@@ -2,19 +2,24 @@ import React from "react";
 import Hero from '../components/Hero';
 import Banner from '../components/Banner';
 import {Link} from 'react-router-dom';
+import Seleccion from '../components/Seleccion';
+import Navbar from "../components/Navbar";
 //import img1 from "../images/bauxita.jpg";
 //import Title from "../components/Title";
 
-const Proxima =() => {
+const Nosotros =() => {
     
 return (
 <>
+<Navbar/>
 <Hero hero="roomsHero">
-    <Banner title="Proxima pagina a relizar">
-        <Link to="/" className="btn-primary">Volver al Home</Link>
-    </Banner>
+<Banner banner="banner" title="Nosotros" >
+</Banner>
 </Hero>
+<Seleccion/>
+
 </>
 )};
 
-export default Proxima;
+export default Nosotros;
+

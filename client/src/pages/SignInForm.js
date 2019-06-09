@@ -34,53 +34,54 @@ class SignInForm extends Component {
 
   render() {
     return (
-      <div className="FormCenter">
-        <form
-          onSubmit={this.handleSubmit}
-          className="FormFields"
-          onSubmit={this.handleSubmit}
-        >
-          <div className="FormField">
-            <label className="FormField__Label" htmlFor="email">
-              Correo Electronico
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="FormField__Input"
-              placeholder="Introduce tu correo electronico"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-          </div>
+      <>
+        <div className="FormCenter">
+          <form
+            onSubmit={this.handleSubmit}
+            className="FormFields"
+            onSubmit={this.handleSubmit}
+          >
+            <div className="FormField">
+              <label className="FormField__Label" htmlFor="email">
+                Correo Electronico
+              </label>
+              <input
+                type="email"
+                id="email"
+                className="FormField__Input"
+                placeholder="Introduce tu correo electronico"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+              />
+            </div>
 
-          <div className="FormField">
-            <label className="FormField__Label" htmlFor="password">
-              Contraseña
-            </label>
-            <input
-              type="password"
-              id="password"
-              className="FormField__Input"
-              placeholder="Introduce tu contraseña"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-          </div>
+            <div className="FormField">
+              <label className="FormField__Label" htmlFor="password">
+                Contraseña
+              </label>
+              <input
+                type="password"
+                id="password"
+                className="FormField__Input"
+                placeholder="Introduce tu contraseña"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+              />
+            </div>
 
-          <div className="FormField">
-            <button className="FormField__Button mr-20">
-              {" "}
-              Iniciar Sesion{" "}
-            </button>{" "}
-            <Link to="/" className="FormField__Link">
-              Crear cuenta
-            </Link>
-          </div>
-        </form>
-      </div>
+            <div className="FormField">
+              <Link to="/sesion" className="FormField__Button mr-20">
+                Iniciar Sesion
+              </Link>
+              <Link to="/" className="FormField__Link">
+                Crear cuenta
+              </Link>
+            </div>
+          </form>
+        </div>
+      </>
     );
   }
 }
