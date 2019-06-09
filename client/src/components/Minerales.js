@@ -59,7 +59,7 @@ export default class Minerales extends Component{
     render(){
         return(
         <article className="featured-rooms">
-            <Title title="Algunos minerales"></Title>
+            <Title className="section-title" title="Algunos minerales"></Title>
             <article className="featured-rooms-center">
             { this.state.minerals.map((item,index)=> { 
                     return <article key={index} className="room">

@@ -7,23 +7,23 @@ export default class Services extends Component{
     state={
         services:[
             {
-                icon:<FaCocktail/>,
+                icon:"fa fa-thermometer-three-quarters",
                 //img: <img1/>,
                 title:"Responsabilidad Ambiental",
                 info:"Loren ipsum dolor sit amet consectetur adipsjsn aksjbd edad"
             },
             {
-                icon:<FaHandsHelping/>,
+                icon:"fa fa-handshake-o",
                 title:"Superar al Cliente",
                 info:"Loren ipsum dolor sit amet consectetur adipsjsn aksjbd edad"
             },
             {
-                icon:<FaCocktail/>,
+                icon:"fa fa-cogs",
                 title:"Innovación e investigacioón continua",
                 info:"Loren ipsum dolor sit amet consectetur adipsjsn aksjbd edad"
             },
             {
-                icon:<FaCocktail/>,
+                icon:"fa fa-heart",
                 title:"Calidad de Servicios",
                 info:"Loren ipsum dolor sit amet consectetur adipsjsn aksjbd edad"
             }
@@ -34,8 +34,9 @@ export default class Services extends Component{
             <Title title="Objetivos"> </Title>
             <div className="services-center">
                 { this.state.services.map((item,index)=> { 
+                    
                     return <article key={index} className="service">
-                            <span>{item.icon}</span>
+                            <span className={item.icon}/>
                             <h6>{item.title}</h6>
                             <p>{item.info}</p>
                     </article>

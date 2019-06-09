@@ -6,42 +6,54 @@ import {
   FaBoxOpen,
   FaHardHat,
   FaBook,
-  FaBars,
-  FaPowerOff
+  FaBars
 } from "react-icons/fa";
 import Account from "./Account";
-import logo from "../images/logo.png";
-import { Link } from "react-router-dom";
+import LogOut from "./LogOut";
+import { HashRouter as Router, Route, Link, NavLink } from "react-router-dom";
 import perfil from "../images/perfil.png";
+import MenuCrud from "./MenuCrud";
+import "../styles/Menu.css";
 
 // link de react-icons https://react-icons.netlify.com/#/icons/fa
 export default class Menu extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   state = {
     isOpen: false,
+    crud: this.props.crud,
     option: [
       {
         icon: <FaHome />,
-        title: "Home"
+        title: "Home",
+        tipo: "/"
       },
       {
         icon: <FaHardHat />,
-        title: "Empleados"
+        title: "Empleados",
+        tipo: "/empleados"
       },
       {
         icon: <FaHammer />,
-        title: "Yacimientos"
+        title: "Yacimientos",
+        tipo: "/yacimientos"
       },
       {
         icon: <FaUser />,
-        title: "Clientes"
+        title: "Clientes",
+        tipo: "/clientes"
       },
       {
         icon: <FaBoxOpen />,
-        title: "Inventario"
+        title: "Inventario",
+        tipo: "/inventario"
       },
       {
         icon: <FaBook />,
-        title: "Información Reelevante"
+        title: "Información Relevante",
+        tipo: "/info"
       }
     ]
   };
@@ -60,6 +72,7 @@ export default class Menu extends Component {
           >
             <FaBars className="sidenav-icon" />
           </button>
+          <MenuCrud crud={this.props.crud}/>
         </div>
         <div className="sidenav">
           <div
@@ -68,21 +81,16 @@ export default class Menu extends Component {
             <ul>
               {this.state.option.map((item, index) => {
                 return (
-                  <li key={index} isSelect>
-                    <span className="icons">{item.icon}</span>
-                    <span>{item.title}</span>
+                  <li key={index}>
+                    <Link to={item.tipo} className="sidenav-links">
+                      <span className="icons">{item.icon}</span>
+                      <span>{item.title}</span>
+                    </Link>
                   </li>
                 );
               })}
               <Account />
-              <div className="log-out">
-                <span>Log Out</span>
-                <span className="log-btn">
-                  <FaPowerOff>
-                    <Link to="/" />
-                  </FaPowerOff>
-                </span>
-              </div>
+              <LogOut />
             </ul>
           </div>
         </div>
