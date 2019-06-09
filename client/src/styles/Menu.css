@@ -1,0 +1,182 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  position: absolute;
+  height: 65px;
+  width: 100%;
+  z-index: 4;
+  background-color: rgb(216, 146, 16);
+}
+.header-show {
+  position: absolute;
+  height: 65px;
+  width: 100%;
+  margin-left: 250px;
+  background-color: rgb(216, 146, 16);
+  z-index: 4;
+  transition-duration: 0.3s;
+}
+.sidenav {
+  position: absolute;
+  border-left-color: black;
+  height: 100vh;
+  background: #1b1e20;
+  z-index: 3;
+}
+.sidenav-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 15px 16px;
+}
+.sidenav-icon {
+  font-size: 1.5rem;
+}
+.sidenav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidenav ul li {
+  padding: 20px 20px;
+  text-align: inline;
+  font-size: 15px;
+  color: #fff;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.sidenav ul li:hover {
+  background: rgb(214, 140, 3);
+  color: #fff;
+}
+.sidenav-show {
+  width: 250px;
+  transition-duration: 0.3s;
+  padding-top: 30px;
+}
+
+.sidenav-show div img {
+  width: 30px;
+  height: 30px;
+}
+.sidenav-show ul li span:nth-child(2) {
+  padding: 0px 8px;
+}
+
+.sidenav-noshow .account {
+  display: none;
+}
+
+.sidenav-noshow ul li {
+  padding: 20px 10px;
+  text-align: center;
+}
+
+.sidenav-noshow ul li span:nth-child(2) {
+  display: none;
+}
+
+.sidenav-noshow {
+  width: 60px;
+  padding-top: 65px;
+  transition-duration: 0.3s;
+}
+.sidenav-noshow .log-out {
+  display: none;
+}
+
+.menu div img {
+  height: 50px;
+  width: 50px;
+  border: #fff 3px solid;
+  border-radius: 25px;
+  margin-left: 20px;
+}
+
+.icons {
+  color: #fff;
+}
+.account {
+  margin-top: 50px;
+}
+.account a {
+  margin-left: 15px;
+  font-size: 13.5px;
+  color: #fff;
+}
+
+.account img {
+  margin-top: 30px;
+}
+
+.perfil {
+  align-items: flex-end;
+}
+.log-out {
+  margin-left: 30px;
+  margin-top: 60px;
+  color: #fff;
+}
+.log-btn {
+  cursor: pointer;
+  margin-left: 95px;
+}
+
+@media screen and (min-width: 768px) {
+  .sidenav-noshow ul li {
+    padding: 20px 20px;
+    margin: auto;
+  }
+
+  .sidenav ul li {
+    padding: 20px 30px;
+    margin: auto;
+    text-align: initial;
+  }
+  .sidenav-show {
+    width: 250px;
+    transition: 0.3s;
+  }
+  .sidenav-noshow {
+    width: 250px;
+    transition: 0.3s;
+  }
+  .sidenav-noshow .log-out {
+    display: inline;
+  }
+  .sidenav-noshow .account {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: list-item;
+  }
+  .sidenav-show .account {
+    margin-top: 50px;
+    display: list-item;
+  }
+
+  .header {
+    margin-left: 250px;
+    background-color: rgb(216, 146, 16);
+  }
+  .header-show {
+    margin-left: 250px;
+    background-color: rgb(252, 164, 1);
+  }
+
+  .sidenav-btn {
+    display: none;
+  }
+  .sidenav-noshow ul li span:nth-child(2) {
+    display: inline;
+  }
+
+  .icons {
+    font-size: 1.4em;
+    display: inline;
+    padding-right: 18px;
+  }
+}
