@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 const Home = () => {
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <Hero hero="defaultHero">
         <Banner
           banner="banner"
