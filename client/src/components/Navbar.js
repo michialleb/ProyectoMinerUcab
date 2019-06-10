@@ -30,7 +30,7 @@ export default class Navbar extends Component {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/Nosotros">Nosotros</Link>
+              <Link to="/nosotros">Nosotros</Link>
             </li>
             <li>
               <Link to="/login" className="btn-singup">
