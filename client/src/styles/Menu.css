@@ -1,18 +1,20 @@
 body {
   margin: 0;
   padding: 0;
-  background: rgb(225, 228, 228);
+  background: rgb(65, 71, 71);
 }
 
 .header {
   position: absolute;
   height: 65px;
+  width:100%;
   z-index: 4;
   background-color: rgb(216, 146, 16);
 }
 .header-show {
   position: absolute;
   height: 65px;
+  width:100%;
   margin-left: 250px;
   background-color: rgb(216, 146, 16);
   z-index: 4;

@@ -6,7 +6,7 @@ class SignUpForm extends Component {
     super();
 
     this.state = {
-      // usuarioList: [],
+      //empleadoList: [],
       email: "",
       password: "",
       name: "",
@@ -19,6 +19,8 @@ class SignUpForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  
 
   handleChange(e) {
     let target = e.target;

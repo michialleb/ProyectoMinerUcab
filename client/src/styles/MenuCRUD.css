@@ -8,7 +8,12 @@ body {
   margin-left: 65px;
   transition: 0.00000001s;
 }
-
+.demo-tabs{
+  width: 100%;
+}
+.options{
+  color: white;
+}
 .header-show .demo-tabs {
   margin-top: 30px;
   transition: 0.3s;
