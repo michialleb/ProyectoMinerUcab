@@ -13,7 +13,7 @@ export default class MenuCrud extends Component {
   render() {
     return (
       <div className="demo-tabs">
-        <Tabs
+        <Tabs className="tabs-crud"
           activeTab={this.state.activeTab}
           onChange={tabId => this.setState({ activeTab: tabId })}
           ripple
