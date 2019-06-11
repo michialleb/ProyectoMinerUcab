@@ -5,22 +5,31 @@ import ConsultTable from "../components/ConsultTable";
 
 export default class Empleado extends Component {
   render() {
+    var consult = {
+      consult: [
+        "ID",
+        "Nombre",
+        "Apellido",
+        "Nacimiento",
+        "Cedula",
+        "Telefono",
+        "Direccion"
+      ]
+    };
     var crud = {
-      options: ["Ingresar ", "Consultar ", "Eliminar ","Modificar"],
-      consult:["ID","Nombre","Apellido","Nacimiento","Cedula","Telefono","Direccion"],
-      content:[
-        { 
-         form:<Form/>,
-         id:0
+      options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar"],
+      content: [
+        {
+          form: <Form />,
+          id: 0
         },
         {
-          form:<ConsultTable/>,
-          id:1
+          form: <ConsultTable consult={consult} />,
+          id: 1
         }
-      ],
-     
+      ]
     };
-    
+
     return <Menu crud={crud} />;
   }
 }
