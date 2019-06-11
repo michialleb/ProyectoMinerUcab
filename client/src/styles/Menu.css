@@ -7,14 +7,14 @@ body {
 .header {
   position: absolute;
   height: 65px;
-  width:100%;
+  width: 100%;
   z-index: 4;
   background-color: rgb(216, 146, 16);
 }
 .header-show {
   position: absolute;
   height: 65px;
-  width:100%;
+  width: 100%;
   margin-left: 250px;
   background-color: rgb(216, 146, 16);
   z-index: 4;
@@ -59,7 +59,6 @@ body {
   background: rgb(214, 140, 3);
   color: #fff;
 }
-
 .sidenav-show {
   height: cover;
   width: 250px;
