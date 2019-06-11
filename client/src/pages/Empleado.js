@@ -7,6 +7,7 @@ export default class Empleado extends Component {
   render() {
     var crud = {
       options: ["Ingresar ", "Consultar ", "Eliminar ","Modificar"],
+      consult:["ID","Nombre","Apellido","Nacimiento","Cedula","Telefono","Direccion"],
       content:[
         { 
          form:<Form/>,
