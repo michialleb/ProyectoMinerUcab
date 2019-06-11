@@ -8,11 +8,32 @@
   min-height: calc(100vh - 66px);
   width: 50%;
   background: url("../src/images/industria.jpg") right/cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
-
+.btn-back-link {
+  text-decoration: none;
+  color: #fff;
+}
+.btn-back {
+  display: block;
+  height: 50px;
+  border-radius: 8px;
+  background-color: orange;
+  text-decoration: none;
+  border: none;
+  color: #ffffff;
+  text-align: center;
+  font-size: 13px;
+  padding: 20px;
+  width: 100px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+.btn-back:hover {
+  opacity: 100;
+  background: orange;
+  color: orange;
+}
 .Login__Form {
   width: 50%;
   background: linear-gradient(to left, #4c2e12, #a55825);
