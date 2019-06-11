@@ -7,27 +7,27 @@ body {
   margin-top: 30px;
   margin-left: 65px;
   transition: 0.00000001s;
-  position: center;
 }
-.demo-tabs{
+.demo-tabs {
   width: 100%;
 }
-.options{
+.options {
   color: white;
 }
 .header-show .demo-tabs {
   margin-top: 30px;
   transition: 0.3s;
-  position: center;
 }
 
 @media screen and (min-width: 768px) {
   .header-show .demo-tabs {
     margin-top: 85px;
     margin-left: 15%;
+    width: 50%;
   }
   .header .demo-tabs {
     margin-top: 85px;
+    width: 50%;
     margin-left: 15%;
   }
 }
