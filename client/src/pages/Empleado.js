@@ -26,7 +26,6 @@ export default class Empleado extends Component {
   }
   render() {
     var empleados = this.empleadoList;
-
     var consult = {
       consult: [
         "ID",
