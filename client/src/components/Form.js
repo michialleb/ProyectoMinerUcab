@@ -36,17 +36,12 @@ class Form extends Component {
     });
   }
 
-  /*handleAddEmpleado = () => {
+  handleAddEmpleado = () => {
     fetch("/api/empleados", {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ empleado: this.state })
-    })
-      .then(res => res.json())
-      .then(res => {
-        this.getEmpleadoList();
-        this.setState({ name: "" });
-      });
+    }).then(res => res.json());
   };
 
   /*componentDidMount() {

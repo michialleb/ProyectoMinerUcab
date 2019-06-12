@@ -4,6 +4,26 @@ import Form from "../components/Form";
 import ConsultTable from "../components/ConsultTable";
 
 export default class Empleado extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      empleadoList: []
+    };
+  }
+
+  getEmpleadoList = () => {
+    fetch("/api/empleados")
+      .then(res => res.json())
+      .then(res => {
+        var empleadoList = res.map(r => r.empleado_nombre);
+        this.setState({ empleadoList });
+      });
+  };
+
+  componentDidMount() {
+    this.getEmpleadoList();
+  }
   render() {
     var consult = {
       consult: [
@@ -16,6 +36,7 @@ export default class Empleado extends Component {
         "Direccion"
       ]
     };
+
     var crud = {
       options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar"],
       content: [
@@ -24,7 +45,12 @@ export default class Empleado extends Component {
           id: 0
         },
         {
-          form: <ConsultTable consult={consult} />,
+          form: (
+            <ConsultTable
+              consult={consult}
+              empleados={this.state.empleadoList}
+            />
+          ),
           id: 1
         }
       ]

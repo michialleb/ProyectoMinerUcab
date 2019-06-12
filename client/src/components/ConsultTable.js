@@ -8,6 +8,7 @@ class ConsultTable extends Component {
   }
 
   render() {
+    let nombre;
     return (
       <>
         <table id="t01">
@@ -16,6 +17,9 @@ class ConsultTable extends Component {
               <th key={i}>{item}</th>
             ))}
           </tr>
+          {this.props.empleados.map((empleado, i) => {
+            return <tr key={i} />;
+          })}
           <tr>
             <td>Diego</td>
             <td>Smith</td>
