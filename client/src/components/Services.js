@@ -1,7 +1,6 @@
 import React ,{Component} from 'react';
 import Title from './Title';
 //import img1 from '../images/people.jpg';
-import {FaCocktail,FaHandsHelping} from 'react-icons/fa';
 //import {TiThermometer,FaHandshake,TiArrowUpThick} from 'react-icons/fa';
 export default class Services extends Component{
     state={

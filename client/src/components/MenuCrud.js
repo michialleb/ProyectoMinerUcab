@@ -11,6 +11,7 @@ export default class MenuCrud extends Component {
 
   render() {
     return (
+      
       <div className="demo-tabs">
         <Tabs
           className="tabs-crud"

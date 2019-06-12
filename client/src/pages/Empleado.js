@@ -8,10 +8,30 @@ export default class Empleado extends Component {
     super();
 
     this.state = {
-      empleadoList: []
+      empleadoList: [],
+      empleadoCedula: []
     };
   }
 
+  /*handleGetEmpleado = (empleadoCedula, empleado) => {
+    fetch("/api/empleados/:cedula", {
+      method: "get",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ cedula: empleadoCedula })
+    }).then(res => res.json())
+      .then(res => {
+        empleado =res.map(r => r);
+      });
+  };*/
+  
+  /*getEmpleadoListCedula = (empleadoListCedula) => {
+    fetch("/api/empleados/:cedula")
+      .then(res => res.json())
+      .then(res => {
+        var empleadoList = res.map(r => r);
+        empleadoListCedula = empleadoList;
+      });
+  }; */
   getEmpleadoList = () => {
     fetch("/api/empleados")
       .then(res => res.json())

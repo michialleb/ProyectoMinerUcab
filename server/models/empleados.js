@@ -9,6 +9,14 @@ class Empleados {
     });
   }
 
+  static retrieveCedula(cedula,callback) {
+    db.query("SELECT * FROM empleados WHERE cedula= ?",[cedula], function(err, res) {
+      if (err.error) return callback(err);
+      callback(res);
+    });
+  }
+
+
   static insert(empleado, callback) {
     db.query(
       "INSERT INTO empleados (empleado_nombre,empleado_apellido,empleado_cedula,\

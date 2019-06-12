@@ -9,6 +9,13 @@ router.get("/", function(req, res) {
     return res.json(empleados);
   });
 });
+router.get("/empleados/:cedula", function(req, res) {
+  var cedula= req.params;
+  Empleados.retrieveCedula(cedula,function( err, empleados) {
+    if (err) return res.json(err);
+    return res.json(empleados);
+  });
+});
 
 router.post("/", function(req, res) {
   var empleado = req.body.empleado;
