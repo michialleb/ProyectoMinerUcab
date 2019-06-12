@@ -17,14 +17,6 @@ class Form extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  /* getEmpleadoList = ()=>{
-    fetch("/api/empleados")
-    .then(res => res.json())
-    .then(res => {
-        var empleadoList = res.map(r=>r)
-        this.setState({ empleadoList });
-      });
-  };*/
 
   handleChange(e) {
     let target = e.target;
@@ -44,9 +36,6 @@ class Form extends Component {
     }).then(res => res.json());
   };
 
-  /*componentDidMount() {
-    this.getEmpleadoList();
-  }*/
 
   handleSubmit(e) {
     e.preventDefault();

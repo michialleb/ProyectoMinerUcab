@@ -9,7 +9,7 @@ class ConsultTable extends Component {
 
   render() {
     return (
-      <a>
+      <>
         <table id="t01">
           <tr>
             {this.props.consult.consult.map((item, i) => (
@@ -17,25 +17,19 @@ class ConsultTable extends Component {
             ))}
           </tr>
           {this.props.empleados.map((empleado, i) => {
-            return <tr key={i}> {empleado}</tr>;
+            return <tr key={i}> 
+                     <td>{empleado.empleado_nombre}</td>
+                     <td>{empleado.empleado_apellido}</td>
+                     <td>{empleado.empleado_fnac}</td>
+                     <td>{empleado.empleado_cedula}</td>
+                     <td>{empleado.empleado_telefono}</td>
+                     <td>{empleado.empleado_direccion}</td>
+                 
+                  </tr>;
           })}
-          <tr>
-            <td>Diego</td>
-            <td>Smith</td>
-            <td>50</td>
-          </tr>
-          <tr>
-            <td>Eve</td>
-            <td>Jackson</td>
-            <td>94</td>
-          </tr>
-          <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>80</td>
-          </tr>
+        
         </table>
-      </a>
+      </>
     );
   }
 }

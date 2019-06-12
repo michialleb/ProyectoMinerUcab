@@ -16,7 +16,7 @@ export default class Empleado extends Component {
     fetch("/api/empleados")
       .then(res => res.json())
       .then(res => {
-        var empleadoList = res.map(r => r.empleado_nombre);
+        var empleadoList = res.map(r => r);
         this.setState({ empleadoList });
       });
   };
@@ -25,10 +25,9 @@ export default class Empleado extends Component {
     this.getEmpleadoList();
   }
   render() {
-    var empleados = this.empleadoList;
+    var empleados = this.state.empleadoList;
     var consult = {
       consult: [
-        "ID",
         "Nombre",
         "Apellido",
         "Nacimiento",

@@ -3,7 +3,7 @@ var express = require("express");
 
 class Empleados {
   static retrieveAll(callback) {
-    db.query("SELECT empleado_nombre FROM empleados", function(err, res) {
+    db.query("SELECT * FROM empleados", function(err, res) {
       if (err.error) return callback(err);
       callback(res);
     });
