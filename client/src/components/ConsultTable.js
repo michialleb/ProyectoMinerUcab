@@ -9,7 +9,7 @@ class ConsultTable extends Component {
 
   render() {
     return (
-      <>
+      <a>
         <table id="t01">
           <tr>
             {this.props.consult.consult.map((item, i) => (
@@ -35,7 +35,7 @@ class ConsultTable extends Component {
             <td>80</td>
           </tr>
         </table>
-      </>
+      </a>
     );
   }
 }
