@@ -25,6 +25,7 @@ export default class Empleado extends Component {
     this.getEmpleadoList();
   }
   render() {
+    var empleados= this.empleadoList;
     var consult = {
       consult: [
         "ID",
@@ -48,7 +49,7 @@ export default class Empleado extends Component {
           form: (
             <ConsultTable
               consult={consult}
-              empleados={this.state.empleadoList}
+              empleados={empleados}
             />
           ),
           id: 1

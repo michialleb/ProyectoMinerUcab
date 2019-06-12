@@ -8,7 +8,6 @@ class ConsultTable extends Component {
   }
 
   render() {
-    let nombre;
     return (
       <>
         <table id="t01">
