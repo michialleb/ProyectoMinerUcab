@@ -2,7 +2,7 @@ var { Pool } = require("pg");
 
 const CONNECTION_STRING =
   process.env.DATABASE_URL ||
-  "postgresql://postgres:tete15tefi15@localhost:5432/ejemplologin";
+  "postgresql://postgres:michimichi1@localhost:5432/Prueba1";
 const SSL = process.env.NODE_ENV === "production";
 
 class Database {
