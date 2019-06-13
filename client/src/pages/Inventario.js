@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import Menu from "../components/Menu";
-import Form from "../components/Form";
 import Hero from "../components/Hero";
+import Form from "../components/Form";
 
-export default class Empleado extends Component {
+export default class Clientes extends Component {
   render() {
     var crud = {
       options: ["Ingresar ", "Consultar ", "Eliminar ","Modificar"],

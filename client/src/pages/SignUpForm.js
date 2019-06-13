@@ -6,7 +6,7 @@ class SignUpForm extends Component {
     super();
 
     this.state = {
-      // usuarioList: [],
+      //empleadoList: [],
       email: "",
       password: "",
       name: "",
@@ -20,6 +20,8 @@ class SignUpForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  
+
   handleChange(e) {
     let target = e.target;
     let value = target.type === "checkbox" ? target.checked : target.value;
@@ -31,7 +33,7 @@ class SignUpForm extends Component {
   }
 
   handleAddUsuario = () => {
-    fetch("/api/usuarios", {
+    fetch("/api/usuarios/", {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ usuario: this.state })

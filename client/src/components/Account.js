@@ -7,8 +7,8 @@ export default class Account extends Component {
       <div className="account">
         <a> Your Account</a>
         <div clasName="perfil">
-          <img src={people} alt="Filomena Diaz" />
-          <a>Filomena</a>
+          <img src={people} alt="Andres Arriaga" />
+          <a>Andres Arriaga</a>
         </div>
       </div>
     );

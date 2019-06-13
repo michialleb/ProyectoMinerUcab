@@ -1,27 +1,76 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import Menu from "../components/Menu";
-import Services from "../components/Services";
-import Minerales from "../components/Minerales";
-import Hero from "../components/Hero";
+import Form from "../components/Form";
+import ConsultTable from "../components/ConsultTable";
 
 export default class Empleado extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      empleadoList: [],
+      empleadoCedula: []
+    };
+  }
+
+  /*handleGetEmpleado = (empleadoCedula, empleado) => {
+    fetch("/api/empleados/:cedula", {
+      method: "get",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ cedula: empleadoCedula })
+    }).then(res => res.json())
+      .then(res => {
+        empleado =res.map(r => r);
+      });
+  };*/
+  
+  /*getEmpleadoListCedula = (empleadoListCedula) => {
+    fetch("/api/empleados/:cedula")
+      .then(res => res.json())
+      .then(res => {
+        var empleadoList = res.map(r => r);
+        empleadoListCedula = empleadoList;
+      });
+  }; */
+  getEmpleadoList = () => {
+    fetch("/api/empleados")
+      .then(res => res.json())
+      .then(res => {
+        var empleadoList = res.map(r => r);
+        this.setState({ empleadoList });
+      });
+  };
+
+  componentDidMount() {
+    this.getEmpleadoList();
+  }
   render() {
+    var empleados = this.state.empleadoList;
+    var consult = {
+      consult: [
+        "Nombre",
+        "Apellido",
+        "Nacimiento",
+        "Cedula",
+        "Telefono",
+        "Direccion"
+      ]
+    };
+
     var crud = {
-      options: ["Ingresar Empleado", "Consultar Empleado", "Eliminar Empleado"],
-      content:[
-        { 
-         form:<Hero/>,
-         id:0
+      options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar"],
+      content: [
+        {
+          form: <Form />,
+          id: 0
         },
         {
-          form:<Services/>,
-          id:1
+          form: <ConsultTable consult={consult} empleados={empleados} />,
+          id: 1
         }
-      ],
-      a:<Hero/>
+      ]
     };
-    
+
     return <Menu crud={crud} />;
   }
 }
