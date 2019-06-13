@@ -33,7 +33,7 @@ class SignUpForm extends Component {
   }
 
   handleAddUsuario = () => {
-    fetch("/api/usuarios", {
+    fetch("/api/usuarios/", {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ usuario: this.state })
