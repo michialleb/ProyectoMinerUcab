@@ -17,7 +17,6 @@ class Form extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
   handleChange(e) {
     let target = e.target;
     let value = target.type === "checkbox" ? target.checked : target.value;
@@ -35,7 +34,6 @@ class Form extends Component {
       body: JSON.stringify({ empleado: this.state })
     }).then(res => res.json());
   };
-
 
   handleSubmit(e) {
     e.preventDefault();
@@ -78,8 +76,9 @@ class Form extends Component {
               <div className="cargo">
                 <label htmlFor="cargo">Cargo</label>
                 <select>
-                  <option>x</option>
-                  <option>y</option>
+                  {this.props.cargos.map((cargo, i) => (
+                    <option key={i}>{cargo.tipo_cargo}</option>
+                  ))}
                 </select>
               </div>
               <div className="ci">

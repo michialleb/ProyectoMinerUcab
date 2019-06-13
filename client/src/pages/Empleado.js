@@ -8,6 +8,7 @@ export default class Empleado extends Component {
     super();
 
     this.state = {
+      cargoList: [],
       empleadoList: "",
       empleadoCedula: ""
     };
@@ -22,6 +23,16 @@ export default class Empleado extends Component {
       });
   };
 
+  getCargoList = () => {
+    fetch("/api/cargos")
+      .then(res => res.json())
+      .then(res => {
+        var cargoList = res.map(r => r);
+        this.setState({ cargoList });
+
+      });
+  };
+
   getEmpleadoList = () => {
     fetch("/api/empleados")
       .then(res => res.json())
@@ -32,10 +43,12 @@ export default class Empleado extends Component {
   };
 
   componentDidMount() {
+    this.getCargoList();
     this.getEmpleadoList();
   }
   render() {
     var empleados = this.state.empleadoList;
+    var cargos = this.state.cargoList;
     var consult = {
       consult: [
         "Nombre",
@@ -51,7 +64,7 @@ export default class Empleado extends Component {
       options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar"],
       content: [
         {
-          form: <Form />,
+          form: <Form cargos={cargos} />,
           id: 0
         },
         {
