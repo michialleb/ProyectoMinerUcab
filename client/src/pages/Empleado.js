@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Menu from "../components/Menu";
 import Form from "../components/Form";
 import ConsultTable from "../components/ConsultTable";
+import ModiEmpleado from "../components/ModiEmpleado";
 
 export default class Empleado extends Component {
   constructor() {
@@ -16,7 +17,7 @@ export default class Empleado extends Component {
     fetch("/api/empleados")
       .then(res => res.json())
       .then(res => {
-        var empleadoList = res.map(r => r.empleado_nombre);
+        var empleadoList = res;
         this.setState({ empleadoList });
       });
   };
@@ -25,10 +26,9 @@ export default class Empleado extends Component {
     this.getEmpleadoList();
   }
   render() {
-    var empleados = this.empleadoList;
+    var empleados = this.state.empleadoList;
     var consult = {
       consult: [
-        "ID",
         "Nombre",
         "Apellido",
         "Nacimiento",
@@ -48,6 +48,10 @@ export default class Empleado extends Component {
         {
           form: <ConsultTable consult={consult} empleados={empleados} />,
           id: 1
+        },
+        {
+          form: <ModiEmpleado consult={consult} empleados={empleados} />,
+          id: 2
         }
       ]
     };

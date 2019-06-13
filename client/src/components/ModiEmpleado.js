@@ -1,21 +1,31 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
+
 class Form extends Component {
   constructor() {
     super();
 
     this.state = {
       empleadoList: [],
-      nombre: "",
-      apellido: "",
-      fnac: "",
-      cedula: "",
-      direccion: "",
-      telefono: ""
+      nombre: "pepe",
+      apellido: "porras",
+      fnac: "10/10/1990",
+      cedula: "1212",
+      direccion: "caracas",
+      telefono: "00"
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  /* getEmpleadoList = ()=>{
+    fetch("/api/empleados")
+    .then(res => res.json())
+    .then(res => {
+        var empleadoList = res.map(r=>r)
+        this.setState({ empleadoList });
+      });
+  };*/
 
   handleChange(e) {
     let target = e.target;
@@ -35,6 +45,10 @@ class Form extends Component {
     }).then(res => res.json());
   };
 
+  /*componentDidMount() {
+    this.getEmpleadoList();
+  }*/
+
   handleSubmit(e) {
     e.preventDefault();
 
@@ -47,7 +61,7 @@ class Form extends Component {
       <>
         <div className="wrapper">
           <div className="form-wrapper">
-            <h5>Ingresar Usuario</h5>
+            <h5>Datos del Usuario</h5>
             <form className="form" noValidate>
               <div className="firstName">
                 <label htmlFor="firstName">Nombre Empleado</label>
