@@ -1,10 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  
 }
-
-
 
 .header {
   position: absolute;
@@ -23,9 +20,9 @@ body {
   transition-duration: 0.3s;
 }
 .sidenav {
-  position: absolute;
+  position: fixed;
   border-left-color: black;
-  height: cover;
+  height: 1000em;
   background: #1b1e20;
   z-index: 3;
 }
