@@ -9,29 +9,19 @@ export default class Empleado extends Component {
 
     this.state = {
       empleadoList: [],
-      empleadoCedula: []
+      empleadoCedula: ""
     };
   }
 
-  /*handleGetEmpleado = (empleadoCedula, empleado) => {
-    fetch("/api/empleados/:cedula", {
-      method: "get",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ cedula: empleadoCedula })
-    }).then(res => res.json())
-      .then(res => {
-        empleado =res.map(r => r);
-      });
-  };*/
-  
-  /*getEmpleadoListCedula = (empleadoListCedula) => {
-    fetch("/api/empleados/:cedula")
+  handleGetEmpleado = cedula => {
+    fetch(`/api/empleados/${cedula}`)
       .then(res => res.json())
       .then(res => {
-        var empleadoList = res.map(r => r);
-        empleadoListCedula = empleadoList;
+        this.setState({ empleadoCedula: res });
+        console.log(this.state.empleadoCedula);
       });
-  }; */
+  };
+
   getEmpleadoList = () => {
     fetch("/api/empleados")
       .then(res => res.json())
@@ -42,6 +32,7 @@ export default class Empleado extends Component {
   };
 
   componentDidMount() {
+    this.handleGetEmpleado(234565);
     this.getEmpleadoList();
   }
   render() {
