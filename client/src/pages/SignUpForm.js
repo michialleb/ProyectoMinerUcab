@@ -75,7 +75,6 @@ class SignUpForm extends Component {
   }
 
   handleAddUsuario = () => {
-<<<<<<< HEAD
     if (formValid(this.state)) {
       fetch("/api/usuarios", {
         method: "post",
@@ -90,17 +89,6 @@ class SignUpForm extends Component {
     } else {
       alert("Datos invalidos, revise el formulario");
     }
-=======
-    fetch("/api/usuarios/", {
-      method: "post",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ usuario: this.state })
-    }).then(res => res.json());
-    /* .then(res => {
-        this.getUsuarioList();
-        this.setState({ name: "" });
-      });*/
->>>>>>> michialleb
   };
 
   /*componentDidMount() {

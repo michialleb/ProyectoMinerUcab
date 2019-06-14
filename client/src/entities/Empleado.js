@@ -37,11 +37,7 @@ export default class Empleado extends Component {
     fetch("/api/empleados")
       .then(res => res.json())
       .then(res => {
-<<<<<<< HEAD:client/src/pages/Empleado.js
-        var empleadoList = res;
-=======
         var empleadoList = res.map(r => r);
->>>>>>> michialleb:client/src/entities/Empleado.js
         this.setState({ empleadoList });
       });
   };
@@ -52,10 +48,7 @@ export default class Empleado extends Component {
   }
   render() {
     var empleados = this.state.empleadoList;
-<<<<<<< HEAD:client/src/pages/Empleado.js
-=======
     var cargos = this.state.cargoList;
->>>>>>> michialleb:client/src/entities/Empleado.js
     var consult = {
       consult: [
         "Nombre",

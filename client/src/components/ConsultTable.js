@@ -26,8 +26,6 @@ class ConsultTable extends Component {
   render() {
     return (
       <>
-<<<<<<< HEAD
-=======
         <div>
           <span className="searching">
             <input
@@ -47,7 +45,6 @@ class ConsultTable extends Component {
             </button>
           </span>
         </div>
->>>>>>> michialleb
         <table id="t01">
           <tr>
             {this.props.consult.consult.map((item, i) => (
@@ -57,21 +54,12 @@ class ConsultTable extends Component {
           {this.props.empleados.map((empleado, i) => {
             return (
               <tr key={i}>
-<<<<<<< HEAD
-                <td> {empleado.empleado_nombre}</td>
-                <td> {empleado.empleado_apellido}</td>
-                <td> {empleado.empleado_fnac}</td>
-                <td> {empleado.empleado_cedula}</td>
-                <td> {empleado.empleado_telefono}</td>
-                <td> {empleado.empleado_direccion}</td>
-=======
                 <td>{empleado.empleado_nombre}</td>
                 <td>{empleado.empleado_apellido}</td>
                 <td>{empleado.empleado_fnac}</td>
                 <td>{empleado.empleado_cedula}</td>
                 <td>{empleado.empleado_telefono}</td>
                 <td>{empleado.empleado_direccion}</td>
->>>>>>> michialleb
               </tr>
             );
           })}

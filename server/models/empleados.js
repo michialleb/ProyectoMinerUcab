@@ -9,7 +9,6 @@ class Empleados {
     });
   }
 
-<<<<<<< HEAD
   static empleadoXcedula(empleado, callback) {
     // const {empleado_cedula}=empelado.cedula;
     db.query(
@@ -36,12 +35,17 @@ class Empleados {
         empleado.direccion,
         empleado_cedula
       ],
-=======
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+
   static retrieveCedula(cedula, callback) {
     db.query(
-      "SELECT * FROM empleados WHERE empleado_cedula= $1",
-      [cedula],
->>>>>>> michialleb
+      "SELECT * FROM empleados WHERE empleado_cedula= $1", [cedula],
       function(err, res) {
         if (err.error) return callback(err);
         callback(res);
