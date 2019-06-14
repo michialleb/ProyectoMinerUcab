@@ -9,24 +9,53 @@ export default class Empleado extends Component {
     super();
 
     this.state = {
-      empleadoList: []
+      cargoList: [],
+      empleadoList: "",
+      empleadoCedula: ""
     };
   }
+
+  handleGetEmpleado = cedula => {
+    fetch(`/api/empleados/${cedula}`)
+      .then(res => res.json())
+      .then(res => {
+        var empleadoList = res.map(r => r);
+        this.setState({ empleadoList });
+      });
+  };
+
+  getCargoList = () => {
+    fetch("/api/cargos")
+      .then(res => res.json())
+      .then(res => {
+        var cargoList = res.map(r => r);
+        this.setState({ cargoList });
+      });
+  };
 
   getEmpleadoList = () => {
     fetch("/api/empleados")
       .then(res => res.json())
       .then(res => {
+<<<<<<< HEAD:client/src/pages/Empleado.js
         var empleadoList = res;
+=======
+        var empleadoList = res.map(r => r);
+>>>>>>> michialleb:client/src/entities/Empleado.js
         this.setState({ empleadoList });
       });
   };
 
   componentDidMount() {
+    this.getCargoList();
     this.getEmpleadoList();
   }
   render() {
     var empleados = this.state.empleadoList;
+<<<<<<< HEAD:client/src/pages/Empleado.js
+=======
+    var cargos = this.state.cargoList;
+>>>>>>> michialleb:client/src/entities/Empleado.js
     var consult = {
       consult: [
         "Nombre",
@@ -42,11 +71,17 @@ export default class Empleado extends Component {
       options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar"],
       content: [
         {
-          form: <Form />,
+          form: <Form cargos={cargos} />,
           id: 0
         },
         {
-          form: <ConsultTable consult={consult} empleados={empleados} />,
+          form: (
+            <ConsultTable
+              consult={consult}
+              empleados={empleados}
+              getEmpleado={this.handleGetEmpleado}
+            />
+          ),
           id: 1
         },
         {

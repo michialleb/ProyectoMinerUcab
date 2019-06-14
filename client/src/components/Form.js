@@ -6,7 +6,7 @@ class Form extends Component {
 
     this.state = {
       empleadoList: [],
-      nombre: "",
+      nombre: "tete",
       apellido: "",
       fnac: "",
       cedula: "",
@@ -75,8 +75,9 @@ class Form extends Component {
               <div className="cargo">
                 <label htmlFor="cargo">Cargo</label>
                 <select>
-                  <option>x</option>
-                  <option>y</option>
+                  {this.props.cargos.map((cargo, i) => (
+                    <option key={i}>{cargo.tipo_cargo}</option>
+                  ))}
                 </select>
               </div>
               <div className="ci">

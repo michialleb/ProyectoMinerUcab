@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import "../styles/ConsultTable.css";
 import { FaSistrix } from "react-icons/fa";
 
-class ConsultTable extends Component {
+class ConsultTableEmpresas extends Component {
   constructor(props) {
     super(props);
     this.state = {
       activeTab: 0,
-      cedula: ""
-      // empleado: null,
+      nombre: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -19,59 +18,44 @@ class ConsultTable extends Component {
     let value = target.value;
 
     this.setState({
-      cedula: value
+      nombre: value
     });
   }
 
   render() {
     return (
       <>
-<<<<<<< HEAD
-=======
         <div>
           <span className="searching">
             <input
               className="inp-search"
               type="search"
-              placeholder="Ingrese nro de cédula"
-              name="empleadoCedula"
-              value={this.state.cedula}
+              placeholder="Ingrese nombre de empresa"
+              name="nombreEmpresa"
+              value={this.state.nombre}
               onChange={this.handleChange}
             />
             <button
               className="search"
               type="button"
-              onClick={this.props.getEmpleado(this.state.cedula)}
+              onClick={this.props.getEmpresa(this.state.nombre)}
             >
               {<FaSistrix />}
             </button>
           </span>
         </div>
->>>>>>> michialleb
         <table id="t01">
           <tr>
             {this.props.consult.consult.map((item, i) => (
               <th key={i}>{item}</th>
             ))}
           </tr>
-          {this.props.empleados.map((empleado, i) => {
+          {this.props.empresas.map((empresa, i) => {
             return (
               <tr key={i}>
-<<<<<<< HEAD
-                <td> {empleado.empleado_nombre}</td>
-                <td> {empleado.empleado_apellido}</td>
-                <td> {empleado.empleado_fnac}</td>
-                <td> {empleado.empleado_cedula}</td>
-                <td> {empleado.empleado_telefono}</td>
-                <td> {empleado.empleado_direccion}</td>
-=======
-                <td>{empleado.empleado_nombre}</td>
-                <td>{empleado.empleado_apellido}</td>
-                <td>{empleado.empleado_fnac}</td>
-                <td>{empleado.empleado_cedula}</td>
-                <td>{empleado.empleado_telefono}</td>
-                <td>{empleado.empleado_direccion}</td>
->>>>>>> michialleb
+                <td>{empresa.empresa_nombre}</td>
+                <td>{empresa.empresa_fecha_creacion}</td>
+                <td>{empresa.empresa_descripcion}</td>
               </tr>
             );
           })}
@@ -80,4 +64,4 @@ class ConsultTable extends Component {
     );
   }
 }
-export default ConsultTable;
+export default ConsultTableEmpresas;

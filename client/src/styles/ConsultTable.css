@@ -3,7 +3,7 @@ table {
     margin-top: 50px;
   }
   table, th, td {
-    
+    font-size: 0.89em;
     border-collapse: collapse;
   }
   th, td {
@@ -19,4 +19,17 @@ table {
   table#t01 th {
     background-color: orange;
     color: white;
+  }
+  .search{
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-size: 15px;
+    margin-left: 10px;
+    color: black;
+  }
+  .inp-search{
+    margin-top: 10px;
+    font-size: 15px;
   }

@@ -1,7 +1,11 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   padding: 0;
-  background: rgb(65, 71, 71);
 }
 
 .header {
@@ -9,21 +13,21 @@ body {
   height: 65px;
   width: 100%;
   z-index: 4;
-  background-color: rgb(216, 146, 16);
+  background-color: orange;
 }
 .header-show {
   position: absolute;
   height: 65px;
   width: 100%;
   margin-left: 250px;
-  background-color: rgb(216, 146, 16);
+  background-color: orange;
   z-index: 4;
   transition-duration: 0.3s;
 }
 .sidenav {
-  position: absolute;
+  position: fixed;
   border-left-color: black;
-  height: cover;
+  height: 1000em;
   background: #1b1e20;
   z-index: 3;
 }
@@ -56,7 +60,7 @@ body {
   color: #fff;
 }
 .sidenav ul li:hover {
-  background: rgb(214, 140, 3);
+  background: orange;
   color: #fff;
 }
 .sidenav-show {
@@ -110,6 +114,7 @@ body {
 }
 .account {
   margin-top: 50px;
+  border-top-style: green solid;
 }
 .account a {
   margin-left: 15px;
@@ -176,11 +181,11 @@ body {
 
   .header {
     margin-left: 250px;
-    background-color: rgb(216, 146, 16);
+    background-color: orange;
   }
   .header-show {
     margin-left: 250px;
-    background-color: rgb(252, 164, 1);
+    background-color: orange;
   }
 
   .sidenav-btn {
