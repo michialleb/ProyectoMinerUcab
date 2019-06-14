@@ -6,7 +6,7 @@ class Form extends Component {
 
     this.state = {
       empleadoList: [],
-      nombre: "tete",
+      nombre: "",
       apellido: "",
       fnac: "",
       cedula: "",
