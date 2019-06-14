@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Menu from "../components/Menu";
 import Hero from "../components/Hero";
 import Form from "../components/Form";
+import FormCliente from "../components/FormClienteEmpresa";
 
 export default class Clientes extends Component {
   render() {
@@ -9,11 +10,11 @@ export default class Clientes extends Component {
       options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar"],
       content: [
         {
-          form: <Hero />,
+          form: <FormCliente />,
           id: 0
         },
         {
-          form: <Form />,
+          form: "",
           id: 1
         }
       ],

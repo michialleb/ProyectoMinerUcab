@@ -18,4 +18,12 @@ router.get("/:nombre", function(req, res) {
   });
 });
 
+router.post("/", function(req, res) {
+  var yacimiento = req.body.yacimiento;
+
+  Yacimientos.insert(yacimiento, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
 module.exports = router;

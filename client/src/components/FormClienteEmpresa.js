@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
-class Form extends Component {
+class FormCliente extends Component {
   constructor() {
     super();
 
@@ -15,6 +15,8 @@ class Form extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.Persona = this.Persona.bind(this);
+    this.Empresa = this.Empresa.bind(this);
   }
 
   handleChange(e) {
@@ -41,27 +43,56 @@ class Form extends Component {
     console.log("The form was submitted with the following data:");
     console.log(this.state);
   }
+  
+ Persona(){
+  document.getElementById("persona").style.display="block";
+  document.getElementById("empresa").style.display="none";
+  if(document.getElementById("btn-p").style.background==="orange"){
+    document.getElementById("btn-p").style.background="#333";
+    document.getElementById("btn-p").style.color="orange";
 
+      }else {
+      document.getElementById("btn-p").style.background="orange";
+      document.getElementById("btn-p").style.color="#333";
+    }
+}
+Empresa(){
+  document.getElementById("persona").style.display="none";
+  document.getElementById("empresa").style.display="block";
+  if(document.getElementById("btn-e").style.background==="orange"){
+    
+  document.getElementById("btn-e").style.background="#333";
+  document.getElementById("btn-e").style.color="orange";
+    }else {
+    document.getElementById("btn-e").style.background="orange";
+    document.getElementById("btn-e").style.color="#333";
+  }
+
+}
   render() {
     return (
       <>
         <div className="wrapper">
-          <div className="form-wrapper">
-            <h5>Ingresar Usuario</h5>
+          <div className="buttonClienteshow">
+              <button id="btn-p" type="submit" onClick={(e) => this.Persona(e)}>Ingresar Persona</button>
+              <button id="btn-e" type="submit" onClick={(e) => this.Empresa(e)}>Ingresar Empresa</button>
+          </div>
+          <div id="persona" className="form-wrapper">
             <form className="form" noValidate>
               <div className="firstName">
-                <label htmlFor="firstName">Nombre Empleado</label>
+                <label htmlFor="firstName">Nombre:</label>
                 <input
                   className=""
                   placeholder="Ingrese el nombre"
                   type="text"
                   name="nombre"
+                  noValidate
                   value={this.state.nombre}
                   onChange={this.handleChange}
                 />
               </div>
               <div className="secondName">
-                <label htmlFor="secondName">Apellido Empleado</label>
+                <label htmlFor="secondName">Apellido:</label>
                 <input
                   className=""
                   placeholder="Ingrese el apellido"
@@ -71,14 +102,6 @@ class Form extends Component {
                   value={this.state.apellido}
                   onChange={this.handleChange}
                 />
-              </div>
-              <div className="cargo">
-                <label htmlFor="cargo">Cargo</label>
-                <select>
-                  {this.props.cargos.map((cargo, i) => (
-                    <option key={i}>{cargo.tipo_cargo}</option>
-                  ))}
-                </select>
               </div>
               <div className="ci">
                 <label htmlFor="ci">C.I</label>
@@ -128,30 +151,77 @@ class Form extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-              <div className="horario-act">
-                <label htmlFor="horario-act">Desea agregar un horario?</label>
-                <div>
-                  <div className="check">
-                    <input type="checkbox" id="yes" />
-                    <label>Si</label>
-                  </div>
-                  <div className="check">
-                    <input type="checkbox" />
-                    <label>No</label>
-                  </div>
-                </div>
-              </div>
               <div className="ingresarUsuario">
                 <button type="submit" onClick={this.handleAddEmpleado}>
-                  Ingresar Usuario
+                  Ingresar Cliente
                 </button>
               </div>
             </form>
           </div>
+
+          <div id="empresa" className="form-wrapper">
+            <form className="form" noValidate>
+              <div className="firstName">
+                <label htmlFor="firstName">Nombre:</label>
+                <input
+                  className=""
+                  placeholder="Ingrese el nombre"
+                  type="text"
+                  name="nombre"
+                  noValidate
+                  value={this.state.nombre}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="secondName">
+                <label htmlFor="secondName">Direccion:</label>
+                <input
+                  className=""
+                  placeholder="Ingrese el apellido"
+                  type="text"
+                  name="apellido"
+                  noValidate
+                  value={this.state.apellido}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="ci">
+                <label htmlFor="ci">rif:</label>
+                <input
+                  className=""
+                  placeholder="Ingrese cédula"
+                  type="number"
+                  name="cedula"
+                  noValidate
+                  value={this.state.cedula}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="nacimiento">
+                <label htmlFor="nacimiento">Telefono:</label>
+                <input
+                  className=""
+                  placeholder="xx/yy/zz"
+                  type="number"
+                  name="fnac"
+                  noValidate
+                  value={this.state.fnac}
+                  onChange={this.handleChange}
+                />
+              </div>
+
+              <div className="ingresarUsuario">
+                <button type="submit" onClick={this.handleAddEmpleado}>
+                  Ingresar Cliente
+                </button>
+              </div>
+            </form>
+          </div>
+
         </div>
       </>
     );
   }
 }
 
-export default Form;
+export default FormCliente;

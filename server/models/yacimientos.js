@@ -19,6 +19,21 @@ class Yacimientos {
       callback(res);
     });
   }
-}
 
+
+static insert(yacimiento, callback) {
+  db.query(
+    "INSERT INTO yacimiento (yacimiento_nombre,kilometros) VALUES ($1,$2)",
+    [
+      yacimiento.nombre,
+      yacimiento.kilometros
+    ],
+
+    function(err, res) {
+      if (err.error) return callback(err);
+      callback(res);
+    }
+  );
+}
+}
 module.exports = Yacimientos;
