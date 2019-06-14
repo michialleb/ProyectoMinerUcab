@@ -1,24 +1,61 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import Menu from "../components/Menu";
-import Form from "../components/Form";
-import Hero from "../components/Hero";
+import ConsultTableYacimientos from "../components/ConsultTableYacimientos";
 
-export default class Yacimiento extends Component {
+export default class Yacimientos extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      yacimientosList: ""
+    };
+  }
+
+  getYacimiento = nombre => {
+    fetch(`/api/yacimientos/${nombre}`)
+      .then(res => res.json())
+      .then(res => {
+        var yacimientosList = res.map(r => r);
+        this.setState({ yacimientosList });
+      });
+  };
+
+  getYacimientosList = () => {
+    fetch("/api/yacimientos")
+      .then(res => res.json())
+      .then(res => {
+        var yacimientosList = res.map(r => r);
+        this.setState({ yacimientosList });
+      });
+  };
+
+  componentDidMount() {
+    this.getYacimientosList();
+  }
   render() {
+    var yacimientos = this.state.yacimientosList;
+    var consult = {
+      consult: ["Nombre", "Kilometros"]
+    };
+
     var crud = {
       options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar"],
       content: [
         {
-          form: <Hero />,
+          form: null, //colocar formato de ingreso
           id: 0
         },
         {
-          form: <Form />,
+          form: (
+            <ConsultTableYacimientos
+              yacimientos={yacimientos}
+              consult={consult}
+              getYacimiento={this.getYacimiento}
+            />
+          ),
           id: 1
         }
-      ],
-      a: <Hero />
+      ]
     };
 
     return <Menu crud={crud} />;
