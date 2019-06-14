@@ -5,11 +5,12 @@ body {
 
 .header .demo-tabs {
   margin-top: 30px;
-  margin-left: 65px;
+
   transition: 0.00000001s;
 
 }
 .demo-tabs {
+  position: fixed;
   width: 100%;
  
 }
@@ -30,6 +31,25 @@ body {
   .header .demo-tabs {
     margin-top: 85px;
     width: 50%;
-    margin-left: 15%;
+   margin-left: 15%;
   }
+}
+
+.buttonClienteshow button{
+  
+    background-color: orange;
+    color: #333;
+    border: 2px solid #fff;
+    margin-top: 1em;
+    padding: 8px 0px;
+    font-size: 1em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 0.25em;
+    width: 50%;
+}
+.buttonClienteshow button:hover {
+  color: orange;
+  background-color: #333;
+  border: 2px solid #333 ;
 }

@@ -18,7 +18,11 @@
   box-shadow: 0px 10px 50px #555;
   background-color: #ffffff;
 }
+#empresa,#persona{
 
+  margin-top: 20px;
+
+}
 .form {
   width: 100%;
   display: flex;
@@ -108,7 +112,7 @@ margin-left: 29%;
 .ingresarUsuario button:hover {
   color: orange;
   background-color: #333;
-  border: 2px solid orange;
+  border: 2px solid #333 ;
 }
 
 .bg-modal{
@@ -126,4 +130,7 @@ margin-left: 29%;
   height: 500px;
   background-color: white;
 
+}
+#empresa{
+  display: none;
 }

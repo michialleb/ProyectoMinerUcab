@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
+
 class FormYacimiento extends Component {
   constructor() {
     super();
@@ -8,7 +9,7 @@ class FormYacimiento extends Component {
       yacimientoList: [],
       nombre: "",
       direccion: "",
-      capacidad: "",
+      kilometros: "",
       status: "",
       descripcion: ""
     };
@@ -65,9 +66,9 @@ class FormYacimiento extends Component {
                   className=""
                   placeholder=""
                   type="number"
-                  name="capacidad"
+                  name="kilometros"
                   noValidate
-                  value={this.state.capacidad}
+                  value={this.state.kilometros}
                   onChange={this.handleChange}
                 /> 
               </div>
