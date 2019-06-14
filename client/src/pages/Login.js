@@ -6,16 +6,17 @@ import {
   NavLink,
   Switch
 } from "react-router-dom";
+import "../Login.css";
 import SignUpForm from "../pages/SignUpForm";
 import SignInForm from "../pages/SignInForm";
 import Sesion from "./Sesion";
-import Empleado from "./Empleado";
-import Yacimientos from "./Yacimientos";
-
-import "../Login.css";
-import Home from "./Home";
-import Navbar from "../components/Navbar";
-
+import Empleado from "../entities/Empleado";
+import Yacimientos from "../entities/Yacimientos";
+import Inventario from "../entities/Inventario";
+import Clientes from "../entities/Clientes";
+import EmpresasAliadas from "../entities/EmpresasAliadas";
+import Minerales from "../entities/Minerales";
+import InfoRelevante from "../entities/InfoRelevante";
 class Login extends Component {
   render() {
     return (
@@ -24,7 +25,12 @@ class Login extends Component {
           <Switch>
             <Route exact path="/sesion" component={Sesion} />
             <Route path="/empleados" component={Empleado} />
+            <Route path="/clientes" component={Clientes} />
+            <Route path="/inventario" component={Inventario} />
             <Route path="/yacimientos" component={Yacimientos} />
+            <Route path="/empresas" component={EmpresasAliadas} />
+            <Route path="/minerales" component={Minerales} />
+            <Route path="/info" component={InfoRelevante} />
 
             <div className="Login">
               <div className="Login__Aside">
