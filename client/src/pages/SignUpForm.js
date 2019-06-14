@@ -1,5 +1,21 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { Formik, FormikProps, FormikErrors, withFormik } from "formik";
+import * as EmailValidator from "email-validator";
+import * as Yup from "yup";
+
+const formValid = ({ formErrors, ...rest }) => {
+  let valid = true;
+
+  Object.values(formErrors).forEach(val => {
+    val.length > 0 && (valid = false);
+  });
+
+  Object.values(rest).forEach(val => {
+    val === null && (valid = false);
+  });
+  return valid;
+};
 
 class SignUpForm extends Component {
   constructor() {
@@ -13,35 +29,66 @@ class SignUpForm extends Component {
       apellido: "",
       usario: "",
       cedula: "",
-      hasAgreed: false
+      hasAgreed: false,
+
+      formErrors: {
+        emailError: "",
+        passwordError: "",
+        cedulaError: ""
+      }
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  
-
   handleChange(e) {
     let target = e.target;
     let value = target.type === "checkbox" ? target.checked : target.value;
     let name = target.name;
+    let formErrors = this.state.formErrors;
 
-    this.setState({
-      [name]: value
-    });
+    switch (name) {
+      case "email":
+        const emailRegex = RegExp(
+          /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+        );
+        formErrors.emailError = emailRegex.test(value)
+          ? ""
+          : "Direccion de correo invalida";
+        break;
+      case "password":
+        formErrors.passwordError =
+          value.length < 7 ? "Se requieren 7 caracteres como minimo" : "";
+        break;
+      default:
+        break;
+    }
+
+    this.setState(
+      {
+        formErrors,
+        [name]: value
+      },
+      () => console.log(this.state)
+    );
   }
 
   handleAddUsuario = () => {
-    fetch("/api/usuarios", {
-      method: "post",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ usuario: this.state })
-    }).then(res => res.json());
-    /* .then(res => {
-        this.getUsuarioList();
-        this.setState({ name: "" });
-      });*/
+    if (formValid(this.state)) {
+      fetch("/api/usuarios", {
+        method: "post",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ usuario: this.state })
+      }).then(res => res.json());
+      /* .then(res => {
+      this.getUsuarioList();
+      this.setState({ name: "" });
+    });*/
+      alert("Usuario creado satisfactoriamente :)");
+    } else {
+      alert("Datos invalidos, revise el formulario");
+    }
   };
 
   /*componentDidMount() {
@@ -50,12 +97,28 @@ class SignUpForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
     console.log("The form was submitted with the following data:");
     console.log(this.state);
   }
 
   render() {
+    const { formErrors } = this.state;
+    /*const { handleBlur,
+           touched,
+           errors,
+            emai=this.state.email,
+          pass=this.state.password
+         } = this.state;
+   
+    const validationSchema = Yup.object().shape({
+      email: Yup.string()
+        .email("El correo debe ser valido")
+        .required(),
+      password: Yup.string()
+        .required()
+        .min(7, "La contraseña es muy corta, debe tener 7 caracteres minimo")
+    });
+*/
     return (
       <div className="FormCenter">
         <form onSubmit={this.handleSubmit} className="FormFields">
@@ -106,17 +169,22 @@ class SignUpForm extends Component {
               Cédula
             </label>
             <input
-              type="text"
+              type="number"
               id="cedula"
               className="FormField__Input"
               placeholder="Introduce tu numero de cedula"
               name="cedula"
               value={this.state.cedula}
               onChange={this.handleChange}
+              errorText={this.state.cedulaError}
             />
           </div>
           <div className="FormField">
-            <label className="FormField__Label" htmlFor="password">
+            <label
+              className="FormField__Label"
+              htmlFor="password"
+              //help={touched.pass && errors.pass ? errors.pass : ""} validateStatus={touched.pass && errors.pass ? "error" : undefined}
+            >
               Contraseña
             </label>
             <input
@@ -127,10 +195,20 @@ class SignUpForm extends Component {
               name="password"
               value={this.state.password}
               onChange={this.handleChange}
+              //onBlur={handleBlur}
+              errorText={this.state.passwordError}
             />
+
+            {this.state.password.length > 0 && (
+              <span className="errorMessage">{formErrors.passwordError}</span>
+            )}
           </div>
           <div className="FormField">
-            <label className="FormField__Label" htmlFor="email">
+            <label
+              className="FormField__Label"
+              htmlFor="email"
+              //help={touched.emai && errors.emai ? errors.emai : ""} validateStatus={touched.emai && errors.emai ? "error" : undefined}
+            >
               Correo Electrónico
             </label>
             <input
@@ -141,7 +219,12 @@ class SignUpForm extends Component {
               name="email"
               value={this.state.email}
               onChange={this.handleChange}
+              //onBlur={handleBlur}
+              errorText={this.state.emailError}
             />
+            {this.state.email.length > 0 && (
+              <span className="errorMessage">{formErrors.emailError}</span>
+            )}
           </div>
 
           <div className="FormField">
@@ -162,6 +245,7 @@ class SignUpForm extends Component {
 
           <div className="FormField">
             <button
+              type="submit"
               className="FormField__Button mr-20"
               onClick={this.handleAddUsuario}
             >
