@@ -78,7 +78,13 @@ export default class Empleado extends Component {
           id: 1
         },
         {
-          form: <ModiEmpleado consult={consult} empleados={empleados} />,
+          form: (
+            <ModiEmpleado
+              consult={consult}
+              empleados={empleados}
+              getEmpleado={this.handleGetEmpleado}
+            />
+          ),
           id: 2
         }
       ]

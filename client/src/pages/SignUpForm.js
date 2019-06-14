@@ -148,6 +148,7 @@ class SignUpForm extends Component {
               name="apellido"
               value={this.state.apellido}
               onChange={this.handleChange}
+              required
             />
           </div>
           <div className="FormField">
@@ -162,6 +163,7 @@ class SignUpForm extends Component {
               name="usuario"
               value={this.state.usuario}
               onChange={this.handleChange}
+              required
             />
           </div>
           <div className="FormField">
@@ -177,6 +179,7 @@ class SignUpForm extends Component {
               value={this.state.cedula}
               onChange={this.handleChange}
               errorText={this.state.cedulaError}
+              required
             />
           </div>
           <div className="FormField">
@@ -197,6 +200,7 @@ class SignUpForm extends Component {
               onChange={this.handleChange}
               //onBlur={handleBlur}
               errorText={this.state.passwordError}
+              required
             />
 
             {this.state.password.length > 0 && (
@@ -221,6 +225,7 @@ class SignUpForm extends Component {
               onChange={this.handleChange}
               //onBlur={handleBlur}
               errorText={this.state.emailError}
+              required
             />
             {this.state.email.length > 0 && (
               <span className="errorMessage">{formErrors.emailError}</span>

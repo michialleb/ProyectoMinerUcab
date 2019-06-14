@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
+import { FaSistrix } from "react-icons/fa";
 
 class Form extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      empleadoList: [],
       nombre: "pepe",
       apellido: "porras",
       fnac: "10/10/1990",
-      cedula: "1212",
+      cedula: "",
       direccion: "caracas",
       telefono: "00"
     };
@@ -59,6 +59,25 @@ class Form extends Component {
   render() {
     return (
       <>
+        <div>
+          <span className="searching">
+            <input
+              className="inp-search"
+              type="search"
+              placeholder="Ingrese nro de cédula"
+              name="empleadoCedula"
+              value={this.state.cedula}
+              onChange={this.handleChange}
+            />
+            <button
+              className="search"
+              type="button"
+              onClick={this.props.getEmpleado(this.state.cedula)}
+            >
+              {<FaSistrix />}
+            </button>
+          </span>
+        </div>
         <div className="wrapper">
           <div className="form-wrapper">
             <h5>Datos del Usuario</h5>
