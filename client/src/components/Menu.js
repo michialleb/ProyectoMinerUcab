@@ -6,7 +6,9 @@ import {
   FaBoxOpen,
   FaHardHat,
   FaBook,
-  FaBars
+  FaBars,
+  FaGem,
+  FaBuilding
 } from "react-icons/fa";
 import Account from "./Account";
 import LogOut from "./LogOut";
@@ -36,9 +38,19 @@ export default class Menu extends Component {
         tipo: "/empleados"
       },
       {
+        icon: <FaGem />,
+        title: "Minerales",
+        tipo: "/minerales"
+      },
+      {
         icon: <FaHammer />,
         title: "Yacimientos",
         tipo: "/yacimientos"
+      },
+      {
+        icon: <FaBuilding />,
+        title: "Empresas Aliadas",
+        tipo: "/empresas"
       },
       {
         icon: <FaUser />,
@@ -72,7 +84,7 @@ export default class Menu extends Component {
           >
             <FaBars className="sidenav-icon" />
           </button>
-          <MenuCrud crud={this.props.crud}/>
+          <MenuCrud crud={this.props.crud} />
         </div>
         <div className="sidenav">
           <div
