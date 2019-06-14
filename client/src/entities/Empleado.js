@@ -29,7 +29,6 @@ export default class Empleado extends Component {
       .then(res => {
         var cargoList = res.map(r => r);
         this.setState({ cargoList });
-
       });
   };
 

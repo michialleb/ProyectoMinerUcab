@@ -1,0 +1,30 @@
+var express = require("express");
+var Minerales = require("../models/minerales");
+
+var router = express.Router();
+
+router.get("/", function(req, res) {
+  Minerales.retrieveAll(function(err, minerales) {
+    if (err) return res.json(err);
+    return res.json(minerales);
+  });
+});
+
+router.get("/:nombre", function(req, res) {
+  var nombre = req.params.nombre;
+  Minerales.retrieveNombre(nombre, function(err, minerales) {
+    if (err) return res.json(err);
+    return res.json(minerales);
+  });
+});
+
+router.post("/", function(req, res) {
+  var minerales = req.body.minerales;
+
+  Minerales.insert(minerales, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
+
+module.exports = router;
