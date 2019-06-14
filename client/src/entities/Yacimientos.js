@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Menu from "../components/Menu";
 import ConsultTableYacimientos from "../components/ConsultTableYacimientos";
+import FormYacimiento from "../components/FormYacimiento";
 
 export default class Yacimientos extends Component {
   constructor() {
@@ -42,7 +43,7 @@ export default class Yacimientos extends Component {
       options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar"],
       content: [
         {
-          form: null, //colocar formato de ingreso
+          form: <FormYacimiento/>, //colocar formato de ingreso
           id: 0
         },
         {
