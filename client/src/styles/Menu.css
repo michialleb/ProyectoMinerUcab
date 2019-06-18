@@ -20,9 +20,9 @@ body {
   transition-duration: 0.3s;
 }
 .sidenav {
-  position: fixed;
+  position: absolute;
   border-left-color: black;
-  height: 100em;
+  height: cover;
   background: #1b1e20;
   z-index: 3;
 }

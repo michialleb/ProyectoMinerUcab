@@ -47,7 +47,7 @@ class Form extends Component {
       <>
         <div className="wrapper">
           <div className="form-wrapper">
-            <h5>Ingresar Usuario</h5>
+            <h5>Ingresar empleado</h5>
             <form className="form" noValidate>
               <div className="firstName">
                 <label htmlFor="firstName">Nombre Empleado</label>
