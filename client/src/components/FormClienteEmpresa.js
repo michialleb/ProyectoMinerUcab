@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
+import Modal from "./popCompraCliente";
 class FormCliente extends Component {
   constructor() {
     super();
@@ -43,39 +44,40 @@ class FormCliente extends Component {
     console.log("The form was submitted with the following data:");
     console.log(this.state);
   }
-  
- Persona(){
-  document.getElementById("persona").style.display="block";
-  document.getElementById("empresa").style.display="none";
-  if(document.getElementById("btn-p").style.background==="orange"){
-    document.getElementById("btn-p").style.background="#333";
-    document.getElementById("btn-p").style.color="orange";
 
-      }else {
-      document.getElementById("btn-p").style.background="orange";
-      document.getElementById("btn-p").style.color="#333";
+  Persona() {
+    document.getElementById("persona").style.display = "block";
+    document.getElementById("empresa").style.display = "none";
+    if (document.getElementById("btn-p").style.background === "orange") {
+      document.getElementById("btn-p").style.background = "#333";
+      document.getElementById("btn-p").style.color = "orange";
+    } else {
+      document.getElementById("btn-p").style.background = "orange";
+      document.getElementById("btn-p").style.color = "#333";
     }
-}
-Empresa(){
-  document.getElementById("persona").style.display="none";
-  document.getElementById("empresa").style.display="block";
-  if(document.getElementById("btn-e").style.background==="orange"){
-    
-  document.getElementById("btn-e").style.background="#333";
-  document.getElementById("btn-e").style.color="orange";
-    }else {
-    document.getElementById("btn-e").style.background="orange";
-    document.getElementById("btn-e").style.color="#333";
   }
-
-}
+  Empresa() {
+    document.getElementById("persona").style.display = "none";
+    document.getElementById("empresa").style.display = "block";
+    if (document.getElementById("btn-e").style.background === "orange") {
+      document.getElementById("btn-e").style.background = "#333";
+      document.getElementById("btn-e").style.color = "orange";
+    } else {
+      document.getElementById("btn-e").style.background = "orange";
+      document.getElementById("btn-e").style.color = "#333";
+    }
+  }
   render() {
     return (
       <>
         <div className="wrapper">
           <div className="buttonClienteshow">
-              <button id="btn-p" type="submit" onClick={(e) => this.Persona(e)}>Ingresar Persona</button>
-              <button id="btn-e" type="submit" onClick={(e) => this.Empresa(e)}>Ingresar Empresa</button>
+            <button id="btn-p" type="submit" onClick={e => this.Persona(e)}>
+              Ingresar Persona
+            </button>
+            <button id="btn-e" type="submit" onClick={e => this.Empresa(e)}>
+              Ingresar Empresa
+            </button>
           </div>
           <div id="persona" className="form-wrapper">
             <form className="form" noValidate>
@@ -151,11 +153,7 @@ Empresa(){
                   onChange={this.handleChange}
                 />
               </div>
-              <div className="ingresarUsuario">
-                <button type="submit" onClick={this.handleAddEmpleado}>
-                  Ingresar Cliente
-                </button>
-              </div>
+              <Modal />
             </form>
           </div>
 
@@ -210,14 +208,9 @@ Empresa(){
                 />
               </div>
 
-              <div className="ingresarUsuario">
-                <button type="submit" onClick={this.handleAddEmpleado}>
-                  Ingresar Cliente
-                </button>
-              </div>
+              <Modal />
             </form>
           </div>
-
         </div>
       </>
     );
