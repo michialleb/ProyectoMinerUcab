@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
+<<<<<<< HEAD
 import Modal from "./popCompraCliente";
+=======
+import Modal from "./ModalCompraCliente";
+>>>>>>> dec1e3bcb92fbd1b6275341c7b32df28493602cd
 class FormCliente extends Component {
   constructor() {
     super();
@@ -153,7 +157,11 @@ class FormCliente extends Component {
                   onChange={this.handleChange}
                 />
               </div>
+<<<<<<< HEAD
               <Modal />
+=======
+             <Modal />
+>>>>>>> dec1e3bcb92fbd1b6275341c7b32df28493602cd
             </form>
           </div>
 
@@ -208,7 +216,11 @@ class FormCliente extends Component {
                 />
               </div>
 
+<<<<<<< HEAD
               <Modal />
+=======
+            <Modal />
+>>>>>>> dec1e3bcb92fbd1b6275341c7b32df28493602cd
             </form>
           </div>
         </div>

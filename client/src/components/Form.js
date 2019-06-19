@@ -5,18 +5,19 @@ class Form extends Component {
     super();
 
     this.state = {
+   
       empleadoList: [],
-      nombre: "",
+      nombre: "",       
       apellido: "",
       fnac: "",
       cedula: "",
       direccion: "",
-      telefono: ""
+      telefono: "",
+      fk_cargo:0
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
   handleChange(e) {
     let target = e.target;
     let value = target.type === "checkbox" ? target.checked : target.value;
@@ -26,6 +27,8 @@ class Form extends Component {
       [name]: value
     });
   }
+
+  
 
   handleAddEmpleado = () => {
     fetch("/api/empleados", {
@@ -40,6 +43,7 @@ class Form extends Component {
 
     console.log("The form was submitted with the following data:");
     console.log(this.state);
+    
   }
 
   render() {
@@ -47,7 +51,7 @@ class Form extends Component {
       <>
         <div className="wrapper">
           <div className="form-wrapper">
-            <h5>Ingresar Usuario</h5>
+            <h5>Ingresar empleado </h5>
             <form className="form" noValidate>
               <div className="firstName">
                 <label htmlFor="firstName">Nombre Empleado</label>
@@ -75,9 +79,10 @@ class Form extends Component {
               </div>
               <div className="cargo">
                 <label htmlFor="cargo">Cargo</label>
-                <select>
+                <select name="fk_cargo" id="selected" value={this.state.fk_cargo} onChange={this.handleChange}>
+                  <option></option>
                   {this.props.cargos.map((cargo, i) => (
-                    <option key={i}>{cargo.tipo_cargo}</option>
+                    <option value={cargo.id_cargo} key={i}>{cargo.tipo_cargo}</option>
                   ))}
                 </select>
               </div>

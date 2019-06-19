@@ -10,12 +10,32 @@ class FormYacimiento extends Component {
       nombre: "",
       direccion: "",
       kilometros: "",
-      status: "",
-      descripcion: ""
+      status: 2,
+      descripcion: "",
+      mineral:"",
+      mineralList:[]
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChangeMineral = this.handleChangeMineral.bind(this);
+    this.onDelete = this.onDelete.bind(this);
   }
+
+  handleChangeMineral(e) {
+    e.preventDefault();
+    let minerales=this.state.mineralList;
+    let target = e.target;
+    let value = target.type === "checkbox" ? target.checked : target.value;
+    let name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+    minerales.push(value);
+    this.setState({mineralList: minerales});
+
+  }
+  
   handleChange(e) {
     let target = e.target;
     let value = target.type === "checkbox" ? target.checked : target.value;
@@ -25,7 +45,16 @@ class FormYacimiento extends Component {
       [name]: value
     });
   }
-  
+  onDelete(e){
+    let minerales=this.state.mineralList;
+    let target=e.target;
+    let name=target.name;
+    var index=minerales.indexOf(name);
+    if (index > -1) {
+      minerales.splice(index, 1);
+   }
+   this.setState({mineralList: minerales});
+  };
   handleAddYacimiento = () => {
     fetch("/api/yacimientos", {
       method: "post",
@@ -43,6 +72,7 @@ class FormYacimiento extends Component {
 
   render() {
     return (
+    
       <>
         <div className="wrapper">
           <div className="form-wrapper">
@@ -72,14 +102,18 @@ class FormYacimiento extends Component {
                   onChange={this.handleChange}
                 /> 
               </div>
-              <div className="status">
-                <label htmlFor="status">Status:</label>
-                <select>
-                  <option>Activo</option>
-                  <option>Inactivo</option>
-                </select>
-              </div>
-             
+              <div className="firstName">
+                <label htmlFor="firstName">Descripcion:</label>
+                <input
+                  className=""
+                  placeholder="Ingrese una descripcion"
+                  type="text"
+                  name="descripcion"
+                  noValidate
+                  value={this.state.descripcion}
+                  onChange={this.handleChange}
+                />
+              </div>            
               <div className="ubicacion">
                 <label htmlFor="ubicacion">Ubicacion</label>
                 <input
@@ -92,17 +126,37 @@ class FormYacimiento extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-              <div className="firstName">
-                <label htmlFor="firstName">Descripcion:</label>
-                <input
-                  className=""
-                  placeholder="Ingrese una descripcion"
-                  type="text"
-                  name="descripcion"
-                  noValidate
-                  value={this.state.descripcion}
-                  onChange={this.handleChange}
-                />
+              <div>
+              <div className="add_minerales">
+                
+                <select name="mineral"  value={this.state.mineral} onChange={this.handleChangeMineral}>
+                  <option></option>
+                  {this.props.minerales.map((mineral, i) => (
+                    <option value={mineral.mineral_nombre} key={i}>{mineral.mineral_nombre}</option>
+                  ))}
+                </select>
+
+
+
+                <table id="t01">
+          {this.state.mineralList.map((mineral, i) => {
+            return (
+              <tr key={i}>
+                <td>
+                     {mineral}
+                     <button name={mineral} onClick={this.onDelete}>
+                       x
+                     </button>
+                
+                </td>
+              </tr>
+            );
+          })}
+
+
+        </table>
+        </div>
+
               </div>
               <div className="ingresarUsuario">
                 <button type="submit" onClick={this.handleAddYacimiento}>
