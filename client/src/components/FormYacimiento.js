@@ -10,7 +10,7 @@ class FormYacimiento extends Component {
       nombre: "",
       direccion: "",
       kilometros: "",
-      status: "",
+      status: 2,
       descripcion: ""
     };
     this.handleChange = this.handleChange.bind(this);
@@ -97,13 +97,6 @@ class FormYacimiento extends Component {
                 />
               </div>
 
-              <div className="status">
-                <label htmlFor="status">Status:</label>
-                <select>
-                  <option>Activo</option>
-                  <option>Inactivo</option>
-                </select>
-              </div>
               <div className="ingresarUsuario">
                 <button type="submit" onClick={this.handleAddYacimiento}>
                   Ingresar Yacimiento

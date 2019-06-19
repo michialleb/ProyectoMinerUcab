@@ -52,10 +52,11 @@ export default class Empleado extends Component {
       consult: [
         "Nombre",
         "Apellido",
-        "Nacimiento",
         "Cedula",
+        "Nacimiento",
         "Telefono",
-        "Direccion"
+        "Direccion",
+        "Cargo"
       ]
     };
 

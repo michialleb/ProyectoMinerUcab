@@ -10,7 +10,7 @@ export default class Clientes extends Component {
       options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar"],
       content: [
         {
-          form: <FormCompraCliente />,
+          form: "",
           id: 0
         },
         {

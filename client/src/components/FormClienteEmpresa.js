@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
+import Modal from "./ModalCompraCliente";
 class FormCliente extends Component {
   constructor() {
     super();
@@ -151,11 +152,7 @@ Empresa(){
                   onChange={this.handleChange}
                 />
               </div>
-              <div className="ingresarUsuario">
-                <button type="submit" onClick={this.handleAddEmpleado}>
-                  Ingresar Cliente
-                </button>
-              </div>
+             <Modal />
             </form>
           </div>
 
@@ -210,11 +207,7 @@ Empresa(){
                 />
               </div>
 
-              <div className="ingresarUsuario">
-                <button type="submit" onClick={this.handleAddEmpleado}>
-                  Ingresar Cliente
-                </button>
-              </div>
+            <Modal />
             </form>
           </div>
 

@@ -1,14 +1,19 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
 
-class FormMineral extends Component {
+class FormCompraCliente extends Component {
   constructor() {
     super();
     this.state = {
         nombre:"Sutanito",
         ci:11111,
         cantidad:"",
-        fechaentrega:""
+        fechaentrega:"",
+        mineral:"",
+        nombreMineral:[],
+        1:"",
+        2:""
+
       };
       this.handleChange=this.handleChange.bind(this);
       this.add=this.add.bind(this);
@@ -22,13 +27,32 @@ class FormMineral extends Component {
       [name]: value
     });
   }
-
+  /*<label htmlFor="cargo">Cargo</label>
+  <select name="fk_cargo" id="selected" value={this.state.fk_cargo} onChange={this.handleChange}>
+    <option></option>
+    {this.props.cargos.map((cargo, i) => (
+      <option value={cargo.id_cargo} key={i}>{cargo.tipo_cargo}</option>
+    ))}
+  </select>*/
   add =(cantidad)=>{
     let inputs=[]
     //document.getElementById("cant").readOnly=true;
+    /*for(let j=1;j<=cantidad;j++){
+      this.setState({nombreMineral:[this.state.nombreMineral[j],j]});
+    }
+    console.log(this.state.nombreMineral);*/
     for(let i=1;i<=cantidad;i++){
         inputs.push(<div className="min-compra">
-            <div><label>Mineral</label><input></input></div>
+            <div>
+              <label>Mineral {i}</label>
+              <select name='nombre' value={this.state.mineral} onChange={this.handleChange}>
+                <option></option>
+                {this.props.minerales.map((mineral,i) => (
+                  <option value={mineral.id_mineral} key={i}>{mineral.mineral_nombre} </option>
+                  
+                ))}
+               </select>
+             </div>
             <div><label>Presentacion</label><input></input></div>
             <div><label>Cantidad</label><input type="number"></input></div>
             </div>)
@@ -93,4 +117,4 @@ class FormMineral extends Component {
   }
 }
 
-export default FormMineral;
+export default FormCompraCliente;

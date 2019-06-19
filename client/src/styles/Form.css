@@ -165,3 +165,7 @@ h5 {
   display: flex;
   width: 50%;
 }
+/*modal*/
+.modal{
+  margin-top: 300px;
+}
