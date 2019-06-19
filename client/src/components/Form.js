@@ -11,7 +11,8 @@ class Form extends Component {
       fnac: "",
       cedula: "",
       direccion: "",
-      telefono: ""
+      telefono: "",
+      sexo: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,6 +26,8 @@ class Form extends Component {
     this.setState({
       [name]: value
     });
+
+    console.log(this.state);
   }
 
   handleAddEmpleado = () => {
@@ -33,6 +36,7 @@ class Form extends Component {
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ empleado: this.state })
     }).then(res => res.json());
+    console.log(this.state);
   };
 
   handleSubmit(e) {
@@ -128,6 +132,20 @@ class Form extends Component {
                   onChange={this.handleChange}
                 />
               </div>
+
+              <div className="sexo">
+                <label htmlFor="sexo">Sexo</label>
+                <select
+                  name="sexo"
+                  value={this.state.sexo}
+                  onChange={this.handleChange}
+                >
+                  <option />
+                  <option>M</option>
+                  <option>F</option>
+                </select>
+              </div>
+
               <div className="horario-act">
                 <label htmlFor="horario-act">Desea agregar un horario?</label>
                 <div>

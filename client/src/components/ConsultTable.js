@@ -6,12 +6,12 @@ class ConsultTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeTab: 0,
       cedula: ""
       // empleado: null,
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleGetEmpleado = this.handleGetEmpleado.bind(this);
   }
 
   handleChange(e) {
@@ -23,6 +23,10 @@ class ConsultTable extends Component {
     });
   }
 
+  handleGetEmpleado(e) {
+    this.props.getEmpleado(this.state.cedula);
+    console.log(this.props.empleados);
+  }
   render() {
     return (
       <>
@@ -32,19 +36,20 @@ class ConsultTable extends Component {
               className="inp-search"
               type="search"
               placeholder="Ingrese nro de cédula"
-              name="empleadoCedula"
+              name="cedula"
               value={this.state.cedula}
               onChange={this.handleChange}
             />
             <button
               className="search"
               type="button"
-              onClick={this.props.getEmpleado(this.state.cedula)}
+              onClick={this.handleGetEmpleado}
             >
               {<FaSistrix />}
             </button>
           </span>
         </div>
+
         <table id="t01">
           <tr>
             {this.props.consult.consult.map((item, i) => (
@@ -54,12 +59,13 @@ class ConsultTable extends Component {
           {this.props.empleados.map((empleado, i) => {
             return (
               <tr key={i}>
-                <td>{empleado.empleado_nombre}</td>
-                <td>{empleado.empleado_apellido}</td>
-                <td>{empleado.empleado_fnac}</td>
-                <td>{empleado.empleado_cedula}</td>
-                <td>{empleado.empleado_telefono}</td>
-                <td>{empleado.empleado_direccion}</td>
+                <td>{empleado.nombre_empleado}</td>
+                <td>{empleado.apellido_empleado}</td>
+                <td>{empleado.fecha_nacimiento_empleado}</td>
+                <td>{empleado.cedula_empleado}</td>
+                <td>{empleado.telefono_empleado}</td>
+                <td>{empleado.direccion_empleado}</td>
+                <td>{empleado.sexo_empleado}</td>
               </tr>
             );
           })}

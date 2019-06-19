@@ -1,7 +1,7 @@
 create table Lugar (
   id_lugar serial,
-  nombre_lugar varchar (300) not null,
-  tipo_lugar varchar (300) not null,
+  nombre_lugar varchar (50) not null,
+  tipo_lugar varchar (30) not null,
   fk_lugar integer,
   constraint fk_lugar_lugar foreign key (fk_lugar)
   references Lugar (id_lugar),
@@ -10,9 +10,9 @@ create table Lugar (
 
 CREATE TABLE empresa_aliada (
      id_empresa_aliada SERIAL,
-     nombre_empresa VARCHAR(300) NOT NULL,
+     nombre_empresa VARCHAR(30) NOT NULL,
      fecha_creacion_empresa DATE,
-     descripcion_empresa VARCHAR(300),
+     descripcion_empresa VARCHAR(100),
      fk_lugar integer NOT NULL,
      CONSTRAINT fk_empresa_aliada_lugar FOREIGN KEY (fk_Lugar)
      REFERENCES Lugar (id_lugar),
@@ -21,38 +21,34 @@ CREATE TABLE empresa_aliada (
 
 create table Presentacion(
     id_presentacion serial,
-    nombre_presentacion varchar(300) not null,
+    nombre_presentacion varchar(30) not null,
     constraint pk_id_presentacion primary key (id_presentacion)
 );
 
 CREATE TABLE tipo_status(
      id_tipo_status SERIAL,
-     nombre_tipo_status VARCHAR(300) NOT NULL,
+     nombre_tipo_status VARCHAR(30) NOT NULL,
      CONSTRAINT pk_id_tipo_status PRIMARY KEY (id_tipo_status)
 );
 
 
 create table Inventario(
-    id_inventario serial,
-    fecha_inventario DATE NOT NULL,
+    numero serial,
     cantidad integer not null,
-    Fk_Detalle_Compra_Aliado integer,
-    Fk_Detalle_Compra_Cliente integer,
-    constraint pk_inventario  primary key (id_inventario),
-    constraint fk_detalle_compra_cliente_aliado_inventario foreign key (Fk_Detalle_Compra_Aliado)
-    references Detalle_Compra_Aliado (id_detalle_compra_aliado),
-    constraint fk_detalle_compra_cliente_cliente_inventario foreign key (Fk_Detalle_Compra_cliente)
-    references Detalle_Compra_Cliente (id_detalle_compra_cliente)
+    constraint pk_inventario  primary key (numero)
 );
-
 create table Mineral_Metalico(
     id_mineral serial,
     nombre_mineral varchar (50) not null,
     valor_economico varchar (10) not null,
-    descripcion_mineral varchar (300) not null,
+    costo_tonelada  integer not null,
+    descripcion_mineral varchar (100) not null,
     fecha_ini_explotacion date not null,
     fecha_nacionalizacion date not null,
+    fk_lugar integer not null,
     constraint pk_mineral_metalico primary key (id_mineral),
+    constraint fk_lugar_inicio_mineral foreign key (fk_lugar)
+    references Lugar (id_lugar),
 	constraint check_valor_economico check 
 	(valor_economico in ('Bajo','Medio','Alto'))
 );
@@ -61,8 +57,9 @@ create table Mineral_NoMetalico(
     id_mineral serial,
     nombre_mineral varchar (50) not null,
     valor_economico varchar (10) not null,
-    descripcion_mineral varchar (300) not null,
-    industria_dirigida varchar(300) not null,
+    costo_tonelada  integer not null,
+    descripcion_mineral varchar (100) not null,
+    industria_dirigida varchar(50) not null,
     constraint pk_mineral_nometalico primary key (id_mineral),
 	constraint check_valor_economico check 
 	(valor_economico in ('Bajo','Medio','Alto'))
@@ -70,15 +67,21 @@ create table Mineral_NoMetalico(
 
 CREATE TABLE Cargo (
     id_cargo serial,
-    tipo_cargo VARCHAR(100) NOT NULL,
-    salario_empleado INTEGER,
+    tipo_cargo VARCHAR(15) NOT NULL,
+    salario_empleado NUMERIC,
     CONSTRAINT pk_id_cargo PRIMARY KEY(id_cargo)
     );
 
 
+CREATE TABLE Banco (
+    id_Banco serial,
+    nombre_banco VARCHAR(20) NOT NULL,
+    CONSTRAINT pk_id_banco PRIMARY KEY(id_banco)
+    );
+
 CREATE TABLE Permiso (
     id_permiso serial,
-    nombre_permiso VARCHAR(70) NOT NULL,
+    nombre_permiso VARCHAR(20) NOT NULL,
     descripcion_permiso VARCHAR(225),
     CONSTRAINT pk_id_permiso PRIMARY KEY(id_permiso)
     );
@@ -94,11 +97,11 @@ CREATE TABLE Permiso_Rol (
     id_permiso_rol serial,
     FK_Permiso integer,
     FK_Rol integer,
-    CONSTRAINT pk_id_perm_rol PRIMARY KEY(id_permiso_rol),
+    CONSTRAINT pk_id_perm_rol PRIMARY KEY(id_permiso_rol,FK_Permiso,FK_Rol),
     CONSTRAINT fk_perm_rol_permiso FOREIGN KEY(FK_Permiso) 
     REFERENCES Permiso(id_Permiso),
     CONSTRAINT fk_perm_rol_rol FOREIGN KEY(FK_Rol) 
-    REFERENCES Rol(id_rol)
+    REFERENCES Rol(id_Rol)
     );
 
 CREATE TABLE Empresa (
@@ -116,7 +119,7 @@ CREATE TABLE Empresa (
     cedula_identidad integer NOT NULL UNIQUE,
     nombre_persona VARCHAR(50) NOT NULL,
     apellido_persona VARCHAR(50) NOT NULL,
-    fecha_nacimiento DATE NOT NULL, 
+    fecha_nacimiento TIMESTAMP NOT NULL, 
     sexo CHAR(1) NOT NULL,
     FK_Lugar INTEGER NOT NULL, 
     CONSTRAINT fk_persona_lugar FOREIGN KEY (FK_Lugar)
@@ -127,12 +130,15 @@ CREATE TABLE Empresa (
 
 CREATE TABLE Empleado (
     id_empleado serial,
-    cedula_identidad integer NOT NULL UNIQUE,
+    cedula_empleado integer NOT NULL UNIQUE,
     nombre_empleado VARCHAR(50) NOT NULL,
     apellido_empleado VARCHAR(50) NOT NULL,
-    fecha_nacimiento DATE NOT NULL, 
-    sexo CHAR(1) NOT NULL,
+    fecha_nacimiento_empleado TIMESTAMP NOT NULL, 
+    sexo_empleado CHAR(1) NOT NULL,
+    FK_Cargo INTEGER NOT NULL,
     FK_Lugar INTEGER NOT NULL, 
+    CONSTRAINT fk_cargo_empleado FOREIGN KEY (FK_Cargo)
+    REFERENCES Cargo (id_cargo),
     CONSTRAINT fk_lugar_empleado FOREIGN KEY (FK_Lugar)
     REFERENCES Lugar (id_lugar),
     CONSTRAINT check_sexo_emp CHECK(sexo in('M','F')), 
@@ -151,12 +157,10 @@ CREATE TABLE Usuario (
     CONSTRAINT pk_id_usuario PRIMARY KEY(id_usuario),
     CONSTRAINT fk_usuario_empleado FOREIGN KEY (FK_empleado)
     REFERENCES Empleado (id_empleado),
-    CONSTRAINT fk_usuario_cliente_empresa FOREIGN KEY (FK_Cliente_Empresa)
+    CONSTRAINT pk_usuario_cliente_empresa FOREIGN KEY (FK_Cliente_Empresa)
     REFERENCES Empresa (id_cliente),
-    CONSTRAINT fk_usuario_cliente_persona FOREIGN KEY (FK_Cliente_Persona)
-    REFERENCES Persona (id_cliente),
-    CONSTRAINT fk_rol_usuario FOREIGN KEY (FK_Rol) 
-    REFERENCES Rol (id_rol)
+    CONSTRAINT pk_usuario_cliente_persona FOREIGN KEY (FK_Cliente_Persona)
+    REFERENCES Persona (id_cliente)
     );
 
 CREATE TABLE Horario (
@@ -174,7 +178,7 @@ CREATE TABLE Horario_Empleado (
     id_horario_empleado serial,
     FK_Empleado integer,
     FK_Horario integer, 
-    CONSTRAINT pk_id_horario_empleado PRIMARY KEY(id_horario_empleado),
+    CONSTRAINT pk_id_horario_empleado PRIMARY KEY(id_horario_empleado, FK_Empleado, FK_Horario),
     CONSTRAINT fk_horario_empleado_e FOREIGN KEY(FK_Empleado) 
     REFERENCES Empleado(id_empleado),
     CONSTRAINT fk_horario_empleado_h FOREIGN KEY(FK_Horario) 
@@ -550,3 +554,4 @@ create table Status_Fase (
     constraint fk_tipo_status_fase foreign key (fk_tipo_status)
     references Tipo_Status (id_tipo_status)   
 );
+

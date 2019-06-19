@@ -10,6 +10,7 @@ export default class Empleado extends Component {
 
     this.state = {
       cargoList: [],
+      empleado: [],
       empleadoList: "",
       empleadoCedula: ""
     };
@@ -19,8 +20,7 @@ export default class Empleado extends Component {
     fetch(`/api/empleados/${cedula}`)
       .then(res => res.json())
       .then(res => {
-        var empleadoList = res.map(r => r);
-        this.setState({ empleadoList });
+        this.setState({ empleadoList: res.map(r => r) });
       });
   };
 
@@ -47,6 +47,7 @@ export default class Empleado extends Component {
     this.getEmpleadoList();
   }
   render() {
+    var empleado = this.state.empleado;
     var empleados = this.state.empleadoList;
     var cargos = this.state.cargoList;
     var consult = {
@@ -56,7 +57,8 @@ export default class Empleado extends Component {
         "Nacimiento",
         "Cedula",
         "Telefono",
-        "Direccion"
+        "Direccion",
+        "Sexo"
       ]
     };
 
@@ -78,14 +80,20 @@ export default class Empleado extends Component {
           id: 1
         },
         {
+          form: "",
+
+          id: 2
+        },
+        {
           form: (
             <ModiEmpleado
+              cargos={cargos}
               consult={consult}
-              empleados={empleados}
+              empleado={empleados}
               getEmpleado={this.handleGetEmpleado}
             />
           ),
-          id: 2
+          id: 3
         }
       ]
     };

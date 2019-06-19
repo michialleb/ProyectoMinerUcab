@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-/*  background-color: #258ea6;*/
+  /*  background-color: #258ea6;*/
 }
 
 .form-wrapper {
@@ -18,10 +18,9 @@
   box-shadow: 0px 10px 50px #555;
   background-color: #ffffff;
 }
-#empresa,#persona{
-
+#empresa,
+#persona {
   margin-top: 20px;
-
 }
 .form {
   width: 100%;
@@ -35,55 +34,85 @@ h5 {
   width: 100%;
   color: #111;
   font-weight: lighter;
-  
 }
 
-.firstname,.ci,.telefono,.nacimiento,.direccion,.secondName,.capacidad,.ubicacion, label {
+.firstname,
+.ci,
+.telefono,
+.nacimiento,
+.direccion,
+.secondName,
+.capacidad,
+.ubicacion,
+label {
   font-size: 1em;
   margin-bottom: 0.25em;
   font-weight: lighter;
 }
 
-/*.firstname,.ci,.telefono,.nacimiento,.direccion*/ input {
+/*.firstname,.ci,.telefono,.nacimiento,.direccion*/
+input {
   padding: 1.5px 1.5px;
   border-radius: 5px;
   outline: none;
   border: 1px solid #cfcfcf;
 }
 
-.firstname,.ci,.telefono,.nacimiento,.direccion,.secondName,.capacidad,.ubicacion input::placeholder {
+.firstname,
+.ci,
+.telefono,
+.nacimiento,
+.direccion,
+.secondName,
+.capacidad,
+.ubicacion input::placeholder {
   font-size: 1em;
   font-weight: lighter;
 }
 
-.check .yes input{
+.check .yes input {
   margin-right: 2%;
 }
-.firstName,.cargo,.nacimiento ,.horario-act,.direccion,.status {
+.firstName,
+.cargo,
+.nacimiento,
+.horario-act,
+.direccion,
+.status,
+.sexo {
   margin-right: 1%;
 }
 
-.secondName .ci,.nacimiento,.telefono,.capacidad{
+.secondName .ci,
+.nacimiento,
+.telefono,
+.capacidad {
   margin-left: 1%;
 }
 
 .firstName,
 .cargo,
+.sexo,
 .ci,
-.nacimiento,.telefono,.direccion,.horario-act,.secondName,.capacidad,.ubicacion {
+.nacimiento,
+.telefono,
+.direccion,
+.horario-act,
+.secondName,
+.capacidad,
+.ubicacion {
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
   width: 48%;
 }
-.ubicacion{
-width: 48%;
-margin-left: 29%;
+.ubicacion {
+  width: 48%;
+  margin-left: 29%;
 }
-.status{
+.status {
   width: 20%;
 }
-
 
 /*.nacimiento {
   width: 100%;
@@ -112,25 +141,24 @@ margin-left: 29%;
 .ingresarUsuario button:hover {
   color: orange;
   background-color: #333;
-  border: 2px solid #333 ;
+  border: 2px solid #333;
 }
 
-.bg-modal{
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    position: absolute;
-    top:0;
-    display: none;
-    justify-content: center;
-    align-items: center;
+.bg-modal {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
 }
-.modal-content{
+.modal-content {
   width: 200px;
   height: 500px;
   background-color: white;
-
 }
-#empresa{
+#empresa {
   display: none;
 }

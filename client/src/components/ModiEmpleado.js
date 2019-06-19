@@ -7,15 +7,21 @@ class Form extends Component {
     super(props);
 
     this.state = {
-      nombre: "pepe",
-      apellido: "porras",
-      fnac: "10/10/1990",
+      nombre: "",
+      apellido: "",
+      fnac: "",
       cedula: "",
-      direccion: "caracas",
-      telefono: "00"
+      direccion: "",
+      telefono: "",
+      sexo: "",
+      cedulaBuscada: ""
     };
+    var cedulaBuscada = "";
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleGetEmpleado = this.handleGetEmpleado.bind(this);
+    this.addInfoEmpleado = this.addInfoEmpleado.bind(this);
   }
 
   /* getEmpleadoList = ()=>{
@@ -29,7 +35,7 @@ class Form extends Component {
 
   handleChange(e) {
     let target = e.target;
-    let value = target.type === "checkbox" ? target.checked : target.value;
+    let value = target.value;
     let name = target.name;
 
     this.setState({
@@ -37,23 +43,43 @@ class Form extends Component {
     });
   }
 
-  handleAddEmpleado = () => {
-    fetch("/api/empleados", {
+  handleUpdateEmpleado = () => {
+    fetch(`/api/empleados/empleado`, {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ empleado: this.state })
     }).then(res => res.json());
   };
 
-  /*componentDidMount() {
-    this.getEmpleadoList();
-  }*/
-
   handleSubmit(e) {
     e.preventDefault();
 
     console.log("The form was submitted with the following data:");
     console.log(this.state);
+  }
+
+  addInfoEmpleado(empleado) {
+    empleado.map(empl => {
+      this.setState({
+        nombre: empl.nombre_empleado,
+        apellido: empl.apellido_empleado,
+        fnac: empl.fecha_nacimiento_empleado,
+        cedula: empl.cedula_empleado,
+        direccion: empl.direccion_empleado,
+        telefono: empl.telefono_empleado,
+        sexo: empl.sexo_empleado
+      });
+    });
+  }
+
+  handleGetEmpleado(e) {
+    // this.setState(null);
+    this.props.getEmpleado(this.state.cedulaBuscada);
+    this.addInfoEmpleado(this.props.empleado);
+    console.log(this.props.empleado);
+    // this.setState({
+    // nombre: this.props.empleados.empleado_nombre
+    //});
   }
 
   render() {
@@ -65,14 +91,15 @@ class Form extends Component {
               className="inp-search"
               type="search"
               placeholder="Ingrese nro de cédula"
-              name="empleadoCedula"
-              value={this.state.cedula}
+              name="cedulaBuscada"
+              value={this.state.cedulaBuscada}
               onChange={this.handleChange}
             />
+
             <button
               className="search"
               type="button"
-              onClick={this.props.getEmpleado(this.state.cedula)}
+              onClick={this.handleGetEmpleado}
             >
               {<FaSistrix />}
             </button>
@@ -108,8 +135,9 @@ class Form extends Component {
               <div className="cargo">
                 <label htmlFor="cargo">Cargo</label>
                 <select>
-                  <option>x</option>
-                  <option>y</option>
+                  {this.props.cargos.map((cargo, i) => (
+                    <option key={i}>{cargo.tipo_cargo}</option>
+                  ))}
                 </select>
               </div>
               <div className="ci">
@@ -136,6 +164,7 @@ class Form extends Component {
                   onChange={this.handleChange}
                 />
               </div>
+
               <div className="telefono">
                 <label htmlFor="telefono">Número de teléfono</label>
                 <input
@@ -160,6 +189,18 @@ class Form extends Component {
                   onChange={this.handleChange}
                 />
               </div>
+              <div className="sexo">
+                <label htmlFor="sexo">Sexo</label>
+                <select
+                  name="sexo"
+                  value={this.state.sexo}
+                  onChange={this.handleChange}
+                >
+                  <option />
+                  <option>M</option>
+                  <option>F</option>
+                </select>
+              </div>
               <div className="horario-act">
                 <label htmlFor="horario-act">Desea agregar un horario?</label>
                 <div>
@@ -174,7 +215,7 @@ class Form extends Component {
                 </div>
               </div>
               <div className="ingresarUsuario">
-                <button type="submit" onClick={this.handleAddEmpleado}>
+                <button type="submit" onClick={this.handleUpdateEmpleado}>
                   Ingresar Usuario
                 </button>
               </div>

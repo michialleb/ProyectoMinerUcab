@@ -3,29 +3,17 @@ var express = require("express");
 
 class Empleados {
   static retrieveAll(callback) {
-    db.query("SELECT * FROM empleados", function(err, res) {
+    db.query("SELECT * FROM empleado", function(err, res) {
       if (err.error) return callback(err);
       callback(res);
     });
   }
 
-  static empleadoXcedula(empleado, callback) {
-    // const {empleado_cedula}=empelado.cedula;
-    db.query(
-      "SELECT * FROM empleados WHERE empleado_cedula = ?",
-      [empleado.cedula],
-      function(err, res) {
-        if (err.error) return callback(err);
-        callback(res);
-      }
-    );
-  }
-
   static update(empleado, callback) {
-    const newEmpleado = req.body;
     db.query(
-      "UPDATE empleados set empleado_nombre=?,empleado_apellido=?,empleado_cedula=?,\
-      empleado_fnac=?,empleado_telefono=?,empleado_direccion=? where empleado_cedula = ?)",
+      "UPDATE empleado set nombre_empleado=$1,apellido_empleado=$2,cedula_empleado=$3,\
+      fecha_nacimiento_empleado=$4,telefono_empleado=$5,direccion_empleado=$6,\
+      sexo_empleado=$7 where cedula_empleado= $3",
       [
         empleado.nombre,
         empleado.apellido,
@@ -33,7 +21,7 @@ class Empleados {
         empleado.fnac,
         empleado.telefono,
         empleado.direccion,
-        empleado_cedula
+        empleado.sexo
       ],
       function(err, res) {
         if (err.error) return callback(err);
@@ -42,10 +30,10 @@ class Empleados {
     );
   }
 
-
   static retrieveCedula(cedula, callback) {
     db.query(
-      "SELECT * FROM empleados WHERE empleado_cedula= $1", [cedula],
+      "SELECT * FROM empleado WHERE cedula_empleado= $1",
+      [cedula],
       function(err, res) {
         if (err.error) return callback(err);
         callback(res);
@@ -55,15 +43,16 @@ class Empleados {
 
   static insert(empleado, callback) {
     db.query(
-      "INSERT INTO empleados (empleado_nombre,empleado_apellido,empleado_cedula,\
-        empleado_fnac,empleado_telefono,empleado_direccion) VALUES ($1,$2,$3,$4,$5,$6)",
+      "INSERT INTO empleado (nombre_empleado,apellido_empleado,cedula_empleado,\
+       fecha_nacimiento_empleado,telefono_empleado,direccion_empleado,sexo_empleado) VALUES ($1,$2,$3,$4,$5,$6,$7)",
       [
         empleado.nombre,
         empleado.apellido,
         empleado.cedula,
         empleado.fnac,
         empleado.telefono,
-        empleado.direccion
+        empleado.direccion,
+        empleado.sexo
       ],
 
       function(err, res) {
