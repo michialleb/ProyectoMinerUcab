@@ -35,7 +35,7 @@ class Login extends Component {
             <div className="Login">
               <div className="Login__Aside">
                 <button className="btn-back">
-                  <Link to="/home" className="btn-back-link">
+                  <Link to="/" className="btn-back-link">
                     Regresar
                   </Link>
                 </button>
