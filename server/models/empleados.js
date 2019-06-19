@@ -3,23 +3,26 @@ var express = require("express");
 
 class Empleados {
   static retrieveAll(callback) {
-    db.query("select e.empleado_nombre as nombre,e.empleado_apellido as apellido,\
-    e.empleado_cedula as cedula ,e.empleado_fnac as fnac,e.empleado_telefono as telefono,\
-    e.empleado_direccion as direccion,c.tipo_cargo as cargo \
+    db.query(
+      "select e.nombre_empleado as nombre,e.apellido_empleado as apellido,\
+    e.cedula_empleado as cedula ,e.fecha_nacimiento_empleado as fnac,e.telefono.empleado as telefono,\
+    e.direccion_empleado as direccion,c.tipo_cargo as cargo \
     from empleados e,cargo c\
-    where e.fk_cargo=c.id_cargo;", function(err, res) {
-      if (err.error) return callback(err);
-      callback(res);
-    });
+    where e.fk_cargo=c.id_cargo",
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
   }
 
   static retrieveCedula(cedula, callback) {
     db.query(
-      "select e.empleado_nombre as nombre,e.empleado_apellido as apellido,\
-      e.empleado_cedula as cedula ,e.empleado_fnac as fnac,e.empleado_telefono as telefono,\
-      e.empleado_direccion as direccion,c.tipo_cargo as cargo \
+      "select e.nombre_empleado as nombre,e.apellido_empleado as apellido,\
+      e.cedula_empleado as cedula ,e.fecha_nacimiento_empleado as fnac,e.telefono.empleado as telefono,\
+      e.direccion_empleado as direccion,c.tipo_cargo as cargo \
       from empleados e,cargo c\
-      where e.fk_cargo=c.id_cargo and e.empleado_cedula=$1",
+      where e.fk_cargo=c.id_cargo and e.cedula=$1",
       [cedula],
       function(err, res) {
         if (err.error) return callback(err);
