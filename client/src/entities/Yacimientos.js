@@ -8,7 +8,8 @@ export default class Yacimientos extends Component {
     super();
 
     this.state = {
-      yacimientosList: ""
+      yacimientosList: "",
+      mineralList:[]
     };
   }
 
@@ -20,7 +21,14 @@ export default class Yacimientos extends Component {
         this.setState({ yacimientosList });
       });
   };
-
+  getMineralList = () => {
+    fetch("/api/minerales")
+      .then(res => res.json())
+      .then(res => {
+        var mineralList = res.map(r => r);
+        this.setState({ mineralList });
+      });
+  };
   getYacimientosList = () => {
     fetch("/api/yacimientos")
       .then(res => res.json())
@@ -32,9 +40,11 @@ export default class Yacimientos extends Component {
 
   componentDidMount() {
     this.getYacimientosList();
+    this.getMineralList();
   }
   render() {
     var yacimientos = this.state.yacimientosList;
+    var minerales = this.state.mineralList;
     var consult = {
       consult: ["Nombre", "Kilometros","Status"]
     };
@@ -43,7 +53,7 @@ export default class Yacimientos extends Component {
       options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar"],
       content: [
         {
-          form: <FormYacimiento/>, //colocar formato de ingreso
+          form: <FormYacimiento minerales={minerales}/>, //colocar formato de ingreso
           id: 0
         },
         {
