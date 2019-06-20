@@ -30,7 +30,7 @@ class ConsultTableYacimientos extends Component {
             <input
               className="inp-search"
               type="search"
-              placeholder="Ingrese nombre del yacimiento"
+              placeholder="Ingrese el yacimiento"
               name="nombreYacimiento"
               value={this.state.nombre}
               onChange={this.handleChange}
@@ -55,6 +55,7 @@ class ConsultTableYacimientos extends Component {
               <tr key={i}>
                 <td>{yacimiento.nombre_yacimiento}</td>
                 <td>{yacimiento.kilometros}</td>
+                <td>{yacimiento.descripcion}</td>
                 <td>{yacimiento.nombre_status}</td>
               </tr>
             );
