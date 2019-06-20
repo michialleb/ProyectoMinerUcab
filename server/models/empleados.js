@@ -63,7 +63,7 @@ class Empleados {
         empleado.fnac,
         empleado.telefono,
         empleado.direccion,
-        empleado.sexo
+        empleado.sexo,
         empleado.fk_cargo
       ],
 
