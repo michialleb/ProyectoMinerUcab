@@ -12,8 +12,8 @@ class FormMineral extends Component {
       tipo: "",
       valor: "",
       descripcion: "",
-      inicio:"",
-      nacionalizacion:""
+      inicio: "",
+      nacionalizacion: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,7 +27,7 @@ class FormMineral extends Component {
       [name]: value
     });
   }
-  
+
   handleAddMineral = () => {
     fetch("/api/minerales", {
       method: "post",
@@ -100,21 +100,21 @@ class FormMineral extends Component {
               </div>
               <div className="status">
                 <label htmlFor="status">Valor aproximado:</label>
-                <select>
-                  <option>Alto</option>
-                  <option>Medio</option>
-                  <option>Bajo</option>
+                <select name="valor" value={this.state.valor} onChange={this.handleChange}>
+                  <option></option>
+                  <option value="Alto">Alto</option>
+                  <option value="Medio">Medio</option>
+                  <option value="Bajo">Bajo</option>
                 </select>
               </div>
               <div className="status">
                 <label htmlFor="status">Tipo:</label>
-                <select>
-                  <option>Metalico</option>
-                  <option>No metalico</option>
+                <select name="tipo" value={this.state.tipo} onChange={this.handleChange}>
+                  <option></option>
+                  <option value={"Metalico"}>Metalico</option>
+                  <option value={"No metalico"}>No metalico</option>
                 </select>
               </div>
-             
-             
 
               <div className="ingresarUsuario">
                 <button type="submit" onClick={this.handleAddMineral}>
