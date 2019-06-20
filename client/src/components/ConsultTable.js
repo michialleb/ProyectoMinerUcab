@@ -59,13 +59,14 @@ class ConsultTable extends Component {
           {this.props.empleados.map((empleado, i) => {
             return (
               <tr key={i}>
-                <td>{empleado.nombre_empleado}</td>
-                <td>{empleado.apellido_empleado}</td>
-                <td>{empleado.fecha_nacimiento_empleado}</td>
-                <td>{empleado.cedula_empleado}</td>
-                <td>{empleado.telefono_empleado}</td>
-                <td>{empleado.direccion_empleado}</td>
-                <td>{empleado.sexo_empleado}</td>
+                <td>{empleado.nombre}</td>
+                <td>{empleado.apellido}</td>
+                <td>{empleado.cedula}</td>
+                <td>{empleado.fnac}</td>
+                <td>{empleado.telefono}</td>
+                <td>{empleado.direccion}</td>
+                <td>{empleado.cargo}</td>
+                <td>{empleado.sexo}</td>
               </tr>
             );
           })}

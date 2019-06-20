@@ -1,17 +1,19 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
 
-class FormYacimiento extends Component {
+class FormMineral extends Component {
   constructor() {
     super();
 
     this.state = {
-      yacimientoList: [],
+      mineralList: [],
       nombre: "",
       direccion: "",
-      kilometros: "",
-      status: 2,
-      descripcion: ""
+      tipo: "",
+      valor: "",
+      descripcion: "",
+      inicio:"",
+      nacionalizacion:""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,11 +28,11 @@ class FormYacimiento extends Component {
     });
   }
   
-  handleAddYacimiento = () => {
-    fetch("/api/yacimientos", {
+  handleAddMineral = () => {
+    fetch("/api/minerales", {
       method: "post",
       headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ yacimiento: this.state })
+      body: JSON.stringify({ minerales: this.state })
     }).then(res => res.json());
   };
 
@@ -46,10 +48,10 @@ class FormYacimiento extends Component {
       <>
         <div className="wrapper">
           <div className="form-wrapper">
-            <h5>Ingresar Yacimiento</h5>
+            <h5>Ingresar Mineral</h5>
             <form className="form" noValidate>
               <div className="firstName">
-                <label htmlFor="firstName">Nombre Yacimiento:</label>
+                <label htmlFor="firstName">Nombre del Mineral:</label>
                 <input
                   className=""
                   placeholder="Ingrese el nombre"
@@ -60,46 +62,63 @@ class FormYacimiento extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-              <div className="capacidad">
-                <label htmlFor="capacidad">Capacidad en km^2:</label>
+              <div className="ubicacionmin">
+                <label htmlFor="ubicacionmin">Descripción:</label>
                 <input
                   className=""
-                  placeholder=""
-                  type="number"
-                  name="kilometros"
-                  noValidate
-                  value={this.state.kilometros}
-                  onChange={this.handleChange}
-                /> 
-              </div>
-              <div className="firstName">
-                <label htmlFor="firstName">Descripcion:</label>
-                <input
-                  className=""
-                  placeholder="Ingrese una descripcion"
+                  placeholder="Ingrese la descripcion"
                   type="text"
                   name="descripcion"
                   noValidate
                   value={this.state.descripcion}
                   onChange={this.handleChange}
                 />
-              </div>            
-              <div className="ubicacion">
-                <label htmlFor="ubicacion">Ubicacion</label>
+              </div>
+              <div className="firstName">
+                <label htmlFor="firstName">Primera fecha de explotación:</label>
                 <input
                   className=""
-                  placeholder="Ingrese la ubicacion"
-                  type="text"
-                  name="direccion"
+                  placeholder=""
+                  type="date"
+                  name="inicio"
                   noValidate
-                  value={this.state.direccion}
+                  value={this.state.inicio}
                   onChange={this.handleChange}
                 />
               </div>
+              <div className="firstName">
+                <label htmlFor="firstName">Fecha de nacionalización:</label>
+                <input
+                  className=""
+                  placeholder=""
+                  type="date"
+                  name="nacionalizacion"
+                  noValidate
+                  value={this.state.nacionalizacion}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="status">
+                <label htmlFor="status">Valor aproximado:</label>
+                <select>
+                  <option>Alto</option>
+                  <option>Medio</option>
+                  <option>Bajo</option>
+                </select>
+              </div>
+              <div className="status">
+                <label htmlFor="status">Tipo:</label>
+                <select>
+                  <option>Metalico</option>
+                  <option>No metalico</option>
+                </select>
+              </div>
+             
+             
 
               <div className="ingresarUsuario">
-                <button type="submit" onClick={this.handleAddYacimiento}>
-                  Ingresar Yacimiento
+                <button type="submit" onClick={this.handleAddMineral}>
+                  Ingresar Mineral
                 </button>
               </div>
             </form>
@@ -110,4 +129,4 @@ class FormYacimiento extends Component {
   }
 }
 
-export default FormYacimiento;
+export default FormMineral;

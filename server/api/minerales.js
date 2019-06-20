@@ -12,12 +12,11 @@ router.get("/", function(req, res) {
 
 router.get("/:nombre", function(req, res) {
   var nombre = req.params.nombre;
-  Minerales.retrieveNombre(nombre, function(err, minerales) {
+  Minerales.retrieveNombre(nombre, function(err, yacimientos) {
     if (err) return res.json(err);
-    return res.json(minerales);
+    return res.json(yacimientos);
   });
 });
-
 router.post("/", function(req, res) {
   var minerales = req.body.minerales;
 

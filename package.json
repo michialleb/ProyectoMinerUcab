@@ -20,6 +20,7 @@
   "homepage": "https://github.com/michialleb/ProyectoMinerUcab#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "bootstrap": "^4.3.1",
     "cookie-parser": "^1.4.4",
     "create-react-app": "^3.0.1",
     "email-validator": "^2.0.4",
@@ -27,9 +28,11 @@
     "formik": "^1.5.7",
     "pg": "^7.11.0",
     "react": "^16.8.6",
+    "react-bootstrap": "^1.0.0-beta.9",
     "react-dom": "^16.8.6",
     "yup": "^0.27.0",
-    "react-router-dom": "^5.0.1"
+    "react-router-dom": "^5.0.1",
+    "reactstrap": "^8.0.0"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",

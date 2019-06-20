@@ -53,8 +53,9 @@ class ConsultTableYacimientos extends Component {
           {this.props.yacimientos.map((yacimiento, i) => {
             return (
               <tr key={i}>
-                <td>{yacimiento.yacimiento_nombre}</td>
+                <td>{yacimiento.nombre_yacimiento}</td>
                 <td>{yacimiento.kilometros}</td>
+                <td>{yacimiento.nombre_status}</td>
               </tr>
             );
           })}

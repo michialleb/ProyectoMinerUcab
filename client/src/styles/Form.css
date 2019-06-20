@@ -86,7 +86,9 @@ input {
 .secondName .ci,
 .nacimiento,
 .telefono,
-.capacidad {
+.capacidad,
+.ubicacion,
+.direccion {
   margin-left: 1%;
 }
 
@@ -106,17 +108,25 @@ input {
   margin-bottom: 15px;
   width: 48%;
 }
-.ubicacion {
-  width: 48%;
-  margin-left: 29%;
+
+.status {
+  font-size: 0.9em;
+  width: 20%;
 }
 .status {
-  width: 20%;
+  width: 25%;
 }
 
 /*.nacimiento {
   width: 100%;
 }*/
+.min-compra {
+  display: flex;
+  font-size: 0.9em;
+}
+.min-compra div {
+  width: 25%;
+}
 
 .ingresarUsuario {
   width: 100%;
@@ -161,4 +171,40 @@ input {
 }
 #empresa {
   display: none;
+}
+/*Form compra cliente*/
+.title-compra {
+  padding-top: 20px;
+  display: inline-flex;
+}
+
+#title {
+  font-size: 2em;
+  width: 50%;
+  background: #f2994a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #f2c94c,
+    #f2994a
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #f2c94c,
+    #f2994a
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  color: #fff;
+  padding: 3.5px;
+  border-radius: 0.3rem;
+}
+#compra {
+  padding-top: 20px;
+}
+.infocompra {
+  display: flex;
+  width: 50%;
+}
+/*modal*/
+.modal {
+  margin-top: 300px;
 }

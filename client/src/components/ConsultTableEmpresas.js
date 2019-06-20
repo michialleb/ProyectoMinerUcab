@@ -38,8 +38,7 @@ class ConsultTableEmpresas extends Component {
             <button
               className="search"
               type="button"
-              onClick={this.props.getEmpresa(this.state.nombre)}
-            >
+              onClick={this.props.getEmpresa(this.state.nombre)}>
               {<FaSistrix />}
             </button>
           </span>
