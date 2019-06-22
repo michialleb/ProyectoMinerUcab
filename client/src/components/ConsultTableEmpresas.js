@@ -53,9 +53,9 @@ class ConsultTableEmpresas extends Component {
           {this.props.empresas.map((empresa, i) => {
             return (
               <tr key={i}>
-                <td>{empresa.empresa_nombre}</td>
-                <td>{empresa.empresa_fecha_creacion}</td>
-                <td>{empresa.empresa_descripcion}</td>
+                <td>{empresa.nombre_empresa}</td>
+                <td>{empresa.fecha_creacion_empresa}</td>
+                <td>{empresa.descripcion_empresa}</td>
               </tr>
             );
           })}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Menu from "../components/Menu";
 import ConsultTableMinerales from "../components/ConsultTableMinerales";
+import FormMineral from "../components/FormMineral";
 
 export default class Minerales extends Component {
   constructor() {
@@ -50,7 +51,7 @@ export default class Minerales extends Component {
       options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar"],
       content: [
         {
-          form: null, //colocar formato de ingreso
+          form: <FormMineral />,
           id: 0
         },
         {
