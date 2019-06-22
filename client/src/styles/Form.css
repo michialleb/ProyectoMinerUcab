@@ -215,3 +215,10 @@ input {
 .modal {
   margin-top: 300px;
 }
+#t01 button{
+  margin-left:2px;
+  padding: 4px;
+  font-size: 1em;
+  background-color: rgb(165, 39, 39);
+  color: white;
+}

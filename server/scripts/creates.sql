@@ -11,11 +11,7 @@ CREATE TABLE empresa_aliada (
      CONSTRAINT pk_id_empresa_aliada PRIMARY KEY (id_empresa_aliada)
 );
 
-create table Presentacion(
-    id_presentacion serial,
-    nombre_presentacion varchar(300) not null,
-    constraint pk_id_presentacion primary key (id_presentacion)
-);
+create table Presentacion(id_presentacion serial,nombre_presentacion varchar(300) not null,constraint pk_id_presentacion primary key (id_presentacion));
 
 CREATE TABLE tipo_status(
      id_tipo_status SERIAL,

@@ -53,13 +53,13 @@ class ConsultTableMinerales extends Component {
           {this.props.minerales.map((mineral, i) => {
             return (
               <tr key={i}>
-                <td>{mineral.mineral_nombre}</td>
-                <td>{mineral.mineral_tipo}</td>
-                <td>{mineral.mineral_valor}</td>
-                <td>{mineral.mineral_descripcion}</td>
-                <td>{mineral.mineral_industria}</td>
-                <td>{mineral.mineral_fecha_inicio}</td>
-                <td>{mineral.mineral_fecha_nacionalizacion}</td>
+                <td>{mineral.nombre_mineral}</td>
+                <td>{mineral.tipo_mineral}</td>
+                <td>{mineral.valor_economico}</td>
+                <td>{mineral.descripcion_mineral}</td>
+                <td>{mineral.industria_mineral}</td>
+                <td>{mineral.fecha_inicio_mineral}</td>
+                <td>{mineral.fecha_nacionalizacion_mineral}</td>
               </tr>
             );
           })}
