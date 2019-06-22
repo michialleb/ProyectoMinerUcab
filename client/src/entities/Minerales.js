@@ -51,7 +51,7 @@ export default class Minerales extends Component {
       options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar"],
       content: [
         {
-          form: <FormMineral/>, //colocar formato de ingreso
+          form: <FormMineral />,
           id: 0
         },
         {

@@ -8,8 +8,8 @@ export default class Yacimientos extends Component {
     super();
 
     this.state = {
-      yacimientosList: "",
-      mineralList:[]
+      yacimientosList: [],
+      mineralList: []
     };
   }
 
@@ -46,14 +46,14 @@ export default class Yacimientos extends Component {
     var yacimientos = this.state.yacimientosList;
     var minerales = this.state.mineralList;
     var consult = {
-      consult: ["Nombre", "Kilometros","Status"]
+      consult: ["Nombre", "Kilometros", "Descripción", "Status"]
     };
 
     var crud = {
       options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar"],
       content: [
         {
-          form: <FormYacimiento minerales={minerales}/>, //colocar formato de ingreso
+          form: <FormYacimiento minerales={minerales} />, //colocar formato de ingreso
           id: 0
         },
         {

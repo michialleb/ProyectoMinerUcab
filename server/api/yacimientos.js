@@ -8,7 +8,6 @@ router.get("/", function(req, res) {
     if (err) return res.json(err);
     return res.json(yacimientos);
   });
-
 });
 
 router.get("/:nombre", function(req, res) {
@@ -26,6 +25,7 @@ router.post("/", function(req, res) {
     if (err) return res.json(err);
     return res.json(result);
   });
+
   /*Yacimientos.insertstatusdefault(yacimiento,function(err,result){
     if (err) return res.json(err);
     return res.json(result);
