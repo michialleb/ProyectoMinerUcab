@@ -14,14 +14,15 @@ class Form extends Component {
       direccion: "",
       telefono: "",
       sexo: "",
-      cedulaBuscada: ""
+      cedulaBuscada: "",
+      fk_cargo: ""
     };
-    var cedulaBuscada = "";
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleGetEmpleado = this.handleGetEmpleado.bind(this);
     this.addInfoEmpleado = this.addInfoEmpleado.bind(this);
+    this.handleUpdateEmpleado = this.handleUpdateEmpleado.bind(this);
   }
 
   /* getEmpleadoList = ()=>{
@@ -41,6 +42,7 @@ class Form extends Component {
     this.setState({
       [name]: value
     });
+    console.log(this.state);
   }
 
   handleUpdateEmpleado = () => {
@@ -61,13 +63,14 @@ class Form extends Component {
   addInfoEmpleado(empleado) {
     empleado.map(empl => {
       this.setState({
-        nombre: empl.nombre_empleado,
-        apellido: empl.apellido_empleado,
-        fnac: empl.fecha_nacimiento_empleado,
-        cedula: empl.cedula_empleado,
-        direccion: empl.direccion_empleado,
-        telefono: empl.telefono_empleado,
-        sexo: empl.sexo_empleado
+        nombre: empl.nombre,
+        apellido: empl.apellido,
+        fnac: empl.fnac,
+        cedula: empl.cedula,
+        direccion: empl.direccion,
+        telefono: empl.telefono,
+        sexo: empl.sexo,
+        fk_cargo: empl.cargo
       });
     });
   }
@@ -134,9 +137,16 @@ class Form extends Component {
               </div>
               <div className="cargo">
                 <label htmlFor="cargo">Cargo</label>
-                <select>
+                <select
+                  name="fk_cargo"
+                  onChange={this.handleChange}
+                  value={this.state.fk_cargo}
+                >
+                  <option />
                   {this.props.cargos.map((cargo, i) => (
-                    <option key={i}>{cargo.tipo_cargo}</option>
+                    <option value={cargo.id_cargo} key={i}>
+                      {cargo.tipo_cargo}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -200,19 +210,6 @@ class Form extends Component {
                   <option>M</option>
                   <option>F</option>
                 </select>
-              </div>
-              <div className="horario-act">
-                <label htmlFor="horario-act">Desea agregar un horario?</label>
-                <div>
-                  <div className="check">
-                    <input type="checkbox" id="yes" />
-                    <label>Si</label>
-                  </div>
-                  <div className="check">
-                    <input type="checkbox" />
-                    <label>No</label>
-                  </div>
-                </div>
               </div>
               <div className="ingresarUsuario">
                 <button type="submit" onClick={this.handleUpdateEmpleado}>

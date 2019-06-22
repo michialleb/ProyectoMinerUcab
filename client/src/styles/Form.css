@@ -79,8 +79,15 @@ input {
 .horario-act,
 .direccion,
 .status,
-.sexo {
+.sexo .lugares {
   margin-right: 1%;
+}
+
+.lugares {
+  margin: 3px;
+}
+.lugares.h1 {
+  display: flex;
 }
 
 .secondName .ci,
@@ -88,7 +95,7 @@ input {
 .telefono,
 .capacidad,
 .ubicacion,
-.direccion {
+.direccion .lugares {
   margin-left: 1%;
 }
 
@@ -102,7 +109,7 @@ input {
 .horario-act,
 .secondName,
 .capacidad,
-.ubicacion {
+.ubicacion .lugares {
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;

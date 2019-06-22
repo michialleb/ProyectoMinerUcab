@@ -21,8 +21,8 @@ class Minerales {
   }
   static insert(mineral, callback) {
     db.query(
-      "INSERT INTO mineral (mineral_nombre,mineral_tipo,mineral_valor,\
-        mineral_descripcion,mineral_fecha_inicio,mineral_fecha_nacionalizacion,mineral_industria) VALUES ($1,$2,$3,$4,$5,$6,$7)",
+      "INSERT INTO mineral (nombre_mineral,tipo_mineral,valor_economico,\
+        descripcion_mineral,fecha_inicio_mineral,fecha_nacionalizacion_mineral,industria_mineral) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)",
       [
         mineral.nombre,
         mineral.tipo,

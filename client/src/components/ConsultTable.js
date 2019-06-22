@@ -65,8 +65,8 @@ class ConsultTable extends Component {
                 <td>{empleado.fnac}</td>
                 <td>{empleado.telefono}</td>
                 <td>{empleado.direccion}</td>
-                <td>{empleado.cargo}</td>
                 <td>{empleado.sexo}</td>
+                <td>{empleado.cargo}</td>
               </tr>
             );
           })}

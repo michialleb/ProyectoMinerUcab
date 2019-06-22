@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Formik, FormikProps, FormikErrors, withFormik } from "formik";
-import * as EmailValidator from "email-validator";
-import * as Yup from "yup";
 
 const formValid = ({ formErrors, ...rest }) => {
   let valid = true;

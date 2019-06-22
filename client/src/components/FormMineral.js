@@ -12,11 +12,12 @@ class FormMineral extends Component {
       tipo: "",
       valor: "",
       descripcion: "",
-      inicio:"",
-      nacionalizacion:""
+      inicio: "",
+      nacionalizacion: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleAddMineral = this.handleAddMineral.bind(this);
   }
   handleChange(e) {
     let target = e.target;
@@ -26,8 +27,9 @@ class FormMineral extends Component {
     this.setState({
       [name]: value
     });
+    console.log(this.state);
   }
-  
+
   handleAddMineral = () => {
     fetch("/api/minerales", {
       method: "post",
@@ -113,8 +115,6 @@ class FormMineral extends Component {
                   <option>No metalico</option>
                 </select>
               </div>
-             
-             
 
               <div className="ingresarUsuario">
                 <button type="submit" onClick={this.handleAddMineral}>

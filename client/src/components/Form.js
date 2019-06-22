@@ -5,19 +5,30 @@ class Form extends Component {
     super();
 
     this.state = {
-      empleadoList: [],
+      //empleadoList: [],
       nombre: "",
       apellido: "",
       fnac: "",
       cedula: "",
-      direccion: "",
-      telefono: "",
+      fk_lugar: "",
+      // telefono: "",
       sexo: "",
-      fk_cargo: 0
+      fk_cargo: "",
+      estado: 0,
+      estado2: -1,
+      municipio: 0,
+      municipio2: -1,
+      municipioList: [],
+      provinciaList: []
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleAddEmpleado = this.handleAddEmpleado.bind(this);
+    this.getMunicipio = this.getMunicipio.bind(this);
+    this.getProvincia = this.getProvincia.bind(this);
   }
+
   handleChange(e) {
     let target = e.target;
     let value = target.type === "checkbox" ? target.checked : target.value;
@@ -26,25 +37,56 @@ class Form extends Component {
     this.setState({
       [name]: value
     });
-
-    console.log(this.state);
   }
 
+  getMunicipio = codigo => {
+    fetch(`/api/lugar/${codigo}`)
+      .then(res => res.json())
+      .then(res => {
+        var municipioList = res.map(r => r);
+        this.setState({ municipioList });
+      });
+  };
+  buscarMunicipios = (codigo, codigo2) => {
+    if (codigo != codigo2) {
+      this.getMunicipio(codigo2);
+      this.setState({ estado: codigo2, municipio2: "" });
+    }
+  };
+
+  getProvincia = codigo => {
+    fetch(`/api/lugar/${codigo}`)
+      .then(res => res.json())
+      .then(res => {
+        var provinciaList = res.map(r => r);
+        this.setState({ provinciaList });
+      });
+  };
+
+  buscarProvincias = (codigo, codigo2) => {
+    if (codigo != codigo2) {
+      this.getProvincia(codigo2);
+      this.setState({ municipio: codigo2 });
+    }
+  };
+
   handleAddEmpleado = () => {
-    fetch("/api/empleados", {
+    fetch(`/api/empleados/`, {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ empleado: this.state })
     }).then(res => res.json());
-    console.log(this.state);
   };
 
   handleSubmit(e) {
     e.preventDefault();
 
     console.log("The form was submitted with the following data:");
-    console.log(this.state);
   }
+
+  /*componentDidMount() {
+    this.props.getLugares();
+  }*/
 
   render() {
     return (
@@ -80,6 +122,7 @@ class Form extends Component {
                 <label htmlFor="cargo">Cargo</label>
                 <select
                   name="fk_cargo"
+                  type="number"
                   id="selected"
                   value={this.state.fk_cargo}
                   onChange={this.handleChange}
@@ -116,29 +159,68 @@ class Form extends Component {
                   onChange={this.handleChange}
                 />
               </div>
+
               <div className="telefono">
                 <label htmlFor="telefono">Número de teléfono</label>
                 <input
                   className=""
                   placeholder="Ingrese nro telefónico"
-                  type="number"
+                  //  type="number"
                   name="telefono"
-                  noValidate
-                  value={this.state.telefono}
-                  onChange={this.handleChange}
+                  //  noValidate
+                  //value={this.state.telefono}
+                  //onChange={this.handleChange}
                 />
               </div>
               <div className="direccion">
                 <label htmlFor="direccion">Dirección</label>
-                <input
-                  className=""
-                  placeholder="Ingrese dirección"
-                  type="text"
-                  name="direccion"
-                  noValidate
-                  value={this.state.direccion}
+                <select
+                  className="lugares"
+                  type="number"
+                  name="estado2"
+                  value={this.state.estado2}
                   onChange={this.handleChange}
-                />
+                >
+                  <option />
+                  {this.props.lugares.map((lugar, i) => (
+                    <option value={lugar.id_lugar} key={i}>
+                      {lugar.nombre_lugar}
+                    </option>
+                  ))}
+                </select>
+                {this.buscarMunicipios(this.state.estado, this.state.estado2)}
+                <select
+                  className="lugares"
+                  type="number"
+                  name="municipio2"
+                  value={this.state.municipio2}
+                  onChange={this.handleChange}
+                >
+                  <option />
+                  {this.state.municipioList.map((lugar, i) => (
+                    <option value={lugar.id_lugar} key={i}>
+                      {lugar.nombre_lugar}
+                    </option>
+                  ))}
+                </select>
+                {this.buscarProvincias(
+                  this.state.municipio,
+                  this.state.municipio2
+                )}
+                <select
+                  className="lugares"
+                  type="number"
+                  name="fk_lugar"
+                  value={this.state.fk_lugar}
+                  onChange={this.handleChange}
+                >
+                  <option />
+                  {this.state.provinciaList.map((lugar, i) => (
+                    <option value={lugar.id_lugar} key={i}>
+                      {lugar.nombre_lugar}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div className="sexo">
@@ -154,19 +236,6 @@ class Form extends Component {
                 </select>
               </div>
 
-              <div className="horario-act">
-                <label htmlFor="horario-act">Desea agregar un horario?</label>
-                <div>
-                  <div className="check">
-                    <input type="checkbox" id="yes" />
-                    <label>Si</label>
-                  </div>
-                  <div className="check">
-                    <input type="checkbox" />
-                    <label>No</label>
-                  </div>
-                </div>
-              </div>
               <div className="ingresarUsuario">
                 <button type="submit" onClick={this.handleAddEmpleado}>
                   Ingresar Usuario
