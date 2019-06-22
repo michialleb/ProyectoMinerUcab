@@ -18,6 +18,8 @@ class Form extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  
   handleChange(e) {
     let target = e.target;
     let value = target.type === "checkbox" ? target.checked : target.value;

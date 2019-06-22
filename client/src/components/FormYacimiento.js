@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
-
+import FormEtapa from "../components/FormEtapa";
 class FormYacimiento extends Component {
   constructor() {
     super();
@@ -9,12 +9,13 @@ class FormYacimiento extends Component {
       yacimientoList: [],
       nombre: "",
       direccion: "",
-      kilometros: "",
-      status: 2,
+      kilometros: 0,
       descripcion: "",
       mineral: "",
       mineralList: [],
-      cantidadList: []
+      cantidadList: [],
+      min:"oro",
+      cant:200
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -79,26 +80,34 @@ class FormYacimiento extends Component {
     this.setState({ cantidadList: cantidades });
     this.setState({ mineralList: minerales });
   }
-  handleIngresarYacimiento = () => {
+  handleIngresarYacimiento = (e) => {
+    e.preventDefault();
     this.handleAddYacimiento();
-    this.handleAddMineralYacimiento();
+    console.log("ingreso yacimiento");
+      this.insertarMineralYacimiento();
+      document.getElementById("form-yac").style.display="none";
   };
-  handleAddYacimiento = () => {
-    let yacimiento = this.state;
+
+  insertarMineralYacimiento (){
+    console.log("esta metido los minerales");
+    this.handleAddMineralYacimiento();
+  }
+  handleAddYacimiento = (e) => {
     fetch("/api/yacimientos", {
       method: "post",
       headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ yacimiento: yacimiento })
+      body: JSON.stringify({ yacimiento:  this.state})
     }).then(res => res.json());
+    
   };
 
   handleAddMineralYacimiento = () => {
-    let yacimientoMineral = this.state;
     fetch("/api/mineralYacimiento", {
       method: "post",
       headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ yacimiento: yacimientoMineral })
+      body: JSON.stringify({ yacimiento: this.state })
     }).then(res => res.json());
+    
   };
 
   handleSubmit(e) {
@@ -109,10 +118,11 @@ class FormYacimiento extends Component {
   }
 
   render() {
+    var cargoList=this.props.cargos;
     return (
       <>
-        <div className="wrapper">
-          <div className="form-wrapper">
+        <div id="form-yac" className="wrapper">
+          <div  className="form-wrapper">
             <h5>Ingresar Yacimiento</h5>
             <form className="form" noValidate>
               <div className="firstName">
@@ -193,12 +203,10 @@ class FormYacimiento extends Component {
                               value={this.state.cantidadList[i]}
                               onChange={this.handleChangeCantidad}
                             />
-
                             <button
                               numero={i}
                               name={mineral}
-                              onClick={this.onDelete}
-                            >
+                              onClick={this.onDelete}>
                               x
                             </button>
                           </td>
@@ -215,9 +223,11 @@ class FormYacimiento extends Component {
                   Ingresar Yacimiento
                 </button>
               </div>
+              
             </form>
-          </div>
+          </div> 
         </div>
+        <FormEtapa cargoList={cargoList}/>
       </>
     );
   }
