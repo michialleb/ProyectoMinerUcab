@@ -32,10 +32,9 @@ class ConsultTableInventario extends Component {
     var cont = 0;
 
     this.props.inventarioCliente.map((inv, i) => {
-      cont = i;
+      cont = cont+1;
       console.log(cont);
     });
-    cont = cont + 1;
 
     for (i = 0; i < cont; i++) {
       repetido = false;
@@ -58,9 +57,6 @@ class ConsultTableInventario extends Component {
     }
 
     this.setState({ inventarioList: inventarioLista });
-    this.state.inventarioList.map(inv => {
-      console.log(inv.mineral);
-    });
   }
 
   handleSubmit(e) {
@@ -95,6 +91,7 @@ class ConsultTableInventario extends Component {
                     <th key={i}>{item}</th>
                   ))}
                 </tr>
+                {console.log(this.state.inventarioList)}
                 {this.state.inventarioList.map((item, i) => (
                   <tr key={i}>
                     <td> {item.mineral}</td>
