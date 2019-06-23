@@ -55,7 +55,6 @@ class ConsultTableYacimientos extends Component {
               <tr key={i}>
                 <td>{yacimiento.nombre_yacimiento}</td>
                 <td>{yacimiento.kilometros}</td>
-                <td>{yacimiento.descripcion}</td>
                 <td>{yacimiento.nombre_status}</td>
               </tr>
             );

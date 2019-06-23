@@ -17,6 +17,7 @@ class FormMineral extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleAddMineral = this.handleAddMineral.bind(this);
   }
   handleChange(e) {
     let target = e.target;
@@ -26,6 +27,7 @@ class FormMineral extends Component {
     this.setState({
       [name]: value
     });
+    console.log(this.state);
   }
 
   handleAddMineral = () => {

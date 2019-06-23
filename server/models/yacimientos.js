@@ -5,10 +5,9 @@ class Yacimientos {
   static retrieveNombre(nombre, callback) {
     db.query(
       "select t.nombre_tipo_status as nombre_status,\
-      y.nombre_yacimiento as nombre_yacimiento,y.kilometros as kilometros,\
-      y.descripcion_yacimiento as descripcion\
+      y.nombre_yacimiento as nombre_yacimiento,y.kilometros as kilometros\
       from yacimiento y,tipo_status t \
-      where y.fk_status=t.id_tipo_status and y.nombre_yacimiento=$1",
+      where y.fk_tipo_status=t.id_tipo_status and y.nombre_yacimiento=$1",
       [nombre],
       function(err, res) {
         if (err.error) return callback(err);
@@ -20,10 +19,9 @@ class Yacimientos {
   static retrieveAll(callback) {
     db.query(
       "select t.nombre_tipo_status as nombre_status,\
-    y.nombre_yacimiento as nombre_yacimiento,y.kilometros as kilometros,\
-    y.descripcion_yacimiento as descripcion\
+    y.nombre_yacimiento as nombre_yacimiento,y.kilometros as kilometros\
     from yacimiento y,tipo_status t \
-    where y.fk_status=t.id_tipo_status",
+    where y.fk_tipo_status=t.id_tipo_status",
       function(err, res) {
         if (err.error) return callback(err);
         callback(res);
@@ -31,12 +29,11 @@ class Yacimientos {
     );
   }
 
- 
   static insert(yacimiento, callback) {
     db.query(
-      "INSERT INTO yacimiento (nombre_yacimiento,kilometros,descripcion_yacimiento,fk_status) \
+      "INSERT INTO yacimiento (nombre_yacimiento,kilometros,fk_tipo_status) \
       VALUES ($1,$2,$3,2)",
-      [yacimiento.nombre, yacimiento.kilometros, yacimiento.descripcion],
+      [yacimiento.nombre, yacimiento.kilometros],
 
       function(err, res) {
         if (err.error) return callback(err);

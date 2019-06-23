@@ -2,8 +2,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 }
-.nosotros-grid{
+.nosotros-grid {
   display: flex;
 }
 :root {
@@ -196,12 +197,12 @@ h6 {
 .roomsHero {
   height: 100px;
   background-image: url("../src/images/industria2.jpg");
- /* min-height: 60vh;*/
+  /* min-height: 60vh;*/
 }
 /* End of Hero */
 
 /* Banner */
-.banner{
+.banner {
   display: inline-block;
   background: rgba(0, 0, 0, 0.5);
   color: var(--mainWhite);
@@ -303,20 +304,20 @@ h6 {
 }
 /*end of services */
 /* featured rooms */
- .featured-rooms {
-    padding: 5rem 0;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
- 
+.featured-rooms {
+  padding: 5rem 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
 /* MAQUINARIA*/
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.6);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
   transition: 0.3s;
 }
-.nosotros-grid{
+.nosotros-grid {
   align-items: center;
   display: grid;
   padding: 10px 10px;
@@ -327,12 +328,12 @@ body {
   width: 25%;
 }
 .card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.6);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.6);
 }
-.card img{
-width:100%;
+.card img {
+  width: 100%;
 
-height: 200px;
+  height: 200px;
 }
 .container {
   padding: 2px 16px;
@@ -345,58 +346,55 @@ height: 200px;
 }
 @media screen and (max-width: 1000px) {
   .column {
-   font-size: 1.2rem;
+    font-size: 1.2rem;
   }
 }
 
-  .featured-rooms-center{
-    width: 100%;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    grid-row-gap: 100px;
-    grid-column-gap: 40px;
+.featured-rooms-center {
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-row-gap: 100px;
+  grid-column-gap: 40px;
+}
+@media screen and (min-width: 776px) {
+  .featured-rooms-center {
+    width: 90vw;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
-  @media screen and (min-width: 776px) {
-    .featured-rooms-center{
-      width: 90vw;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
+}
+@media screen and (min-width: 992px) {
+  .featured-rooms-center {
+    width: 95vw;
+    max-width: 1170px;
   }
-  @media screen and (min-width: 992px) {
-    .featured-rooms-center{
-      width: 95vw;
-      max-width: 1170px;
-    }
-  }
-  /* end pf featured rooms */
-  /* room */
-  .room {
-    background-color: #ececec;
-      padding: 5rem 0;
-    
-    box-shadow: var(--lightShadow);
-    transition: var(--mainTransition);
-  }
-  .room:hover {
-    box-shadow: var(--darkShadow);
-  }
-  
-  .img-container {
-    
-    width: 120px;
-    height: 120px;
-    margin: 0 auto;
-    
-    
-  }
- 
-  .img-container img {
-    width: 120px;
-    height: 120px;
-    display: block;
-    transition: var(--mainTransition);
-  }
+}
+/* end pf featured rooms */
+/* room */
+.room {
+  background-color: #ececec;
+  padding: 5rem 0;
+
+  box-shadow: var(--lightShadow);
+  transition: var(--mainTransition);
+}
+.room:hover {
+  box-shadow: var(--darkShadow);
+}
+
+.img-container {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+}
+
+.img-container img {
+  width: 120px;
+  height: 120px;
+  display: block;
+  transition: var(--mainTransition);
+}
 .price-top {
   position: absolute;
   top: 0;

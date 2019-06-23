@@ -2,7 +2,11 @@ var { Pool } = require("pg");
 
 const CONNECTION_STRING =
   process.env.DATABASE_URL ||
+<<<<<<< HEAD
   "postgresql://postgres:tete15tefi15@localhost:5432/minerucab";
+=======
+  "postgresql://postgres:1234@localhost:5432/MinerUcab";
+>>>>>>> diegucho
 const SSL = process.env.NODE_ENV === "production";
 
 class Database {

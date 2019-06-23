@@ -10,7 +10,7 @@ class FormYacimiento extends Component {
       nombre: "",
       direccion: "",
       kilometros: 0,
-      descripcion: "",
+  
       mineral: "",
       mineralList: [],
       cantidadList: []
@@ -180,18 +180,7 @@ componentDidMount(){}
                   onChange={this.handleChange}
                 />
               </div>
-              <div className="firstName">
-                <label htmlFor="firstName">Descripcion:</label>
-                <input
-                  className=""
-                  placeholder="Ingrese una descripcion"
-                  type="text"
-                  name="descripcion"
-                  noValidate
-                  value={this.state.descripcion}
-                  onChange={this.handleChange}
-                />
-              </div>
+              
               <div className="ubicacion">
                 <label htmlFor="ubicacion">Ubicacion</label>
                 <input

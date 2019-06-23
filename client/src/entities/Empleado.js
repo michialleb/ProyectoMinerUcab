@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Menu from "../components/Menu";
 import Form from "../components/Form";
 import ConsultTable from "../components/ConsultTable";
+import ModiEmpleado from "../components/ModiEmpleado";
 
 export default class Empleado extends Component {
   constructor() {
@@ -9,17 +10,27 @@ export default class Empleado extends Component {
 
     this.state = {
       cargoList: [],
-      empleadoList: "",
+      empleado: [],
+      empleadoList: [],
+      lugarList: [],
+      horarioList: [],
       empleadoCedula: ""
     };
   }
+
+  handleGetHorario = id => {
+    fetch(`/api/empleados/empl/${id}`)
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ horarioList: res.map(r => r) });
+      });
+  };
 
   handleGetEmpleado = cedula => {
     fetch(`/api/empleados/${cedula}`)
       .then(res => res.json())
       .then(res => {
-        var empleadoList = res.map(r => r);
-        this.setState({ empleadoList });
+        this.setState({ empleadoList: res.map(r => r) });
       });
   };
 
@@ -44,10 +55,14 @@ export default class Empleado extends Component {
   componentDidMount() {
     this.getCargoList();
     this.getEmpleadoList();
+    //this.getLugarList();
   }
   render() {
+    var empleado = this.state.empleado;
     var empleados = this.state.empleadoList;
     var cargos = this.state.cargoList;
+    var lugares = this.state.lugarList;
+    var horarios = this.state.horarioList;
     var consult = {
       consult: [
         "Nombre",
@@ -56,6 +71,7 @@ export default class Empleado extends Component {
         "Nacimiento",
         "Telefono",
         "Direccion",
+        "Sexo",
         "Cargo"
       ]
     };
@@ -64,7 +80,13 @@ export default class Empleado extends Component {
       options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar"],
       content: [
         {
-          form: <Form cargos={cargos} />,
+          form: (
+            <Form
+              cargos={cargos}
+              lugares={lugares}
+              getLugares={this.getLugarList}
+            />
+          ),
           id: 0
         },
         {
@@ -73,9 +95,28 @@ export default class Empleado extends Component {
               consult={consult}
               empleados={empleados}
               getEmpleado={this.handleGetEmpleado}
+              getHorarios={this.handleGetHorario}
+              horarios={horarios}
             />
           ),
           id: 1
+        },
+        {
+          form: "",
+
+          id: 2
+        },
+        {
+          form: (
+            <ModiEmpleado
+              cargos={cargos}
+              consult={consult}
+              empleado={empleados}
+              lugares={lugares}
+              getEmpleado={this.handleGetEmpleado}
+            />
+          ),
+          id: 3
         }
       ]
     };

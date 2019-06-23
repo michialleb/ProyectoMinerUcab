@@ -105,6 +105,10 @@
   margin-bottom: 40px;
 }
 
+.errorMessage {
+  color: red;
+  display: flex;
+}
 .FormField__Label {
   display: block;
   text-transform: uppercase;

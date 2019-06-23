@@ -70,7 +70,7 @@ export default class Yacimientos extends Component {
     var cargos= this.state.cargosList;
     var maquinaria= this.state.maquinariaList;
     var consult = {
-      consult: ["Nombre", "Kilometros", "Descripción", "Status"]
+      consult: ["Nombre", "Kilometros", "Status"]
     };
 
     var crud = {
