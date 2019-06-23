@@ -154,16 +154,19 @@ class FormEtapa extends Component {
           nombreEtapa: this.state.nombreEtapa,
           duracionEtapa: dias,
           costoEtapa: bs,
-          numeroEtapa: this.state.numeroEtapa
+          numeroEtapa: this.state.numeroEtapa,
+          nombreProyecto:this.props.nombreProyecto
       }
       EtapaList.push(etapa);
+      console.log(EtapaList);
       this.setState({ etapas: EtapaList});
-      console.log(this.state.etapas);
+      this.props.handleAddEtapa(this.state.etapas);
       this.setState({nombreEtapa: ""});
-      var vacio=[];
+      var vacioFase=[];
+      var vacioEtapa=[];
       var cero=0, uno=1;
-      this.setState({ etapas: vacio});
-      this.setState({ fases: vacio});
+      this.setState({ etapas: vacioEtapa});
+      this.setState({ fases: vacioFase});
       this.setState({ duracionFase: cero});
       this.setState({ costoFase: cero});
       this.setState({ numeroFase: uno})
@@ -309,7 +312,7 @@ class FormEtapa extends Component {
                 </div>
               </div>
               <div className="ingresarUsuario">
-                <button type="submit" onClick="">
+                <button type="submit" >
                   Ingresar Etapas
                 </button>
               </div>

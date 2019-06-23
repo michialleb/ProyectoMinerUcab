@@ -62,6 +62,8 @@ export default class Yacimientos extends Component {
     this.getCargosList();
     this.getMaquinariaList();
   }
+
+  
   render() {
     var yacimientos = this.state.yacimientosList;
     var minerales = this.state.mineralList;

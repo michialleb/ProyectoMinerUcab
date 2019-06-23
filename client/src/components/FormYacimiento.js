@@ -115,9 +115,6 @@ class FormYacimiento extends Component {
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ yacimiento: yacimiento})
     }).then(res => res.json());
-   
-   
-
   };
 
   generarProyectoE (){
@@ -130,8 +127,15 @@ class FormYacimiento extends Component {
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ proyecto:  proyecto})
     }).then(res => res.json());
+  };
 
-  }
+  handleAddEtapa = (etapa) => {
+    fetch("/api/etapas", {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ etapa:  etapa})
+    }).then(res => res.json());
+  };
 
  
 
@@ -258,7 +262,10 @@ componentDidMount(){}
           </div> 
         </div>
         <div id="form-etapa">
-        <FormEtapa  cargoList={cargoList} maquinariaList={maquinariaList} />
+        <FormEtapa nombreProyecto={"Proyecto "+ this.state.nombre}
+                   cargoList={cargoList} 
+                   maquinariaList={maquinariaList} 
+                   handleAddEtapa={this.handleAddEtapa}/>
         </div>
       </>
     );
