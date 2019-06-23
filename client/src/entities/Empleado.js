@@ -34,6 +34,17 @@ export default class Empleado extends Component {
       });
   };
 
+getLugarList=()=>{
+  fetch("/api/lugar")
+  .then(res => res.json())
+  .then(res => {
+    var cargoList = res.map(r => r);
+    this.setState({ cargoList });
+  });
+};
+
+}
+
   getCargoList = () => {
     fetch("/api/cargos")
       .then(res => res.json())
@@ -55,7 +66,7 @@ export default class Empleado extends Component {
   componentDidMount() {
     this.getCargoList();
     this.getEmpleadoList();
-    //this.getLugarList();
+    this.getLugarList();
   }
   render() {
     var empleado = this.state.empleado;
