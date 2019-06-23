@@ -136,17 +136,19 @@ class FormEtapa extends Component {
       faseList.push(fase);
       this.setState({ fases: faseList});
       this.setState({nombreFase: "", duracionFase:"", costoFase:""});
-      console.log(this.state.fases);
+     // console.log(this.state.fases);
   }
 
   handleAddEtapa(e) {
    e.preventDefault();
    let dias=0;
    let bs=0;
+
    this.state.fases.map((f)=>{
        dias=parseInt(dias)+ parseInt(f.duracionFase);
        bs= parseInt(bs)+parseInt(f.costoFase);
    });
+   
    let EtapaList=this.state.etapas;
    let numero=parseInt(this.state.numeroEtapa)+1;
    this.setState({ numeroEtapa: numero});
@@ -158,18 +160,19 @@ class FormEtapa extends Component {
           nombreProyecto:this.props.nombreProyecto
       }
       EtapaList.push(etapa);
-      console.log(EtapaList);
       this.setState({ etapas: EtapaList});
-      this.props.handleAddEtapa(this.state.etapas);
-      this.setState({nombreEtapa: ""});
+            this.state.etapas.map((etapa)=>{
+              this.props.handleAddEtapa(etapa);
+            })
+          this.setState({nombreEtapa: ""});
       var vacioFase=[];
       var vacioEtapa=[];
       var cero=0, uno=1;
-      this.setState({ etapas: vacioEtapa});
-      this.setState({ fases: vacioFase});
-      this.setState({ duracionFase: cero});
-      this.setState({ costoFase: cero});
-      this.setState({ numeroFase: uno})
+          this.setState({ etapas: vacioEtapa});
+          this.setState({ fases: vacioFase});
+          this.setState({ duracionFase: cero});
+          this.setState({ costoFase: cero});
+          this.setState({ numeroFase: uno})
      
   }
 

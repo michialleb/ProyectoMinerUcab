@@ -4,6 +4,9 @@ var express = require("express");
 class Etapas {
 
   static insert(etapa, callback) {
+   console.log(etapa.nombreEtapa);
+   console.log(etapa.numeroEtapa);
+   console.log(etapa.nombreProyecto)
     db.query(
       "INSERT INTO etapa_explotacion(nombre_etapa,numero_etapa,fk_proyecto,\
         fk_tipo_status) VALUES ($1,$2,(SELECT id_proyecto FROM proyecto\

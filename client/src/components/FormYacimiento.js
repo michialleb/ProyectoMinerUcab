@@ -130,6 +130,7 @@ class FormYacimiento extends Component {
   };
 
   handleAddEtapa = (etapa) => {
+    //console.log(etapa);
     fetch("/api/etapas", {
       method: "post",
       headers: { "Content-type": "application/json" },
