@@ -19,7 +19,7 @@ export default class Empleado extends Component {
   }
 
   handleGetHorario = id => {
-    fetch(`/api/empleados/${id}`)
+    fetch(`/api/empleados/empl/${id}`)
       .then(res => res.json())
       .then(res => {
         this.setState({ horarioList: res.map(r => r) });
