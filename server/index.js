@@ -21,6 +21,8 @@ app.use("/api/yacimientos", require("./api/yacimientos"));
 app.use("/api/empresaAliada", require("./api/empresaAliada"));
 app.use("/api/mineralYacimiento", require("./api/mineralYacimiento"));
 app.use("/api/inventario", require("./api/inventario"));
+app.use("/api/maquinaria", require("./api/maquinaria"));
+app.use("/api/proyecto", require("./api/proyecto"));
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}...`);

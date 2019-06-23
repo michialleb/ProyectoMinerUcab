@@ -16,15 +16,80 @@ class FormEtapa extends Component {
      numeroFase:1,
      numeroEtapa:1,
     cargo:"",
-    cargoList:[]
+    maquina:"",
+    cargoList:[],
+    maquinariaList:[],
+    cantidadcargoList:[],
+    cantidadmaquinariaList:[]
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAddEtapa = this.handleAddEtapa.bind(this);
     this.handleAddFase = this.handleAddFase.bind(this);
     this.handleChangeCargo=this.handleChangeCargo.bind(this);
+    this.handleChangeMaquina=this.handleChangeMaquina.bind(this);
+    this.handleChangeCargo=this.handleChangeCargo.bind(this);
+    this.handleChangeCantidad=this.handleChangeCantidad.bind(this);
+    this.onDelete = this.onDelete.bind(this);
+    this.onDeleteMaquina=this.onDeleteMaquina.bind(this);
+   
   }
+  handleChangeCantidad(e) {
+    e.preventDefault();
+    let cantidades = this.state.cantidadcargoList;
+    let target = e.target;
+    let value = target.value;
+    let name = target.name;
 
+    cantidades[name] = value;
+    this.setState({ cantidadcargoList: cantidades });
+  }
+  handleChangeCantidadMaquinaria(e){
+    e.preventDefault();
+    let cantidades = this.state.cantidadmaquinariaList;
+    let target = e.target;
+    let value = target.value;
+    let name = target.name;
+
+    cantidades[name] = value;
+    this.setState({ cantidadmaquinariaList: cantidades });
+  }
+  onDelete(e) {
+    let cargos = this.state.cargoList;
+    let cantidades = this.state.cantidadcargoList;
+    let target = e.target;
+    let name = target.name;
+    let numero = target.numero;
+    var index = cargos.indexOf(name);
+    var index2 = cantidades.indexOf(numero);
+    if (index > -1) {
+      cargos.splice(index, 1);
+    }
+    if (index > -1) {
+      cantidades.splice(index2, 1);
+    }
+
+    this.setState({ cantidadList: cantidades });
+    this.setState({ cargoList: cargos });
+  }
+  onDeleteMaquina(e) {
+    let maquinas = this.state.maquinariaList;
+    let cantidades = this.state.cantidadmaquinariaList;
+    let target = e.target;
+    let name = target.name;
+    let numero = target.numero;
+    var index = maquinas.indexOf(name);
+    var index2 = cantidades.indexOf(numero);
+    if (index > -1) {
+      maquinas.splice(index, 1);
+    }
+    if (index > -1) {
+      cantidades.splice(index2, 1);
+    }
+
+    this.setState({ cantidadList: cantidades });
+    this.setState({ maquinariaList: maquinas });
+  }
   handleChangeCargo(e) {
     e.preventDefault();
     let cargos = this.state.cargoList;
@@ -41,10 +106,25 @@ class FormEtapa extends Component {
       this.setState({ cargoList: cargos });
     }
   }
-
-  handleAddFase (e){
-    let faseList=this.state.fases;
+  handleChangeMaquina(e) {
     e.preventDefault();
+    let maquinas = this.state.maquinariaList;
+    let target = e.target;
+    let value = target.type === "checkbox" ? target.checked : target.value;
+    let name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+    if (maquinas.indexOf(name) == -1) {
+      // revisar esto, podrias meter dos minerales iguales en un yacimiento
+      maquinas.push(value);
+      this.setState({ maquinariaList: maquinas });
+    }
+  }
+  handleAddFase (e){
+    e.preventDefault();
+    let faseList=this.state.fases;
     let numero=this.state.numeroFase+1;
     this.setState({ numeroFase: numero})
       let fase={
@@ -55,7 +135,7 @@ class FormEtapa extends Component {
       }
       faseList.push(fase);
       this.setState({ fases: faseList});
-      this.setState({nombreFase: "", duracionFase:"",costoFase:""});
+      this.setState({nombreFase: "", duracionFase:"", costoFase:""});
       console.log(this.state.fases);
   }
 
@@ -66,11 +146,10 @@ class FormEtapa extends Component {
    this.state.fases.map((f)=>{
        dias=parseInt(dias)+ parseInt(f.duracionFase);
        bs= parseInt(bs)+parseInt(f.costoFase);
-   })
+   });
    let EtapaList=this.state.etapas;
    let numero=parseInt(this.state.numeroEtapa)+1;
-   this.setState({ numeroEtapa: numero})
-    e.preventDefault();
+   this.setState({ numeroEtapa: numero});
       let etapa={
           nombreEtapa: this.state.nombreEtapa,
           duracionEtapa: dias,
@@ -79,8 +158,16 @@ class FormEtapa extends Component {
       }
       EtapaList.push(etapa);
       this.setState({ etapas: EtapaList});
-      this.setState({nombreEtapa: ""});
       console.log(this.state.etapas);
+      this.setState({nombreEtapa: ""});
+      var vacio=[];
+      var cero=0, uno=1;
+      this.setState({ etapas: vacio});
+      this.setState({ fases: vacio});
+      this.setState({ duracionFase: cero});
+      this.setState({ costoFase: cero});
+      this.setState({ numeroFase: uno})
+     
   }
 
   handleChange(e) {
@@ -142,7 +229,7 @@ class FormEtapa extends Component {
                     name="cargo"
                     value={this.state.cargo}
                     onChange={this.handleChangeCargo}
-                                >
+                    >
                     <option />
                     {this.props.cargoList.map((cargo, i) => (
                       <option value={cargo.tipo_cargo} key={i}>
@@ -150,6 +237,71 @@ class FormEtapa extends Component {
                       </option>
                     ))}
                   </select>
+                  <table id="t01">
+                    {this.state.cargoList.map((cargo, i) => {
+                      return (
+                        <tr key={i}>
+                          <td>
+                            {cargo}
+                            <input
+                              className=""
+                              placeholder=""
+                              type="number"
+                              name={i}
+                              noValidate
+                              value={this.state.cantidadcargoList[i]}
+                              onChange={this.handleChangeCantidad}
+                            />
+                            <button
+                              numero={i}
+                              name={cargo}
+                              onClick={this.onDelete}>
+                              Eliminar
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </table>
+                  <select
+                    name="maquina"
+                    value={this.state.maquinas}
+                    onChange={this.handleChangeMaquina}
+                    >
+                    <option />
+                    {this.props.maquinariaList.map((m, i) => (
+                      <option value={m.nombre_maquinaria} key={i}>
+                        {m.nombre_maquinaria}
+                      </option>
+                    ))}
+                  </select>
+
+                  <table id="t01">
+                    {this.state.maquinariaList.map((maquinaria, i) => {
+                      return (
+                        <tr key={i}>
+                          <td>
+                            {maquinaria}
+                            <input
+                              className=""
+                              placeholder=""
+                              type="number"
+                              name={i}
+                              noValidate
+                              value={this.state.cantidadmaquinariaList[i]}
+                              onChange={this.handleChangeCantidadMaquinaria}
+                            />
+                            <button
+                              numero={i}
+                              name={maquinaria}
+                              onClick={this.onDeleteMaquina}>
+                              Eliminar
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </table>
                     </div>
                 </div>
                   <button onClick={this.handleAddEtapa}>Agregar etapa</button>

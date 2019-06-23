@@ -13,9 +13,7 @@ class FormYacimiento extends Component {
       descripcion: "",
       mineral: "",
       mineralList: [],
-      cantidadList: [],
-      min:"hhh",
-      cant:200
+      cantidadList: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -89,6 +87,8 @@ class FormYacimiento extends Component {
 
   handleIngresarMinerales =(e)=> {
     e.preventDefault();
+    this.generarProyectoE();
+    console.log('generando ory');
    this.state.mineralList.map((mineral,i) => {
       let mineral_yacimiento={
         mineral:mineral,
@@ -96,11 +96,11 @@ class FormYacimiento extends Component {
         nombre: this.state.nombre
       }
       this.handleAddMineralYacimiento(mineral_yacimiento);
-   })
-   
+   })  
     document.getElementById("form-yac").style.display="none";
   }
   handleAddYacimiento = (e) => {
+
     fetch("/api/yacimientos", {
       method: "post",
       headers: { "Content-type": "application/json" },
@@ -110,23 +110,41 @@ class FormYacimiento extends Component {
   };
 
   handleAddMineralYacimiento = (yacimiento) => {
-      console.log("esta en mineral Yacimiento");
     fetch("/api/mineralYacimiento", {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ yacimiento: yacimiento})
     }).then(res => res.json());
-    
+   
+   
+
   };
+
+  generarProyectoE (){
+    let proyecto ={
+      nombre: this.state.nombre
+    }
+    console.log('generando proyecto');
+    fetch("/api/proyecto", {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ proyecto:  proyecto})
+    }).then(res => res.json());
+
+  }
+
+ 
 
   handleSubmit(e) {
     e.preventDefault();
     console.log("The form was submitted with the following data:");
     console.log(this.state);
   }
-
+componentDidMount(){}
+ 
   render() {
     var cargoList=this.props.cargos;
+    var maquinariaList=this.props.maquinaria;
     return (
       <>
         <div id="form-yac" className="wrapper">
@@ -222,8 +240,7 @@ class FormYacimiento extends Component {
                       );
                     })}
                   </table>
-                  {console.log(this.state.mineralList)}
-                  {console.log(this.state.cantidadList)}
+                
                 </div>
               </div>
               <div className="ingresarUsuario">
@@ -240,7 +257,9 @@ class FormYacimiento extends Component {
             </form>
           </div> 
         </div>
-        <FormEtapa cargoList={cargoList}/>
+        <div id="form-etapa">
+        <FormEtapa  cargoList={cargoList} maquinariaList={maquinariaList} />
+        </div>
       </>
     );
   }

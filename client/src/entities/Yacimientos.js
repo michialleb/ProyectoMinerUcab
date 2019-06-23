@@ -10,7 +10,8 @@ export default class Yacimientos extends Component {
     this.state = {
       yacimientosList: [],
       mineralList: [],
-      cargosList:[]
+      cargosList:[],
+      maquinariaList: []
     };
   }
 
@@ -46,15 +47,26 @@ export default class Yacimientos extends Component {
         this.setState({ cargosList });
       });
   };
+
+  getMaquinariaList =() => {
+    fetch("/api/maquinaria")
+      .then(res => res.json())
+      .then(res => {
+        var maquinariaList = res.map(r => r);
+        this.setState({ maquinariaList });
+      });
+  }
   componentDidMount() {
     this.getYacimientosList();
     this.getMineralList();
     this.getCargosList();
+    this.getMaquinariaList();
   }
   render() {
     var yacimientos = this.state.yacimientosList;
     var minerales = this.state.mineralList;
     var cargos= this.state.cargosList;
+    var maquinaria= this.state.maquinariaList;
     var consult = {
       consult: ["Nombre", "Kilometros", "Descripción", "Status"]
     };
@@ -63,7 +75,8 @@ export default class Yacimientos extends Component {
       options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar"],
       content: [
         {
-          form: <FormYacimiento minerales={minerales} cargos={cargos}/>, //colocar formato de ingreso
+          form: <FormYacimiento minerales={minerales} cargos={cargos}
+                    maquinaria={maquinaria}/>, //colocar formato de ingreso
           id: 0
         },
         {
