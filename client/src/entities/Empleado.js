@@ -13,9 +13,18 @@ export default class Empleado extends Component {
       empleado: [],
       empleadoList: [],
       lugarList: [],
+      horarioList: [],
       empleadoCedula: ""
     };
   }
+
+  handleGetHorario = id => {
+    fetch(`/api/empleados/${id}`)
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ horarioList: res.map(r => r) });
+      });
+  };
 
   handleGetEmpleado = cedula => {
     fetch(`/api/empleados/${cedula}`)
@@ -34,15 +43,6 @@ export default class Empleado extends Component {
       });
   };
 
-  getLugarList = () => {
-    fetch("/api/lugar")
-      .then(res => res.json())
-      .then(res => {
-        var lugarList = res.map(r => r);
-        this.setState({ lugarList });
-      });
-  };
-
   getEmpleadoList = () => {
     fetch("/api/empleados")
       .then(res => res.json())
@@ -55,13 +55,14 @@ export default class Empleado extends Component {
   componentDidMount() {
     this.getCargoList();
     this.getEmpleadoList();
-    this.getLugarList();
+    //this.getLugarList();
   }
   render() {
     var empleado = this.state.empleado;
     var empleados = this.state.empleadoList;
     var cargos = this.state.cargoList;
     var lugares = this.state.lugarList;
+    var horarios = this.state.horarioList;
     var consult = {
       consult: [
         "Nombre",
@@ -79,7 +80,13 @@ export default class Empleado extends Component {
       options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar"],
       content: [
         {
-          form: <Form cargos={cargos} lugares={lugares} getLugares={this.getLugarList} />,
+          form: (
+            <Form
+              cargos={cargos}
+              lugares={lugares}
+              getLugares={this.getLugarList}
+            />
+          ),
           id: 0
         },
         {
@@ -88,6 +95,8 @@ export default class Empleado extends Component {
               consult={consult}
               empleados={empleados}
               getEmpleado={this.handleGetEmpleado}
+              getHorarios={this.handleGetHorario}
+              horarios={horarios}
             />
           ),
           id: 1

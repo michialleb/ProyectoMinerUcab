@@ -46,7 +46,7 @@ export default class Yacimientos extends Component {
     var yacimientos = this.state.yacimientosList;
     var minerales = this.state.mineralList;
     var consult = {
-      consult: ["Nombre", "Kilometros", "Descripción", "Status"]
+      consult: ["Nombre", "Kilometros", "Status"]
     };
 
     var crud = {

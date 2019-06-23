@@ -11,11 +11,20 @@ class Form extends Component {
       apellido: "",
       fnac: "",
       cedula: "",
-      direccion: "",
+      fk_lugar: "",
       telefono: "",
-      sexo: "",
+      sexo: 0,
       cedulaBuscada: "",
-      fk_cargo: ""
+      fk_cargo: "",
+      estado: 0,
+      estado2: -1,
+      municipio: 0,
+      municipio2: -1,
+      estadoAnterior: "",
+      municipioAnterior: "",
+      provinciaAnteriror: "",
+      municipioList: [],
+      provinciaList: []
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -23,6 +32,8 @@ class Form extends Component {
     this.handleGetEmpleado = this.handleGetEmpleado.bind(this);
     this.addInfoEmpleado = this.addInfoEmpleado.bind(this);
     this.handleUpdateEmpleado = this.handleUpdateEmpleado.bind(this);
+    this.getMunicipio = this.getMunicipio.bind(this);
+    this.getProvincia = this.getProvincia.bind(this);
   }
 
   /* getEmpleadoList = ()=>{
@@ -42,11 +53,41 @@ class Form extends Component {
     this.setState({
       [name]: value
     });
-    console.log(this.state);
   }
 
-  handleUpdateEmpleado = () => {
-    fetch(`/api/empleados/empleado`, {
+  getMunicipio = codigo => {
+    fetch(`/api/lugar/${codigo}`)
+      .then(res => res.json())
+      .then(res => {
+        var municipioList = res.map(r => r);
+        this.setState({ municipioList });
+      });
+  };
+  buscarMunicipios = (codigo, codigo2) => {
+    if (codigo != codigo2) {
+      this.getMunicipio(codigo2);
+      this.setState({ estado: codigo2, municipio2: "" });
+    }
+  };
+
+  getProvincia = codigo => {
+    fetch(`/api/lugar/${codigo}`)
+      .then(res => res.json())
+      .then(res => {
+        var provinciaList = res.map(r => r);
+        this.setState({ provinciaList });
+      });
+  };
+
+  buscarProvincias = (codigo, codigo2) => {
+    if (codigo != codigo2) {
+      this.getProvincia(codigo2);
+      this.setState({ municipio: codigo2 });
+    }
+  };
+
+  handleUpdateEmpleado = update => {
+    fetch(`/api/empleados/${update}`, {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ empleado: this.state })
@@ -70,7 +111,10 @@ class Form extends Component {
         direccion: empl.direccion,
         telefono: empl.telefono,
         sexo: empl.sexo,
-        fk_cargo: empl.cargo
+        fk_cargo: empl.cargo,
+        estadoAnterior: empl.estado,
+        municipioAnterior: empl.municipio,
+        provinciaAnteriror: empl.provincia
       });
     });
   }
@@ -155,9 +199,8 @@ class Form extends Component {
                 <input
                   className=""
                   placeholder="Ingrese cédula"
-                  type="text"
+                  type="number"
                   name="cedula"
-                  noValidate
                   value={this.state.cedula}
                   onChange={this.handleChange}
                 />
@@ -189,16 +232,55 @@ class Form extends Component {
               </div>
               <div className="direccion">
                 <label htmlFor="direccion">Dirección</label>
-                <input
-                  className=""
-                  placeholder="Ingrese dirección"
-                  type="text"
-                  name="direccion"
-                  noValidate
-                  value={this.state.direccion}
+                <select
+                  className="lugares"
+                  type="number"
+                  name="estado2"
+                  value={this.state.estado2}
                   onChange={this.handleChange}
-                />
+                >
+                  <option />
+                  {this.props.lugares.map((lugar, i) => (
+                    <option value={lugar.id_lugar} key={i}>
+                      {lugar.nombre_lugar}
+                    </option>
+                  ))}
+                </select>
+                {this.buscarMunicipios(this.state.estado, this.state.estado2)}
+                <select
+                  className="lugares"
+                  type="number"
+                  name="municipio2"
+                  value={this.state.municipio2}
+                  onChange={this.handleChange}
+                >
+                  <option />
+                  {this.state.municipioList.map((lugar, i) => (
+                    <option value={lugar.id_lugar} key={i}>
+                      {lugar.nombre_lugar}
+                    </option>
+                  ))}
+                </select>
+                {this.buscarProvincias(
+                  this.state.municipio,
+                  this.state.municipio2
+                )}
+                <select
+                  className="lugares"
+                  type="number"
+                  name="fk_lugar"
+                  value={this.state.fk_lugar}
+                  onChange={this.handleChange}
+                >
+                  <option />
+                  {this.state.provinciaList.map((lugar, i) => (
+                    <option value={lugar.id_lugar} key={i}>
+                      {lugar.nombre_lugar}
+                    </option>
+                  ))}
+                </select>
               </div>
+
               <div className="sexo">
                 <label htmlFor="sexo">Sexo</label>
                 <select
@@ -212,7 +294,7 @@ class Form extends Component {
                 </select>
               </div>
               <div className="ingresarUsuario">
-                <button type="submit" onClick={this.handleUpdateEmpleado}>
+                <button type="submit" onClick={this.handleUpdateEmpleado(1)}>
                   Ingresar Usuario
                 </button>
               </div>
