@@ -29,10 +29,6 @@ class Form extends Component {
     this.getProvincia = this.getProvincia.bind(this);
   }
 
-<<<<<<< HEAD
-  
-=======
->>>>>>> diegucho
   handleChange(e) {
     let target = e.target;
     let value = target.type === "checkbox" ? target.checked : target.value;
