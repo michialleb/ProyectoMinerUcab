@@ -39,6 +39,7 @@ class Empleados {
     );
   }
 
+<<<<<<< HEAD
   static retrieveHorarioSalario(id, callback) {
     console.log("el id es: " + id);
     db.query(
@@ -54,6 +55,13 @@ class Empleados {
         callback(res);
       }
     );
+=======
+  static retrieveCedula(cedula,callback) {
+    db.query("SELECT * FROM empleados_cedula WHERE cedula= ?",[cedula], function(err, res) {
+      if (err.error) return callback(err);
+      callback(res);
+    });
+>>>>>>> d2735f801d03f2cb704f733c23bf9e111fae1e92
   }
 
   static retrieveCedula(cedula, callback) {
