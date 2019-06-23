@@ -39,29 +39,11 @@ class Empleados {
     );
   }
 
-<<<<<<< HEAD
-  static retrieveHorarioSalario(id, callback) {
-    console.log("el id es: " + id);
-    db.query(
-      "select h.dia_de_semana as dia, h.hora_inicio as inicio, h.hora_salida as salida\
-       from Horario h, horario_empleado he\
-      where he.fk_empl_horario_fase= (select efc.id_empleado_cargo_fase\
-                                      from empleado_fase_cargo efc\
-                                      where efc.fk_empleado =$1)\
-      and he.fk_horario=h.id_horario",
-      [id],
-      function(err, res) {
-        if (err.error) return callback(err);
-        callback(res);
-      }
-    );
-=======
   static retrieveCedula(cedula,callback) {
     db.query("SELECT * FROM empleados_cedula WHERE cedula= ?",[cedula], function(err, res) {
       if (err.error) return callback(err);
       callback(res);
     });
->>>>>>> d2735f801d03f2cb704f733c23bf9e111fae1e92
   }
 
   static retrieveCedula(cedula, callback) {
