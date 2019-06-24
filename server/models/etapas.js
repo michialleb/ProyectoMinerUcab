@@ -12,8 +12,8 @@ class Etapas {
         fk_tipo_status) VALUES ($1,$2,(SELECT id_proyecto FROM proyecto\
         WHERE nombre_proyecto=$3),1)",
       [
-        etapa.nombreEtapa,
-        etapa.numeroEtapa,
+        etapa.nombre,
+        etapa.numero,
         etapa.nombreProyecto
       ],
 

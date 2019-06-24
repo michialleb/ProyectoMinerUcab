@@ -11,7 +11,7 @@ class ConfiguracionProyecto extends Component {
     super(props);
     this.state = {
             etapaList:[], 
-            numeroEtapa:0
+            numeroEtapa:1
     };
     this.handleChange = this.handleChange.bind(this);   
     this.handleIngresarFase = this.handleIngresarFase.bind(this);
@@ -19,7 +19,7 @@ class ConfiguracionProyecto extends Component {
     this.handleIngresarMaquinaria = this.handleIngresarMaquinaria.bind(this);
     this.handleAgregarOtraEtapa = this.handleAgregarOtraEtapa.bind(this);
     this.handleAceptarCambiosMaquinaria = this.handleAceptarCambiosMaquinaria.bind(this);
-    
+  
    
   }
   
@@ -32,17 +32,24 @@ class ConfiguracionProyecto extends Component {
     });
   }
   /* Ingresar en bd */
-  addEtapa(etapa){
-    console.log(etapa.nombre)
-    /* fetch("/api/etapas", {
+  addEtapa(nombreEtapa){
+   let etapa={
+        nombre: nombreEtapa,
+        numero: this.state.numeroEtapa,
+        nombreProyecto: this.props.nombreProyecto
+    }
+    fetch("/api/etapas", {
         method: "post",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ etapa:  etapa})
-      }).then(res => res.json());*/
+      }).then(res => res.json());
   }
   /*Acciones de botones */
-  handleIngresarFase(etapa){
-    this.addEtapa(etapa);
+  handleIngresarFase(e, nombreEtapa){
+    e.preventDefault();
+    let numero=(this.state.numeroEtapa + 1); // cuenta las etapas que se van agregando
+    this.setState({numeroEtapa: numero})
+    this.addEtapa(nombreEtapa);
     document.getElementById("form_etapa").style.display="none";
     document.getElementById("form_fase").style.display="block";
   }
@@ -79,14 +86,12 @@ class ConfiguracionProyecto extends Component {
     return (
       <>
       <div id ="form_etapa">
-          <FormEtapa  
-          handleIngresarFase={this.handleIngresarFase.bind(this)}
-          nombreProyecto= {this.props.nombreProyecto}/>
+          <FormEtapa  handleIngresarFase={this.handleIngresarFase}/>
       </div>
       <div id ="form_fase">
           <FormFases  
            handleIngresarCargos={this.handleIngresarCargos}
-           />.bind(this)
+           />
       </div>
       <div id ="form_cargos">
           <FormCargos  

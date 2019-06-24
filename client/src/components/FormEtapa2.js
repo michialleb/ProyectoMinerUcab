@@ -12,18 +12,9 @@ class FormEtapa2 extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     
-   
+
   }
-  ingresarEtapa (){
-    let numero=this.state.numeroEtapa + 1;
-    this.setState({numeroEtapa : numero})
-    let etapa={
-        nombre: this.state.nombreEtapa,
-        numero: this.state.numeroEtapa,
-        nombreProyecto: this.props.nombreProyecto
-    }
-      this.props.handleIngresarFase(etapa);
-  }
+ 
   
   handleChange(e) {
     let target = e.target;
@@ -60,7 +51,7 @@ class FormEtapa2 extends Component {
                 
               </div>
               <div className="ingresarUsuario">
-                <button type="submit" onClick={() => this.ingresarEtapa()}>
+                <button type="submit" onClick={(function (e) {this.props.handleIngresarFase(e,this.state.nombreEtapa)}).bind(this)}>
                   Aceptar
                 </button>
               </div>
