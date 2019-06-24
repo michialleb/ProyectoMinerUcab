@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
-import FormEtapa from "../components/FormEtapa";
+import ConfiguracionProyecto from "../components/ConfiguracionProyecto";
+
 class FormYacimiento extends Component {
   constructor() {
     super();
@@ -10,7 +11,6 @@ class FormYacimiento extends Component {
       nombre: "",
       direccion: "",
       kilometros: 0,
-  
       mineral: "",
       mineralList: [],
       cantidadList: []
@@ -99,8 +99,9 @@ class FormYacimiento extends Component {
    })  
     document.getElementById("form-yac").style.display="none";
   }
-  handleAddYacimiento = (e) => {
 
+
+  handleAddYacimiento = (e) => {
     fetch("/api/yacimientos", {
       method: "post",
       headers: { "Content-type": "application/json" },
@@ -119,7 +120,8 @@ class FormYacimiento extends Component {
 
   generarProyectoE (){
     let proyecto ={
-      nombre: this.state.nombre
+      nombre: this.state.nombre,
+      duracion_proyecto: 0
     }
     console.log('generando proyecto');
     fetch("/api/proyecto", {
@@ -129,14 +131,6 @@ class FormYacimiento extends Component {
     }).then(res => res.json());
   };
 
-  handleAddEtapa = (etapa) => {
-    //console.log(etapa);
-    fetch("/api/etapas", {
-      method: "post",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ etapa:  etapa})
-    }).then(res => res.json());
-  };
 
  
 
@@ -252,7 +246,7 @@ componentDidMount(){}
           </div> 
         </div>
         <div id="form-etapa">
-        <FormEtapa nombreProyecto={"Proyecto "+ this.state.nombre}
+        <ConfiguracionProyecto  nombreProyecto={"Proyecto "+ this.state.nombre}
                    cargoList={cargoList} 
                    maquinariaList={maquinariaList} 
                    handleAddEtapa={this.handleAddEtapa}/>

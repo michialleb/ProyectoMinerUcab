@@ -3618,3 +3618,47 @@ values ('Lunes','06:00:00','12:00:00'),
 ('Jueves','08:00:00','16:00:00'),
 ('Viernes','09:00:00','20:00:00'),
 ('Viernes','09:00:00','16:00:00');
+
+/*Empleados*/
+insert into empleado(cedula_empleado,nombre_empleado,apellido_empleado,fecha_nacimiento,sexo,fk_lugar,fk_cargo)
+values (2222,'Rafael','Nadal','04-04-1974','M',468,1),
+(3333,'Roger','Federer','04-04-1973','M',469,1),
+(4444,'Nole','Djokovik','04-04-1972','M',470,1),
+(5555,'Andy','Murray','05-04-1972','M',471,1),
+(6666,'Antonio','Cruz','07-08-1979','M',470,1),
+(7777,'Magda','Boniel','06-06-1959','F',470,1),
+(8888,'Mikaela','Castelli','12-08-1973','F',473,1),
+(9999,'Mikel','Osorio','08-07-1982','M',473,1),
+(1112,'Fernando','Aristigueta','04-04-1972','M',474,1),
+(1113,'Tomas','Rincon','04-04-1972','M',476,1),
+(1114,'Alexander','Zverev','04-04-1972','M',476,1),
+(1115,'David','Ferrer','04-04-1972','M',477,1),
+(1116,'Denis','Shapovalov','04-04-1972','M',478,1),
+(1117,'Mischa','Zverev','04-04-1972','M',479,1),
+(1118,'Maria','Sharapova','04-04-1972','M',479,1),
+(1119,'Michelle','Castelli','04-04-1972','M',480,1),
+(1110,'Mabel','Nobrega','04-04-1972','M',481,1),
+(1121,'Kei','Nishikori','04-04-1972','M',480,1),
+(1122,'Michael','Melamet','04-04-1972','M',482,1),
+(1123,'Andrea','Arreaga','04-04-1972','F',482,1),
+(1124,'Garbine','Muguruza','04-04-1972','F',483,1),
+(1125,'Stephanie','Graff','04-04-1972','F',484,1),
+(1126,'Nicolas','Pereira','04-04-1972','M',485,1),
+(1127,'Gustavo','Dudamel','04-04-1972','M',484,1),
+(1128,'Francisco','Otamendi','04-04-1972','M',485,1),
+(1129,'Andre','Aggasi','04-04-1972','M',486,1),
+(1130,'Naomi','Osaka','04-04-1972','F',486,1),
+(1131,'Ricardo','Montaner','04-04-1972','M',487,1),
+(1132,'Dominic','Thiem','04-04-1972','M',487,1),
+(1133,'Stefano','Tsitipas','04-04-1972','M',488,1),
+(1134,'Fabio','Fognini','04-04-1972','M',489,1),
+(1135,'Juan','Del Potro','04-04-1972','M',489,1),
+(1136,'Jon','Isner','04-04-1972','M',490,1),
+(1137,'Milos','Raonic','04-04-1972','M',470,1),
+(1138,'Stan','Wawrinka','04-04-1972','M',470,1),
+(1139,'Diego','Swartzman','04-04-1972','M',470,1),
+(1140,'Guido','Pela','04-04-1972','M',470,1);
+
+/*Cargo Fase*/
+insert into cargo_fase (cantidad,costo,fk_cargo,fk_fase)
+values (3,1000,1,)

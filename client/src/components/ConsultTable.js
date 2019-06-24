@@ -24,7 +24,7 @@ class ConsultTable extends Component {
 
   handleGetEmpleado(e) {
     this.props.getEmpleado(this.state.cedula);
-    var id_empleado = 4;
+    var id_empleado = 1;
     this.props.getHorarios(id_empleado);
     console.log(this.props.empleados);
     console.log(this.props.horarios);

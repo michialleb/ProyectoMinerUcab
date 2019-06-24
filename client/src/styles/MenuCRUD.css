@@ -6,7 +6,7 @@
 body {
   margin: 0;
   padding: 0;
-  position: fixed;
+ 
 }
 
 .header .demo-tabs {
@@ -16,7 +16,6 @@ body {
   transition: 0.00000001s;
 }
 .demo-tabs {
-  position: fixed;
   width: 100%;
 }
 .options {

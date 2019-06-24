@@ -8,9 +8,7 @@
 
   /*  background-color: #258ea6;*/
 }
-.content {
-  position: flex;
-}
+
 .form-wrapper {
   width: 100%;
   display: flex;
@@ -20,7 +18,7 @@
   border-radius: 10px;
   box-shadow: 0px 10px 50px #555;
   background-color: #ffffff;
-  position: flex;
+
 }
 #empresa,
 #persona {
@@ -28,7 +26,6 @@
 }
 .form {
   width: 100%;
-  display: flex;
   flex-wrap: wrap;
   margin-top: 5px;
 }

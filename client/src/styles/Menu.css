@@ -7,9 +7,7 @@ body {
   margin: 0;
   padding: 0;
 }
-.menu{
-  position: flex;
-}
+
 
 .header {
   position: fixed;
