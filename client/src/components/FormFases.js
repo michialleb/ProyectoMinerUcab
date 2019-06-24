@@ -6,7 +6,9 @@ class FormFases extends Component {
     super();
 
     this.state = {
-       nombreEtapa:""
+       nombreFase:"",
+       duracionFase:"",
+       costoFase: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -42,8 +44,8 @@ class FormFases extends Component {
                     <label>Nombre Fase:</label>
                     <input 
                     type="text"
-                    name="nombreEtapa"
-                    value={this.state.nombreEtapa}
+                    name="nombreFase"
+                    value={this.state.nombreFase}
                     onChange={this.handleChange}/></div>
                 </div>
                     <label>Duración (dias):</label>
@@ -60,8 +62,9 @@ class FormFases extends Component {
                       onChange={this.handleChange}></input>
               </div>
               <div className="ingresarUsuario">
-                <button type="submit" onClick={this.props.handleIngresarCargos}>
-                  Agregar cargos
+                <button type="submit" 
+                       onClick={(function (e) {this.props.handleIngresarCargos(e,this.state.nombreFase,this.state.duracionFase,this.state.costoFase)}).bind(this)}>
+                      Agregar cargos
                 </button>
               </div>
             </form>

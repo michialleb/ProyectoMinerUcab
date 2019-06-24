@@ -11,7 +11,11 @@ class ConfiguracionProyecto extends Component {
     super(props);
     this.state = {
             etapaList:[], 
-            numeroEtapa:1
+            numeroEtapa:1,
+            nombreEtapa: "",
+            numeroFase: 1,
+            costoFase: "",
+            duracionFase:""
     };
     this.handleChange = this.handleChange.bind(this);   
     this.handleIngresarFase = this.handleIngresarFase.bind(this);
@@ -46,20 +50,48 @@ class ConfiguracionProyecto extends Component {
         body: JSON.stringify({ etapa:  etapa})
       }).then(res => res.json());
   }
+
+  addFase (nombreFase,duracionFase,costoFase){
+    let fase={
+        nombreFase: nombreFase,
+        duracion: duracionFase,
+        costo:costoFase,
+        numeroFase:this.state.numeroFase,
+        nombreProyecto:this.props.nombreProyecto,
+        numeroEtapa: this.state.numeroEtapa
+      }
+      console.log(fase);
+      fetch("/api/fases", {
+        method: "post",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ fase:  fase})
+      }).then(res => res.json());
+  }
   /*Acciones de botones */
   handleIngresarFase(e, nombreEtapa){
     e.preventDefault();
     let numero=(this.state.numeroEtapa + 1); // cuenta las etapas que se van agregando
-    this.setState({numeroEtapa: numero})
+    this.setState({numeroEtapa: numero});
+    this.setState({nombreEtapa: nombreEtapa});
     this.addEtapa(nombreEtapa);
+   
     document.getElementById("form_etapa").style.display="none";
     document.getElementById("form_fase").style.display="block";
   }
-  handleIngresarCargos(e){
+  handleIngresarCargos(e, nombreFase, duracionFase,costoFase){
       e.preventDefault();
+      let costo= parseInt(costoFase)+parseInt(this.state.costoFase);
+      let duracion= parseInt(duracionFase)+parseInt(this.state.duracionFase);
+      let numero=(this.state.numeroFase + 1); // cuenta las fases que se van agregando
+      this.addFase(nombreFase,duracionFase,costoFase);
+      this.setState({numeroFase: numero,
+                     costoFase: costo,
+                     duracionFase: duracion});
+
       document.getElementById("form_fase").style.display="none";
       document.getElementById("form_cargos").style.display="block";
   }
+
   handleIngresarOtraFase(e){
     e.preventDefault();
     document.getElementById("form_fase").style.display="block";
@@ -67,6 +99,12 @@ class ConfiguracionProyecto extends Component {
 }
   handleAgregarOtraEtapa (e){
     e.preventDefault();
+    let cero= 0;
+    let cero2=0;
+    let numero= 1; // cuenta las etapas que se van agregando
+    this.setState({numeroFase: numero,
+                   costoFase: cero,
+                   duracionFase: cero2});
     document.getElementById("form_etapa").style.display="block";
     document.getElementById("form_maquinaria").style.display="none";
     
@@ -88,7 +126,8 @@ class ConfiguracionProyecto extends Component {
     return (
       <>
       <div id ="form_etapa">
-          <FormEtapa  handleIngresarFase={this.handleIngresarFase}/>
+          <FormEtapa  
+          handleIngresarFase={this.handleIngresarFase}/>
       </div>
       <div id ="form_fase">
           <FormFases  

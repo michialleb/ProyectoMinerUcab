@@ -140,7 +140,7 @@ class FormMaquinaria extends Component {
                 </button>
               </div>
               <div className="ingresarUsuario">
-                <button type="submit" onClick={this.props.handleAgregarOtraFase}>
+                <button type="submit" onClick={(function (e) {this.props.handleIngresarOtraFase(e)}).bind(this)}>
                   Agregar Otra Fase
                 </button>
               </div>
