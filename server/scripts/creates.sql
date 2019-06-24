@@ -415,8 +415,12 @@ CREATE TABLE pago_pago (
 create table Mineral_Mineral (
   id_mineral_mineral serial,
   fk_mineral integer,
+  fk_mineral_comp integer,
+  cantidad real not null,
   constraint pk_id_mineral primary key (id_mineral_mineral),
   constraint fk_mineral_n_a_m foreign key (fk_mineral)
+  references Mineral(id_mineral),
+  constraint fk_mineral_n_a_m_c foreign key (fk_mineral_comp)
   references Mineral(id_mineral)
 );
 
@@ -617,6 +621,11 @@ values('Cal','Bajo','Usado desde la antigüedad en la construcción de viviend
 ('Sal Comun','Bajo','Se encuentra en las salineras y es usada ampliamente en la cocina universalmente para condimentar y conservar alimentos.','No metalico'),
 ('Talco','Bajo','Es usado en diversas industrias entre ellas para la fabricación de papel, en la industria cosmética para prevenir la irritación de la piel, e incluso como parte de algunos plásticos.','No metalico')
 ;
+insert into mineral(nombre_mineral,valor_economico,fecha_ini_explotacion,fecha_nacionalizacion,tipo_mineral)
+values('Vitrita','Bajo','07-09-19','06-23-1970','Metalico'),
+('Fusita','Bajo','07-09-19','06-23-1970','Metalico'),
+('Clarita','Bajo','07-09-19','06-23-1970','Metalico'),
+('Durita','Bajo','07-09-19','06-23-1970','Metalico')
 
 
 
@@ -3663,3 +3672,22 @@ values (2222,'Rafael','Nadal','04-04-1974','M',468,1),
 /*Cargo Fase*/
 insert into cargo_fase (cantidad,costo,fk_cargo,fk_fase)
 values (3,1000,1,)
+
+/*Mineral_mineral*/
+
+insert into mineral_mineral (fk_mineral,fk_mineral_comp,cantidad)
+values 
+(4,35,300),
+(4,36,200),
+(4,37,400),
+(4,38,500)
+
+/*cargo_fase*/
+
+/*presentacion*/
+insert into presentacion(nombre_presentacion)
+values ('Polvo'),
+('Liquido'),
+('Molido'),
+('Cilindrico'),
+('Lingotes');

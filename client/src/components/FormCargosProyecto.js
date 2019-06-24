@@ -40,17 +40,21 @@ class FormCargosProyecto extends Component {
     let target = e.target;
     let value = target.value;
     let name = target.name;
-    let salario = target.salario;
+    let salarioCargo="";
+    this.props.cargoList.map((cargo) =>{
+      if ( cargo.tipo_cargo=== value){
+        salarioCargo= cargo.salario_empleado
+      }
+    });
     console.log(value);
     console.log(name);
-    console.log(salario);
+    console.log(salarioCargo);
     this.setState({
-      [name]: value,
-      salario: salario 
+      [name]: value
     });
     let cargo={
-       tipo_cargo: this.state.cargo,
-       salario: this.state.salario
+       tipo_cargo: value,
+       salario: salarioCargo
     }
     cargos.push(cargo);
     this.setState({ cargoList: cargos });
@@ -107,17 +111,15 @@ class FormCargosProyecto extends Component {
               <div>
               <select
                     name="cargo"
-                    nombre="salario"
                     value={this.state.cargo}
-                    salario={this.state.salario}
                     onChange={this.handleChangeCargo}
-              >
+                    >
                     <option />
                     {this.props.cargoList.map((cargo, i) => (
-                      <option salario={cargo.salario_empleado}
-                              value={cargo.tipo_cargo} 
-                              key={i}>
-                        {cargo.tipo_cargo}
+                      <option 
+                          value={cargo.tipo_cargo} 
+                          key={i}>
+                         {cargo.tipo_cargo}
                       </option>
                     ))}
               </select>
@@ -139,7 +141,8 @@ class FormCargosProyecto extends Component {
                             <button
                               numero={i}
                               name={cargo}
-                              onClick={this.onDelete}>
+                             // onClick={this.onDelete}
+                              >
                               Eliminar
                             </button>
                           </td>
