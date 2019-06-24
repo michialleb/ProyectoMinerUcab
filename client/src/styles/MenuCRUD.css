@@ -6,13 +6,15 @@
 body {
   margin: 0;
   padding: 0;
+<<<<<<< HEAD
  
+=======
+>>>>>>> diegucho
 }
 
 .header .demo-tabs {
   height: 1000000em;
   margin-top: 30px;
-  position: absolute;
   transition: 0.00000001s;
 }
 .demo-tabs {

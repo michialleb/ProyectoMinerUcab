@@ -45,7 +45,7 @@ h5 {
 .secondName,
 .capacidad,
 .ubicacion,
-label {
+.correo label {
   font-size: 1em;
   margin-bottom: 0.25em;
   font-weight: lighter;
@@ -66,6 +66,7 @@ input {
 .direccion,
 .secondName,
 .capacidad,
+.correo,
 .ubicacion input::placeholder {
   font-size: 1em;
   font-weight: lighter;
@@ -80,7 +81,7 @@ input {
 .horario-act,
 .direccion,
 .status,
-.sexo .lugares {
+.lugares {
   margin-right: 1%;
 }
 
@@ -96,6 +97,8 @@ input {
 .telefono,
 .capacidad,
 .ubicacion,
+.correo,
+.sexo,
 .direccion .lugares {
   margin-left: 1%;
 }
@@ -110,6 +113,7 @@ input {
 .horario-act,
 .secondName,
 .capacidad,
+.correo,
 .ubicacion .lugares {
   display: flex;
   flex-direction: column;
