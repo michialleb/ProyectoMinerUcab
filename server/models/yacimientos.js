@@ -37,7 +37,7 @@ class Yacimientos {
   static insert(yacimiento, callback) {
     db.query(
       "INSERT INTO yacimiento (nombre_yacimiento,kilometros,fk_tipo_status,fk_lugar) \
-      VALUES ($1,$2,2,$3)",
+      VALUES ($1,$2,7,$3)",
       [yacimiento.nombre, yacimiento.kilometros, yacimiento.direccion],
 
       function(err, res) {

@@ -36,7 +36,9 @@ class ConfiguracionProyecto extends Component {
    let etapa={
         nombre: nombreEtapa,
         numero: this.state.numeroEtapa,
-        nombreProyecto: this.props.nombreProyecto
+        nombreProyecto: this.props.nombreProyecto,
+        duracionEtapa: 0,
+        costoEtapa:0
     }
     fetch("/api/etapas", {
         method: "post",

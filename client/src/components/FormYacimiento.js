@@ -10,12 +10,7 @@ class FormYacimiento extends Component {
       yacimientoList: [],
       nombre: "",
       direccion: "",
-<<<<<<< HEAD
       kilometros: 0,
-=======
-      kilometros: "",
-
->>>>>>> diegucho
       mineral: "",
       mineralList: [],
       cantidadList: [],
@@ -92,10 +87,6 @@ class FormYacimiento extends Component {
     this.setState({ cantidadList: cantidades });
     this.setState({ mineralList: minerales });
   }
-<<<<<<< HEAD
-  handleIngresarYacimiento = (e) => {
-    e.preventDefault();
-=======
 
   getMunicipio = codigo => {
     fetch(`/api/lugar/${codigo}`)
@@ -129,13 +120,12 @@ class FormYacimiento extends Component {
     }
   };
 
-  handleIngresarYacimiento = () => {
->>>>>>> diegucho
+  handleIngresarYacimiento = (e) => {
+    e.preventDefault();
     this.handleAddYacimiento();
   
   };
 
-<<<<<<< HEAD
   handleIngresarMinerales =(e)=> {
     e.preventDefault();
     this.generarProyectoE();
@@ -153,10 +143,6 @@ class FormYacimiento extends Component {
 
 
   handleAddYacimiento = (e) => {
-=======
-  handleAddYacimiento = () => {
-    let yacimiento = this.state;
->>>>>>> diegucho
     fetch("/api/yacimientos", {
       method: "post",
       headers: { "Content-type": "application/json" },
@@ -179,11 +165,11 @@ class FormYacimiento extends Component {
       duracion_proyecto: 0
     }
     console.log('generando proyecto');
- /*   fetch("/api/proyecto", {
+  fetch("/api/proyecto", {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ proyecto:  proyecto})
-    }).then(res => res.json());*/
+    }).then(res => res.json());
   };
 
 

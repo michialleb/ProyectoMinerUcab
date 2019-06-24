@@ -10,7 +10,7 @@ class Proyectos {
     db.query(
       "INSERT INTO proyecto (nombre_proyecto,fk_yacimiento,fk_tipo_status, duracion_proyecto)\
        VALUES ($1,(SELECT id_yacimiento FROM yacimiento \
-        WHERE  nombre_yacimiento=$2),1, $3)",
+        WHERE  nombre_yacimiento=$2),4, $3)",
       [
         'Proyecto ' + proyecto.nombre,
         proyecto.nombre,

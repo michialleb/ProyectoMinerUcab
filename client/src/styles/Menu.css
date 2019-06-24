@@ -154,7 +154,7 @@ body {
   }
 
   .sidenav-show {
-    height: 1000em;
+    height: 400em;
     width: 250px;
     transition: 0.3s;
   }
