@@ -10,7 +10,7 @@ export default class Clientes extends Component {
 
     this.state = {
       mineralesList: [],
- 
+      lugarList: []
     };
   }
   getMineralesList = () => {
@@ -21,16 +21,27 @@ export default class Clientes extends Component {
         this.setState({ mineralesList });
       });
   };
+  getLugarList = () => {
+    fetch("/api/lugar")
+      .then(res => res.json())
+      .then(res => {
+        var lugarList = res.map(r => r);
+        this.setState({ lugarList });
+      });
+  };
+
   componentDidMount() {
     this.getMineralesList();
+    this.getLugarList();
   }
   render() {
-    var minerales=this.state.mineralesList;
+    var minerales = this.state.mineralesList;
+    var lugares = this.state.lugarList;
     var crud = {
-      options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar","Compra"],
+      options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar", "Compra"],
       content: [
         {
-          form: <FormCliente />,
+          form: <FormCliente lugares={lugares} />,
           id: 0
         },
         {
@@ -46,7 +57,7 @@ export default class Clientes extends Component {
           id: 3
         },
         {
-          form: <FormCompraCliente minerales={minerales}/>,
+          form: <FormCompraCliente minerales={minerales} />,
           id: 4
         }
       ],

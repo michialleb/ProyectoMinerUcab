@@ -13,15 +13,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.use("/api/inventario", require("./api/inventario"));
 app.use("/api/usuarios", require("./api/usuarios"));
 app.use("/api/empleados", require("./api/empleados"));
+app.use("/api/clientes", require("./api/clientes"));
 app.use("/api/cargos", require("./api/cargos"));
 app.use("/api/lugar", require("./api/lugar"));
 app.use("/api/minerales", require("./api/minerales"));
 app.use("/api/yacimientos", require("./api/yacimientos"));
 app.use("/api/empresaAliada", require("./api/empresaAliada"));
 app.use("/api/mineralYacimiento", require("./api/mineralYacimiento"));
-app.use("/api/inventario", require("./api/inventario"));
+
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}...`);
