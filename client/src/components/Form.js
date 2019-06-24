@@ -11,7 +11,8 @@ class Form extends Component {
       fnac: "",
       cedula: "",
       fk_lugar: "",
-      // telefono: "",
+      telefono: "",
+      correo:"",
       sexo: "",
       fk_cargo: "",
       estado: 0,
@@ -47,6 +48,7 @@ class Form extends Component {
         this.setState({ municipioList });
       });
   };
+
   buscarMunicipios = (codigo, codigo2) => {
     if (codigo != codigo2) {
       this.getMunicipio(codigo2);
@@ -165,11 +167,22 @@ class Form extends Component {
                 <input
                   className=""
                   placeholder="Ingrese nro telefónico"
-                  //  type="number"
+                  type="number"
                   name="telefono"
-                  //  noValidate
-                  //value={this.state.telefono}
-                  //onChange={this.handleChange}
+                  value={this.state.telefono}
+                  onChange={this.handleChange}
+                />
+              </div>
+
+              <div className="correo">
+                <label htmlFor="correo">Correo Electronico</label>
+                <input
+                  className=""
+                  placeholder="Ingrese su correo electronico"
+                  type="email"
+                  name="correo"
+                  value={this.state.correo}
+                  onChange={this.handleChange}
                 />
               </div>
               <div className="direccion">

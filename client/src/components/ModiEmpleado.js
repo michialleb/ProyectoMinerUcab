@@ -13,6 +13,7 @@ class Form extends Component {
       cedula: "",
       fk_lugar: "",
       telefono: "",
+      correo: "",
       sexo: 0,
       cedulaBuscada: "",
       fk_cargo: "",
@@ -35,15 +36,6 @@ class Form extends Component {
     this.getMunicipio = this.getMunicipio.bind(this);
     this.getProvincia = this.getProvincia.bind(this);
   }
-
-  /* getEmpleadoList = ()=>{
-    fetch("/api/empleados")
-    .then(res => res.json())
-    .then(res => {
-        var empleadoList = res.map(r=>r)
-        this.setState({ empleadoList });
-      });
-  };*/
 
   handleChange(e) {
     let target = e.target;
@@ -114,7 +106,8 @@ class Form extends Component {
         fk_cargo: empl.cargo,
         estadoAnterior: empl.estado,
         municipioAnterior: empl.municipio,
-        provinciaAnteriror: empl.provincia
+        provinciaAnteriror: empl.provincia,
+        correo: empl.correo
       });
     });
   }
@@ -223,13 +216,26 @@ class Form extends Component {
                 <input
                   className=""
                   placeholder="Ingrese nro telefónico"
-                  type="text"
+                  type="number"
                   name="telefono"
                   noValidate
                   value={this.state.telefono}
                   onChange={this.handleChange}
                 />
               </div>
+
+              <div className="correo">
+                <label htmlFor="correo">Correo Electronico</label>
+                <input
+                  className=""
+                  placeholder="Ingrese su correo electronico"
+                  type="email"
+                  name="correo"
+                  value={this.state.correo}
+                  onChange={this.handleChange}
+                />
+              </div>
+
               <div className="direccion">
                 <label htmlFor="direccion">Dirección</label>
                 <select
