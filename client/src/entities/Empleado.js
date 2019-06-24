@@ -34,16 +34,14 @@ export default class Empleado extends Component {
       });
   };
 
-getLugarList=()=>{
-  fetch("/api/lugar")
-  .then(res => res.json())
-  .then(res => {
-    var cargoList = res.map(r => r);
-    this.setState({ cargoList });
-  });
-};
-
-}
+  getLugarList = () => {
+    fetch("/api/lugar")
+      .then(res => res.json())
+      .then(res => {
+        var lugarList = res.map(r => r);
+        this.setState({ lugarList });
+      });
+  };
 
   getCargoList = () => {
     fetch("/api/cargos")
@@ -68,6 +66,7 @@ getLugarList=()=>{
     this.getEmpleadoList();
     this.getLugarList();
   }
+
   render() {
     var empleado = this.state.empleado;
     var empleados = this.state.empleadoList;
@@ -83,7 +82,8 @@ getLugarList=()=>{
         "Telefono",
         "Direccion",
         "Sexo",
-        "Cargo"
+        "Cargo",
+        "Correo"
       ]
     };
 
@@ -95,7 +95,6 @@ getLugarList=()=>{
             <Form
               cargos={cargos}
               lugares={lugares}
-              getLugares={this.getLugarList}
             />
           ),
           id: 0

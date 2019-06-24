@@ -11,6 +11,7 @@ class ConsultTableYacimientos extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleGetYacimiento = this.handleGetYacimiento.bind(this);
   }
 
   handleChange(e) {
@@ -20,6 +21,10 @@ class ConsultTableYacimientos extends Component {
     this.setState({
       nombre: value
     });
+  }
+
+  handleGetYacimiento(e) {
+    this.props.getYacimiento(this.state.nombre);
   }
 
   render() {
@@ -38,7 +43,7 @@ class ConsultTableYacimientos extends Component {
             <button
               className="search"
               type="button"
-              onClick={this.props.getYacimiento(this.state.nombre)}
+              onClick={this.handleGetYacimiento}
             >
               {<FaSistrix />}
             </button>
@@ -55,6 +60,14 @@ class ConsultTableYacimientos extends Component {
               <tr key={i}>
                 <td>{yacimiento.nombre_yacimiento}</td>
                 <td>{yacimiento.kilometros}</td>
+                <td>
+                  {"Estado: " +
+                    yacimiento.estado +
+                    ", Municipio: " +
+                    yacimiento.municipio +
+                    ", Provincia: " +
+                    yacimiento.provincia}
+                </td>
                 <td>{yacimiento.nombre_status}</td>
               </tr>
             );

@@ -6,17 +6,14 @@
 body {
   margin: 0;
   padding: 0;
-  position: fixed;
 }
 
 .header .demo-tabs {
   height: 1000000em;
   margin-top: 30px;
-  position: absolute;
   transition: 0.00000001s;
 }
 .demo-tabs {
-  position: fixed;
   width: 100%;
 }
 .options {

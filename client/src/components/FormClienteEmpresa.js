@@ -12,7 +12,8 @@ class FormCliente extends Component {
       fnac: "",
       cedula: "",
       direccion: "",
-      telefono: ""
+      telefono: "",
+      correo:""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -141,6 +142,19 @@ class FormCliente extends Component {
                   onChange={this.handleChange}
                 />
               </div>
+
+              <div className="correo">
+                <label htmlFor="correo">Correo Electronico</label>
+                <input
+                  className=""
+                  placeholder="Ingrese su correo electronico"
+                  type="email"
+                  name="correo"
+                  value={this.state.correo}
+                  onChange={this.handleChange}
+                />
+              </div>
+              
               <div className="direccion">
                 <label htmlFor="direccion">Dirección</label>
                 <input
@@ -154,6 +168,11 @@ class FormCliente extends Component {
                 />
               </div>
              
+              <div className="ingresarUsuario">
+                <button type="submit" onClick={this.handleAddEmpleado}>
+                  Ingresar Cliente
+                </button>
+              </div>
             </form>
           </div>
 
@@ -207,7 +226,23 @@ class FormCliente extends Component {
                   onChange={this.handleChange}
                 />
               </div>
+              <div className="correo">
+                <label htmlFor="correo">Correo Electronico</label>
+                <input
+                  className=""
+                  placeholder="Ingrese su correo electronico"
+                  type="email"
+                  name="correo"
+                  value={this.state.correo}
+                  onChange={this.handleChange}
+                />
+              </div>
 
+              <div className="ingresarUsuario">
+                <button type="submit" onClick={this.handleAddEmpleado}>
+                  Ingresar Empresa Cliente
+                </button>
+              </div>
             </form>
           </div>
         </div>

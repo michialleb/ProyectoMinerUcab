@@ -10,10 +10,16 @@ class FormYacimiento extends Component {
       nombre: "",
       direccion: "",
       kilometros: "",
-  
+
       mineral: "",
       mineralList: [],
-      cantidadList: []
+      cantidadList: [],
+      estado: 0,
+      estado2: -1,
+      municipio: 0,
+      municipio2: -1,
+      municipioList: [],
+      provinciaList: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,6 +27,8 @@ class FormYacimiento extends Component {
     this.handleChangeCantidad = this.handleChangeCantidad.bind(this);
     this.handleIngresarYacimiento = this.handleIngresarYacimiento.bind(this);
     this.onDelete = this.onDelete.bind(this);
+    this.getMunicipio = this.getMunicipio.bind(this);
+    this.getProvincia = this.getProvincia.bind(this);
   }
 
   handleChangeMineral(e) {
@@ -78,10 +86,44 @@ class FormYacimiento extends Component {
     this.setState({ cantidadList: cantidades });
     this.setState({ mineralList: minerales });
   }
+
+  getMunicipio = codigo => {
+    fetch(`/api/lugar/${codigo}`)
+      .then(res => res.json())
+      .then(res => {
+        var municipioList = res.map(r => r);
+        this.setState({ municipioList });
+      });
+  };
+
+  buscarMunicipios = (codigo, codigo2) => {
+    if (codigo != codigo2) {
+      this.getMunicipio(codigo2);
+      this.setState({ estado: codigo2, municipio2: "" });
+    }
+  };
+
+  getProvincia = codigo => {
+    fetch(`/api/lugar/${codigo}`)
+      .then(res => res.json())
+      .then(res => {
+        var provinciaList = res.map(r => r);
+        this.setState({ provinciaList });
+      });
+  };
+
+  buscarProvincias = (codigo, codigo2) => {
+    if (codigo != codigo2) {
+      this.getProvincia(codigo2);
+      this.setState({ municipio: codigo2 });
+    }
+  };
+
   handleIngresarYacimiento = () => {
     this.handleAddYacimiento();
     this.handleAddMineralYacimiento();
   };
+
   handleAddYacimiento = () => {
     let yacimiento = this.state;
     fetch("/api/yacimientos", {
@@ -138,21 +180,60 @@ class FormYacimiento extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-              
-              <div className="ubicacion">
-                <label htmlFor="ubicacion">Ubicacion</label>
-                <input
-                  className=""
-                  placeholder="Ingrese la ubicacion"
-                  type="text"
+
+              <div className="direccion">
+                <label htmlFor="direccion">Dirección</label>
+                <select
+                  className="lugares"
+                  type="number"
+                  name="estado2"
+                  value={this.state.estado2}
+                  onChange={this.handleChange}
+                >
+                  <option />
+                  {this.props.lugares.map((lugar, i) => (
+                    <option value={lugar.id_lugar} key={i}>
+                      {lugar.nombre_lugar}
+                    </option>
+                  ))}
+                </select>
+                {this.buscarMunicipios(this.state.estado, this.state.estado2)}
+                <select
+                  className="lugares"
+                  type="number"
+                  name="municipio2"
+                  value={this.state.municipio2}
+                  onChange={this.handleChange}
+                >
+                  <option />
+                  {this.state.municipioList.map((lugar, i) => (
+                    <option value={lugar.id_lugar} key={i}>
+                      {lugar.nombre_lugar}
+                    </option>
+                  ))}
+                </select>
+                {this.buscarProvincias(
+                  this.state.municipio,
+                  this.state.municipio2
+                )}
+                <select
+                  className="lugares"
+                  type="number"
                   name="direccion"
-                  noValidate
                   value={this.state.direccion}
                   onChange={this.handleChange}
-                />
+                >
+                  <option />
+                  {this.state.provinciaList.map((lugar, i) => (
+                    <option value={lugar.id_lugar} key={i}>
+                      {lugar.nombre_lugar}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div>
                 <div className="add_minerales">
+                  <label>Minerales                   </label>
                   <select
                     name="mineral"
                     value={this.state.mineral}
