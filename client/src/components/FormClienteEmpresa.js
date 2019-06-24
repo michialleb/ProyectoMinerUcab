@@ -11,7 +11,9 @@ class FormCliente extends Component {
       apellido: "",
       fnac: "",
       cedula: "",
+      rif: "",
       direccion: "",
+      sexo: "",
       telefono: "",
       correo: "",
       estado: 0,
@@ -28,7 +30,8 @@ class FormCliente extends Component {
     this.Empresa = this.Empresa.bind(this);
     this.getMunicipio = this.getMunicipio.bind(this);
     this.getProvincia = this.getProvincia.bind(this);
-    this.handleAddCliente = this.handleAddCliente.bind(this);
+    this.handleAddPersona = this.handleAddPersona.bind(this);
+    this.handleAddEmpresa = this.handleAddEmpresa.bind(this);
   }
 
   handleChange(e) {
@@ -39,6 +42,7 @@ class FormCliente extends Component {
     this.setState({
       [name]: value
     });
+    console.log(this.state.nombre);
   }
   getMunicipio = codigo => {
     fetch(`/api/lugar/${codigo}`)
@@ -72,11 +76,19 @@ class FormCliente extends Component {
     }
   };
 
-  handleAddCliente = () => {
-    fetch("/api/clientes", {
+  handleAddPersona = () => {
+    fetch(`/api/clientes/`, {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ cliente: this.state })
+    }).then(res => res.json());
+  };
+
+  handleAddEmpresa = () => {
+    fetch(`/api/clientes/empresas/`, {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ empresa: this.state })
     }).then(res => res.json());
   };
 
@@ -247,8 +259,21 @@ class FormCliente extends Component {
                 </select>
               </div>
 
+              <div className="sexo">
+                <label htmlFor="sexo">Sexo</label>
+                <select
+                  name="sexo"
+                  value={this.state.sexo}
+                  onChange={this.handleChange}
+                >
+                  <option />
+                  <option>M</option>
+                  <option>F</option>
+                </select>
+              </div>
+
               <div className="ingresarUsuario">
-                <button type="submit" onClick={this.handleAddCliente}>
+                <button type="submit" onClick={this.handleAddPersona}>
                   Ingresar Cliente
                 </button>
               </div>
@@ -275,23 +300,23 @@ class FormCliente extends Component {
                 <input
                   className=""
                   placeholder="Ingrese cédula"
-                  type="number"
-                  name="cedula"
+                  type="text"
+                  name="rif"
                   noValidate
-                  value={this.state.cedula}
+                  value={this.state.rif}
                   onChange={this.handleChange}
                 />
               </div>
 
-              <div className="nacimiento">
-                <label htmlFor="nacimiento">Telefono:</label>
+              <div className="telefono">
+                <label htmlFor="telefono">Telefono:</label>
                 <input
                   className=""
-                  placeholder="xx/yy/zz"
+                  placeholder="Ingrese numero telefonico"
                   type="number"
-                  name="fnac"
+                  name="telefono"
                   noValidate
-                  value={this.state.fnac}
+                  value={this.state.telefono}
                   onChange={this.handleChange}
                 />
               </div>
@@ -360,8 +385,8 @@ class FormCliente extends Component {
               </div>
 
               <div className="ingresarUsuario">
-                <button type="submit" onClick={this.handleAddCliente}>
-                  Ingresar Empresa Cliente
+                <button type="submit" onClick={this.handleAddEmpresa}>
+                  >Ingresar Empresa Cliente
                 </button>
               </div>
             </form>
