@@ -3,12 +3,35 @@ var Clientes = require("../models/clientes");
 
 var router = express.Router();
 
-/*router.get("/", function(req, res) {
-  Clientes.retrieveAll(function(err, clientes) {
+router.get("/getEmpresa", function(req, res) {
+  Clientes.retrieveEmpresa(function(err, empresas) {
     if (err) return res.json(err);
-    return res.json(clientes);
+    return res.json(empresas);
   });
-});*/
+});
+
+router.get("/getPersona", function(req, res) {
+  Clientes.retrievePersona(function(err, personas) {
+    if (err) return res.json(err);
+    return res.json(personas);
+  });
+});
+
+router.get("/:cedula", function(req, res) {
+  var cedula = req.params.cedula;
+  Clientes.retrievePersonaCedula(cedula, function(err, per) {
+    if (err) return res.json(err);
+    return res.json(per);
+  });
+});
+
+router.get("/:rif", function(req, res) {
+  var rif = req.params.rif;
+  Clientes.retrieveEmpresaRif(rif, function(err, empre) {
+    if (err) return res.json(err);
+    return res.json(empre);
+  });
+});
 
 /*router.get("/:cedula", function(req, res) {
   var cedula = req.params.cedula;
@@ -34,9 +57,9 @@ router.post("/", function(req, res) {
   });
 });
 
-router.post("/empresas/", function(req, res) {
-  var cliente = req.body.cliente;
-  Clientes.insertEmpresa(cliente, function(err, result) {
+router.post("/empresas", function(req, res) {
+  var empresa = req.body.empresa;
+  Clientes.insertEmpresa(empresa, function(err, result) {
     if (err) return res.json(err);
     return res.json(result);
   });

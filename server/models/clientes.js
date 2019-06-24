@@ -26,6 +26,7 @@ class Clientes {
   }
 
   static insertEmpresa(empresa, callback) {
+    ("esta en el model ");
     db.query(
       "INSERT INTO empresa (nombre_empresa,rif,\
         fk_lugar,correo_empresa,telefono_empresa)\
@@ -38,6 +39,68 @@ class Clientes {
         empresa.telefono
       ],
 
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+  static retrieveEmpresa(callback) {
+    db.query(
+      "select e.nombre_empresa as nombre, e.rif as rif, e.correo_empresa as correo,e.telefono_empresa as telefono, \
+     uno.nombre_lugar as estado,dos.nombre_lugar as municipio ,tres.nombre_lugar as provincia  \
+    from empresa e,lugar uno, lugar dos, lugar tres\
+    where tres.id_lugar=e.fk_lugar and tres.fk_lugar=dos.id_lugar\
+    and dos.fk_lugar=uno.id_lugar",
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+  static retrieveEmpresaRif(rif,callback) {
+    db.query(
+      "select e.nombre_empresa as nombre, e.rif as rif, e.correo_empresa as correo,e.telefono_empresa as telefono, \
+     uno.nombre_lugar as estado,dos.nombre_lugar as municipio ,tres.nombre_lugar as provincia  \
+    from empresa e,lugar uno, lugar dos, lugar tres\
+    where tres.id_lugar=e.fk_lugar and tres.fk_lugar=dos.id_lugar\
+    and dos.fk_lugar=uno.id_lugar and e.rif=$1",
+    [rif],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+  static retrievePersona(callback) {
+    db.query(
+      "select e.nombre_persona as nombre,e.apellido_persona as apellido,\
+      e.cedula_identidad as cedula ,e.fecha_nacimiento as fnac, e.sexo as sexo, \
+      uno.nombre_lugar as estado,dos.nombre_lugar as municipio\
+      ,tres.nombre_lugar as provincia, e.correo_persona as correo,e.telefono_persona as telefono \
+      from Persona e,lugar uno, lugar dos, lugar tres\
+      where tres.id_lugar=e.fk_lugar and tres.fk_lugar=dos.id_lugar\
+      and dos.fk_lugar=uno.id_lugar",
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+  static retrievePersonaCedula(cedula,callback) {
+    db.query(
+      "select e.nombre_persona as nombre,e.apellido_persona as apellido,\
+      e.cedula_identidad as cedula ,e.fecha_nacimiento as fnac, e.sexo as sexo, \
+      uno.nombre_lugar as estado,dos.nombre_lugar as municipio\
+      ,tres.nombre_lugar as provincia, e.correo_persona as correo,e.telefono_persona as telefono \
+      from Persona e,lugar uno, lugar dos, lugar tres\
+      where tres.id_lugar=e.fk_lugar and tres.fk_lugar=dos.id_lugar\
+      and dos.fk_lugar=uno.id_lugar and e.cedula_identidad=$1",
+      [cedula],
       function(err, res) {
         if (err.error) return callback(err);
         callback(res);

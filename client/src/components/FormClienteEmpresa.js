@@ -294,9 +294,8 @@ class FormCliente extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-
               <div className="ci">
-                <label htmlFor="ci">rif:</label>
+                <label htmlFor="ci">Rif:</label>
                 <input
                   className=""
                   placeholder="Ingrese cédula"
@@ -307,7 +306,6 @@ class FormCliente extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-
               <div className="telefono">
                 <label htmlFor="telefono">Telefono:</label>
                 <input
@@ -320,7 +318,6 @@ class FormCliente extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-
               <div className="correo">
                 <label htmlFor="correo">Correo Electronico</label>
                 <input
@@ -332,7 +329,6 @@ class FormCliente extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-
               <div className="direccion">
                 <label htmlFor="direccion">Dirección</label>
                 <select
@@ -383,10 +379,9 @@ class FormCliente extends Component {
                   ))}
                 </select>
               </div>
-
               <div className="ingresarUsuario">
                 <button type="submit" onClick={this.handleAddEmpresa}>
-                  >Ingresar Empresa Cliente
+                  Ingresar Empresa Cliente
                 </button>
               </div>
             </form>
