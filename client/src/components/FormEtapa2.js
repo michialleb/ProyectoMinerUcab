@@ -46,7 +46,8 @@ class FormEtapa2 extends Component {
                     type="text"
                     name="nombreEtapa"
                     value={this.state.nombreEtapa}
-                    onChange={this.handleChange}/></div>
+                    onChange={this.handleChange}/>
+                    </div>
                 </div>
                 
               </div>

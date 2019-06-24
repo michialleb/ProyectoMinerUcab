@@ -58,7 +58,7 @@ class ConfiguracionProyecto extends Component {
         costo:costoFase,
         numeroFase:this.state.numeroFase,
         nombreProyecto:this.props.nombreProyecto,
-        numeroEtapa: this.state.numeroEtapa
+        numeroEtapa: (this.state.numeroEtapa -1)
       }
       console.log(fase);
       fetch("/api/fases", {

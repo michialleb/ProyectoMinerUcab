@@ -7,6 +7,8 @@ class FormCargosProyecto extends Component {
 
     this.state = {
         cargo:"",
+        salario:"",
+        cantidad:"",
         cargoList: [],
         cantidadCargoList:[]
     };
@@ -36,32 +38,48 @@ class FormCargosProyecto extends Component {
     e.preventDefault();
     let cargos = this.state.cargoList;
     let target = e.target;
-    let value = target.type === "checkbox" ? target.checked : target.value;
+    let value = target.value;
     let name = target.name;
-
+    let salario = target.salario;
+    console.log(value);
+    console.log(name);
+    console.log(salario);
     this.setState({
-      [name]: value
+      [name]: value,
+      salario: salario 
     });
-    if (cargos.indexOf(name) == -1) {
-      // revisar esto, podrias meter dos minerales iguales en un yacimiento
-      cargos.push(value);
-      this.setState({ cargoList: cargos });
+    let cargo={
+       tipo_cargo: this.state.cargo,
+       salario: this.state.salario
     }
+    cargos.push(cargo);
+    this.setState({ cargoList: cargos });
+    this.state.cargoList.map((cargo)=>{
+      console.log(cargo);
+    })
+   
   }
 
   handleChangeCantidad(e) {
     e.preventDefault();
-    let cantidades = this.state.cantidadCargoList;
+    let cargoCosto = this.state.cantidadCargoList;
     let target = e.target;
     let value = target.value;
     let name = target.name;
-
-    cantidades[name] = value;
-    this.setState({ cantidadCargoList: cantidades });
+     
+    this.setState({
+      cantidad: value
+    });
+    let cargoCantidad ={
+      tipo_cargo:  this.state.cargoList[name].tipo_cargo,
+      costo: parseInt ((this.state.cargoList[name].salario) * parseInt(value))
+    }
+    cargoCosto.push(cargoCantidad);
+    this.setState({ cantidadCargoList: cargoCosto});
   }
 
   onDelete(e) {
-    let cargos = this.state.cargoList;
+   /* let cargos = this.state.cargoList;
     let cantidades = this.state.cantidadcargoList;
     let target = e.target;
     let name = target.name;
@@ -76,7 +94,7 @@ class FormCargosProyecto extends Component {
     }
 
     this.setState({ cantidadCargoList: cantidades });
-    this.setState({ cargoList: cargos });
+    this.setState({ cargoList: cargos });*/
   }
 
   render() {
@@ -89,16 +107,20 @@ class FormCargosProyecto extends Component {
               <div>
               <select
                     name="cargo"
+                    nombre="salario"
                     value={this.state.cargo}
+                    salario={this.state.salario}
                     onChange={this.handleChangeCargo}
-                    >
+              >
                     <option />
                     {this.props.cargoList.map((cargo, i) => (
-                      <option value={cargo.tipo_cargo} key={i}>
+                      <option salario={cargo.salario_empleado}
+                              value={cargo.tipo_cargo} 
+                              key={i}>
                         {cargo.tipo_cargo}
                       </option>
                     ))}
-                  </select>
+              </select>
                   <table id="t01">
                     {this.state.cargoList.map((cargo, i) => {
                       return (
@@ -111,7 +133,7 @@ class FormCargosProyecto extends Component {
                               type="number"
                               name={i}
                               noValidate
-                              value={this.state.cantidadCargoList[i]}
+                              value={this.state.cantidad}
                               onChange={this.handleChangeCantidad}
                             />
                             <button

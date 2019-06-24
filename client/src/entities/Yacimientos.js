@@ -6,7 +6,6 @@ import FormEtapa from "../components/FormEtapa";
 export default class Yacimientos extends Component {
   constructor() {
     super();
-
     this.state = {
       yacimientosList: [],
       mineralList: [],
@@ -81,6 +80,7 @@ export default class Yacimientos extends Component {
     var cargos= this.state.cargosList;
     var maquinaria= this.state.maquinariaList;
     var lugares = this.state.lugarList;
+    
     var consult = {
       consult: ["Nombre", "Kilometros", "Direccion", "Status"]
     };
