@@ -7,7 +7,7 @@ export default class EmpresasAliadas extends Component {
     super();
 
     this.state = {
-      empresaAliadaList: ""
+      empresaAliadaList: []
     };
   }
 

@@ -5,7 +5,8 @@
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-/*  background-color: #258ea6;*/
+
+  /*  background-color: #258ea6;*/
 }
 
 .form-wrapper {
@@ -17,15 +18,14 @@
   border-radius: 10px;
   box-shadow: 0px 10px 50px #555;
   background-color: #ffffff;
+
 }
-#empresa,#persona{
-
+#empresa,
+#persona {
   margin-top: 20px;
-
 }
 .form {
   width: 100%;
-  display: flex;
   flex-wrap: wrap;
   margin-top: 5px;
 }
@@ -35,64 +35,108 @@ h5 {
   width: 100%;
   color: #111;
   font-weight: lighter;
-  
 }
 
-.firstname,.ci,.telefono,.nacimiento,.direccion,.secondName,.capacidad,.ubicacion, label {
+.firstname,
+.ci,
+.telefono,
+.nacimiento,
+.direccion,
+.secondName,
+.capacidad,
+.ubicacion,
+.correo label {
   font-size: 1em;
   margin-bottom: 0.25em;
   font-weight: lighter;
 }
 
-/*.firstname,.ci,.telefono,.nacimiento,.direccion*/ input {
+/*.firstname,.ci,.telefono,.nacimiento,.direccion*/
+input {
   padding: 1.5px 1.5px;
   border-radius: 5px;
   outline: none;
   border: 1px solid #cfcfcf;
 }
 
-.firstname,.ci,.telefono,.nacimiento,.direccion,.secondName,.capacidad,.ubicacion input::placeholder {
+.firstname,
+.ci,
+.telefono,
+.nacimiento,
+.direccion,
+.secondName,
+.capacidad,
+.correo,
+.ubicacion input::placeholder {
   font-size: 1em;
   font-weight: lighter;
 }
 
-.check .yes input{
+.check .yes input {
   margin-right: 2%;
 }
-.firstName,.cargo,.nacimiento ,.horario-act,.direccion,.status {
+.firstName,
+.cargo,
+.nacimiento,
+.horario-act,
+.direccion,
+.status,
+.lugares {
   margin-right: 1%;
 }
 
-.secondName .ci,.nacimiento,.telefono,.capacidad,.ubicacion,.direccion{
+.lugares {
+  margin: 3px;
+}
+.lugares.h1 {
+  display: flex;
+}
+
+.secondName .ci,
+.nacimiento,
+.telefono,
+.capacidad,
+.ubicacion,
+.correo,
+.sexo,
+.direccion .lugares {
   margin-left: 1%;
 }
 
 .firstName,
 .cargo,
+.sexo,
 .ci,
-.nacimiento,.telefono,.direccion,.horario-act,.secondName,.capacidad,.ubicacion,.ubicacionmin {
+.nacimiento,
+.telefono,
+.direccion,
+.horario-act,
+.secondName,
+.capacidad,
+.correo,
+.ubicacion .lugares {
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
   width: 48%;
 }
 
-.status{
+.status {
   font-size: 0.9em;
   width: 20%;
 }
-.status{
+.status {
   width: 25%;
 }
 
 /*.nacimiento {
   width: 100%;
 }*/
-.min-compra{
+.min-compra {
   display: flex;
   font-size: 0.9em;
 }
-.min-compra div{
+.min-compra div {
   width: 25%;
 }
 
@@ -119,58 +163,65 @@ h5 {
 .ingresarUsuario button:hover {
   color: orange;
   background-color: #333;
-  border: 2px solid #333 ;
+  border: 2px solid #333;
 }
 
-.bg-modal{
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    position: absolute;
-    top:0;
-    display: none;
-    justify-content: center;
-    align-items: center;
+.bg-modal {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
 }
-.modal-content{
+.modal-content {
   width: 200px;
   height: 500px;
   background-color: white;
-
 }
-#empresa{
+#empresa {
   display: none;
 }
 /*Form compra cliente*/
-.title-compra{
+.title-compra {
   padding-top: 20px;
   display: inline-flex;
 }
 
-#title{
+#title {
   font-size: 2em;
   width: 50%;
-  background: #F2994A;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #F2C94C, #F2994A);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #F2C94C, #F2994A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #f2994a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #f2c94c,
+    #f2994a
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #f2c94c,
+    #f2994a
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
   color: #fff;
   padding: 3.5px;
   border-radius: 0.3rem;
 }
-#compra{
+#compra {
   padding-top: 20px;
 }
-.infocompra{
+.infocompra {
   display: flex;
   width: 50%;
 }
 /*modal*/
-.modal{
+.modal {
   margin-top: 300px;
 }
-#t01 button{
-  margin-left:2px;
+#t01 button {
+  margin-left: 2px;
   padding: 4px;
   font-size: 1em;
   background-color: rgb(165, 39, 39);

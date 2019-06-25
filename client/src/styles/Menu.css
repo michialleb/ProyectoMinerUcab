@@ -1,7 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   padding: 0;
 }
+
 
 .header {
   position: fixed;
@@ -20,9 +26,9 @@ body {
   transition-duration: 0.3s;
 }
 .sidenav {
-  position: fixed;
+  position: absolute;
   border-left-color: black;
-  height: cover;
+  height: 1000em;
   background: #1b1e20;
   z-index: 3;
 }
@@ -109,6 +115,7 @@ body {
 }
 .account {
   margin-top: 50px;
+  border-top-style: green solid;
 }
 .account a {
   margin-left: 15px;
@@ -147,6 +154,7 @@ body {
   }
 
   .sidenav-show {
+    height: 400em;
     width: 250px;
     transition: 0.3s;
   }
