@@ -28,6 +28,7 @@
   width: 100%;
   flex-wrap: wrap;
   margin-top: 5px;
+  display:flex;
 }
 
 h5 {

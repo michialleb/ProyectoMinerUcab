@@ -71,7 +71,7 @@ class ConsultTable extends Component {
                 <td>{empleado.apellido}</td>
                 <td>{empleado.cedula}</td>
                 <td>{empleado.fnac}</td>
-                <td>{empleado.telefono}</td>
+            
                 <td>
                   {"Estado: " +
                     empleado.estado +
@@ -82,7 +82,7 @@ class ConsultTable extends Component {
                 </td>
                 <td>{empleado.sexo}</td>
                 <td>{empleado.cargo}</td>
-                <td>{empleado.correo}</td>
+          
               </tr>
             );
           })}

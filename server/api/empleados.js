@@ -20,7 +20,6 @@ router.get("/:cedula", function(req, res) {
 
 router.get("/empl/:id", function(req, res) {
   var id = req.params.id;
-  console.log("este es el id en api: " + id);
   Empleados.retrieveHorarioSalario(id, function(err, empleados) {
     if (err) return res.json(err);
     return res.json(empleados);
