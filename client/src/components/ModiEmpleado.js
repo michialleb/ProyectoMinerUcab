@@ -203,7 +203,7 @@ class Form extends Component {
                 <input
                   className=""
                   placeholder="xx/yy/zz"
-                  type="date"
+                  type="text"
                   name="fnac"
                   noValidate
                   value={this.state.fnac}

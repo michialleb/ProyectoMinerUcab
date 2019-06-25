@@ -114,11 +114,11 @@ class FormCompraCliente extends Component {
             </div>
             <form id="compra" className="form" noValidate>
               <div className="firstName">
-                <label htmlFor="firstName">Cantidad del Mineral:</label>
+                <label htmlFor="firstName">Mineral a comprar:</label>
                 <input
                   className=""
                   id="cant"
-                  placeholder="Ingrese la cantidad de minerales"
+                  placeholder="Seleccione el mineral"
                   type="number"
                   name="cantidad"
                   noValidate
