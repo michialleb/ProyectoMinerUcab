@@ -84,6 +84,7 @@ class FormCargosProyecto extends Component {
     });
     let cargoCantidad ={
       tipo_cargo:  this.state.cargoList[name].tipo_cargo,
+      cantidad: value,
       costo: parseInt ((this.state.cargoList[name].salario) * parseInt(value))
     }
 
