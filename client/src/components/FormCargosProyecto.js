@@ -7,9 +7,9 @@ class FormCargosProyecto extends Component {
 
     this.state = {
         cargo:"",
-        salario:"",
         cantidad:"",
         cargoList: [],
+        cantidadList: [],
         cantidadCargoList:[]
     };
     this.handleChange = this.handleChange.bind(this);
@@ -35,7 +35,6 @@ class FormCargosProyecto extends Component {
   }
 
   handleChangeCargo(e) {
-    e.preventDefault();
     let cargos = this.state.cargoList;
     let target = e.target;
     let value = target.value;
@@ -56,9 +55,16 @@ class FormCargosProyecto extends Component {
        tipo_cargo: value,
        salario: salarioCargo
     }
-    cargos.push(cargo);
-    this.setState({ cargoList: cargos });
-    this.state.cargoList.map((cargo)=>{
+     let repetido=false;
+     cargos.map((c)=> {
+       if (c.tipo_cargo=== value) repetido=true;
+    });
+    if (repetido===false){
+      cargos.push(cargo);
+      this.setState({ cargoList: cargos });
+    }
+   
+    this.state.cargoList.map((cargo) =>{
       console.log(cargo);
     })
    
@@ -66,11 +72,13 @@ class FormCargosProyecto extends Component {
 
   handleChangeCantidad(e) {
     e.preventDefault();
+    let cantidades=this.state.cantidadList;
     let cargoCosto = this.state.cantidadCargoList;
     let target = e.target;
     let value = target.value;
     let name = target.name;
-     
+
+    cantidades[name] = value;
     this.setState({
       cantidad: value
     });
@@ -78,27 +86,31 @@ class FormCargosProyecto extends Component {
       tipo_cargo:  this.state.cargoList[name].tipo_cargo,
       costo: parseInt ((this.state.cargoList[name].salario) * parseInt(value))
     }
+
+    console.log(cargoCantidad);
     cargoCosto.push(cargoCantidad);
     this.setState({ cantidadCargoList: cargoCosto});
   }
 
   onDelete(e) {
-   /* let cargos = this.state.cargoList;
-    let cantidades = this.state.cantidadcargoList;
+
+    let cargos = this.state.cargoList, cantidades=this.state.cantidadList;
     let target = e.target;
     let name = target.name;
-    let numero = target.numero;
-    var index = cargos.indexOf(name);
-    var index2 = cantidades.indexOf(numero);
-    if (index > -1) {
-      cargos.splice(index, 1);
-    }
-    if (index > -1) {
-      cantidades.splice(index2, 1);
-    }
+    let cargoEliminar;
+    let posicion;
+    cargos.map((c,i) =>{
+       if (c.tipo_cargo=== name){
+            cargoEliminar=c;
+            posicion=i;
+       }
+    });
 
-    this.setState({ cantidadCargoList: cantidades });
-    this.setState({ cargoList: cargos });*/
+    let index= cargos.indexOf(cargoEliminar);
+    cargos.splice(index, 1);
+    cantidades.splice(posicion,1);
+    this.setState({ cargoList: cargos });
+
   }
 
   render() {
@@ -128,20 +140,20 @@ class FormCargosProyecto extends Component {
                       return (
                         <tr key={i}>
                           <td>
-                            {cargo}
+                            {cargo.tipo_cargo}
+                    
                             <input
                               className=""
                               placeholder="Cantidad"
                               type="number"
                               name={i}
                               noValidate
-                              value={this.state.cantidad}
+                              value={this.state.cantidadList[i]}
                               onChange={this.handleChangeCantidad}
                             />
                             <button
-                              numero={i}
-                              name={cargo}
-                             // onClick={this.onDelete}
+                              name={cargo.tipo_cargo}
+                              onClick={this.onDelete}
                               >
                               Eliminar
                             </button>
