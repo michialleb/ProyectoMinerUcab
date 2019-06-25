@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
+import ConfiguracionProyecto from "../components/ConfiguracionProyecto";
 
 class FormYacimiento extends Component {
   constructor() {
@@ -9,8 +10,7 @@ class FormYacimiento extends Component {
       yacimientoList: [],
       nombre: "",
       direccion: "",
-      kilometros: "",
-
+      kilometros: 0,
       mineral: "",
       mineralList: [],
       cantidadList: [],
@@ -26,6 +26,7 @@ class FormYacimiento extends Component {
     this.handleChangeMineral = this.handleChangeMineral.bind(this);
     this.handleChangeCantidad = this.handleChangeCantidad.bind(this);
     this.handleIngresarYacimiento = this.handleIngresarYacimiento.bind(this);
+    this.handleIngresarMinerales = this.handleIngresarMinerales.bind(this);
     this.onDelete = this.onDelete.bind(this);
     this.getMunicipio = this.getMunicipio.bind(this);
     this.getProvincia = this.getProvincia.bind(this);
@@ -42,7 +43,7 @@ class FormYacimiento extends Component {
       [name]: value
     });
     console.log(minerales.indexOf(name));
-    if (minerales.indexOf(name) == -1) {
+    if (minerales.indexOf(name) === -1) {
       // revisar esto, podrias meter dos minerales iguales en un yacimiento
       minerales.push(value);
       this.setState({ mineralList: minerales });
@@ -119,41 +120,75 @@ class FormYacimiento extends Component {
     }
   };
 
-  handleIngresarYacimiento = () => {
+  handleIngresarYacimiento = (e) => {
+    e.preventDefault();
     this.handleAddYacimiento();
-    this.handleAddMineralYacimiento();
+  
   };
 
-  handleAddYacimiento = () => {
-    let yacimiento = this.state;
+  handleIngresarMinerales =(e)=> {
+    e.preventDefault();
+    this.generarProyectoE();
+    console.log('generando ory');
+   this.state.mineralList.map((mineral,i) => {
+      let mineral_yacimiento={
+        mineral:mineral,
+        cantidad: this.state.cantidadList[i],
+        nombre: this.state.nombre
+      }
+      this.handleAddMineralYacimiento(mineral_yacimiento);
+   })  
+    document.getElementById("form-yac").style.display="none";
+  }
+
+
+  handleAddYacimiento = (e) => {
     fetch("/api/yacimientos", {
       method: "post",
       headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ yacimiento: yacimiento })
+      body: JSON.stringify({ yacimiento:  this.state})
     }).then(res => res.json());
+    
   };
 
-  handleAddMineralYacimiento = () => {
-    let yacimientoMineral = this.state;
+  handleAddMineralYacimiento = (yacimiento) => {
     fetch("/api/mineralYacimiento", {
       method: "post",
       headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ yacimiento: yacimientoMineral })
+      body: JSON.stringify({ yacimiento: yacimiento})
     }).then(res => res.json());
   };
 
+  generarProyectoE (){
+    let proyecto ={
+      nombre: this.state.nombre,
+      duracion_proyecto: 0
+    }
+    console.log('generando proyecto');
+  fetch("/api/proyecto", {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ proyecto:  proyecto})
+    }).then(res => res.json());
+  };
+
+
+ 
+
   handleSubmit(e) {
     e.preventDefault();
-
     console.log("The form was submitted with the following data:");
     console.log(this.state);
   }
-
+componentDidMount(){}
+ 
   render() {
+    var cargoList=this.props.cargos;
+    var maquinariaList=this.props.maquinaria;
     return (
       <>
-        <div className="wrapper">
-          <div className="form-wrapper">
+        <div id="form-yac" className="wrapper">
+          <div  className="form-wrapper">
             <h5>Ingresar Yacimiento</h5>
             <form className="form" noValidate>
               <div className="firstName">
@@ -262,12 +297,10 @@ class FormYacimiento extends Component {
                               value={this.state.cantidadList[i]}
                               onChange={this.handleChangeCantidad}
                             />
-
                             <button
                               numero={i}
                               name={mineral}
-                              onClick={this.onDelete}
-                            >
+                              onClick={this.onDelete}>
                               x
                             </button>
                           </td>
@@ -275,8 +308,7 @@ class FormYacimiento extends Component {
                       );
                     })}
                   </table>
-                  {console.log(this.state.mineralList)}
-                  {console.log(this.state.cantidadList)}
+                
                 </div>
               </div>
               <div className="ingresarUsuario">
@@ -284,8 +316,20 @@ class FormYacimiento extends Component {
                   Ingresar Yacimiento
                 </button>
               </div>
+              <div className="ingresarUsuario">
+                <button type="submit" onClick={this.handleIngresarMinerales}>
+                  Ingresar Minerales
+                </button>
+              </div>
+              
             </form>
-          </div>
+          </div> 
+        </div>
+        <div id="form-etapa">
+        <ConfiguracionProyecto  nombreProyecto={"Proyecto "+ this.state.nombre}
+                   cargoList={cargoList} 
+                   maquinariaList={maquinariaList} 
+                   handleAddEtapa={this.handleAddEtapa}/>
         </div>
       </>
     );

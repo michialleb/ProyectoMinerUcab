@@ -44,12 +44,9 @@ export default class Clientes extends Component {
       consult: ["Mineral", "Presentación", "Cantidad"]
     };
     var crud = {
-      options: ["Ingresar", "Consultar ", "Eliminar ", "Modificar"],
+      options: [ "Minerales Disponibles"],
       content: [
-        {
-          form: "",
-          id: 0
-        },
+       
         {
           form: (
             <ConsultTableInventario
@@ -58,7 +55,7 @@ export default class Clientes extends Component {
               consult={consult}
             />
           ),
-          id: 1
+          id: 0
         }
       ]
     };

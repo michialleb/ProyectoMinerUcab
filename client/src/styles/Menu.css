@@ -7,9 +7,7 @@ body {
   margin: 0;
   padding: 0;
 }
-.menu{
-  position: flex;
-}
+
 
 .header {
   position: fixed;
@@ -28,7 +26,7 @@ body {
   transition-duration: 0.3s;
 }
 .sidenav {
-  position: fixed;
+  position: absolute;
   border-left-color: black;
   height: 1000em;
   background: #1b1e20;
@@ -156,7 +154,7 @@ body {
   }
 
   .sidenav-show {
-    height: 1000em;
+    height: 400em;
     width: 250px;
     transition: 0.3s;
   }
