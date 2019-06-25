@@ -30,7 +30,7 @@ class ConsultTable extends Component {
         id_empleado: empl.id
       });
     });
-
+  
     if (this.state.id_empleado != undefined && this.state.id_empleado != "")
       this.props.getHorarios(this.state.id_empleado);
   }
@@ -57,7 +57,7 @@ class ConsultTable extends Component {
             </button>
           </span>
         </div>
-
+        
         <table id="t01">
           <tr>
             {this.props.consult.consult.map((item, i) => (

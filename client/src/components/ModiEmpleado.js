@@ -216,7 +216,7 @@ class Form extends Component {
                 <input
                   className=""
                   placeholder="Ingrese nro telefónico"
-                  type="number"
+                  type="text"
                   name="telefono"
                   noValidate
                   value={this.state.telefono}
@@ -240,7 +240,7 @@ class Form extends Component {
                 <label htmlFor="direccion">Dirección</label>
                 <select
                   className="lugares"
-                  type="number"
+                  type="text"
                   name="estado2"
                   value={this.state.estado2}
                   onChange={this.handleChange}
@@ -255,7 +255,7 @@ class Form extends Component {
                 {this.buscarMunicipios(this.state.estado, this.state.estado2)}
                 <select
                   className="lugares"
-                  type="number"
+                  type="text"
                   name="municipio2"
                   value={this.state.municipio2}
                   onChange={this.handleChange}
@@ -273,7 +273,7 @@ class Form extends Component {
                 )}
                 <select
                   className="lugares"
-                  type="number"
+                  type="text"
                   name="fk_lugar"
                   value={this.state.fk_lugar}
                   onChange={this.handleChange}

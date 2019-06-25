@@ -1,22 +1,25 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
+import "../styles/ConsultTable.css";
+import { FaSistrix } from "react-icons/fa";
 
 class FormCompraCliente extends Component {
   constructor() {
     super();
     this.state = {
-        nombre:"Sutanito",
-        ci:11111,
-        cantidad:"",
-        fechaentrega:"",
-        mineral:"",
-        nombreMineral:[],
-        1:"",
-        2:""
-
-      };
-      this.handleChange=this.handleChange.bind(this);
-      this.add=this.add.bind(this);
+      nombre: "",
+      apellido: "",
+      ci: "",
+      cantidad: "",
+      fechaentrega: "",
+      mineral: "",
+      nombreMineral: [],
+      1: "",
+      2: ""
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleGetCliente = this.handleGetCliente.bind(this);
+    this.add = this.add.bind(this);
   }
   handleChange(e) {
     let target = e.target;
@@ -27,54 +30,89 @@ class FormCompraCliente extends Component {
       [name]: value
     });
   }
-  /*<label htmlFor="cargo">Cargo</label>
-  <select name="fk_cargo" id="selected" value={this.state.fk_cargo} onChange={this.handleChange}>
-    <option></option>
-    {this.props.cargos.map((cargo, i) => (
-      <option value={cargo.id_cargo} key={i}>{cargo.tipo_cargo}</option>
-    ))}
-  </select>*/
-  add =(cantidad)=>{
-    let inputs=[]
-    //document.getElementById("cant").readOnly=true;
-    /*for(let j=1;j<=cantidad;j++){
-      this.setState({nombreMineral:[this.state.nombreMineral[j],j]});
-    }
-    console.log(this.state.nombreMineral);*/
-    for(let i=1;i<=cantidad;i++){
-        inputs.push(<div className="min-compra">
-            <div>
-              <label>Mineral {i}</label>
-              <select name='nombre' value={this.state.mineral} onChange={this.handleChange}>
-                <option></option>
-                {this.props.minerales.map((mineral,i) => (
-                  <option value={mineral.id_mineral} key={i}>{mineral.mineral_nombre} </option>
-                  
-                ))}
-               </select>
-             </div>
-            <div><label>Presentacion</label><input></input></div>
-            <div><label>Cantidad</label><input type="number"></input></div>
-            </div>)
+
+  handleGetCliente(e) {
+    this.props.getPersonaCedula(this.state.ci);
+    this.props.personas.map(persona => {
+      this.setState({
+        ci: persona.cedula,
+        nombre: persona.nombre,
+        apellido: persona.apellido
+      });
+    });
+  }
+
+  add = cantidad => {
+    let inputs = [];
+
+    for (let i = 1; i <= cantidad; i++) {
+      inputs.push(
+        <div className="min-compra">
+          <div>
+            <label>Mineral {i}</label>
+            <select
+              name="nombre"
+              value={this.state.mineral}
+              onChange={this.handleChange}
+            >
+              <option />
+              {this.props.minerales.map((mineral, i) => (
+                <option value={mineral.id_mineral} key={i}>
+                  {mineral.mineral_nombre}{" "}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label>Presentacion</label>
+            <input />
+          </div>
+          <div>
+            <label>Cantidad</label>
+            <input type="number" />
+          </div>
+        </div>
+      );
     }
     return inputs;
-  }
+  };
   render() {
     return (
       <>
         <div className="wrapper">
           <div className="form-wrapper">
             <div className="title-compra">
-            <div className="infocompra">
-            <label >Nombre: {this.state.nombre}</label>
-            <label>Ci: {this.state.ci}</label>
-            <label>Ci: {this.state.ci}</label>
-            <label>Ci: {this.state.ci}</label>
+              <div className="infocompra">
+                <div>
+                  <span className="searching">
+                    <input
+                      className="inp-search"
+                      type="text"
+                      placeholder="Ingrese nro de cédula"
+                      name="ci"
+                      value={this.state.ci}
+                      onChange={this.handleChange}
+                    />
+
+                    <button
+                      className="search"
+                      type="button"
+                      onClick={this.handleGetCliente}
+                    >
+                      {<FaSistrix />}
+                    </button>
+                  </span>
+                </div>
+
+                <td>Nombre: {this.state.nombre}</td>
+                <td>Apellido: {this.state.apellido}</td>
+                <td>Ci: {this.state.ci}</td>
+              </div>
+              <div>
+                
+              </div>
             </div>
-            <div><label id="title">Orden de Compra</label></div>
-            
-            </div>
-            <form id="compra"className="form" noValidate>
+            <form id="compra" className="form" noValidate>
               <div className="firstName">
                 <label htmlFor="firstName">Cantidad del Mineral:</label>
                 <input
@@ -101,9 +139,7 @@ class FormCompraCliente extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-             <div>
-                 {this.add(this.state.cantidad)}
-             </div>
+              <div>{this.add(this.state.cantidad)}</div>
               <div className="ingresarUsuario">
                 <button type="submit" onClick={this.handleAddMineral}>
                   Generar Compra

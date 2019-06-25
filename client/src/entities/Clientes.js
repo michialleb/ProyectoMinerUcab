@@ -16,6 +16,7 @@ export default class Clientes extends Component {
       empresaList: []
     };
   }
+
   handleGetPersonaCedula = cedula => {
     fetch(`/api/clientes/${cedula}`)
       .then(res => res.json())
@@ -31,7 +32,6 @@ export default class Clientes extends Component {
         this.setState({ empresaList: res.map(r => r) });
       });
   };
-
 
   getMineralesList = () => {
     fetch("/api/minerales")
@@ -49,7 +49,6 @@ export default class Clientes extends Component {
         this.setState({ lugarList });
       });
   };
-
 
   getPersonaList = () => {
     fetch(`/api/clientes/getPersona`)
@@ -93,7 +92,7 @@ export default class Clientes extends Component {
       ]
     };
     var consultaEmpresa = {
-      consultaEmpresa: ["Nombre", "Rif","Direccion", "Telefono", "Correo"]
+      consultaEmpresa: ["Nombre", "Rif", "Direccion", "Telefono", "Correo"]
     };
 
     var crud = {
@@ -110,8 +109,8 @@ export default class Clientes extends Component {
               consultaEmpresa={consultaEmpresa}
               personas={personas}
               empresas={empresas}
-              getPersonaCedula= {this.handleGetPersonaCedula}
-              getEmpresaRif = {this.handleGetEmpresaRif}
+              getPersonaCedula={this.handleGetPersonaCedula}
+              getEmpresaRif={this.handleGetEmpresaRif}
             />
           ),
           id: 1
@@ -125,7 +124,15 @@ export default class Clientes extends Component {
           id: 3
         },
         {
-          form: <FormCompraCliente minerales={minerales} />,
+          form: (
+            <FormCompraCliente
+              minerales={minerales}
+              personas={personas}
+              empresas={empresas}
+              getPersonaCedula={this.handleGetPersonaCedula}
+              getEmpresaRif={this.handleGetEmpresaRif}
+            />
+          ),
           id: 4
         }
       ],

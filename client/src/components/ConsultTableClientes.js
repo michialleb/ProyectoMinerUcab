@@ -17,14 +17,16 @@ class ConsultTableClientes extends Component {
   handleChange(e) {
     let target = e.target;
     let value = target.value;
+    let name = target.name;
 
     this.setState({
-      cedula: value
+      [name]: value
     });
   }
 
   handleGetPersona(e) {
     this.props.getPersonaCedula(this.state.cedula);
+    console.log(this.props.personas);
   }
 
   handleGetEmpresa(e) {
@@ -133,7 +135,7 @@ class ConsultTableClientes extends Component {
                 <button
                   className="search"
                   type="button"
-                  onClick={this.handleGetEmpresa}
+                  onClick={e => this.handleGetEmpresa(e)}
                 >
                   {<FaSistrix />}
                 </button>
