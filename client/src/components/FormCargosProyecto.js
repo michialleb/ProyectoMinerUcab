@@ -39,21 +39,22 @@ class FormCargosProyecto extends Component {
     let target = e.target;
     let value = target.value;
     let name = target.name;
-    let salarioCargo="";
+    let salarioCargo="", id_cargo;
     this.props.cargoList.map((cargo) =>{
       if ( cargo.tipo_cargo=== value){
-        salarioCargo= cargo.salario_empleado
+        salarioCargo= cargo.salario_empleado;
+        id_cargo= cargo.id_cargo;
       }
     });
-    console.log(value);
-    console.log(name);
-    console.log(salarioCargo);
     this.setState({
       [name]: value
     });
     let cargo={
        tipo_cargo: value,
-       salario: salarioCargo
+       salario: salarioCargo,
+       id_cargo: id_cargo,
+       cantidad:0,
+       costo:0
     }
      let repetido=false;
      cargos.map((c)=> {
@@ -64,42 +65,53 @@ class FormCargosProyecto extends Component {
       this.setState({ cargoList: cargos });
     }
    
-    this.state.cargoList.map((cargo) =>{
-      console.log(cargo);
-    })
-   
   }
 
   handleChangeCantidad(e) {
     e.preventDefault();
-    let cantidades=this.state.cantidadList;
-    let cargoCosto = this.state.cantidadCargoList;
-    let target = e.target;
-    let value = target.value;
-    let name = target.name;
+    let cantidades=this.state.cantidadList,
+     cargoCosto = this.state.cantidadCargoList,
+     target = e.target,
+     value = target.value,
+     name = target.name,
+    repetido= false;
 
     cantidades[name] = value;
     this.setState({
       cantidad: value
     });
-    let cargoCantidad ={
-      tipo_cargo:  this.state.cargoList[name].tipo_cargo,
-      cantidad: value,
-      costo: parseInt ((this.state.cargoList[name].salario) * parseInt(value))
+   
+    cargoCosto.map((cargo)=>{
+      if (cargo.tipo_cargo===this.state.cargoList[name].tipo_cargo){
+          repetido=true;
+      }
+    });
+    
+    if (repetido==false){
+      let cargoCantidad ={
+        id_cargo: this.state.cargoList[name].id_cargo,
+        tipo_cargo:  this.state.cargoList[name].tipo_cargo,
+        cantidad: value,
+        costo: parseInt ((this.state.cargoList[name].salario) * parseInt(value))
+      }
+      cargoCosto.push(cargoCantidad);
+    }else{
+       cargoCosto[name].costo=parseInt ((this.state.cargoList[name].salario) * parseInt(value));
+       cargoCosto[name].cantidad=value;
     }
-
-    console.log(cargoCantidad);
-    cargoCosto.push(cargoCantidad);
+  
+    
     this.setState({ cantidadCargoList: cargoCosto});
   }
 
   onDelete(e) {
 
-    let cargos = this.state.cargoList, cantidades=this.state.cantidadList;
-    let target = e.target;
-    let name = target.name;
-    let cargoEliminar;
-    let posicion;
+    let cargos = this.state.cargoList, cantidades=this.state.cantidadList,
+    target = e.target,
+    name = target.name,
+    cargoEliminar,
+    posicion;
+    
     cargos.map((c,i) =>{
        if (c.tipo_cargo=== name){
             cargoEliminar=c;
@@ -165,7 +177,9 @@ class FormCargosProyecto extends Component {
                   </table>
               </div>
               <div className="ingresarUsuario">
-                <button type="submit" onClick={this.props.handleIngresarMaquinaria}>
+             
+                <button type="submit" 
+                onClick={ (function (e) {this.props.handleIngresarMaquinaria(e,this.state.cantidadCargoList)}).bind(this)}>
                   Aceptar Cambios
                 </button>
               </div>

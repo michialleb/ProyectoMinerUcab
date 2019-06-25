@@ -19,4 +19,13 @@ router.post("/", function(req, res) {
   });
 });
 
+router.post("/cargoFase", function(req, res) {
+  var cargoFase = req.body.cargoFase;
+
+  Cargos.insertCargoFase(cargoFase, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
+
 module.exports = router;
