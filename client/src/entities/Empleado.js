@@ -3,6 +3,7 @@ import Menu from "../components/Menu";
 import Form from "../components/Form";
 import ConsultTable from "../components/ConsultTable";
 import ModiEmpleado from "../components/ModiEmpleado";
+import EliminarEmpleado from "../components/EliminarEmpleado";
 
 export default class Empleado extends Component {
   constructor() {
@@ -32,8 +33,16 @@ export default class Empleado extends Component {
       .then(res => {
         this.setState({ empleadoList: res.map(r => r) });
       });
+      console.log(this.state.empleadoList);
   };
-
+handlegetempleado = cedula =>{
+  fetch(`/api/empleados/${cedula}`)
+  .then(res => res.json())
+  .then(res => {
+    this.setState({ empleadolista: res.map(r => r) });
+  });
+  console.log(this.state.empleadolista);
+}
   getLugarList = () => {
     fetch("/api/lugar")
       .then(res => res.json())
@@ -60,7 +69,7 @@ export default class Empleado extends Component {
         this.setState({ empleadoList });
       });
   };
-
+//removeEmpleado =()=>{}
   componentDidMount() {
     this.getCargoList();
     this.getEmpleadoList();
@@ -68,7 +77,6 @@ export default class Empleado extends Component {
   }
 
   render() {
-    var empleado = this.state.empleado;
     var empleados = this.state.empleadoList;
     var cargos = this.state.cargoList;
     var lugares = this.state.lugarList;
@@ -112,8 +120,15 @@ export default class Empleado extends Component {
           id: 1
         },
         {
-          form: "",
-
+          form: (
+            <EliminarEmpleado
+              consult={consult}
+              empleados={empleados}
+              getEmpleado={this.handleGetEmpleado}
+              getHorarios={this.handleGetHorario}
+              horarios={horarios}
+            />
+          ),
           id: 2
         },
         {

@@ -221,6 +221,8 @@ CREATE TABLE Empleado (
     apellido_empleado VARCHAR(50) NOT NULL,
     fecha_nacimiento DATE NOT NULL, 
     sexo CHAR(1) NOT NULL,
+	correo_empleado varchar(50),
+	telefono_empleado integer,
     FK_Lugar INTEGER NOT NULL, 
     fk_cargo integer not null,
     CONSTRAINT fk_lugar_empleado FOREIGN KEY (FK_Lugar)
@@ -505,6 +507,7 @@ CREATE TABLE maquinaria (
 CREATE TABLE Maquinaria_Fase (
     id_maquinaria_fase serial,
     cantidad integer not null,
+	costo real not null,
     fk_fase integer not null,
     fk_maquinaria integer not null,
     CONSTRAINT pk_id_maq_fase PRIMARY KEY (id_maquinaria_fase)

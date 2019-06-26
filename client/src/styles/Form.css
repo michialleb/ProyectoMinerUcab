@@ -228,3 +228,13 @@ input {
   background-color: rgb(165, 39, 39);
   color: white;
 }
+/*Eliminar*/
+.btn-eliminar{
+  margin-top: 20px;
+  border-radius: 0.5em;
+  width: 100px;
+  padding:20px 20px;
+  border-color: black;
+  align-items: center;
+}
+

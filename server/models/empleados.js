@@ -19,6 +19,13 @@ class Empleados {
   }
   //fecha_nacimiento=$4, fk_lugar=$5, sexo=$6, fk_cargo=$7
   static update(empleado, callback) {
+    console.log(empleado.nombre);
+    console.log(empleado.apellido);
+    console.log(empleado.fnac);
+    console.log(empleado.fk_lugar);
+    console.log(empleado.sexo);
+    console.log(empleado.fk_cargo);
+    console.log(empleado.cedula);
     db.query(
       "UPDATE empleado set nombre_empleado=$1,apellido_empleado=$2,fecha_nacimiento=$3,fk_lugar=$4,\
        sexo=$5, fk_cargo=$6\
@@ -43,7 +50,7 @@ class Empleados {
     db.query(
       "select h.dia_de_semana as dia, h.hora_inicio as inicio, h.hora_salida as salida\
        from Horario h, horario_empleado he\
-      where he.fk_empl_horario_fase= (select efc.id_empleado_cargo_fase\
+        where he.fk_empl_horario_fase= (select efc.id_empleado_cargo_fase\
                                       from empleado_fase_cargo efc\
                                       where efc.fk_empleado =$1)\
       and he.fk_horario=h.id_horario",
@@ -93,5 +100,6 @@ class Empleados {
       }
     );
   }
+  /* */
 }
 module.exports = Empleados;

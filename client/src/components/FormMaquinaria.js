@@ -177,17 +177,20 @@ class FormMaquinaria extends Component {
                   </table>
               </div>
               <div className="ingresarUsuario">
-                <button type="submit" onClick={(function (e) {this.props.handleAceptarCambiosMaquinaria(e, this.state.cantidadMaquinariaList)}).bind(this)}>
+                <button type="submit" onClick={
+                  (function (e) {this.props.handleAceptarCambiosMaquinaria(e, this.state.cantidadMaquinariaList)}).bind(this)}>
                   Finalizar     
                 </button>
               </div>
               <div className="ingresarUsuario">
-                <button type="submit" onClick={  (function (e) {this.props.handleAgregarOtraEtapa(e, this.state.cantidadMaquinariaList)}).bind(this)}>
+                <button type="submit" 
+                onClick={  (function (e) {this.props.handleAgregarOtraEtapa(e, this.state.cantidadMaquinariaList)}).bind(this)}>
                   Agregar Otra Etapa 
                 </button>
               </div>
               <div className="ingresarUsuario">
-                <button type="submit" onClick={(function (e) {this.props.handleIngresarOtraFase(e, this.state.cantidadMaquinariaList)}).bind(this)}>
+                <button type="submit" 
+                onClick={(function (e) {this.props.handleIngresarOtraFase(e, this.state.cantidadMaquinariaList)}).bind(this)}>
                   Agregar Otra Fase
                 </button>
               </div>

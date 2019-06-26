@@ -8,7 +8,8 @@ class ConsultTable extends Component {
     this.state = {
       cedula: "",
       horario: "",
-      id_empleado: ""
+      id_empleado: "",
+      bool:false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleGetEmpleado = this.handleGetEmpleado.bind(this);
@@ -31,8 +32,14 @@ class ConsultTable extends Component {
       });
     });
 
-    if (this.state.id_empleado != undefined && this.state.id_empleado != "")
+    if (this.state.id_empleado != undefined && this.state.id_empleado != ""){
       this.props.getHorarios(this.state.id_empleado);
+      this.setState({bool:true});
+    }
+      if (this.state.id_empleado===""){
+        this.setState({bool:false})
+      }
+
   }
 
   render() {
@@ -87,25 +94,29 @@ class ConsultTable extends Component {
             );
           })}
         </table>
-
-        <table id="t02">
-          <label>Horario del empleado </label>
-          <tr>
-            <th>Dia de semana</th>
-            <th>Hora de inicio</th>
-            <th>Hora de salida</th>
-          </tr>
-
-          {this.props.horarios.map((horario, i) => {
-            return (
-              <tr key={i}>
-                <td>{horario.dia}</td>
-                <td>{horario.inicio}</td>
-                <td>{horario.salida}</td>
-              </tr>
-            );
-          })}
-        </table>
+          {this.state.bool?
+           <table id="t02">
+           <label>Horario del empleado </label>
+           <tr>
+             <th>Dia de semana</th>
+             <th>Hora de inicio</th>
+             <th>Hora de salida</th>
+           </tr>
+ 
+           {this.props.horarios.map((horario, i) => {
+             return (
+               <tr key={i}>
+                 <td>{horario.dia}</td>
+                 <td>{horario.inicio}</td>
+                 <td>{horario.salida}</td>
+               </tr>
+             );
+           })}
+         </table>
+         :
+         <div></div>
+        }
+       
       </>
     );
   }

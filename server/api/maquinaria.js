@@ -11,4 +11,13 @@ router.get("/", function(req, res) {
 
 });
 
+router.post("/maquinariaFase", function(req, res) {
+  var maquinariaFase = req.body.maquinariaFase;
+
+  Maquinaria.insertMaquinariaFase(maquinariaFase, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
+
 module.exports = router;

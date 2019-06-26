@@ -23,7 +23,6 @@ class ConfiguracionProyecto extends Component {
     this.handleIngresarMaquinaria = this.handleIngresarMaquinaria.bind(this);
     this.handleAgregarOtraEtapa = this.handleAgregarOtraEtapa.bind(this);
     this.handleAceptarCambiosMaquinaria = this.handleAceptarCambiosMaquinaria.bind(this);
-  
    
   }
   
@@ -75,7 +74,6 @@ class ConfiguracionProyecto extends Component {
  }
   addCargos (cargos){
       cargos.map((cargo,i)=>{
-        this.sumarCostoAFase(cargo.costo)
         let cargoFase={
             cantidad: cargo.cantidad,
             costo: cargo.costo,
@@ -91,6 +89,26 @@ class ConfiguracionProyecto extends Component {
           }).then(res => res.json());  
       });
      
+  }
+ 
+
+  addMaquinaria(maquinaria){
+    maquinaria.map((maquina,i)=>{
+        let maquinariaFase={
+            cantidad: maquina.cantidad,
+            costo: maquina.costo,
+            id_maquinaria: maquina.id_maquinaria,
+            numero_etapa: (this.state.numeroEtapa -1),
+            numero_fase: (this.state.numeroFase-1),
+            nombre_proyecto:this.props.nombreProyecto
+        }
+        console.log(maquina.id_maquinaria);
+      fetch("/api/maquinaria/maquinariaFase" ,{
+            method: "post",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({ maquinariaFase:  maquinariaFase})
+          }).then(res => res.json());  
+      }); 
   }
   /*Acciones de botones */
   handleIngresarFase(e, nombreEtapa){
@@ -127,6 +145,7 @@ class ConfiguracionProyecto extends Component {
 
   handleIngresarOtraFase(e, maquinaria){
     e.preventDefault();
+    this.addMaquinaria(maquinaria).bind(this); 
     document.getElementById("form_fase").style.display="block";
     document.getElementById("form_maquinaria").style.display="none";
 }
