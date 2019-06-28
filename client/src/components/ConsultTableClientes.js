@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../styles/ConsultTable.css";
-import { FaSistrix } from "react-icons/fa";
+import { MDBDataTable } from "mdbreact";
 
 class ConsultTableClientes extends Component {
   constructor(props) {
@@ -56,8 +56,143 @@ class ConsultTableClientes extends Component {
       document.getElementById("btn-e").style.color = "#333";
     }
   }
-
+  addButtom = empresas =>{
+    var emps = [];
+    this.props.empresas.map(emp => {
+      let e = {
+        nombre: emp.nombre,
+        rif: emp.rif,
+        telefono: emp.telefono,
+        correo: emp.correo,
+        direccion: emp.estado + ", " + emp.municipio + ", " + emp.provincia,
+        mas: (
+          <div className="horario">
+          <button>
+            {" "}
+            Ver más{" "}
+          </button>
+          </div>
+        )
+      };
+      emps.push(e);
+    });
+    return emps;
+  };
+  addBotton = personas => {
+    var pers = [];
+    this.props.personas.map(per => {
+      let e = {
+        nombre: per.nombre,
+        apellido: per.apellido,
+        cedula: per.cedula,
+        fnac: per.fnac,
+        sexo: per.sexo,
+        direccion: per.estado + ", " + per.municipio + ", " + per.provincia,
+        correo: per.correo,
+        telefono: per.telefono,
+        mas: (
+          <div className="horario">
+          <button>
+            {" "}
+            Ver más{" "}
+          </button>
+          </div>
+        )
+      };
+      pers.push(e);
+    });
+    return pers;
+  };
   render() {
+    const dataPersona = {
+      columns: [
+        {
+          label: "Nombre",
+          field: "nombre",
+          sort: "asc",
+          width: 150
+        },
+        {
+          label: "Apellido",
+          field: "apellido",
+          sort: "asc",
+          width: 150
+        },
+        {
+          label: "Sexo",
+          field: "sexo",
+          sort: "asc",
+          width: 100
+        },
+        {
+          label: "Cedula",
+          field: "cedula",
+          sort: "asc",
+          width: 200
+        },
+        {
+          label: "Fecha Nacimiento",
+          field: "fnac",
+          sort: "asc",
+          width: 200
+        },
+        {
+          label: "Correo",
+          field: "correo",
+          sort: "asc",
+          width: 200
+        }
+        ,
+        {
+          label: "Telefono",
+          field: "telefono",
+          sort: "asc",
+          width: 200
+        },
+        {
+          label: "Direccion",
+          field: "direccion",
+          sort: "asc",
+          width: 270
+        }
+      ],
+      rows: this.addBotton(this.props.personas).bind(this)
+    };
+    const dataEmpresa = {
+      columns: [
+        {
+          label: "Nombre",
+          field: "nombre",
+          sort: "asc",
+          width: 150
+        },
+        {
+          label: "RIF",
+          field: "rif",
+          sort: "asc",
+          width: 270
+        },
+        {
+          label: "Telefono",
+          field: "telefono",
+          sort: "asc",
+          width: 200
+        },
+        {
+          label: "Correo",
+          field: "correo",
+          sort: "asc",
+          width: 200
+        },
+        {
+          label: "Direccion",
+          field: "direccion",
+          sort: "asc",
+          width: 200
+        }
+      ],
+      rows: this.addButtom(this.props.empresas).bind(this)
+    };
     return (
       <>
         <div className="wrapper">
@@ -71,103 +206,16 @@ class ConsultTableClientes extends Component {
           </div>
 
           <div id="persona">
-            <div>
-              <span className="searching">
-                <input
-                  className="inp-search"
-                  type="search"
-                  placeholder="Ingrese nro de cédula del cliente"
-                  name="cedula"
-                  value={this.state.cedula}
-                  onChange={this.handleChange}
-                />
-                <button
-                  className="search"
-                  type="button"
-                  onClick={this.handleGetPersona}
-                >
-                  {<FaSistrix />}
-                </button>
-              </span>
+        
+              <MDBDataTable btn striped bordered hover data={dataPersona} />
+           </div>
+             <div id="empresa">
+      
+              <MDBDataTable btn striped bordered hover data={dataEmpresa} />
             </div>
 
-            <table id="t02">
-              <tr>
-                {this.props.consultaPersona.consultaPersona.map((item, i) => (
-                  <th key={i}>{item}</th>
-                ))}
-              </tr>
-              {this.props.personas.map((persona, i) => {
-                return (
-                  <tr key={i}>
-                    <td>{persona.nombre}</td>
-                    <td>{persona.apellido}</td>
-                    <td>{persona.cedula}</td>
-                    <td>{persona.fnac}</td>
-                    <td>{persona.telefono}</td>
-                    <td>
-                      {"Estado: " +
-                        persona.estado +
-                        ", Municipio: " +
-                        persona.municipio +
-                        ", Provincia: " +
-                        persona.provincia}
-                    </td>
-                    <td>{persona.sexo}</td>
-                    <td>{persona.correo}</td>
-                  </tr>
-                );
-              })}
-            </table>
-          </div>
-
-          <div id="empresa">
-            <div>
-              <span className="searching">
-                <input
-                  className="inp-search"
-                  type="search"
-                  placeholder="Ingrese nro de rif del cliente"
-                  name="rif"
-                  value={this.state.rif}
-                  onChange={this.handleChange}
-                />
-                <button
-                  className="search"
-                  type="button"
-                  onClick={e => this.handleGetEmpresa(e)}
-                >
-                  {<FaSistrix />}
-                </button>
-              </span>
-            </div>
-
-            <table id="t02">
-              <tr>
-                {this.props.consultaEmpresa.consultaEmpresa.map((item, i) => (
-                  <th key={i}>{item}</th>
-                ))}
-              </tr>
-              {this.props.empresas.map((empresa, i) => {
-                return (
-                  <tr key={i}>
-                    <td>{empresa.nombre}</td>
-                    <td>{empresa.rif}</td>
-                    <td>
-                      {"Estado: " +
-                        empresa.estado +
-                        ", Municipio: " +
-                        empresa.municipio +
-                        ", Provincia: " +
-                        empresa.provincia}
-                    </td>
-                    <td>{empresa.telefono}</td>
-                    <td>{empresa.correo}</td>
-                  </tr>
-                );
-              })}
-            </table>
-          </div>
+           
+         
         </div>
       </>
     );

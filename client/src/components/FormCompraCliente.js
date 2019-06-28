@@ -44,11 +44,13 @@ class FormCompraCliente extends Component {
         this.state.inventarioList.map((inventario) => {
           if ((inventario.mineral == this.state.mineral) &&  (inventario.cantidad >= this.state.cantidad)){
             this.setState({ mineralDisponible : !this.state.mineralDisponible});
+            console.log('entroooo , si hay')
           }
         });
       }
     })
   }
+
   handleChange(e) {
     e.preventDefault();
     let target = e.target;
@@ -93,7 +95,7 @@ class FormCompraCliente extends Component {
   handleGetCliente(e) {
     e.preventDefault();
     console.log(this.state.tipoCliente);
-    if ((this.state.tipoCliente = "Persona")) {
+    if ((this.state.tipoCliente =="Persona")) {
       this.props.getPersonaCedula(this.state.documento);
       this.props.personas.map(persona => {
         this.setState({
