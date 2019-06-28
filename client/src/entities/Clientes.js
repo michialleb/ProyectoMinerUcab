@@ -79,21 +79,6 @@ export default class Clientes extends Component {
     var lugares = this.state.lugarList;
     var personas = this.state.personaList;
     var empresas = this.state.empresaList;
-    var consultaPersona = {
-      consultaPersona: [
-        " Nombre",
-        "Apellido",
-        "Cedula",
-        "Nacimiento",
-        "Telefono",
-        "Direccion",
-        "Sexo",
-        "Correo"
-      ]
-    };
-    var consultaEmpresa = {
-      consultaEmpresa: ["Nombre", "Rif", "Direccion", "Telefono", "Correo"]
-    };
 
     var crud = {
       options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar", "Compra"],
@@ -105,12 +90,9 @@ export default class Clientes extends Component {
         {
           form: (
             <ConsultarCliente
-              consultaPersona={consultaPersona}
-              consultaEmpresa={consultaEmpresa}
               personas={personas}
               empresas={empresas}
-              getPersonaCedula={this.handleGetPersonaCedula}
-              getEmpresaRif={this.handleGetEmpresaRif}
+        
             />
           ),
           id: 1

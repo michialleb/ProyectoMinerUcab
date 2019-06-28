@@ -8,41 +8,24 @@ export default class Clientes extends Component {
     super();
 
     this.state = {
-      inventarioClienteList: [],
-      inventarioAliadoList: [],
       inventarioList: []
     };
   }
 
-  getInventarioCliente = () => {
-    fetch("/api/inventario/cliente")
+  getInventario = () => {
+    fetch("/api/inventario")
       .then(res => res.json())
       .then(res => {
-        this.setState({ inventarioClienteList: res.map(r => r) });
-        console.log(this.state.inventarioClienteList);
-      });
-  };
-
-  getInventarioAliado = () => {
-    fetch("/api/inventario/aliado")
-      .then(res => res.json())
-      .then(res => {
-        this.setState({ inventarioAliadoList: res.map(r => r) });
-        
+        this.setState({ inventarioList: res.map(r => r) });
+        console.log(this.state.inventarioList);
       });
   };
 
   componentDidMount() {
-    this.getInventarioCliente();
-    this.getInventarioAliado();
+    this.getInventario();
   }
 
   render() {
-    var inventarioCliente = this.state.inventarioClienteList;
-    var inventarioAliado = this.state.inventarioAliadoList;
-    var consult = {
-      consult: ["Mineral", "Presentación", "Cantidad"]
-    };
     var crud = {
       options: [ "Minerales Disponibles"],
       content: [
@@ -50,9 +33,7 @@ export default class Clientes extends Component {
         {
           form: (
             <ConsultTableInventario
-              inventarioCliente={inventarioCliente}
-              inventarioAliado={inventarioAliado}
-              consult={consult}
+              inventario={this.state.inventarioList}
             />
           ),
           id: 0

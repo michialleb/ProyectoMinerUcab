@@ -49,8 +49,8 @@ export default class Menu extends Component {
       },
       {
         icon: <FaBuilding />,
-        title: "Empresas Aliadas",
-        tipo: "/empresas"
+        title: "Proyectos",
+        tipo: "/proyectos"
       },
       {
         icon: <FaUser />,
