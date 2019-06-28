@@ -31,18 +31,17 @@ export default class Empleado extends Component {
     fetch(`/api/empleados/${cedula}`)
       .then(res => res.json())
       .then(res => {
+        this.setState({ empleado: res.map(r => r) });
+      });
+      console.log(this.state.empleado);
+  };
+  handleGetEmpleado = cedula => {
+    fetch(`/api/empleados/${cedula}`)
+      .then(res => res.json())
+      .then(res => {
         this.setState({ empleadoList: res.map(r => r) });
       });
-      console.log(this.state.empleadoList);
   };
-handlegetempleado = cedula =>{
-  fetch(`/api/empleados/${cedula}`)
-  .then(res => res.json())
-  .then(res => {
-    this.setState({ empleadolista: res.map(r => r) });
-  });
-  console.log(this.state.empleadolista);
-}
   getLugarList = () => {
     fetch("/api/lugar")
       .then(res => res.json())
@@ -60,13 +59,26 @@ handlegetempleado = cedula =>{
         this.setState({ cargoList });
       });
   };
+deleteEmpleado = ced =>{
+
+  console.log(ced)
+  console.log(ced+'id de diego 0')
+  fetch(`/api/empleados/${ced}`, {method: 'DELETE'})
+  .then(res => res.json())
+  .then(res => {
+   /* if (res.success) {
+      alert('Empleado eliminado');
+    } else {alert('No eliminado')}*/
+  });
+}
 
   getEmpleadoList = () => {
     fetch("/api/empleados")
       .then(res => res.json())
       .then(res => {
         var empleadoList = res.map(r => r);
-        this.setState({ empleadoList });
+          this.setState({ empleadoList });
+        
       });
   };
 //removeEmpleado =()=>{}
@@ -75,12 +87,12 @@ handlegetempleado = cedula =>{
     this.getEmpleadoList();
     this.getLugarList();
   }
-
   render() {
     var empleados = this.state.empleadoList;
     var cargos = this.state.cargoList;
     var lugares = this.state.lugarList;
     var horarios = this.state.horarioList;
+    var empleado= this.state.empleado;
     var consult = {
       consult: [
         "Nombre",
@@ -112,6 +124,7 @@ handlegetempleado = cedula =>{
             <ConsultTable
               consult={consult}
               empleados={empleados}
+              empleado={empleado}
               getEmpleado={this.handleGetEmpleado}
               getHorarios={this.handleGetHorario}
               horarios={horarios}
@@ -124,9 +137,11 @@ handlegetempleado = cedula =>{
             <EliminarEmpleado
               consult={consult}
               empleados={empleados}
-              getEmpleado={this.handleGetEmpleado}
+              empleado={empleado}
+              getEmpleado={this.handleGetEmpleadoced}
               getHorarios={this.handleGetHorario}
               horarios={horarios}
+              eliminar={this.deleteEmpleado}
             />
           ),
           id: 2
@@ -139,6 +154,7 @@ handlegetempleado = cedula =>{
               empleado={empleados}
               lugares={lugares}
               getEmpleado={this.handleGetEmpleado}
+              
             />
           ),
           id: 3

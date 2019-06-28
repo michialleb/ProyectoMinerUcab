@@ -2,17 +2,24 @@ import React, { Component } from "react";
 import "../styles/ConsultTable.css";
 import { FaSistrix } from "react-icons/fa";
 import "../styles/Form.css";
+import InlineConfirmButton from "react-inline-confirm";
+
+
 class EliminarEmpleado extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super(); //props elimine
     this.state = {
       cedula: "",
       horario: "",
       id_empleado: "",
-      bool:false
+      bool:false,
+      empleado:[],
+      show:false
     };
+    
     this.handleChange = this.handleChange.bind(this);
     this.handleGetEmpleado = this.handleGetEmpleado.bind(this);
+    this.deleteEmpleado = this.deleteEmpleado.bind(this);
   }
 
   handleChange(e) {
@@ -23,17 +30,47 @@ class EliminarEmpleado extends Component {
       cedula: value
     });
   }
-
+  /*handleGetEmpleado = cedula => {
+    fetch(`/api/empleados/${cedula}`)
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ empleado: res.map(r => r) });
+      });
+      console.log(this.state.empleado);
+  };*/
   handleGetEmpleado(e) {
-    this.props.getEmpleado(this.state.cedula);
-    this.props.empleados.map(empl => {
+    e.preventDefault();
+  //  e.preventDefault();
+    //this.props.getEmpleado(this.state.cedula);
+    fetch(`/api/empleados/${this.state.cedula}`)
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ empleado: res.map(r => r) });
+      });
+    this.state.empleado.map(empl => {
       this.setState({
         id_empleado: empl.id
       });
     });
+   
     this.setState({bool:true})
+    
   }
-
+  deleteEmpleado (e,ced) {
+    e.preventDefault();
+    console.log(ced)
+    console.log(ced+'id de diego 0')
+    fetch(`/api/empleados/${ced}`, {method: 'DELETE'})
+    .then(res => res.json())
+    .then(res => {
+     /* if (res.success) {
+        alert('Empleado eliminado');
+      } else {alert('No eliminado')}*/
+    });
+   // alert('Empleado eliminado');
+    document.getElementById("t01").style.display="none";
+    document.getElementById("eliminado").style.display="block";
+  }
   
   render() {
     return (
@@ -51,12 +88,13 @@ class EliminarEmpleado extends Component {
             <button
               className="search"
               type="button"
-              onClick={this.handleGetEmpleado}
+              onClick={(function (e) {this.handleGetEmpleado(e)}).bind(this)}
             >
               {<FaSistrix />}
             </button>
           </span>
         </div>
+        
       {this.state.bool ?  
       
       <table id="t01">
@@ -65,7 +103,7 @@ class EliminarEmpleado extends Component {
           <th key={i}>{item}</th>
         ))}
       </tr>
-      {this.props.empleados.map((empleado, i) => {
+      {this.state.empleado.map((empleado, i) => {
         return (
           <tr key={i}>
             <td>{empleado.nombre}</td>
@@ -88,7 +126,8 @@ class EliminarEmpleado extends Component {
           </tr>
         );
       })}
-      <button className="btn-eliminar" > Eliminar Empleado </button>
+      
+      <button className="btn-eliminar" onClick={(function (e) {this.deleteEmpleado(e,this.state.id_empleado)}).bind(this)}> Eliminar Empleado </button>
     </table>      
     : 
     <div className="wrapper">
@@ -98,8 +137,10 @@ class EliminarEmpleado extends Component {
       </div>
         
       }  
-       
-
+       <div  id="eliminado" className="wrapper">
+          <div className="form-wrapper">
+            <h5>Empleado Eliminado!!!</h5></div></div>
+        
 
       </>
     );

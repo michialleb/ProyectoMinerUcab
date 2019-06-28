@@ -26,7 +26,7 @@ class ConsultTable extends Component {
 
   handleGetEmpleado(e) {
     this.props.getEmpleado(this.state.cedula);
-    this.props.empleados.map(empl => {
+    this.props.empleado.map(empl => {
       this.setState({
         id_empleado: empl.id
       });
@@ -39,7 +39,6 @@ class ConsultTable extends Component {
       if (this.state.id_empleado===""){
         this.setState({bool:false})
       }
-
   }
 
   render() {
@@ -89,6 +88,8 @@ class ConsultTable extends Component {
                 </td>
                 <td>{empleado.sexo}</td>
                 <td>{empleado.cargo}</td>
+                <td>{empleado.correo}</td>
+                <td>{empleado.telefono}</td>
           
               </tr>
             );

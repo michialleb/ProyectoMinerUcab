@@ -238,3 +238,6 @@ input {
   align-items: center;
 }
 
+#eliminado{
+  display: none;
+}

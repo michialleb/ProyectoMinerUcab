@@ -100,6 +100,19 @@ class Empleados {
       }
     );
   }
-  /* */
+
+   static delete(ced, callback) {
+    db.query(
+      `DELETE FROM empleado where id_empleado=${ced}`,
+      
+      console.log(ced + ' de diego'),
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+  
 }
 module.exports = Empleados;

@@ -31,12 +31,10 @@ export default class Clientes extends Component {
         
       });
   };
-
   componentDidMount() {
     this.getInventarioCliente();
     this.getInventarioAliado();
   }
-
   render() {
     var inventarioCliente = this.state.inventarioClienteList;
     var inventarioAliado = this.state.inventarioAliadoList;
@@ -45,8 +43,7 @@ export default class Clientes extends Component {
     };
     var crud = {
       options: [ "Minerales Disponibles"],
-      content: [
-       
+      content: [    
         {
           form: (
             <ConsultTableInventario
@@ -59,7 +56,6 @@ export default class Clientes extends Component {
         }
       ]
     };
-
     return <Menu crud={crud} />;
   }
 }

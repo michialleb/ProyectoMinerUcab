@@ -24,13 +24,22 @@ export default class EmpresasAliadas extends Component {
     fetch("/api/empresaAliada")
       .then(res => res.json())
       .then(res => {
-        var empresaAliadaList = res.map(r => r);
-        this.setState({ empresaAliadaList });
+        if(res.error)
+        {
+         console.log('errorrrrr');
+        }
+          else {
+            var empresaAliadaList = res.map(r => r);
+            this.setState({ empresaAliadaList });
+          }
+          
+
       });
   };
 
   componentDidMount() {
     this.getEmpresaAliada();
+    this.getempresaAliadaList();
   }
   render() {
     var empresaAliada = this.state.empresaAliadaList;

@@ -147,7 +147,12 @@ class FormYacimiento extends Component {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ yacimiento:  this.state})
-    }).then(res => res.json());
+    }).then(res => res.json())
+      .catch(function(error) {
+        console.log('errorrrrr');
+      });
+
+      
     
   };
 
@@ -156,7 +161,8 @@ class FormYacimiento extends Component {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ yacimiento: yacimiento})
-    }).then(res => res.json());
+    }).then(res => res.json())
+
   };
 
   generarProyectoE (){
@@ -165,11 +171,15 @@ class FormYacimiento extends Component {
       duracion_proyecto: 0
     }
     console.log('generando proyecto');
+    
   fetch("/api/proyecto", {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ proyecto:  proyecto})
-    }).then(res => res.json());
+    }).then(res => res.json())
+    .catch(function (error) {
+      console.log('Request failed', error);
+    });
   };
 
 

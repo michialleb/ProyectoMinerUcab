@@ -113,7 +113,7 @@ class Form extends Component {
   }
 
   handleGetEmpleado(e) {
-    e.preventDefault();
+    e.preventDefault()
     // this.setState(null);
     this.props.getEmpleado(this.state.cedulaBuscada);
     this.addInfoEmpleado(this.props.empleado);

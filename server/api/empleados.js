@@ -7,7 +7,8 @@ router.get("/", function(req, res) {
   Empleados.retrieveAll(function(err, empleados) {
     if (err) return res.json(err);
     return res.json(empleados);
-  });
+  })
+
 });
 
 router.get("/:cedula", function(req, res) {
@@ -43,12 +44,13 @@ router.post("/", function(req, res) {
   });
 });
 
-/*router.delete("/:cedula",function(req,res)){
-  var empleado = req.body.empleado;
-
-  Empleados.insert(empleado, function(err, result) {
+router.delete("/:ced",function(req,res) {
+  var ced = req.params.ced;
+  console.log(ced + ' de diego 1');
+  Empleados.delete(ced, function(err, result) {
     if (err) return res.json(err);
     return res.json(result);
   });
-}*/
+});
+
 module.exports = router;

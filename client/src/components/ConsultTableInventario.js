@@ -14,12 +14,11 @@ class ConsultTableInventario extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.desplegar = this.desplegar.bind(this);
   }
-
+  
   handleChange(e) {
     let target = e.target;
     let value = target.type === "checkbox" ? target.checked : target.value;
     let name = target.name;
-
     this.setState({
       [name]: value
     });
@@ -42,16 +41,12 @@ class ConsultTableInventario extends Component {
       var presentacion = this.props.inventarioCliente[i].presentacion;
       var cantidad = this.props.inventarioCliente[i].cantidad;
       inventarioLista.map(inventario => {
-        if (
-          inventario.mineral == mineral &&
-          inventario.presentacion == presentacion
-        ) {
-          inventario.cantidad =
-            parseInt(cantidad) + parseInt(inventario.cantidad);
+        if (inventario.mineral == mineral &&inventario.presentacion == presentacion) {
+          inventario.cantidad =parseInt(cantidad) + parseInt(inventario.cantidad);
           repetido = true;
         }
       });
-      if (repetido == false) {
+      if (repetido === false) {
         inventarioLista.push(this.props.inventarioCliente[i]);
       }
     }
