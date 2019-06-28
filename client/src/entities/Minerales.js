@@ -58,8 +58,6 @@ export default class Minerales extends Component {
           form: (
             <ConsultTableMinerales
               minerales={minerales}
-              consult={consult}
-              getMineral={this.getMineral}
             />
           ),
           id: 1

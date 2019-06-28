@@ -1,69 +1,64 @@
 import React, { Component } from "react";
 import "../styles/ConsultTable.css";
 import { FaSistrix } from "react-icons/fa";
+import { MDBDataTable, MDBBtn } from "mdbreact";
 
 class ConsultTableMinerales extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      activeTab: 0,
-      nombre: ""
-    };
-
-    this.handleChange = this.handleChange.bind(this);
+  
   }
 
-  handleChange(e) {
-    let target = e.target;
-    let value = target.value;
-
-    this.setState({
-      nombre: value
+  addBotton = minerales => {
+    var mineral = [];
+    this.props.minerales.map(min => {
+      let m = {
+        nombre: min.nombre_mineral,
+        tipo: min.tipo_mineral,
+        valor: min.valor_economico,
+        ver_mas: (
+               <button
+                       onClick={function(e) {
+                       this.handleGetInfo(min.id_mineral);
+                       }.bind(this)}  >  Ver más 
+             </button>
+        )
+      };
+      mineral.push(m);
     });
-  }
+    return mineral;
+  };
 
   render() {
+
+    const data = {
+      columns: [
+        {
+          label: "Nombre",
+          field: "nombre",
+          sort: "asc",
+          width: 150
+        },
+        {
+          label: "Tipo",
+          field: "tipo",
+          sort: "asc",
+          width: 270
+        },
+        {
+          label: "valor",
+          field: "valor",
+          sort: "asc",
+          width: 200
+        }
+      ],
+      rows: this.addBotton(this.props.minerales)
+    };
     return (
       <>
-        <div>
-          <span className="searching">
-            <input
-              className="inp-search"
-              type="search"
-              placeholder="Ingrese mineral"
-              name="nombreMineral"
-              value={this.state.nombre}
-              onChange={this.handleChange}
-            />
-            <button
-              className="search"
-              type="button"
-              onClick={this.props.getMineral(this.state.nombre)}
-            >
-              {<FaSistrix />}
-            </button>
-          </span>
-        </div>
-        <table id="t01">
-          <tr>
-            {this.props.consult.consult.map((item, i) => (
-              <th key={i}>{item}</th>
-            ))}
-          </tr>
-          {this.props.minerales.map((mineral, i) => {
-            return (
-              <tr key={i}>
-                <td>{mineral.nombre_mineral}</td>
-                <td>{mineral.tipo_mineral}</td>
-                <td>{mineral.valor_economico}</td>
-                <td>{mineral.descripcion_mineral}</td>
-                <td>{mineral.industria_mineral}</td>
-                <td>{mineral.fecha_inicio_mineral}</td>
-                <td>{mineral.fecha_nacionalizacion_mineral}</td>
-              </tr>
-            );
-          })}
-        </table>
+      <div>
+          <MDBDataTable btn striped bordered hover data={data} />
+      </div>
       </>
     );
   }
