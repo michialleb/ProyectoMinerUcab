@@ -26,7 +26,7 @@ export default class Clientes extends Component {
   };
 
   handleGetEmpresaRif = rif => {
-    fetch(`/api/clientes/${rif}`)
+    fetch(`/api/clientes/empresa/${rif}`)
       .then(res => res.json())
       .then(res => {
         this.setState({ empresaList: res.map(r => r) });

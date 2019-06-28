@@ -23,9 +23,10 @@ router.get("/:cedula", function(req, res) {
     if (err) return res.json(err);
     return res.json(per);
   });
+
 });
 
-router.get("/:rif", function(req, res) {
+router.get("/empresa/:rif", function(req, res) {
   var rif = req.params.rif;
   Clientes.retrieveEmpresaRif(rif, function(err, empre) {
     if (err) return res.json(err);

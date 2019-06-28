@@ -32,6 +32,7 @@ class Inventario {
       and pe.id_presentacion = mp.fk_presentacion \
       and (mp.id_mineral_presentacion = aliado.mpa);",
       function(err, res) {
+      
         if (err.error) return callback(err);
         callback(res);
       }

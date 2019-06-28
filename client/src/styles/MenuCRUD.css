@@ -13,9 +13,7 @@ body {
   margin-top: 30px;
   transition: 0.00000001s;
 }
-.demo-tabs {
-  width: 100%;
-}
+
 .options {
   color: white;
 }
@@ -23,18 +21,20 @@ body {
   margin-top: 30px;
   transition: 0.3s;
 }
-
+.section {
+  margin-left: 10%;
+  margin-right: 10%;
+  display: flex;
+  overflow: auto;
+}
 @media screen and (min-width: 768px) {
   .header-show .demo-tabs {
     margin-top: 85px;
-    margin-left: 15%;
-    width: 50%;
+
+    overflow: auto;
   }
   .header .demo-tabs {
     margin-top: 85px;
-    width: 50%;
-    margin-left: 15%;
-    width: 50%;
   }
 }
 

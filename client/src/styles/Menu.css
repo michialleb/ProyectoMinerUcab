@@ -8,11 +8,10 @@ body {
   padding: 0;
 }
 
-
 .header {
   position: fixed;
   height: 65px;
-  width: 100%;
+  width: 90%;
   z-index: 4;
   background-color: orange;
 }
@@ -28,7 +27,7 @@ body {
 .sidenav {
   position: absolute;
   border-left-color: black;
-  height: 1000em;
+  height: cover;
   background: #1b1e20;
   z-index: 3;
 }
@@ -65,7 +64,6 @@ body {
   color: #fff;
 }
 .sidenav-show {
-  height: fixed;
   width: 250px;
   transition-duration: 0.3s;
   padding-top: 30px;
