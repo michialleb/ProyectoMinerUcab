@@ -11,11 +11,9 @@ class ConsultTableEmpleado extends Component {
     super(props);
     this.state = {
       empl: [],
-      selected: false,
       horarioList: []
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.consultarHorarios = this.consultarHorarios.bind(this);
+
     this.handleGetHorario = this.handleGetHorario.bind(this);
   }
 
@@ -50,21 +48,6 @@ class ConsultTableEmpleado extends Component {
       });
     console.log(this.state.horarioList);
   };
-
-  handleChange(e) {
-    let target = e.target;
-    let value = target.value;
-    this.setState({
-      cedula: value
-    });
-  }
-  consultarHorarios(e, id) {
-    e.preventDefault();
-    console.log("seleccionee" + id);
-    this.handleGetHorario(id);
-    console.log(this.state.horarioList);
-    // this.setState({ consulta: !this.state.consulta });
-  }
 
   componentDidMount() {
     this.setState({ empl: this.props.empleados });

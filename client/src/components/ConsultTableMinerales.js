@@ -9,6 +9,10 @@ class ConsultTableMinerales extends Component {
   
   }
 
+  handleGetInfo=()=>{
+
+  }
+  
   addBotton = minerales => {
     var mineral = [];
     this.props.minerales.map(min => {
