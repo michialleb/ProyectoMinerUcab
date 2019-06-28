@@ -41,22 +41,12 @@ export default class Empleado extends Component {
       });
   };
 deleteEmpleado = ced =>{
-
   console.log(ced)
   console.log(ced+'id de diego 0')
   fetch(`/api/empleados/${ced}`, {method: 'DELETE'})
   .then(res => res.json())
-  .then(res => {
-   /* if (res.success) {
-      alert('Empleado eliminado');
-    } else {alert('No eliminado')}*/
-  
 
-  cambiarEmpleado(empleado) {
-    this.setState(state => {
-      return { empleadoList: empleado };
-    });
-  }
+}
   getEmpleadoList = () => {
     fetch("/api/empleados")
       .then(res => res.json())
