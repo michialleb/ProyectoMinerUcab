@@ -5895,3 +5895,21 @@ values (1,1,1,100000),
 (1,430,10,100000),
 (1,430,11,100000),
 /*65*/
+
+/*inventario query*/
+select todo.nom,todo.pre, sum(todo.sum)
+from 
+((Select M.nombre_mineral as nom, P.nombre_presentacion as pre, SUM(dca.Cantidad)
+FROM Mineral M 
+INNER JOIN Mineral_Presentacion MP ON M.id_mineral = MP.fk_mineral
+INNER JOIN Presentacion P ON P.ID_PRESENTACION = MP.FK_PRESENTACION
+INNER JOIN Compra_aliado DCa ON MP.id_mineral_presentacion = DCa.fk_mineral_presentacion
+Group BY M.nombre_mineral, P.nombre_presentacion)
+union all
+(Select M.nombre_mineral as nom, P.nombre_presentacion as pre, (-1)*SUM(dcc.Cantidad)
+FROM Mineral M 
+INNER JOIN Mineral_Presentacion MP ON M.id_mineral = MP.fk_mineral
+INNER JOIN Presentacion P ON P.ID_PRESENTACION = MP.FK_PRESENTACION
+INNER JOIN Compra_cliente DCc ON MP.id_mineral_presentacion = DCc.fk_mineral_presentacion
+Group BY M.nombre_mineral, P.nombre_presentacion) ) as todo 
+group by todo.nom,todo.pre

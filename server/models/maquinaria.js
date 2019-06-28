@@ -8,7 +8,6 @@ class Maquinaria {
       callback(res);
     });
   }
-<<<<<<< HEAD
 
   static insertMaquinariaFase(maquinariaFase, callback) {
     db.query(
@@ -38,8 +37,6 @@ class Maquinaria {
     );
   }
   
-=======
->>>>>>> diegucho
 }
 
 module.exports = Maquinaria;

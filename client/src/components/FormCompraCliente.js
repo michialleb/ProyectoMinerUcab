@@ -18,6 +18,7 @@ class FormCompraCliente extends Component {
       mineral: "",
       nombreMineral: [],
       tipoCliente: "",
+      presentaciones:[],
       1: "",
       2: ""
     };
@@ -26,6 +27,7 @@ class FormCompraCliente extends Component {
     this.Persona = this.Persona.bind(this);
     this.Empresa = this.Empresa.bind(this);
     this.add = this.add.bind(this);
+    this.getPresentacionList = this.getPresentacionList.bind(this);
   }
   handleChange(e) {
     e.preventDefault();
@@ -37,6 +39,19 @@ class FormCompraCliente extends Component {
       [name]: value
     });
   }
+
+  getPresentacionList = (nombreMineral) => {
+    fetch(`/api/minerales/presentacion/:${nombreMineral}`)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        var presentaciones = res.map(r => r);
+          this.setState({ presentaciones });
+        
+      });
+
+      console.log("estas son las presentaciones "+ this.state.presentaciones);
+  };
 
   Persona(e) {
     e.preventDefault();
@@ -109,10 +124,15 @@ class FormCompraCliente extends Component {
     }
     return inputs;
   };
+
+componentDidMount(){
+ this.getPresentacionList();
+}
+
   render() {
     return (
       <>
-        <div className="wrapper">
+        <div className="wrapper-c">
           <div className="titulo">
             <form className="form" noValidate>
               <h5 id="ordenTitulo">Orden de Compra</h5>
@@ -188,6 +208,24 @@ class FormCompraCliente extends Component {
                   {this.props.minerales.map((mineral, i) => (
                     <option value={mineral.nombre_mineral} key={i}>
                       {mineral.nombre_mineral}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="firstName">
+                <label>Presentacion: </label>
+                <select
+                  name="presentacion"
+                  value={this.state.presentacion}
+                  onChange={this.handleChange}
+                >
+                  {console.log("aca papi " +this.state.mineral)}
+                  <option />
+                  {this.getPresentacionList(this.state.mineral)}
+                  {this.state.presentaciones.map((presentacion, i) => (
+                    <option value={presentacion.nombre_presentacion} key={i}>
+                      {presentacion.nombre_presentacion}
                     </option>
                   ))}
                 </select>

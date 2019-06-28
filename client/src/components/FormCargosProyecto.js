@@ -39,24 +39,16 @@ class FormCargosProyecto extends Component {
     let target = e.target;
     let value = target.value;
     let name = target.name;
-<<<<<<< HEAD
     let salarioCargo="", id_cargo;
     this.props.cargoList.map((cargo) =>{
       if ( cargo.tipo_cargo=== value){
         salarioCargo= cargo.salario_empleado;
         id_cargo= cargo.id_cargo;
-=======
-    let salarioCargo = "";
-    this.props.cargoList.map(cargo => {
-      if (cargo.tipo_cargo === value) {
-        salarioCargo = cargo.salario_empleado;
->>>>>>> diegucho
       }
     });
     this.setState({
       [name]: value
     });
-<<<<<<< HEAD
     let cargo={
        tipo_cargo: value,
        salario: salarioCargo,
@@ -67,52 +59,27 @@ class FormCargosProyecto extends Component {
      let repetido=false;
      cargos.map((c)=> {
        if (c.tipo_cargo=== value) repetido=true;
-=======
-    let cargo = {
-      tipo_cargo: value,
-      salario: salarioCargo
-    };
-    let repetido = false;
-    cargos.map(c => {
-      if (c.tipo_cargo === value) repetido = true;
->>>>>>> diegucho
     });
     if (repetido === false) {
       cargos.push(cargo);
       this.setState({ cargoList: cargos });
     }
-<<<<<<< HEAD
    
-=======
-
-    this.state.cargoList.map(cargo => {
-      console.log(cargo);
-    });
->>>>>>> diegucho
   }
 
   handleChangeCantidad(e) {
     e.preventDefault();
-<<<<<<< HEAD
     let cantidades=this.state.cantidadList,
      cargoCosto = this.state.cantidadCargoList,
      target = e.target,
      value = target.value,
      name = target.name,
     repetido= false;
-=======
-    let cantidades = this.state.cantidadList;
-    let cargoCosto = this.state.cantidadCargoList;
-    let target = e.target;
-    let value = target.value;
-    let name = target.name;
->>>>>>> diegucho
 
     cantidades[name] = value;
     this.setState({
       cantidad: value
     });
-<<<<<<< HEAD
    
     cargoCosto.map((cargo)=>{
       if (cargo.tipo_cargo===this.state.cargoList[name].tipo_cargo){
@@ -150,31 +117,6 @@ class FormCargosProyecto extends Component {
             cargoEliminar=c;
             posicion=i;
        }
-=======
-    let cargoCantidad = {
-      tipo_cargo: this.state.cargoList[name].tipo_cargo,
-      cantidad: value,
-      costo: parseInt(this.state.cargoList[name].salario * parseInt(value))
-    };
-
-    console.log(cargoCantidad);
-    cargoCosto.push(cargoCantidad);
-    this.setState({ cantidadCargoList: cargoCosto });
-  }
-
-  onDelete(e) {
-    let cargos = this.state.cargoList,
-      cantidades = this.state.cantidadList;
-    let target = e.target;
-    let name = target.name;
-    let cargoEliminar;
-    let posicion;
-    cargos.map((c, i) => {
-      if (c.tipo_cargo === name) {
-        cargoEliminar = c;
-        posicion = i;
-      }
->>>>>>> diegucho
     });
 
     let index = cargos.indexOf(cargoEliminar);
@@ -232,16 +174,9 @@ class FormCargosProyecto extends Component {
                 </table>
               </div>
               <div className="ingresarUsuario">
-<<<<<<< HEAD
              
                 <button type="submit" 
                 onClick={ (function (e) {this.props.handleIngresarMaquinaria(e,this.state.cantidadCargoList)}).bind(this)}>
-=======
-                <button
-                  type="submit"
-                  onClick={this.props.handleIngresarMaquinaria}
-                >
->>>>>>> diegucho
                   Aceptar Cambios
                 </button>
               </div>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../styles/ConsultTable.css";
 import { FaSistrix } from "react-icons/fa";
 import "../styles/Form.css";
-import InlineConfirmButton from "react-inline-confirm";
+//import InlineConfirmButton from "react-inline-confirm";
 
 
 class EliminarEmpleado extends Component {

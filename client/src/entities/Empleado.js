@@ -3,11 +3,8 @@ import Menu from "../components/Menu";
 import Form from "../components/Form";
 import ConsultTable from "../components/ConsultTable";
 import ModiEmpleado from "../components/ModiEmpleado";
-<<<<<<< HEAD
 import EliminarEmpleado from "../components/EliminarEmpleado";
-=======
 import ConsultTableEmpleado from "../components/ConsultTableEmpleado";
->>>>>>> diegucho
 
 export default class Empleado extends Component {
   constructor() {
@@ -47,12 +44,7 @@ export default class Empleado extends Component {
       .then(res => {
         this.setState({ empleadoList: res.map(r => r) });
       });
-<<<<<<< HEAD
   };
-=======
-  };*/
-
->>>>>>> diegucho
   getLugarList = () => {
     fetch("/api/lugar")
       .then(res => res.json())
@@ -80,8 +72,7 @@ deleteEmpleado = ced =>{
    /* if (res.success) {
       alert('Empleado eliminado');
     } else {alert('No eliminado')}*/
-  });
-}
+  
 
   cambiarEmpleado(empleado) {
     this.setState(state => {
@@ -93,34 +84,22 @@ deleteEmpleado = ced =>{
       .then(res => res.json())
       .then(res => {
         var empleadoList = res.map(r => r);
-<<<<<<< HEAD
           this.setState({ empleadoList });
         
-=======
-        this.cambiarEmpleado(empleadoList);
-        //   this.setState({ empleadoList });
->>>>>>> diegucho
       });
   };
 //removeEmpleado =()=>{}
   componentDidMount() {
-    this.getCargoList();
+   // this.getCargoList();
     this.getEmpleadoList();
-    this.getLugarList();
+    //this.getLugarList();
   }
   render() {
-<<<<<<< HEAD
     var empleados = this.state.empleadoList;
     var cargos = this.state.cargoList;
     var lugares = this.state.lugarList;
     var horarios = this.state.horarioList;
     var empleado= this.state.empleado;
-=======
-   // var empleado = this.state.empleado;
-    var empleados = this.state.empleadoList;
-    var cargos = this.state.cargoList;
-    var lugares = this.state.lugarList;
->>>>>>> diegucho
     var consult = {
       consult: [
         "Nombre",
@@ -152,15 +131,10 @@ deleteEmpleado = ced =>{
 
             <ConsultTableEmpleado
               empleados={empleados}
-<<<<<<< HEAD
               empleado={empleado}
               getEmpleado={this.handleGetEmpleado}
               getHorarios={this.handleGetHorario}
               horarios={horarios}
-=======
-            //  getHorarios={this.getHorarios}
-              //horarios={this.state.horarioList}
->>>>>>> diegucho
             />
           ),
           id: 1
