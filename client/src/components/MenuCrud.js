@@ -25,7 +25,7 @@ export default class MenuCrud extends Component {
             </Tab>
           ))}
         </Tabs>
-        <section>
+        <section className="section">
           <div className="content">
             {this.props.crud.content.map(item => {
               if (item.id === this.state.activeTab) {

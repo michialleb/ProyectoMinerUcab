@@ -4,7 +4,7 @@ var express = require("express");
 class Empleados {
   static retrieveAll(callback) {
     db.query(
-      "select e.nombre_empleado as nombre,e.apellido_empleado as apellido,\
+      "select e.id_empleado as id, e.nombre_empleado as nombre,e.apellido_empleado as apellido,\
     e.cedula_identidad as cedula ,e.fecha_nacimiento as fnac, e.sexo as sexo, \
     c.tipo_cargo as cargo,uno.nombre_lugar as estado,dos.nombre_lugar as municipio\
     ,tres.nombre_lugar as provincia\

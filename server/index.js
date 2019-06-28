@@ -13,8 +13,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.use("/api/inventario", require("./api/inventario"));
 app.use("/api/usuarios", require("./api/usuarios"));
 app.use("/api/empleados", require("./api/empleados"));
+app.use("/api/clientes", require("./api/clientes"));
 app.use("/api/cargos", require("./api/cargos"));
 app.use("/api/lugar", require("./api/lugar"));
 app.use("/api/minerales", require("./api/minerales"));

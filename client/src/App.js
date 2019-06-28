@@ -7,6 +7,9 @@ import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import { Route, Switch } from "react-router-dom";
 import Nosotros from "./pages/Nosotros";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "bootstrap-css-only/css/bootstrap.min.css";
+import "mdbreact/dist/css/mdb.css";
 
 // pagina de react-router-dom and netlify https://www.slightedgecoder.com/2018/12/18/page-not-found-on-netlify-with-react-router/
 //  pagina de documentacion de react-router-dom https://reacttraining.com/react-router/web/guides/quick-start

@@ -52,7 +52,8 @@ class FormEtapa2 extends Component {
                 
               </div>
               <div className="ingresarUsuario">
-                <button type="submit" onClick={(function (e) {this.props.handleIngresarFase(e,this.state.nombreEtapa)}).bind(this)}>
+                <button type="submit"
+                 onClick={(function (e) {this.props.handleIngresarFase(e,this.state.nombreEtapa)}).bind(this)}>
                   Aceptar
                 </button>
               </div>

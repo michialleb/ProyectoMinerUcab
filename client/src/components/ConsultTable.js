@@ -6,7 +6,8 @@ class ConsultTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cedula: "",
+      empl: props.empleados,
+      cedula: 0,
       horario: "",
       id_empleado: "",
       bool:false
@@ -25,12 +26,22 @@ class ConsultTable extends Component {
   }
 
   handleGetEmpleado(e) {
+<<<<<<< HEAD
     this.props.getEmpleado(this.state.cedula);
     this.props.empleado.map(empl => {
+=======
+    let id;
+    console.log(this.state.cedula);
+
+    this.props.getEmpleado(parseInt(this.state.cedula));
+    this.props.empleados.map(empl => {
+      id = empl.nombre;
+>>>>>>> diegucho
       this.setState({
         id_empleado: empl.id
       });
     });
+<<<<<<< HEAD
 
     if (this.state.id_empleado != undefined && this.state.id_empleado != ""){
       this.props.getHorarios(this.state.id_empleado);
@@ -39,6 +50,10 @@ class ConsultTable extends Component {
       if (this.state.id_empleado===""){
         this.setState({bool:false})
       }
+=======
+    this.props.getHorarios(this.state.id_empleado);
+    console.log("est e es el id" + id);
+>>>>>>> diegucho
   }
 
   render() {

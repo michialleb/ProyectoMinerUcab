@@ -335,7 +335,7 @@ componentDidMount(){}
             </form>
           </div> 
         </div>
-        <div id="form-etapa">
+        <div id="form-etapa">\
         <ConfiguracionProyecto  nombreProyecto={"Proyecto "+ this.state.nombre}
                    cargoList={cargoList} 
                    maquinariaList={maquinariaList} 
