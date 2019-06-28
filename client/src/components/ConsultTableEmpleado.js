@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "../styles/ConsultTable.css";
 import { FaSistrix } from "react-icons/fa";
-import swal from "sweetalert";
+import swal from "@sweetalert/with-react";
+import ModalHorarios from "./ModalHorarios";
 
 import { MDBDataTable, MDBBtn } from "mdbreact";
 
@@ -10,11 +11,9 @@ class ConsultTableEmpleado extends Component {
     super(props);
     this.state = {
       empl: [],
-      consulta: false,
       horarioList: []
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.consultarHorarios = this.consultarHorarios.bind(this);
+
     this.handleGetHorario = this.handleGetHorario.bind(this);
   }
 
@@ -22,25 +21,33 @@ class ConsultTableEmpleado extends Component {
     fetch(`/api/empleados/empl/${id}`)
       .then(res => res.json())
       .then(res => {
-        console.log(res);
-        //  this.setState({ horarioList: res.map(r => r) });
-      });
-  };
+        if (res !== []) this.setState({ horarioList: res.map(r => r) });
+      })
+      .then(res => {
+        swal(
+          <table id="t02">
+            <label>Horario del empleado </label>
+            <tr>
+              <th>Dia de semana</th>
+              <th>Hora de inicio</th>
+              <th>Hora de salida</th>
+            </tr>
 
-  handleChange(e) {
-    let target = e.target;
-    let value = target.value;
-    this.setState({
-      cedula: value
-    });
-  }
-  consultarHorarios(e, id) {
-    e.preventDefault();
-    console.log("seleccionee" + id);
-    this.handleGetHorario(id);
+            {this.state.horarioList.map((horario, i) => {
+              return (
+                <tr key={i}>
+                  <td>{horario.dia}</td>
+                  <td>{horario.inicio}</td>
+                  <td>{horario.salida}</td>
+                </tr>
+              );
+            })}
+          </table>
+        );
+        // this.setState({ selected : !this.state.selected});
+      });
     console.log(this.state.horarioList);
-    // this.setState({ consulta: !this.state.consulta });
-  }
+  };
 
   componentDidMount() {
     this.setState({ empl: this.props.empleados });
@@ -63,14 +70,13 @@ class ConsultTableEmpleado extends Component {
           <div className="horario">
           <button 
             onClick={function(e) {
-              this.consultarHorarios(e, emp.id);
+              this.handleGetHorario(emp.id);
             }.bind(this)}
           >
             {" "}
             Horario{" "}
-          </button></div>
-        ),
-        id: emp.id
+          </button>
+        )
       };
       empl.push(e);
     });
@@ -145,37 +151,10 @@ class ConsultTableEmpleado extends Component {
       rows: this.addBotton(this.props.empleados)
     };
 
-    const selectRowProp = {
-      mode: "checkbox",
-
-      bgColor: "pink", // you should give a bgcolor, otherwise, you can't regonize which row has been selected
-
-      hideSelectColumn: true, // enable hide selection column.
-
-      clickToSelect: true // you should enable clickToSelect, otherwise, you can't select column.
-    };
-    const options = {
-      // ---------------------------------
-      // detects click on each row
-      //---------------------------------
-      onRowClick: function(row) {
-        console.log("holaa");
-      }
-    };
-
     return (
       <>
         <div>
-          <MDBDataTable
-            btn
-            striped
-            bordered
-            hover
-            data={data}
-            selectRow={selectRowProp}
-            options={options}
-          />
-          {console.log(this.state.consulta)}
+          <MDBDataTable btn striped bordered hover data={data} />
         </div>
       </>
     );

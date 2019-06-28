@@ -19,11 +19,19 @@ router.get("/:nombre", function(req, res) {
 });
 
 router.get("/presentacion/:nombreMineral", function(req, res) {
-  console.log("entro en el api con mineral")
-  var nombreMineral= req.params.nombreMineral;
+  console.log("entro en el api con mineral");
+  var nombreMineral = req.params.nombreMineral;
   Minerales.retrievePresentacion(nombreMineral, function(err, presentaciones) {
     if (err) return res.json(err);
     return res.json(presentaciones);
+  });
+});
+
+router.get("/mineralCompuesto/:id_mineral", function(req, res) {
+  var id_mineral = req.params.id_mineral;
+  Minerales.retrieveMineralCompuesto(id_mineral, function(err, minerales) {
+    if (err) return res.json(err);
+    return res.json(minerales);
   });
 });
 

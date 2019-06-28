@@ -14,7 +14,7 @@ import Empleado from "../entities/Empleado";
 import Yacimientos from "../entities/Yacimientos";
 import Inventario from "../entities/Inventario";
 import Clientes from "../entities/Clientes";
-import EmpresasAliadas from "../entities/EmpresasAliadas";
+import Proyectos from "../entities/Proyectos";
 import Minerales from "../entities/Minerales";
 import InfoRelevante from "../entities/InfoRelevante";
 class Login extends Component {
@@ -28,7 +28,7 @@ class Login extends Component {
             <Route path="/clientes" component={Clientes} />
             <Route path="/inventario" component={Inventario} />
             <Route path="/yacimientos" component={Yacimientos} />
-            <Route path="/empresas" component={EmpresasAliadas} />
+            <Route path="/proyectos" component={Proyectos} />
             <Route path="/minerales" component={Minerales} />
             <Route path="/info" component={InfoRelevante} />
 

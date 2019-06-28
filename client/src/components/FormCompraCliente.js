@@ -19,6 +19,8 @@ class FormCompraCliente extends Component {
       nombreMineral: [],
       tipoCliente: "",
       presentaciones:[],
+      inventarioList: [],
+      mineralDisponible: false,
       1: "",
       2: ""
     };
@@ -28,6 +30,24 @@ class FormCompraCliente extends Component {
     this.Empresa = this.Empresa.bind(this);
     this.add = this.add.bind(this);
     this.getPresentacionList = this.getPresentacionList.bind(this);
+  }
+ 
+  handleRevisarInventario = ()=> {
+    fetch(`/api/inventario`)
+    .then(res => res.json())
+    .then(res => {
+      var inventario = res.map(r => r);
+       this.setState({inventario});
+    })
+    .then(res => {
+      if (this.state.inventarioList && this.state.inventarioList.length){
+        this.state.inventarioList.map((inventario) => {
+          if ((inventario.mineral == this.state.mineral) &&  (inventario.cantidad >= this.state.cantidad)){
+            this.setState({ mineralDisponible : !this.state.mineralDisponible});
+          }
+        });
+      }
+    })
   }
   handleChange(e) {
     e.preventDefault();
