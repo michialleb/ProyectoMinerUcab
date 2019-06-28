@@ -22,8 +22,8 @@ class Inventario {
             ON  M.id_mineral = MP.fk_mineral  \
             INNER JOIN Presentacion P\
             ON P.ID_PRESENTACION =  MP.FK_PRESENTACION  \
-            INNER JOIN Compra_cliente DCc \
-            ON MP.id_mineral_presentacion  = DCc.fk_mineral_presentacion \
+            INNER JOIN Compra_cliente DCC \
+            ON MP.id_mineral_presentacion  = DCC.fk_mineral_presentacion \
             GROUP BY  M.nombre_mineral,  P.nombre_presentacion) )  AS todo \
             GROUP BY todo.nom,todo.pre ",
            function(err, res) {

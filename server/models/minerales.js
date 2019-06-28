@@ -2,10 +2,25 @@ const db = require("../database");
 var express = require("express");
 
 class Minerales {
+
+
   static retrieveNombre(nombre, callback) {
     db.query(
       "SELECT * FROM mineral WHERE nombre_mineral= $1",
       [nombre],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+  static retrieveMineralCompuesto(id_mineral, callback) {
+    db.query(
+      "select m.nombre_mineral as nombre from mineral m, mineral_mineral mm\
+       where  mm.fk_mineral_comp = m.id_mineral  \
+       and mm.fk_mineral = $1",
+      [id_mineral],
       function(err, res) {
         if (err.error) return callback(err);
         callback(res);
