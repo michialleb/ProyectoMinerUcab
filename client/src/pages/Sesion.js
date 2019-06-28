@@ -7,21 +7,18 @@ import {
   Switch
 } from "react-router-dom";
 import Menu from "../components/Menu";
-import Services from "../components/Services";
-import Minerales from "../components/Minerales";
-
+import Banner from "../components/Banner";
 class Sesion extends Component {
   render() {
     var crud = {
-      options: ["Ingresar Empleado", "Consultar Empleado", "Eliminar Empleado"],
+      options: [""],
       content: [
         {
-          form: <Minerales />,
+          form:  <Banner
+          banner="welcome"
+          title="Bienvenido"
+          subtitle="" />,
           id: 0
-        },
-        {
-          form: <Services />,
-          id: 1
         }
       ]
     };

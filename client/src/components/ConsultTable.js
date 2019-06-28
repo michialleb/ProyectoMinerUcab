@@ -9,7 +9,8 @@ class ConsultTable extends Component {
       empl: props.empleados,
       cedula: 0,
       horario: "",
-      id_empleado: ""
+      id_empleado: "",
+      bool:false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleGetEmpleado = this.handleGetEmpleado.bind(this);
@@ -35,6 +36,14 @@ class ConsultTable extends Component {
         id_empleado: empl.id
       });
     });
+
+    if (this.state.id_empleado != undefined && this.state.id_empleado != ""){
+      this.props.getHorarios(this.state.id_empleado);
+      this.setState({bool:true});
+    }
+      if (this.state.id_empleado===""){
+        this.setState({bool:false})
+      }
     this.props.getHorarios(this.state.id_empleado);
     console.log("est e es el id" + id);
   }
@@ -75,7 +84,7 @@ class ConsultTable extends Component {
                 <td>{empleado.apellido}</td>
                 <td>{empleado.cedula}</td>
                 <td>{empleado.fnac}</td>
-                <td>{empleado.telefono}</td>
+            
                 <td>
                   {"Estado: " +
                     empleado.estado +
@@ -87,29 +96,35 @@ class ConsultTable extends Component {
                 <td>{empleado.sexo}</td>
                 <td>{empleado.cargo}</td>
                 <td>{empleado.correo}</td>
+                <td>{empleado.telefono}</td>
+          
               </tr>
             );
           })}
         </table>
-
-        <table id="t02">
-          <label>Horario del empleado </label>
-          <tr>
-            <th>Dia de semana</th>
-            <th>Hora de inicio</th>
-            <th>Hora de salida</th>
-          </tr>
-
-          {this.props.horarios.map((horario, i) => {
-            return (
-              <tr key={i}>
-                <td>{horario.dia}</td>
-                <td>{horario.inicio}</td>
-                <td>{horario.salida}</td>
-              </tr>
-            );
-          })}
-        </table>
+          {this.state.bool?
+           <table id="t02">
+           <label>Horario del empleado </label>
+           <tr>
+             <th>Dia de semana</th>
+             <th>Hora de inicio</th>
+             <th>Hora de salida</th>
+           </tr>
+ 
+           {this.props.horarios.map((horario, i) => {
+             return (
+               <tr key={i}>
+                 <td>{horario.dia}</td>
+                 <td>{horario.inicio}</td>
+                 <td>{horario.salida}</td>
+               </tr>
+             );
+           })}
+         </table>
+         :
+         <div></div>
+        }
+       
       </>
     );
   }

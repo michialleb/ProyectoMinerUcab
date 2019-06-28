@@ -6,9 +6,11 @@ class FormMaquinaria extends Component {
     super();
 
     this.state = {
+        cantidadList :[],
         cantidadMaquinariaList: [],
         maquinariaList:[],
-        maquina:""
+        maquina:"",
+        cantidad:""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this); 
@@ -32,50 +34,95 @@ class FormMaquinaria extends Component {
     console.log(this.state);
   }
 
-  handleChangeCantidadMaquinaria(e){
-    e.preventDefault();
-    let cantidades = this.state.cantidadMaquinariaList;
+
+  handleChangeMaquina(e) {
+    let maquinas = this.state.maquinariaList;
     let target = e.target;
     let value = target.value;
     let name = target.name;
-    cantidades[name] = value;
-    this.setState({ cantidadMaquinariaList: cantidades });
-  }
-
-  handleChangeMaquina(e) {
-    e.preventDefault();
-    let maquinas = this.state.maquinariaList;
-    let target = e.target;
-    let value =  target.value;
-    let name = target.name;
-
+    let  costo_maquinaria="", id_maquinaria;
+    this.props.maquinariaList.map((maquina) =>{
+      if ( maquina.nombre_maquinaria=== value){
+        costo_maquinaria= maquina.costo_maquinaria;
+        id_maquinaria= maquina.id_maquinaria;
+      }
+    });
     this.setState({
       [name]: value
     });
-    if (maquinas.indexOf(name) == -1) {
-      // revisar esto, podrias meter dos minerales iguales en un yacimiento
-      maquinas.push(value);
+    let maquinaria={
+       nombre_maquinaria: value,
+       costo_maquinaria: costo_maquinaria,
+       id_maquinaria: id_maquinaria,
+       cantidad:0,
+       costo:0
+    }
+     let repetido=false;
+     maquinas.map((maquina)=> {
+       if (maquina.nombre_maquinaria=== value) repetido=true;
+    });
+    if (repetido===false){
+      maquinas.push(maquinaria);
       this.setState({ maquinariaList: maquinas });
     }
   }
 
 
-  onDeleteMaquina(e) {
-    let maquinas = this.state.maquinariaList;
-    let cantidades = this.state.cantidadMaquinariaList;
-    let target = e.target;
-    let name = target.name;
-    let numero = target.numero;
-    var index = maquinas.indexOf(name);
-    var index2 = cantidades.indexOf(numero);
-    if (index > -1) {
-      maquinas.splice(index, 1);
-    }
-    if (index > -1) {
-      cantidades.splice(index2, 1);
-    }
+  handleChangeCantidadMaquinaria(e){
+    e.preventDefault();
+    let cantidades=this.state.cantidadList,
+     maquinariaCosto = this.state.cantidadMaquinariaList,
+     target = e.target,
+     value = target.value,
+     name = target.name,
+     repetido= false;
 
-    this.setState({ cantidadMaquinariaList: cantidades });
+    cantidades[name] = value;
+    this.setState({
+      cantidad: value
+    });
+   
+    maquinariaCosto.map((maquina)=>{
+      if (maquina.nombre_maquinaria===this.state.maquinariaList[name].nombre_maquinaria){
+          repetido=true;
+      }
+    });
+    
+    if (repetido==false){
+      let maquinariaCantidad ={
+        id_maquinaria: this.state.maquinariaList[name].id_maquinaria,
+        nombre_maquinaria:  this.state.maquinariaList[name].nombre_maquinaria,
+        cantidad: value,
+        costo: parseInt ((this.state.maquinariaList[name].costo_maquinaria) * parseInt(value))
+      }
+      maquinariaCosto.push(maquinariaCantidad);
+    }else{
+       maquinariaCosto[name].costo=parseInt ((this.state.maquinariaList[name].costo_maquinaria) * parseInt(value));
+       maquinariaCosto[name].cantidad=value;
+    }
+  
+    
+    this.setState({ cantidadMaquinariaList: maquinariaCosto});
+    console.log(this.state.cantidadMaquinariaList);
+  }
+
+  onDeleteMaquina(e) {
+    let maquinas = this.state.maquinariaList, cantidades=this.state.cantidadList,
+    target = e.target,
+    name = target.name,
+    maquinaEliminar,
+    posicion;
+    
+    maquinas.map((m,i) =>{
+       if (m.costo_maquinaria === name){
+            maquinaEliminar=m;
+            posicion=i;
+       }
+    });
+
+    let index= maquinas.indexOf(maquinaEliminar);
+    maquinas.splice(index, 1);
+    cantidades.splice(posicion,1);
     this.setState({ maquinariaList: maquinas });
   }
 
@@ -107,19 +154,19 @@ class FormMaquinaria extends Component {
                       return (
                         <tr key={i}>
                           <td>
-                            {maquinaria}
+                            {maquinaria.nombre_maquinaria}
                             <input
                               className=""
                               placeholder="Cantidad"
                               type="number"
                               name={i}
                               noValidate
-                              value={this.state.cantidadMaquinariaList[i]}
+                              value={this.state.cantidadList[i]}
                               onChange={this.handleChangeCantidadMaquinaria}
                             />
                             <button
                               numero={i}
-                              name={maquinaria}
+                              name={maquinaria.nombre_maquinaria}
                               onClick={this.onDeleteMaquina}>
                               Eliminar
                             </button>
@@ -130,17 +177,20 @@ class FormMaquinaria extends Component {
                   </table>
               </div>
               <div className="ingresarUsuario">
-                <button type="submit" onClick={this.props.handleAceptarCambiosMaquinaria}>
-                  Finalizar 
+                <button type="submit" onClick={
+                  (function (e) {this.props.handleAceptarCambiosMaquinaria(e, this.state.cantidadMaquinariaList)}).bind(this)}>
+                  Finalizar     
                 </button>
               </div>
               <div className="ingresarUsuario">
-                <button type="submit" onClick={this.props.handleAgregarOtraEtapa}>
-                  Agregar Otra Etapa
+                <button type="submit" 
+                onClick={  (function (e) {this.props.handleAgregarOtraEtapa(e, this.state.cantidadMaquinariaList)}).bind(this)}>
+                  Agregar Otra Etapa 
                 </button>
               </div>
               <div className="ingresarUsuario">
-                <button type="submit" onClick={(function (e) {this.props.handleIngresarOtraFase(e)}).bind(this)}>
+                <button type="submit" 
+                onClick={(function (e) {this.props.handleIngresarOtraFase(e, this.state.cantidadMaquinariaList)}).bind(this)}>
                   Agregar Otra Fase
                 </button>
               </div>

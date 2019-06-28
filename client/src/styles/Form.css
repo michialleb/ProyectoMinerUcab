@@ -1,15 +1,27 @@
 .wrapper {
   height: 100vh;
+  width: 70%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 100px;
+  
+
+  /*  background-color: #258ea6;*/
+}
+.wrapper-c{
+  height: 100vh;
   width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+  margin-left: 100px;
   
 
   /*  background-color: #258ea6;*/
 }
-
 .form-wrapper {
   width: 100%;
   display: flex;
@@ -46,6 +58,7 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 5px;
+  display:flex;
 }
 
 h5 {
@@ -87,7 +100,7 @@ input {
 .capacidad,
 .tipoCliente,
 .correo,
-.ubicacion input::placeholder {
+.ubicacion,.searching input::placeholder {
   font-size: 1em;
   font-weight: lighter;
 }
@@ -249,4 +262,17 @@ input {
   font-size: 1em;
   background-color: rgb(165, 39, 39);
   color: white;
+}
+/*Eliminar*/
+.btn-eliminar{
+  margin-top: 20px;
+  border-radius: 0.5em;
+  width: 100px;
+  padding:20px 20px;
+  border-color: black;
+  align-items: center;
+}
+
+#eliminado{
+  display: none;
 }

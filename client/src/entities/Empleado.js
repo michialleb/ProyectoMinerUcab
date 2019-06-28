@@ -3,6 +3,7 @@ import Menu from "../components/Menu";
 import Form from "../components/Form";
 import ConsultTable from "../components/ConsultTable";
 import ModiEmpleado from "../components/ModiEmpleado";
+import EliminarEmpleado from "../components/EliminarEmpleado";
 import ConsultTableEmpleado from "../components/ConsultTableEmpleado";
 
 export default class Empleado extends Component {
@@ -22,7 +23,6 @@ export default class Empleado extends Component {
   }
 
 
-
   getLugarList = () => {
     fetch("/api/lugar")
       .then(res => res.json())
@@ -40,6 +40,17 @@ export default class Empleado extends Component {
         this.setState({ cargoList });
       });
   };
+deleteEmpleado = ced =>{
+
+  console.log(ced)
+  console.log(ced+'id de diego 0')
+  fetch(`/api/empleados/${ced}`, {method: 'DELETE'})
+  .then(res => res.json())
+  .then(res => {
+   /* if (res.success) {
+      alert('Empleado eliminado');
+    } else {alert('No eliminado')}*/
+  
 
   cambiarEmpleado(empleado) {
     this.setState(state => {
@@ -51,22 +62,22 @@ export default class Empleado extends Component {
       .then(res => res.json())
       .then(res => {
         var empleadoList = res.map(r => r);
-        this.cambiarEmpleado(empleadoList);
-        //   this.setState({ empleadoList });
+          this.setState({ empleadoList });
+        
       });
   };
-
+//removeEmpleado =()=>{}
   componentDidMount() {
-    this.getCargoList();
+   // this.getCargoList();
     this.getEmpleadoList();
-    this.getLugarList();
+    //this.getLugarList();
   }
-
   render() {
-   // var empleado = this.state.empleado;
     var empleados = this.state.empleadoList;
     var cargos = this.state.cargoList;
     var lugares = this.state.lugarList;
+    var horarios = this.state.horarioList;
+    var empleado= this.state.empleado;
     var consult = {
       consult: [
         "Nombre",
@@ -98,15 +109,26 @@ export default class Empleado extends Component {
 
             <ConsultTableEmpleado
               empleados={empleados}
-            //  getHorarios={this.getHorarios}
-              //horarios={this.state.horarioList}
+              empleado={empleado}
+              getEmpleado={this.handleGetEmpleado}
+              getHorarios={this.handleGetHorario}
+              horarios={horarios}
             />
           ),
           id: 1
         },
         {
-          form: "",
-
+          form: (
+            <EliminarEmpleado
+              consult={consult}
+              empleados={empleados}
+              empleado={empleado}
+              getEmpleado={this.handleGetEmpleadoced}
+              getHorarios={this.handleGetHorario}
+              horarios={horarios}
+              eliminar={this.deleteEmpleado}
+            />
+          ),
           id: 2
         },
         {
@@ -117,6 +139,7 @@ export default class Empleado extends Component {
               empleado={empleados}
               lugares={lugares}
               getEmpleado={this.handleGetEmpleado}
+              
             />
           ),
           id: 3

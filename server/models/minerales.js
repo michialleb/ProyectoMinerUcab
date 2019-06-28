@@ -13,6 +13,25 @@ class Minerales {
     );
   }
 
+  static retrievePresentacion(nombreMineral, callback) {
+    console.log("entro al  model con nombre: "+ nombreMineral);
+    db.query(
+      "select p.nombre_presentacion \
+      from presentacion p, mineral m, mineral_presentacion mp\
+      where mp.fk_mineral = (select m.id_mineral from mineral m\
+                             where m.nombre_mineral=$1)\
+      and mp.fk_presentacion= p.id_presentacion\
+      group by p.nombre_presentacion",
+      [nombreMineral],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+
+
   static retrieveAll(callback) {
     db.query("SELECT * FROM mineral", function(err, res) {
       if (err.error) return callback(err);

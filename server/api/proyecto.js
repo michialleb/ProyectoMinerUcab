@@ -14,7 +14,7 @@ router.post("/", function(req, res) {
   var proyecto = req.body.proyecto;
 
   Proyecto.insert(proyecto, function(err, result) {
-    if (err) return res.json(err);
+    if (err) return res.status(404).json('oh nooooo');
     return res.json(result);
   });
   
