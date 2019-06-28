@@ -60,14 +60,15 @@ class ConsultTableEmpleado extends Component {
         correo: emp.correo,
         telefono: emp.telefono,
         horario: (
-          <button
+          <div className="horario">
+          <button 
             onClick={function(e) {
               this.consultarHorarios(e, emp.id);
             }.bind(this)}
           >
             {" "}
             Horario{" "}
-          </button>
+          </button></div>
         ),
         id: emp.id
       };

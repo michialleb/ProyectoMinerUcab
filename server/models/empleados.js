@@ -66,7 +66,7 @@ class Empleados {
     db.query(
       "select e.id_empleado as id, e.nombre_empleado as nombre,e.apellido_empleado as apellido,\
       e.cedula_identidad as cedula ,e.fecha_nacimiento as fnac, e.sexo as sexo, \
-      c.tipo_cargo as cargo, c.salario_empleado as salario, \
+      c.tipo_cargo as cargo, c.salario_empleado as salario, e.telefono_empleado as telefono,e.correo_empleado as correo,\
       uno.nombre_lugar as estado,dos.nombre_lugar as municipio,tres.nombre_lugar as provincia\
       from empleado e,cargo c,lugar uno, lugar dos, lugar tres\
       where e.fk_cargo=c.id_cargo and e.cedula_identidad=$1 and tres.id_lugar=e.fk_lugar and tres.fk_lugar=dos.id_lugar\

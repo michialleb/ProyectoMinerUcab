@@ -18,7 +18,7 @@ router.get("/:nombre", function(req, res) {
   });
 });
 
-router.get("presentacion/:nombreMineral", function(req, res) {
+router.get("/presentacion/:nombreMineral", function(req, res) {
   console.log("entro en el api con mineral")
   var nombreMineral= req.params.nombreMineral;
   Minerales.retrievePresentacion(nombreMineral, function(err, presentaciones) {

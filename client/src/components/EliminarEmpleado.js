@@ -51,6 +51,7 @@ class EliminarEmpleado extends Component {
       this.setState({
         id_empleado: empl.id
       });
+      console.log(this.state.id_empleado)
     });
    
     this.setState({bool:true})
@@ -122,7 +123,8 @@ class EliminarEmpleado extends Component {
             
             <td>{empleado.sexo}</td>
             <td>{empleado.cargo}</td>
-      
+            <td>{empleado.correo}</td>
+            <td>{empleado.telefono}</td>
           </tr>
         );
       })}

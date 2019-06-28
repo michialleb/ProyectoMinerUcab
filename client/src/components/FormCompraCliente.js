@@ -39,6 +39,8 @@ class FormCompraCliente extends Component {
       [name]: value
     });
   }
+  
+  
 
   getPresentacionList = (nombreMineral) => {
     fetch(`/api/minerales/presentacion/:${nombreMineral}`)
@@ -47,6 +49,7 @@ class FormCompraCliente extends Component {
         console.log(res);
         var presentaciones = res.map(r => r);
           this.setState({ presentaciones });
+          console.log(this.state.presentaciones);
         
       });
 
@@ -125,9 +128,6 @@ class FormCompraCliente extends Component {
     return inputs;
   };
 
-componentDidMount(){
- this.getPresentacionList();
-}
 
   render() {
     return (
@@ -203,6 +203,7 @@ componentDidMount(){
                   name="mineral"
                   value={this.state.mineral}
                   onChange={this.handleChange}
+                  onClick={this.getPresentacionList(this.state.mineral)}
                 >
                   <option />
                   {this.props.minerales.map((mineral, i) => (
@@ -222,7 +223,7 @@ componentDidMount(){
                 >
                   {console.log("aca papi " +this.state.mineral)}
                   <option />
-                  {this.getPresentacionList(this.state.mineral)}
+                 
                   {this.state.presentaciones.map((presentacion, i) => (
                     <option value={presentacion.nombre_presentacion} key={i}>
                       {presentacion.nombre_presentacion}
