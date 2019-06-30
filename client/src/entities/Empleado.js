@@ -58,9 +58,9 @@ deleteEmpleado = ced =>{
   };
 //removeEmpleado =()=>{}
   componentDidMount() {
-   // this.getCargoList();
+    this.getCargoList();
     this.getEmpleadoList();
-    //this.getLugarList();
+    this.getLugarList();
   }
   render() {
     var empleados = this.state.empleadoList;

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Menu from "../components/Menu";
 import ConsultTableMinerales from "../components/ConsultTableMinerales";
 import FormMineral from "../components/FormMineral";
+import EliminarEmpleado from "../components/EliminarEmpleado";
+import EliminarMineral from "../components/EliminarMineral";
 
 export default class Minerales extends Component {
   constructor() {
@@ -38,12 +40,12 @@ export default class Minerales extends Component {
     var consult = {
       consult: [
         "Nombre",
-        "Tipo",
         "Valor",
         "Descripción",
-        "Industria",
         "Inicio de Explotación",
-        "Fecha Nacionalización"
+        "Fecha Nacionalización",
+        "Tipo",
+
       ]
     };
 
@@ -61,6 +63,10 @@ export default class Minerales extends Component {
             />
           ),
           id: 1
+        },
+        {
+          form:(<EliminarMineral consult={consult}/>),
+          id:2
         }
       ]
     };

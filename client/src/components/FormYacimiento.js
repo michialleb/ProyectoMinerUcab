@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
 import ConfiguracionProyecto from "../components/ConfiguracionProyecto";
+import swal from 'sweetalert';
 
 class FormYacimiento extends Component {
   constructor() {
@@ -148,9 +149,17 @@ class FormYacimiento extends Component {
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ yacimiento:  this.state})
     }).then(res => res.json())
-      .catch(function(error) {
-        console.log('errorrrrr');
-      });
+    .catch (res =>{
+      //swal("Revisar campos obligatorios!", "You clicked the button!", "error");
+     })
+       .then (res =>{
+         if(res.error)
+         swal("Revisar campos vacios!", "Intente de nuevo!", "error")
+        
+        else 
+        swal("Yacimiento  Ingresado!", "Satisfactoriamentes!", "success");
+        ;
+      })
 
       
     

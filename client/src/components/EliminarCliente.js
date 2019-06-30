@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../styles/ConsultTable.css";
 import { FaSistrix } from "react-icons/fa";
 import "../styles/Form.css";
-
+import swal from 'sweetalert';
 class EliminarCliente extends Component {
   constructor() {
     super(); //props elimine
@@ -64,10 +64,12 @@ class EliminarCliente extends Component {
     fetch(`/api/clientes/persona/${ced}`, {method: 'DELETE'})
     .then(res => res.json())
     .then(res => {
-
+      if (res.error){ swal("Ingrese un numero de cedula válido", "Satisfactoriamentes!", "error");}
+      else {
+        swal("Cliente eliminado", "Satisfactoriamentes!", "success");}
     });
-    document.getElementById("t01").style.display="none";
-    document.getElementById("eliminado").style.display="block";
+    //document.getElementById("t01").style.display="none";
+    //document.getElementById("eliminado").style.display="block";
   }
   handleGetEmpresa(e) {
     e.preventDefault();
@@ -93,10 +95,12 @@ class EliminarCliente extends Component {
     fetch(`/api/clientes/empresa/${rif}`, {method: 'DELETE'})
     .then(res => res.json())
     .then(res => {
-
+      if (res.error){if (res.error){ swal("Ingrese un numero de cedula válido", "Satisfactoriamentes!", "error");}}
+      else {
+        swal("Cliente eliminado", "Satisfactoriamentes!", "success");}
     });
-    document.getElementById("t01").style.display="none";
-    document.getElementById("eliminado").style.display="block";
+   // document.getElementById("t01").style.display="none";
+   // document.getElementById("eliminado").style.display="block";
   }
   Personas() {
     document.getElementById("persona").style.display = "block";
@@ -147,7 +151,7 @@ class EliminarCliente extends Component {
                     <span className="searching">
                         <input
                         className="inp-search"
-                        type="search"
+                        type="number"
                         placeholder="Ingrese cédula"
                         name="cedula"
                         value={this.state.cedula}
@@ -205,10 +209,7 @@ class EliminarCliente extends Component {
       </div>
         
       }  
-       <div  id="eliminado" className="wrapper">
-          <div className="form-wrapper">
-            <h5>Cliente Eliminado!!!</h5></div>
-            </div>
+     
           </div>
 
       
@@ -218,7 +219,7 @@ class EliminarCliente extends Component {
                     <span className="searching">
                         <input
                         className="inp-search"
-                        type="search"
+                        type="number"
                         placeholder="Ingrese rif"
                         name="cedula"
                         value={this.state.rif}
@@ -274,10 +275,7 @@ class EliminarCliente extends Component {
       </div>
         
       }  
-       <div  id="eliminado" className="wrapper">
-          <div className="form-wrapper">
-            <h5>Cliente Eliminado!!!</h5></div>
-            </div>
+       
           </div>
          
             </div>

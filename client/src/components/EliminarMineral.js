@@ -6,21 +6,20 @@ import swal from 'sweetalert';
 //import InlineConfirmButton from "react-inline-confirm";
 
 
-class EliminarEmpleado extends Component {
+class EliminarMineral extends Component {
   constructor() {
     super(); //props elimine
     this.state = {
-      cedula: "",
-      horario: "",
-      id_empleado: "",
+      nombre: "",
+      nombre_min: "",
       bool:false,
-      empleado:[],
+      mineral:[],
       show:false
     };
     
     this.handleChange = this.handleChange.bind(this);
-    this.handleGetEmpleado = this.handleGetEmpleado.bind(this);
-    this.deleteEmpleado = this.deleteEmpleado.bind(this);
+    this.handleGetMineral = this.handleGetMineral.bind(this);
+    this.deleteMineral = this.deleteMineral.bind(this);
   }
 
   handleChange(e) {
@@ -28,7 +27,7 @@ class EliminarEmpleado extends Component {
     let value = target.value;
 
     this.setState({
-      cedula: value
+      nombre: value
     });
   }
   /*handleGetEmpleado = cedula => {
@@ -39,35 +38,32 @@ class EliminarEmpleado extends Component {
       });
       console.log(this.state.empleado);
   };*/
-  handleGetEmpleado(e) {
+  handleGetMineral(e) {
     e.preventDefault();
   //  e.preventDefault();
     //this.props.getEmpleado(this.state.cedula);
-    fetch(`/api/empleados/${this.state.cedula}`)
+    fetch(`/api/minerales/${this.state.nombre}`)
       .then(res => res.json())
       .then(res => {
-        this.setState({ empleado: res.map(r => r) });
+        this.setState({ mineral: res.map(r => r) });
       });
-    this.state.empleado.map(empl => {
+    this.state.mineral.map(empl => {
       this.setState({
-        id_empleado: empl.id
+        nombre_min: empl.nombre_mineral
       });
-      console.log(this.state.id_empleado)
     });
    
     this.setState({bool:true})
     
   }
-  deleteEmpleado (e,ced) {
+  deleteMineral (e,nombre) {
     e.preventDefault();
-    console.log(ced)
-    console.log(ced+'id de diego 0')
-    fetch(`/api/empleados/${ced}`, {method: 'DELETE'})
+    fetch(`/api/minerales/${nombre}`, {method: 'DELETE'})
     .then(res => res.json())
     .then(res => {
-      if (res.error){}
+        if (res.error){}
       else {
-        swal("Empleado eliminado", "Satisfactoriamentes!", "success");}
+        swal("Mineral eliminado", "Satisfactoriamentes!", "success");}
      /* if (res.success) {
         alert('Empleado eliminado');
       } else {alert('No eliminado')}*/
@@ -75,6 +71,7 @@ class EliminarEmpleado extends Component {
    // alert('Empleado eliminado');
     document.getElementById("t01").style.display="none";
     document.getElementById("eliminado").style.display="block";
+
   }
   
   render() {
@@ -85,15 +82,15 @@ class EliminarEmpleado extends Component {
             <input
               className="inp-search"
               type="search"
-              placeholder="Ingrese nro de cédula"
-              name="cedula"
-              value={this.state.cedula}
+              placeholder="Ingrese mineral"
+              name="nombre"
+              value={this.state.nombre}
               onChange={this.handleChange}
             />
             <button
               className="search"
               type="button"
-              onClick={(function (e) {this.handleGetEmpleado(e)}).bind(this)}
+              onClick={(function (e) {this.handleGetMineral(e)}).bind(this)}
             >
               {<FaSistrix />}
             </button>
@@ -108,48 +105,36 @@ class EliminarEmpleado extends Component {
           <th key={i}>{item}</th>
         ))}
       </tr>
-      {this.state.empleado.map((empleado, i) => {
+      {this.state.mineral.map((mineral, i) => {
         return (
           <tr key={i}>
-            <td>{empleado.nombre}</td>
-            <td>{empleado.apellido}</td>
-            <td>{empleado.cedula}</td>
-            <td>{empleado.fnac}</td>
-        
-            <td>
-              {"Estado: " +
-                empleado.estado +
-                ", Municipio: " +
-                empleado.municipio +
-                ", Provincia: " +
-                empleado.provincia}
-            </td>
-            
-            <td>{empleado.sexo}</td>
-            <td>{empleado.cargo}</td>
-            <td>{empleado.correo}</td>
-            <td>{empleado.telefono}</td>
+            <td>{mineral.nombre_mineral}</td>
+            <td>{mineral.valor_economico}</td>
+            <td>{mineral.descripcion_mineral}</td>
+            <td>{mineral.fecha_ini_explotacion}</td>
+            <td>{mineral.fecha_nacionalizacion}</td>
+            <td>{mineral.tipo_mineral}</td>
           </tr>
         );
       })}
-      
-      <button className="btn-eliminar" onClick={(function (e) {this.deleteEmpleado(e,this.state.id_empleado)}).bind(this)}> Eliminar Empleado </button>
+      {console.log(this.state.nombre_min)}
+      <button className="btn-eliminar" onClick={(function (e) {this.deleteMineral(e,this.state.nombre_min)}).bind(this)}> Eliminar Empleado </button>
     </table>      
     : 
     <div className="wrapper">
     <div className="form-wrapper">
-      <h5>Ingresar empleado </h5>
+      <h5>Ingresar Mineral </h5>
     </div>
       </div>
         
       }  
        <div  id="eliminado" className="wrapper">
           <div className="form-wrapper">
-            <h5>Empleado Eliminado!!!</h5></div></div>
+            <h5>Mineral Eliminado!!!</h5></div></div>
         
 
       </>
     );
   }
 }
-export default EliminarEmpleado;
+export default EliminarMineral;

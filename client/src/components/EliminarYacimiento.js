@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../styles/ConsultTable.css";
 import { FaSistrix } from "react-icons/fa";
 import "../styles/Form.css";
+import swal from 'sweetalert';
 //import InlineConfirmButton from "react-inline-confirm";
 
 
@@ -52,18 +53,18 @@ class EliminarYacimiento extends Component {
       });
     });
    
-    this.setState({bool:true})
-    
+    this.setState({bool:true}) 
   }
   deleteYacimiento (e,nombre) {
     e.preventDefault();
-    
+      console.log(nombre);
     fetch(`/api/yacimientos/${nombre}`, {method: 'DELETE'})
     .then(res => res.json())
     .then(res => {
-     /* if (res.success) {
-        alert('Empleado eliminado');
-      } else {alert('No eliminado')}*/
+      if (res.error){}
+      else {
+        swal("Yacimiento eliminado", "Satisfactoriamentes!", "success");}
+
     });
    // alert('Empleado eliminado');
     document.getElementById("t01").style.display="none";
@@ -78,7 +79,7 @@ class EliminarYacimiento extends Component {
             <input
               className="inp-search"
               type="search"
-              placeholder="Ingrese nro de cédula"
+              placeholder="Ingrese nombre yacimiento"
               name="cedula"
               value={this.state.nombre}
               onChange={this.handleChange}
@@ -121,7 +122,7 @@ class EliminarYacimiento extends Component {
         );
       })}
       
-      <button className="btn-eliminar" onClick={(function (e) {this.deleteYacimiento(e,this.state.id_empleado)}).bind(this)}> Eliminar Empleado </button>
+      <button className="btn-eliminar" onClick={(function (e) {this.deleteYacimiento(e,this.state.nombre)}).bind(this)}> Eliminar Empleado </button>
     </table>      
     : 
     <div className="wrapper">

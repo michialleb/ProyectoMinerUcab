@@ -35,6 +35,10 @@ class Yacimientos {
   }
 
   static insert(yacimiento, callback) {
+    if (yacimiento.nombre == "")
+    yacimiento.nombre=null
+    else if (yacimiento.kilometros=="")
+    yacimiento.kilometros=null
     db.query(
       "INSERT INTO yacimiento (nombre_yacimiento,kilometros,fk_tipo_status,fk_lugar) \
       VALUES ($1,$2,7,$3)",
@@ -46,13 +50,15 @@ class Yacimientos {
       }
     );
   }
+  // SI NO SIRVE EL DELETE YACIMIENTO CAMBIAR FORMA DE PARAMETROS ``
   static delete(nombre, callback) {
+    console.log(nombre+' tete');
     db.query(
-      `DELETE FROM yacimiento where nombre_yacimiento=${nombre}`,
-      
+      'DELETE FROM yacimiento where nombre_yacimiento=$1',[nombre],
       function(err, res) {
         if (err.error) return callback(err);
         callback(res);
+        
       }
     );
   }

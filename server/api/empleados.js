@@ -37,7 +37,7 @@ router.post("/:update", function(req, res) {
 
 router.post("/", function(req, res) {
   var empleado = req.body.empleado;
-
+  console.log('michi en api');
   Empleados.insert(empleado, function(err, result) {
     if (err) return res.json(err);
     return res.json(result);

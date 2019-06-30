@@ -3553,10 +3553,10 @@ INSERT INTO empleado (nombre_empleado,apellido_empleado,telefono_empleado,sexo,c
 
 insert into mineral_mineral (fk_mineral,fk_mineral_comp,cantidad)
 values 
-(4,35,300),
-(4,36,200),
-(4,37,400),
-(4,38,500);
+(4,21,300),
+(4,22,200),
+(4,23,400),
+(4,24,500);
 /*presentacion*/
 insert into presentacion(nombre_presentacion)
 values ('Polvo'),
@@ -3570,7 +3570,7 @@ insert into mineral_presentacion
 values (1000,1,1),(1000,1,2),(1000,1,3),(1000,1,4),(1000,1,5),(1000,1,6),(1000,1,7),(1000,1,8)
 ,(1000,2,9),(1000,2,10),(1000,2,11),(1000,2,12),(1000,2,13),(1000,2,14),(1000,2,15),(1000,2,16)
 ,(1000,2,17),(1000,2,18),(1000,2,19),(1000,2,20),(1000,3,1),(1000,3,2),(1000,3,4),(1000,4,1),(1000,5,1),
-/*aliados*/(2000,14),(1500,15),(1600,16),(1700,17);
+/*aliados*/(2000,6,14),(1500,6,15),(1600,6,16),(1700,6,17);
 /*cargo fase*/ 
 insert into cargo_fase(cantidad,fk_cargo,costo,fk_fase)
 values

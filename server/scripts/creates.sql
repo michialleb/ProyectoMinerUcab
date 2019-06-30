@@ -47,9 +47,9 @@ CREATE TABLE Mineral_presentacion(
     fk_mineral integer not null,
     CONSTRAINT pk_mineral_presentacion PRIMARY KEY (id_mineral_presentacion),
     CONSTRAINT fk_presentacion_mineral FOREIGN KEY (fk_presentacion) 
-    REFERENCES Presentacion(id_presentacion),
+    REFERENCES Presentacion(id_presentacion) on delete cascade ,
     CONSTRAINT fk_mineral_presentacion FOREIGN KEY (fk_mineral) 
-    REFERENCES Mineral(id_mineral)
+    REFERENCES Mineral(id_mineral) on delete cascade
 );
 
 CREATE TABLE tipo_status(
@@ -96,12 +96,12 @@ CREATE TABLE Compra_Cliente (
       fk_tipo_status integer not null,
 	  fk_mineral_presentacion integer not null,
       CONSTRAINT pk_id_compra_cliente PRIMARY KEY(id_compra_cliente),
-      CONSTRAINT FK_compra_cliente_empresa FOREIGN KEY(FK_Empresa) 
+      CONSTRAINT FK_compra_cliente_empresa FOREIGN KEY(FK_Empresa)  
       REFERENCES Empresa(id_cliente) on delete cascade,
       CONSTRAINT FK_compra_cliente_persona FOREIGN KEY(FK_Persona) 
       REFERENCES Persona(id_cliente) on delete cascade,
 	  CONSTRAINT FK_min_pre_comp_cli FOREIGN KEY(FK_mineral_presentacion) 
-      REFERENCES Mineral_Presentacion(id_mineral_presentacion),
+      REFERENCES Mineral_Presentacion(id_mineral_presentacion) on delete cascade ,
       CONSTRAINT FK_compra_cliente_status FOREIGN KEY(fk_tipo_status) 
       REFERENCES tipo_status(id_tipo_status)
       );
@@ -141,7 +141,7 @@ create table Yacimiento (
      fk_tipo_status integer not null,
      CONSTRAINT pk_id_proyecto PRIMARY KEY (id_proyecto),
      CONSTRAINT fk_yacimiento FOREIGN KEY (fk_yacimiento)
-     REFERENCES Yacimiento (id_yacimiento),
+     REFERENCES Yacimiento (id_yacimiento) on delete cascade ,
      CONSTRAINT fk_tipo_status FOREIGN KEY (fk_tipo_status)
      REFERENCES Tipo_Status (id_tipo_status));
 
@@ -293,7 +293,7 @@ CREATE TABLE Horario (
      fk_tipo_status INTEGER NOT NULL,
      CONSTRAINT pk_id_etapa_explotacion PRIMARY KEY (id_etapa),
      CONSTRAINT fk_proyecto_etapa FOREIGN KEY (fk_proyecto)
-     REFERENCES proyecto (id_proyecto),
+     REFERENCES proyecto (id_proyecto) on delete cascade,
      CONSTRAINT fk_tipo_status_etapa FOREIGN KEY(fk_tipo_status)
      REFERENCES tipo_status(id_tipo_status)
 );
@@ -301,7 +301,7 @@ CREATE TABLE Horario (
 create table Fase (
    id_fase  serial,
    numero_fase integer not null,
-   nombre_fase  varchar(30) not null,
+   nombre_fase  varchar(200) not null,
    descripcion_fase varchar (100),
    duracion_fase    integer not null,
    costo_fase   real not null,
@@ -311,7 +311,7 @@ create table Fase (
    fk_tipo_status INTEGER NOT NULL,
    constraint pk_fase primary key (id_fase),
    constraint fk_exploracion_etapa foreign key (fk_etapa_explotacion)
-   references etapa_explotacion  (id_etapa),
+   references etapa_explotacion  (id_etapa) on delete cascade ,
    CONSTRAINT fk_tipo_status_fase FOREIGN KEY(fk_tipo_status)
      REFERENCES tipo_status(id_tipo_status)
 );
@@ -324,9 +324,9 @@ CREATE TABLE Cargo_Fase(
     FK_Fase integer not null,
     CONSTRAINT pk_cargo_fase PRIMARY KEY(id_cargo_fase),
     CONSTRAINT fk_cargo_en_fase FOREIGN KEY (FK_Cargo)
-    REFERENCES Cargo(id_cargo), 
+    REFERENCES Cargo(id_cargo) on delete cascade, 
      CONSTRAINT fk_fase_en_cargos FOREIGN KEY (FK_Fase)
-    REFERENCES Fase(id_fase)
+    REFERENCES Fase(id_fase) on delete cascade
 );
 
 CREATE TABLE Empleado_Fase_Cargo(
@@ -335,9 +335,9 @@ CREATE TABLE Empleado_Fase_Cargo(
     FK_Cargo_Fase integer not null,
     CONSTRAINT pk_empleado_cargo_fase PRIMARY KEY(id_empleado_cargo_fase),
     CONSTRAINT fk_empleado_en_fase_cargo FOREIGN KEY (FK_Empleado)
-    REFERENCES Empleado(id_empleado), 
+    REFERENCES Empleado(id_empleado) on delete cascade , 
     CONSTRAINT fk_cargos_de_Fase FOREIGN KEY (FK_Cargo_Fase)
-    REFERENCES Cargo_Fase(id_cargo_fase)
+    REFERENCES Cargo_Fase(id_cargo_fase) on delete cascade
 );
 CREATE TABLE Horario_empleado(
     id_horario_empleado serial,
@@ -374,10 +374,10 @@ CREATE TABLE Compra_cliente_proyecto(
     fk_compra_cliente integer ,  /* not null*/
     fk_proyecto integer,
     CONSTRAINT pk_compra_cliente_proyecto PRIMARY KEY(id_compra_cliente_proyecto),
-    CONSTRAINT FK_compra_cliente FOREIGN KEY(fk_compra_cliente) 
-    REFERENCES Compra_Cliente(id_compra_cliente),
+    CONSTRAINT FK_compra_cliente FOREIGN KEY(fk_compra_cliente)
+    REFERENCES Compra_Cliente(id_compra_cliente)  on delete cascade,
     CONSTRAINT FK_proyecto FOREIGN KEY(fk_proyecto) 
-    REFERENCES proyecto(id_proyecto)
+    REFERENCES proyecto(id_proyecto) on delete cascade
 );
       
  
@@ -455,9 +455,9 @@ create table Mineral_Yacimiento(
     fk_yacimiento integer not null,
     constraint pk_mineral_yacimiento primary key (id_mineral_yacimiento),
     constraint fk_mineral_en_yacimiento foreign key (fk_mineral)
-    references Mineral(id_mineral),
+    references Mineral(id_mineral) on delete cascade ,
     constraint fk_yacimiento_con_minerales foreign key (fk_yacimiento)
-    references Yacimiento (id_yacimiento)
+    references Yacimiento (id_yacimiento) on delete cascade 
     );
 	
 
@@ -496,7 +496,7 @@ CREATE TABLE Maquinaria_Fase (
     fk_maquinaria integer not null,
     CONSTRAINT pk_id_maq_fase PRIMARY KEY (id_maquinaria_fase),
     CONSTRAINT fk_fase2_maq FOREIGN KEY (fk_fase)
-    REFERENCES fase(id_fase),
+    REFERENCES fase(id_fase) on delete cascade ,
     CONSTRAINT fk_fase_maq2 FOREIGN KEY (fk_maquinaria)
     REFERENCES maquinaria(id_maquinaria)
 );
@@ -507,9 +507,9 @@ CREATE TABLE Maquinaria_Activa(
     fk_maquinaria integer not null,
     fk_tipo_status integer not null,
      CONSTRAINT fk_fase2_maq_act FOREIGN KEY (fk_fase)
-     REFERENCES fase(id_fase),
+     REFERENCES fase(id_fase) on delete cascade,
      CONSTRAINT fk_fase_maq2 FOREIGN KEY (fk_fase)
-     REFERENCES maquinaria(id_maquinaria),
+     REFERENCES maquinaria(id_maquinaria) on delete cascade ,
      CONSTRAINT fk_status_maq_act FOREIGN KEY (fk_tipo_status)
      REFERENCES tipo_status(id_tipo_status)
 );

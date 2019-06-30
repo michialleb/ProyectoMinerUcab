@@ -44,4 +44,12 @@ router.post("/", function(req, res) {
   });
 });
 
+router.delete("/:nombre",function(req,res) {
+  var nombre= req.params.nombre;
+  console.log(nombre+ ' hjjhb de diego 1');
+  Minerales.delete(nombre, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
 module.exports = router;

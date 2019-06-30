@@ -54,23 +54,34 @@ class Minerales {
     });
   }
   static insert(mineral, callback) {
+    if (mineral.nombre =="")
+        mineral.nombre=null;
     db.query(
       "INSERT INTO mineral (nombre_mineral,tipo_mineral,valor_economico,\
-        descripcion_mineral,fecha_inicio_mineral,fecha_nacionalizacion_mineral,industria_mineral) \
-        VALUES ($1,$2,$3,$4,$5,$6,$7)",
+        descripcion_mineral,fecha_ini_explotacion,fecha_nacionalizacion) \
+        VALUES ($1,$2,$3,$4,$5,$6)",
       [
         mineral.nombre,
         mineral.tipo,
         mineral.valor,
         mineral.descripcion,
         mineral.inicio,
-        mineral.nacionalizacion,
-        mineral.industria
+        mineral.nacionalizacion
       ],
 
       function(err, res) {
         if (err.error) return callback(err);
         callback(res);
+      }
+    );
+  }
+  static delete(nombre, callback) {
+    db.query(
+      'DELETE FROM mineral where nombre_mineral=$1',[nombre],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+        
       }
     );
   }

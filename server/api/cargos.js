@@ -4,6 +4,7 @@ var Cargos = require("../models/cargos");
 var router = express.Router();
 
 router.get("/", function(req, res) {
+  console.log('api');
   Cargos.retrieveAll(function(err, cargos) {
     if (err) return res.json(err);
     return res.json(cargos);

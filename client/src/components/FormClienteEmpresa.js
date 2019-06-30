@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
-
+import swal from 'sweetalert';
 class FormCliente extends Component {
   constructor() {
     super();
