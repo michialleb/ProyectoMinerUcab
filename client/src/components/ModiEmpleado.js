@@ -10,7 +10,7 @@ class Form extends Component {
       nombre: "",
       apellido: "",
       fnac: "",
-      cedula: "",
+      cedula: 0,
       fk_lugar: "",
       telefono: "",
       correo: "",
@@ -45,21 +45,6 @@ class Form extends Component {
     this.setState({
       [name]: value
     });
-  }
-
-  handleGetEmpleado() {
-    fetch(`/api/empleados/${this.state.cedulaBuscada}`)
-      .then(res => res.json())
-      .then(res => {
-        this.setState({ empleado: res.map(r => r) });
-      });
-    this.state.empleado.map(empl => {
-      this.setState({
-        id_empleado: empl.id
-      });
-    });
-
-    this.setState({ bool: true });
   }
 
   getMunicipio = codigo => {
@@ -105,15 +90,17 @@ class Form extends Component {
     e.preventDefault();
 
     console.log("The form was submitted with the following data:");
-    console.log(this.state);
+    // console.log(this.state);
   }
 
   addInfoEmpleado(empleado) {
     empleado.map(empl => {
+      var date = empl.fnac.split(["T"], [1]);
+      console.log(date);
       this.setState({
         nombre: empl.nombre,
         apellido: empl.apellido,
-        fnac: empl.fnac,
+        fnac: date,
         cedula: empl.cedula,
         direccion: empl.direccion,
         telefono: empl.telefono,
@@ -124,19 +111,18 @@ class Form extends Component {
         provinciaAnteriror: empl.provincia,
         correo: empl.correo
       });
+      console.log("addinfo");
+      console.log(empl);
     });
   }
 
+
   handleGetEmpleado(e) {
     e.preventDefault();
-    // this.setState(null);
-    console.log(this.state.cedula);
-    this.props.handleGetEmpleado(this.state.cedulaBuscada);
+    //console.log(this.state.cedula);
+    this.props.getEmpleado(this.state.cedulaBuscada);
     this.addInfoEmpleado(this.props.empleado);
-    console.log(this.props.empleado);
-    // this.setState({
-    // nombre: this.props.empleados.empleado_nombre
-    //});
+    //  console.log(this.props.empleado);
   }
 
   render() {
@@ -219,8 +205,8 @@ class Form extends Component {
                 <label htmlFor="nacimiento">Fecha de nacimiento</label>
                 <input
                   className=""
-                  placeholder="xx/yy/zz"
-                  type="date"
+                  placeholder="yyyy/mm/dd"
+                  type="text"
                   name="fnac"
                   noValidate
                   value={this.state.fnac}

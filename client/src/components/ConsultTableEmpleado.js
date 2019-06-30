@@ -37,7 +37,7 @@ class ConsultTableEmpleado extends Component {
               return (
                 <tr key={i}>
                   <td>{horario.dia}</td>
-                            <td>{horario.inicio}</td>
+                  <td>{horario.inicio}</td>
                   <td>{horario.salida}</td>
                 </tr>
               );
@@ -56,11 +56,12 @@ class ConsultTableEmpleado extends Component {
   addBotton = empleados => {
     var empl = [];
     this.props.empleados.map(emp => {
+      var date = emp.fnac.split(["T"], [1]);
       let e = {
         nombre: emp.nombre,
         apellido: emp.apellido,
         cedula: emp.cedula,
-        fnac: emp.fnac,
+        fnac: date,
         sexo: emp.sexo,
         cargo: emp.cargo,
         direccion: emp.estado + ", " + emp.municipio + ", " + emp.provincia,

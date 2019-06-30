@@ -1,36 +1,17 @@
 import React, { Component } from "react";
 import "../styles/ConsultTable.css";
-import { FaSistrix } from "react-icons/fa";
+import swal from "@sweetalert/with-react";
+import { MDBDataTable } from "mdbreact";
 
 class ConsultTableClientes extends Component {
   constructor(props) {
     super(props);
     this.state = {
       cedula: "",
-      rif: ""
+      rif: "",
+      comprasList: [],
+      comprasEmpresaList: []
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleGetPersona = this.handleGetPersona.bind(this);
-    this.handleGetEmpresa = this.handleGetEmpresa.bind(this);
-  }
-
-  handleChange(e) {
-    let target = e.target;
-    let value = target.value;
-    let name = target.name;
-
-    this.setState({
-      [name]: value
-    });
-  }
-
-  handleGetPersona(e) {
-    this.props.getPersonaCedula(this.state.cedula);
-    console.log(this.props.personas);
-  }
-
-  handleGetEmpresa(e) {
-    this.props.getEmpresaRif(this.state.rif);
   }
 
   Persona() {
@@ -56,8 +37,220 @@ class ConsultTableClientes extends Component {
       document.getElementById("btn-e").style.color = "#333";
     }
   }
+  addButtom = empresas => {
+    var empresa = [];
+    this.props.empresas.map(emp => {
+      let e = {
+        nombre: emp.nombre,
+        rif: emp.rif,
+        telefono: emp.telefono,
+        correo: emp.correo,
+        direccion: emp.estado + ", " + emp.municipio + ", " + emp.provincia,
+        compras: (
+          <div className="horario">
+            <button
+              onClick={function(e) {
+                this.getComprasEmpresa(emp.id);
+              }.bind(this)}
+            >
+              {" "}
+              Compras{" "}
+            </button>
+          </div>
+        )
+      };
+      empresa.push(e);
+    });
+    return empresa;
+  };
+  addBotton = personas => {
+    var pers = [];
+    this.props.personas.map(per => {
+      let e = {
+        nombre: per.nombre,
+        apellido: per.apellido,
+        cedula: per.cedula,
+        fnac: per.fnac,
+        sexo: per.sexo,
+        direccion: per.estado + ", " + per.municipio + ", " + per.provincia,
+        correo: per.correo,
+        telefono: per.telefono,
+        Compras: (
+          <div className="horario">
+            <button
+              onClick={function(e) {
+                this.getComprasPersona(per.id);
+              }.bind(this)}
+            >
+              {" "}
+              Compras{" "}
+            </button>
+          </div>
+        )
+      };
+      pers.push(e);
+    });
+    return pers;
+  };
 
+  getComprasEmpresa(id) {
+    fetch(`/api/clientes/consultar/compras/empresa/${id}`)
+      .then(res => res.json())
+      .then(res => {
+        if (res !== []) this.setState({ comprasEmpresaList: res.map(r => r) });
+      })
+      .then(res => {
+        swal(
+          <table id="t02">
+            <label>Compras Realizadas </label>
+            <tr>
+              <th>Fecha</th>
+              <th>Mineral</th>
+              <th>Presentacion</th>
+              <th>Costo</th>
+              <th>Total </th>
+            </tr>
+
+            {this.state.comprasEmpresaList.map((compra, i) => {
+              return (
+                <tr key={i}>
+                  <td>{compra.fecha.split(["T"], [1])}</td>
+                  <td>{compra.mineral}</td>
+                  <td>{compra.presentacion}</td>
+                  <td>{compra.costo}</td>
+                  <td>{compra.total}</td>
+                </tr>
+              );
+            })}
+          </table>
+        );
+        // this.setState({ selected : !this.state.selected});
+      });
+  }
+
+  getComprasPersona(id) {
+    fetch(`/api/clientes/consultar/compras/${id}`)
+      .then(res => res.json())
+      .then(res => {
+        if (res !== []) this.setState({ comprasList: res.map(r => r) });
+      })
+      .then(res => {
+        swal(
+          <table id="t02">
+            <label>Compras Realizadas</label>
+            <tr>
+              <th>Fecha</th>
+              <th>Mineral</th>
+              <th>Presentacion</th>
+              <th>Costo</th>
+              <th>Total </th>
+            </tr>
+
+            {this.state.comprasList.map((compra, i) => {
+              return (
+                <tr key={i}>
+                  <td>{compra.fecha.split(["T"], [1])}</td>
+                  <td>{compra.mineral}</td>
+                  <td>{compra.presentacion}</td>
+                  <td>{compra.costo}</td>
+                  <td>{compra.total}</td>
+                </tr>
+              );
+            })}
+          </table>
+        );
+        // this.setState({ selected : !this.state.selected});
+      });
+  }
   render() {
+    const dataPersona = {
+      columns: [
+        {
+          label: "Nombre",
+          field: "nombre",
+          sort: "asc",
+          width: 150
+        },
+        {
+          label: "Apellido",
+          field: "apellido",
+          sort: "asc",
+          width: 150
+        },
+        {
+          label: "Sexo",
+          field: "sexo",
+          sort: "asc",
+          width: 100
+        },
+        {
+          label: "Cedula",
+          field: "cedula",
+          sort: "asc",
+          width: 200
+        },
+        {
+          label: "Fecha Nacimiento",
+          field: "fnac",
+          sort: "asc",
+          width: 200
+        },
+        {
+          label: "Correo",
+          field: "correo",
+          sort: "asc",
+          width: 200
+        },
+        {
+          label: "Telefono",
+          field: "telefono",
+          sort: "asc",
+          width: 200
+        },
+        {
+          label: "Direccion",
+          field: "direccion",
+          sort: "asc",
+          width: 270
+        }
+      ],
+      rows: this.addBotton(this.props.personas)
+    };
+    const dataEmpresa = {
+      columns: [
+        {
+          label: "Nombre",
+          field: "nombre",
+          sort: "asc",
+          width: 150
+        },
+        {
+          label: "RIF",
+          field: "rif",
+          sort: "asc",
+          width: 270
+        },
+        {
+          label: "Telefono",
+          field: "telefono",
+          sort: "asc",
+          width: 200
+        },
+        {
+          label: "Correo",
+          field: "correo",
+          sort: "asc",
+          width: 200
+        },
+        {
+          label: "Direccion",
+          field: "direccion",
+          sort: "asc",
+          width: 200
+        }
+      ],
+      rows: this.addButtom(this.props.empresas)
+    };
     return (
       <>
         <div className="wrapper">
@@ -71,102 +264,10 @@ class ConsultTableClientes extends Component {
           </div>
 
           <div id="persona">
-            <div>
-              <span className="searching">
-                <input
-                  className="inp-search"
-                  type="search"
-                  placeholder="Ingrese nro de cédula del cliente"
-                  name="cedula"
-                  value={this.state.cedula}
-                  onChange={this.handleChange}
-                />
-                <button
-                  className="search"
-                  type="button"
-                  onClick={this.handleGetPersona}
-                >
-                  {<FaSistrix />}
-                </button>
-              </span>
-            </div>
-
-            <table id="t02">
-              <tr>
-                {this.props.consultaPersona.consultaPersona.map((item, i) => (
-                  <th key={i}>{item}</th>
-                ))}
-              </tr>
-              {this.props.personas.map((persona, i) => {
-                return (
-                  <tr key={i}>
-                    <td>{persona.nombre}</td>
-                    <td>{persona.apellido}</td>
-                    <td>{persona.cedula}</td>
-                    <td>{persona.fnac}</td>
-                    <td>{persona.telefono}</td>
-                    <td>
-                      {"Estado: " +
-                        persona.estado +
-                        ", Municipio: " +
-                        persona.municipio +
-                        ", Provincia: " +
-                        persona.provincia}
-                    </td>
-                    <td>{persona.sexo}</td>
-                    <td>{persona.correo}</td>
-                  </tr>
-                );
-              })}
-            </table>
+            <MDBDataTable btn striped bordered hover data={dataPersona} />
           </div>
-
           <div id="empresa">
-            <div>
-              <span className="searching">
-                <input
-                  className="inp-search"
-                  type="search"
-                  placeholder="Ingrese nro de rif del cliente"
-                  name="rif"
-                  value={this.state.rif}
-                  onChange={this.handleChange}
-                />
-                <button
-                  className="search"
-                  type="button"
-                  onClick={e => this.handleGetEmpresa(e)}
-                >
-                  {<FaSistrix />}
-                </button>
-              </span>
-            </div>
-
-            <table id="t02">
-              <tr>
-                {this.props.consultaEmpresa.consultaEmpresa.map((item, i) => (
-                  <th key={i}>{item}</th>
-                ))}
-              </tr>
-              {this.props.empresas.map((empresa, i) => {
-                return (
-                  <tr key={i}>
-                    <td>{empresa.nombre}</td>
-                    <td>{empresa.rif}</td>
-                    <td>
-                      {"Estado: " +
-                        empresa.estado +
-                        ", Municipio: " +
-                        empresa.municipio +
-                        ", Provincia: " +
-                        empresa.provincia}
-                    </td>
-                    <td>{empresa.telefono}</td>
-                    <td>{empresa.correo}</td>
-                  </tr>
-                );
-              })}
-            </table>
+            <MDBDataTable btn striped bordered hover data={dataEmpresa} />
           </div>
         </div>
       </>

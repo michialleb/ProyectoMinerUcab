@@ -8,7 +8,7 @@ class Cargos {
       callback(res);
     });
   }
- 
+
   static insertCargoFase(cargoFase, callback) {
     db.query(
       "INSERT INTO cargo_fase (cantidad, costo, fk_cargo,fk_fase) \
@@ -22,12 +22,12 @@ class Cargos {
                                                    FROM proyecto \
                                                    WHERE nombre_proyecto=$6))))",
       [
-       cargoFase.cantidad,
-       cargoFase.costo,
-       cargoFase.id_cargo,
-       cargoFase.numero_fase,
-       cargoFase.numero_etapa,
-       cargoFase.nombre_proyecto
+        cargoFase.cantidad,
+        cargoFase.costo,
+        cargoFase.id_cargo,
+        cargoFase.numero_fase,
+        cargoFase.numero_etapa,
+        cargoFase.nombre_proyecto
       ],
 
       function(err, res) {
@@ -36,6 +36,5 @@ class Cargos {
       }
     );
   }
-  
 }
 module.exports = Cargos;

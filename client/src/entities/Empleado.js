@@ -20,15 +20,24 @@ export default class Empleado extends Component {
     };
     this.getEmpleadoList = this.getEmpleadoList.bind(this);
     this.handleGetEmpleado = this.handleGetEmpleado.bind(this);
+    this.handleGetHorario = this.handleGetHorario.bind(this);
   }
 
-  handleGetEmpleado(cedula) {
+  handleGetHorario = id => {
+    fetch(`/api/empleados/empl/${id}`)
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ horarioList: res.map(r => r) });
+      });
+  };
+
+  handleGetEmpleado = cedula => {
     fetch(`/api/empleados/${cedula}`)
       .then(res => res.json())
       .then(res => {
-        this.setState({ empleado: res.map(r => r) });
+        this.setState({ empleadoList: res.map(r => r) });
       });
-  }
+  };
 
   getLugarList = () => {
     fetch("/api/lugar")

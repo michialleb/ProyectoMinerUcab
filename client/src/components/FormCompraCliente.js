@@ -4,7 +4,9 @@ import "../styles/ConsultTable.css";
 import { FaSistrix } from "react-icons/fa";
 import Factura from "./Factura";
 import ActivarProyecto from "./ActivarProyecto";
+import CompraAliadoAuto from "./CompraAliadoAuto";
 import Services from "./Services";
+import swal from "sweetalert";
 
 function ChangeCompra(props) {
   const mineralDisponible = true;
@@ -33,14 +35,13 @@ class FormCompraCliente extends Component {
       presentaciones: [],
       inventario: [],
       mineralDisponible: false,
-      1: "",
-      2: ""
+      procesarCompra: false,
+      mineralNoDisponible: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleGetCliente = this.handleGetCliente.bind(this);
     this.Persona = this.Persona.bind(this);
     this.Empresa = this.Empresa.bind(this);
-    this.add = this.add.bind(this);
     this.revisarInventario = this.revisarInventario.bind(this);
   }
 
@@ -55,7 +56,8 @@ class FormCompraCliente extends Component {
     });
   }
 
-  revisarInventario() {
+  revisarInventario(e) {
+    e.preventDefault();
     console.log("inventario");
     fetch(`/api/inventario`)
       .then(res => res.json())
@@ -63,23 +65,35 @@ class FormCompraCliente extends Component {
         this.setState({ inventario: res.map(r => r) });
       })
       .then(res => {
-        console.log("revisando inventario" + this.state.inventario);
-        let verifi = false;
-        if (this.state.inventario && this.state.inventario.length) {
-          this.state.inventario.map(inv => {
-            console.log(
-              "mineral inv " + inv.mineral + "mineral" + this.state.mineral
-            );
-            if (
-              inv.mineral == this.state.mineral &&
-             inv.cantidad >= this.state.cantidad
-            ) {
-              this.setState({
-                mineralDisponible: !this.state.mineralDisponible
-              });
+        this.setState({
+          mineralDisponible: false,
+          procesarCompra: true
+        });
+      })
+      .then(res => {
+        this.state.inventario.map(inv => {
+          if (inv.mineral == this.state.mineral) {
+            if (inv.presentacion == this.state.presentacion) {
+              let c = inv.cantidad - this.state.cantidad;
+              if (c > 0) {
+                this.setState({
+                  mineralDisponible: true
+                });
+              }
             }
+          }
+        });
+        if (!this.state.mineralDisponible) {
+          this.setState({
+            mineralNoDisponible: true
           });
-          console.log(this.state.mineralDisponible);
+          swal(
+            "No tenemos los minerales ahora!",
+            "Comienza el proceso de explotacion",
+            "warning"
+          );
+        } else {
+          swal("Minerales Disponibles!", "Procede a ver tu factura", "success");
         }
       });
   }
@@ -121,46 +135,26 @@ class FormCompraCliente extends Component {
     }
   }
 
-  add = cantidad => {
-    let inputs = [];
-
-    for (let i = 1; i <= cantidad; i++) {
-      inputs.push(
-        <div className="min-compra">
-          <div>
-            <label>Mineral {i}</label>
-            <select
-              name="nombre"
-              value={this.state.mineral}
-              onChange={this.handleChange}
-            >
-              <option />
-
-              {this.props.minerales.map((mineral, i) => (
-                <option value={mineral.id_mineral} key={i}>
-                  {mineral.mineral_nombre}{" "}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label>Presentacion</label>
-            <input />
-          </div>
-          <div>
-            <label>Cantidad</label>
-            <input type="number" />
-          </div>
-        </div>
-      );
-    }
-    return inputs;
+  getIdMineral = mineral => {
+    let id = 0;
+    this.props.minerales.map(m => {
+      console.log("m: " + m.nombre_mineral);
+      if (m.nombre_mineral == mineral) {
+        id = m.id_mineral;
+      }
+    });
+    console.log(id);
+    return id;
   };
 
   render() {
     return (
       <>
-        <div className="wrapper-c">
+        <div
+          className={
+            this.state.procesarCompra ? "wrapper-c_no_show" : "wrapper-c"
+          }
+        >
           <div className="titulo">
             <form className="form" noValidate>
               <h5 id="ordenTitulo">Orden de Compra</h5>
@@ -248,7 +242,6 @@ class FormCompraCliente extends Component {
                   value={this.state.presentacion}
                   onChange={this.handleChange}
                 >
-                  {console.log("aca papi " + this.state.mineral)}
                   <option />
                   {this.props.minerales_presentacion.map((presentacion, i) => {
                     if (presentacion.nombre_mineral == this.state.mineral) {
@@ -267,7 +260,7 @@ class FormCompraCliente extends Component {
               </div>
 
               <div className="ci">
-                <label htmlFor="ci">C.I</label>
+                <label htmlFor="ci">Cantidad</label>
                 <input
                   className=""
                   placeholder="Cantidad que desea comprar (toneladas)"
@@ -280,12 +273,26 @@ class FormCompraCliente extends Component {
               </div>
 
               <div className="ingresarUsuario">
-                <button type="submit" onClick={this.revisarInventario}>
+                <button
+                  type="submit"
+                  onClick={function(e) {
+                    this.revisarInventario(e);
+                  }.bind(this)}
+                >
                   Generar Compra
                 </button>
               </div>
             </form>
           </div>
+        </div>
+        <div>
+          {this.state.mineralDisponible ? <Factura /> : null}
+          {this.state.mineralNoDisponible ? (
+            <CompraAliadoAuto
+              id_mineral={this.getIdMineral(this.state.mineral)}
+              cantidad={this.state.cantidad}
+            />
+          ) : null}
         </div>
       </>
     );

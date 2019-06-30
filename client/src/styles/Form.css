@@ -22,6 +22,10 @@
 
   /*  background-color: #258ea6;*/
 }
+
+.wrapper-c_no_show {
+ display: none;
+}
 .form-wrapper {
   width: 100%;
   display: flex;

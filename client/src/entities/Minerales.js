@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import Menu from "../components/Menu";
 import ConsultTableMinerales from "../components/ConsultTableMinerales";
 import FormMineral from "../components/FormMineral";
+import ModificarMineral from "../components/ModificarMineral";
 
 export default class Minerales extends Component {
   constructor() {
     super();
 
     this.state = {
-      mineralesList: ""
+      mineralesList: "",
+      mineralBuscado: ""
     };
   }
 
@@ -16,8 +18,8 @@ export default class Minerales extends Component {
     fetch(`/api/minerales/${nombre}`)
       .then(res => res.json())
       .then(res => {
-        var mineralesList = res.map(r => r);
-        this.setState({ mineralesList });
+        var mineralBuscado = res.map(r => r);
+        this.setState({ mineralBuscado });
       });
   };
 
@@ -35,6 +37,7 @@ export default class Minerales extends Component {
   }
   render() {
     var minerales = this.state.mineralesList;
+    var mineralBuscado = this.state.mineralBuscado;
     var consult = {
       consult: [
         "Nombre",
@@ -55,12 +58,21 @@ export default class Minerales extends Component {
           id: 0
         },
         {
+          form: <ConsultTableMinerales minerales={minerales} />,
+          id: 1
+        },
+        {
+          form: <ConsultTableMinerales />,
+          id: 2
+        },
+        {
           form: (
-            <ConsultTableMinerales
+            <ModificarMineral
               minerales={minerales}
+              getMinerales={this.getMineral}
             />
           ),
-          id: 1
+          id: 3
         }
       ]
     };

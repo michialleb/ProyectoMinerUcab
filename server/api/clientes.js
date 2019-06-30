@@ -10,6 +10,22 @@ router.get("/getEmpresa", function(req, res) {
   });
 });
 
+router.get("/consultar/compras/:id_cliente", function(req, res) {
+  var id_cliente = req.params.id_cliente;
+  Clientes.retrieveCompraCliente(id_cliente, function(err, compras) {
+    if (err) return res.json(err);
+    return res.json(compras);
+  });
+});
+
+router.get("/consultar/compras/empresa/:id_cliente", function(req, res) {
+  var id_cliente = req.params.id_cliente;
+  Clientes.retrieveCompraClienteEmpresa(id_cliente, function(err, compras) {
+    if (err) return res.json(err);
+    return res.json(compras);
+  });
+});
+
 router.get("/getPersona", function(req, res) {
   Clientes.retrievePersona(function(err, personas) {
     if (err) return res.json(err);
@@ -23,7 +39,6 @@ router.get("/:cedula", function(req, res) {
     if (err) return res.json(err);
     return res.json(per);
   });
-
 });
 
 router.get("/empresa/:rif", function(req, res) {

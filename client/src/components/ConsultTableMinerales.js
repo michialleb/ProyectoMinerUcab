@@ -15,7 +15,6 @@ class ConsultTableMinerales extends Component {
   }
 
   handleGetInfo = id => {
-    console.log("entrooo");
     fetch(`/api/minerales/mineralCompuesto/${id}`)
       .then(res => res.json())
       .then(res => {
