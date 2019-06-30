@@ -5,6 +5,7 @@ import Form from "../components/Form";
 import FormCliente from "../components/FormClienteEmpresa";
 import FormCompraCliente from "../components/FormCompraCliente";
 import ConsultarCliente from "../components/ConsultTableClientes";
+import EliminarCliente from "../components/EliminarCliente";
 export default class Clientes extends Component {
   constructor() {
     super();
@@ -94,7 +95,25 @@ export default class Clientes extends Component {
     var lugares = this.state.lugarList;
     var personas = this.state.personaList;
     var empresas = this.state.empresaList;
-
+    var consult = {
+      persona: [
+        "Nombre",
+        "Apellido",
+        "Cedula",
+        "Nacimiento",
+        "Direccion",
+        "Sexo",
+        "Correo",
+        "Telefono"
+      ],
+      empresa:[
+        "Nombre",
+        "Rif",
+        "Correo",
+        "Telefono",
+        "Direccion"
+      ]
+    };
     var crud = {
       options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar", "Compra"],
       content: [
@@ -107,7 +126,8 @@ export default class Clientes extends Component {
           id: 1
         },
         {
-          form: "",
+          form: (<EliminarCliente
+          consult={consult}/>),
           id: 2
         },
         {

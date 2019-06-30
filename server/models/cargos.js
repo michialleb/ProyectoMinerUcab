@@ -3,6 +3,7 @@ var express = require("express");
 
 class Cargos {
   static retrieveAll(callback) {
+    console.log('model cargos');
     db.query("SELECT * FROM cargo", function(err, res) {
       if (err.error) return callback(err);
       callback(res);

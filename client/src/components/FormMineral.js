@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
+import swal from 'sweetalert';
+
 
 class FormMineral extends Component {
   constructor() {
@@ -30,12 +32,25 @@ class FormMineral extends Component {
     console.log(this.state);
   }
 
-  handleAddMineral = () => {
+  handleAddMineral = (e) => {
+  e.preventDefault (e);
     fetch("/api/minerales", {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ minerales: this.state })
-    }).then(res => res.json());
+    }).then(res => res.json())
+    .catch (res =>{
+      //swal("Revisar campos obligatorios!", "You clicked the button!", "error");
+     })
+       .then (res =>{
+         if(res.error)
+         swal("Revisar campos vacios!", "Intente de nuevo!", "error")
+        
+        else 
+        swal("Mineral Ingresado!", "Satisfactoriamentes!", "success");
+        ;
+      })
+      
   };
 
   handleSubmit(e) {

@@ -99,6 +99,8 @@ class Minerales {
     });
   }
   static insert(mineral, callback) {
+    if (mineral.nombre =="")
+        mineral.nombre=null;
     db.query(
       "INSERT INTO mineral (nombre_mineral,tipo_mineral,valor_economico,\
         descripcion_mineral,fecha_ini_explotacion,fecha_nacionalizacion) \
@@ -115,6 +117,16 @@ class Minerales {
       function(err, res) {
         if (err.error) return callback(err);
         callback(res);
+      }
+    );
+  }
+  static delete(nombre, callback) {
+    db.query(
+      'DELETE FROM mineral where nombre_mineral=$1',[nombre],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+        
       }
     );
   }

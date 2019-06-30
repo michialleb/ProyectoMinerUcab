@@ -3,6 +3,7 @@ import Menu from "../components/Menu";
 import ConsultTableYacimientos from "../components/ConsultTableYacimientos";
 import FormYacimiento from "../components/FormYacimiento";
 import FormEtapa from "../components/FormEtapa";
+import EliminarYacimiento from "../components/EliminarYacimiento";
 export default class Yacimientos extends Component {
   constructor() {
     super();
@@ -107,7 +108,9 @@ export default class Yacimientos extends Component {
           id: 1
         },
         {
-          form:<FormEtapa/>,
+          form:<EliminarYacimiento
+          consult={consult}
+          />,
           id:2
         }
       ]

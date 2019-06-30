@@ -89,11 +89,11 @@ export default class Empleado extends Component {
         "Apellido",
         "Cedula",
         "Nacimiento",
-        "Telefono",
         "Direccion",
         "Sexo",
         "Cargo",
-        "Correo"
+        "Correo",
+        "Telefono"
       ]
     };
 

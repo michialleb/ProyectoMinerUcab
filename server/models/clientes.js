@@ -73,6 +73,7 @@ class Clientes {
         callback(res);
       }
     );
+    console.log(rif);
   }
 
   static retrievePersona(callback) {
@@ -93,7 +94,7 @@ class Clientes {
 
   static retrievePersonaCedula(cedula, callback) {
     db.query(
-      "select e.nombre_persona as nombre,e.apellido_persona as apellido,\
+      "select e.id_cliente as id, e.nombre_persona as nombre,e.apellido_persona as apellido,\
       e.cedula_identidad as cedula ,e.fecha_nacimiento as fnac, e.sexo as sexo, \
       uno.nombre_lugar as estado,dos.nombre_lugar as municipio\
       ,tres.nombre_lugar as provincia, e.correo_persona as correo,e.telefono_persona as telefono \
@@ -101,6 +102,27 @@ class Clientes {
       where tres.id_lugar=e.fk_lugar and tres.fk_lugar=dos.id_lugar\
       and dos.fk_lugar=uno.id_lugar and e.cedula_identidad=$1",
       [cedula],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+      
+    );
+  }
+  static delete(ced, callback) {
+    db.query(
+      `DELETE FROM persona where id_cliente=${ced}`,
+      
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+  static deleteE(rif, callback) {
+    db.query(
+      `DELETE FROM empresa where rif=${rif}`,
+      
       function(err, res) {
         if (err.error) return callback(err);
         callback(res);

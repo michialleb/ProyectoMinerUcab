@@ -3,6 +3,8 @@ import Menu from "../components/Menu";
 import ConsultTableMinerales from "../components/ConsultTableMinerales";
 import FormMineral from "../components/FormMineral";
 import ModificarMineral from "../components/ModificarMineral";
+import EliminarEmpleado from "../components/EliminarEmpleado";
+import EliminarMineral from "../components/EliminarMineral";
 
 export default class Minerales extends Component {
   constructor() {
@@ -41,12 +43,12 @@ export default class Minerales extends Component {
     var consult = {
       consult: [
         "Nombre",
-        "Tipo",
         "Valor",
         "Descripción",
-        "Industria",
         "Inicio de Explotación",
-        "Fecha Nacionalización"
+        "Fecha Nacionalización",
+        "Tipo",
+
       ]
     };
 
@@ -62,8 +64,8 @@ export default class Minerales extends Component {
           id: 1
         },
         {
-          form: <ConsultTableMinerales />,
-          id: 2
+          form:(<EliminarMineral consult={consult}/>),
+          id:2
         },
         {
           form: (
@@ -73,8 +75,7 @@ export default class Minerales extends Component {
             />
           ),
           id: 3
-        }
-      ]
+        }]
     };
 
     return <Menu crud={crud} />;

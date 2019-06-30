@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "../styles/ConsultTable.css";
-import { FaSistrix } from "react-icons/fa";
-import { MDBDataTable, MDBBtn } from "mdbreact";
+import { MDBDataTable } from "mdbreact";
 import swal from "@sweetalert/with-react";
 import { ListGroup } from "react-bootstrap";
 
@@ -21,21 +20,16 @@ class ConsultTableMinerales extends Component {
         if (res !== []) this.setState({ compuestosList: res.map(r => r) });
       })
       .then(res => {
-        if (this.state.acessos !== null) {
+       
           swal(
-            <ListGroup>
+            <div>
+              <ListGroup>
               {this.state.compuestosList.map(mineral => {
-                return <ListGroup.Item>{mineral.nombre}</ListGroup.Item>;
+                return (<ListGroup.Item>{mineral.nombre}</ListGroup.Item>);
               })}
             </ListGroup>
-          );
-        } else {
-          swal({
-            title: "No está compuesto por ningún otro mineral"
-          });
-        }
-
-        // this.setState({ selected : !this.state.selected});
+            </div>
+          );  // this.setState({ selected : !this.state.selected});
       });
     console.log(this.state.compuestosList);
   };

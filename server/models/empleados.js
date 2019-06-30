@@ -75,6 +75,15 @@ class Empleados {
   }
 
   static insert(empleado, callback) {
+    console.log(empleado.nombre + ' michi en models');
+    if (empleado.nombre == "")
+    empleado.nombre=null
+    else if (empleado.apellido=="")
+    empleado.apellido=null
+    else if (empleado.cedula=="")
+    empleado.cedula=null
+    else if (empleado.fnac=="")
+    empleado.fnac = null
     db.query(
       "INSERT INTO empleado (nombre_empleado,apellido_empleado,cedula_identidad,\
        fecha_nacimiento,fk_lugar,sexo,fk_cargo,telefono_empleado,correo_empleado)\

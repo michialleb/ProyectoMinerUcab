@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import "../styles/ConsultTable.css";
-import { FaSistrix } from "react-icons/fa";
+//import { FaSistrix } from "react-icons/fa";
 import swal from "@sweetalert/with-react";
-import ModalHorarios from "./ModalHorarios";
+//import ModalHorarios from "./ModalHorarios";
 
-import { MDBDataTable, MDBBtn } from "mdbreact";
+import { MDBDataTable } from "mdbreact";
 
 class ConsultTableEmpleado extends Component {
   constructor(props) {
@@ -68,7 +68,8 @@ class ConsultTableEmpleado extends Component {
         correo: emp.correo,
         telefono: emp.telefono,
         horario: (
-          <button
+          <div className="horario">
+          <button 
             onClick={function(e) {
               this.handleGetHorario(emp.id);
             }.bind(this)}
@@ -76,6 +77,7 @@ class ConsultTableEmpleado extends Component {
             {" "}
             Horario{" "}
           </button>
+          </div>
         )
       };
       empl.push(e);
