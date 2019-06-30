@@ -1,5 +1,5 @@
 var express = require("express");
-var Satus = require("../models/status");
+var Status = require("../models/status");
 
 var router = express.Router();
 

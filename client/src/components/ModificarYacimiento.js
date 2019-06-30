@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../styles/Form.css";
 //import ConfiguracionProyecto from "../components/ConfiguracionProyecto";
 import swal from "sweetalert";
+import { FaSistrix } from "react-icons/fa";
 
 class FormYacimiento extends Component {
   constructor() {
@@ -21,6 +22,10 @@ class FormYacimiento extends Component {
       estado2: -1,
       municipio: 0,
       municipio2: -1,
+      estadoAnterior: "",
+      municipioAnterior: "",
+      provinciaAnteriror: "",
+
       municipioList: [],
       provinciaList: []
     };
@@ -199,12 +204,13 @@ class FormYacimiento extends Component {
   addInfoYacimiento(yacimiento) {
     yacimiento.map(yaci => {
       this.setState({
-        nombre: yaci.nombre,
+        nombre: yaci.nombre_yacimiento,
         direccion: yaci.direccion,
         kilometros: yaci.kilometros,
         estadoAnterior: yaci.estado,
         municipioAnterior: yaci.municipio,
-        provinciaAnteriror: yaci.provincia
+        provinciaAnteriror: yaci.provincia,
+        fkStatus: yaci.nombre_status
       });
       console.log("addinfo");
       console.log(yaci);
@@ -215,6 +221,17 @@ class FormYacimiento extends Component {
     this.props.getYacimiento(this.state.nombreBuscado);
     this.addInfoYacimiento(this.props.yacimiento);
   }
+
+  handleUpdateYacimiento(e) {
+    e.preventDefault();
+    console.log("entro en el handle");
+    fetch(`/api/yacimientos/actualizar/update`, {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ yacim: this.state })
+    }).then(res => res.json());
+  }
+
   componentDidMount() {}
 
   render() {
@@ -225,21 +242,28 @@ class FormYacimiento extends Component {
     return (
       <>
         <div id="form-yac" className="wrapper">
+          <div className="firstName">
+            <label htmlFor="firstName">
+              Introduce el nombre del Yacimiento a eliminar:
+            </label>
+            <input
+              className=""
+              placeholder="Ingrese el nombre"
+              type="text"
+              name="nombreBuscado"
+              noValidate
+              value={this.state.nombreBuscado}
+              onChange={this.handleChange}
+            />
+            <button
+              className="search"
+              type="button"
+              onClick={this.handleGetYacimiento}
+            >
+              {<FaSistrix />}
+            </button>
+          </div>
           <div className="form-wrapper">
-            <div className="firstName">
-              <label htmlFor="firstName">
-                Introduce el nombre del Yacimiento a eliminar:
-              </label>
-              <input
-                className=""
-                placeholder="Ingrese el nombre"
-                type="text"
-                name="nombreBuscado"
-                noValidate
-                value={this.state.nombreBuscado}
-                onChange={this.handleChange}
-              />
-            </div>
             <h5>Modificar Yacimiento</h5>
             <form className="form" noValidate>
               <div className="firstName">
@@ -268,7 +292,14 @@ class FormYacimiento extends Component {
               </div>
 
               <div className="direccion">
-                <label htmlFor="direccion">Dirección</label>
+                <label htmlFor="direccion">
+                  Dirección: <br />
+                  {this.state.estadoAnterior +
+                    ", " +
+                    this.state.municipioAnterior +
+                    ", " +
+                    this.state.provinciaAnteriror}
+                </label>
                 <select
                   className="lugares"
                   type="number"
@@ -276,7 +307,7 @@ class FormYacimiento extends Component {
                   value={this.state.estado2}
                   onChange={this.handleChange}
                 >
-                  <option />
+                  <option> </option>
                   {this.props.lugares.map((lugar, i) => (
                     <option value={lugar.id_lugar} key={i}>
                       {lugar.nombre_lugar}
@@ -291,7 +322,7 @@ class FormYacimiento extends Component {
                   value={this.state.municipio2}
                   onChange={this.handleChange}
                 >
-                  <option />
+                  <option> </option>
                   {this.state.municipioList.map((lugar, i) => (
                     <option value={lugar.id_lugar} key={i}>
                       {lugar.nombre_lugar}
@@ -309,7 +340,7 @@ class FormYacimiento extends Component {
                   value={this.state.direccion}
                   onChange={this.handleChange}
                 >
-                  <option />
+                  <option> </option>
                   {this.state.provinciaList.map((lugar, i) => (
                     <option value={lugar.id_lugar} key={i}>
                       {lugar.nombre_lugar}
@@ -319,7 +350,7 @@ class FormYacimiento extends Component {
               </div>
               <div>
                 <div className="add_minerales">
-                  <label>Minerales </label>
+                  <label>Minerales {+"  "} </label>
                   <select
                     name="mineral"
                     value={this.state.mineral}
@@ -363,8 +394,8 @@ class FormYacimiento extends Component {
                 </div>
               </div>
 
-              <div className="add-minerales">
-                <label htmlFor="minerales">Status</label>
+              <div className="firstName">
+                <label htmlFor="minerales">Status:</label>
                 <select
                   name="fkStatus"
                   type="text"
@@ -383,13 +414,13 @@ class FormYacimiento extends Component {
               </div>
 
               <div className="ingresarUsuario">
-                <button type="submit" onClick={this.handleIngresarYacimiento}>
+                <button
+                  type="submit"
+                  onClick={function(e) {
+                    this.handleUpdateYacimiento(e);
+                  }.bind(this)}
+                >
                   Modificar Yacimiento
-                </button>
-              </div>
-              <div className="ingresarUsuario">
-                <button type="submit" onClick={this.handleIngresarMinerales}>
-                  Ingresar Minerales
                 </button>
               </div>
             </form>
