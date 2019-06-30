@@ -55,8 +55,6 @@ class FormCompraCliente extends Component {
       [name]: value
     });
   }
-  
-  
 
   revisarInventario(e) {
     e.preventDefault();
@@ -117,7 +115,7 @@ class FormCompraCliente extends Component {
   handleGetCliente(e) {
     e.preventDefault();
     console.log(this.state.tipoCliente);
-    if ((this.state.tipoCliente =="Persona")) {
+    if ((this.state.tipoCliente = "Persona")) {
       this.props.getPersonaCedula(this.state.documento);
       this.props.personas.map(persona => {
         this.setState({
@@ -227,7 +225,6 @@ class FormCompraCliente extends Component {
                   name="mineral"
                   value={this.state.mineral}
                   onChange={this.handleChange}
-                  onClick={this.getPresentacionList(this.state.mineral)}
                 >
                   <option />
                   {this.props.minerales.map((mineral, i) => (
