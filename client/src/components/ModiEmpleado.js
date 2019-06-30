@@ -138,7 +138,6 @@ class Form extends Component {
               value={this.state.cedulaBuscada}
               onChange={this.handleChange}
             />
-
             <button
               className="search"
               type="button"

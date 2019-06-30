@@ -4,15 +4,19 @@ import ConsultTableYacimientos from "../components/ConsultTableYacimientos";
 import FormYacimiento from "../components/FormYacimiento";
 import FormEtapa from "../components/FormEtapa";
 import EliminarYacimiento from "../components/EliminarYacimiento";
+import ModificarYacimiento from "../components/ModificarYacimiento";
+
 export default class Yacimientos extends Component {
   constructor() {
     super();
     this.state = {
       yacimientosList: [],
       mineralList: [],
-      cargosList:[],
+      cargosList: [],
+      yacimientoUnico: [],
       maquinariaList: [],
-      lugarList: []
+      lugarList: [],
+      statusList: []
     };
   }
 
@@ -20,8 +24,8 @@ export default class Yacimientos extends Component {
     fetch(`/api/yacimientos/${nombre}`)
       .then(res => res.json())
       .then(res => {
-        var yacimientosList = res.map(r => r);
-        this.setState({ yacimientosList });
+        var yacimientoUnico = res.map(r => r);
+        this.setState({ yacimientoUnico });
       });
   };
 
@@ -42,6 +46,8 @@ export default class Yacimientos extends Component {
       });
   };
   getYacimientosList = () => {
+
+    console.log("entro en el yacimiento list")
     fetch("/api/yacimientos")
       .then(res => res.json())
       .then(res => {
@@ -58,15 +64,26 @@ export default class Yacimientos extends Component {
       });
   };
 
-  getMaquinariaList =() => {
+  getMaquinariaList = () => {
     fetch("/api/maquinaria")
       .then(res => res.json())
       .then(res => {
         var maquinariaList = res.map(r => r);
         this.setState({ maquinariaList });
       });
-  }
+  };
+
+  getStatusList = () => {
+    fetch("/api/status/buscar")
+      .then(res => res.json())
+      .then(res => {
+        var statusList = res.map(r => r);
+        this.setState({ statusList });
+      });
+  };
+
   componentDidMount() {
+    this.getStatusList();
     this.getYacimientosList();
     this.getMineralList();
     this.getCargosList();
@@ -74,14 +91,15 @@ export default class Yacimientos extends Component {
     this.getLugarList();
   }
 
-  
   render() {
     var yacimientos = this.state.yacimientosList;
+    var yacimiento = this.state.yacimientoUnico;
     var minerales = this.state.mineralList;
-    var cargos= this.state.cargosList;
-    var maquinaria= this.state.maquinariaList;
+    var cargos = this.state.cargosList;
+    var maquinaria = this.state.maquinariaList;
     var lugares = this.state.lugarList;
-    
+    var status = this.state.statusList;
+
     var consult = {
       consult: ["Nombre", "Kilometros", "Direccion", "Status"]
     };
@@ -90,11 +108,14 @@ export default class Yacimientos extends Component {
       options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar"],
       content: [
         {
-          form: <FormYacimiento 
-                   minerales={minerales} 
-                   cargos={cargos}
-                    maquinaria={maquinaria}
-                    lugares={lugares} />, //colocar formato de ingreso
+          form: (
+            <FormYacimiento
+              minerales={minerales}
+              cargos={cargos}
+              maquinaria={maquinaria}
+              lugares={lugares}
+            />
+          ), //colocar formato de ingreso
           id: 0
         },
         {
@@ -108,10 +129,20 @@ export default class Yacimientos extends Component {
           id: 1
         },
         {
-          form:<EliminarYacimiento
-          consult={consult}
-          />,
-          id:2
+          form: <EliminarYacimiento consult={consult} />,
+          id: 2
+        },
+        {
+          form: (
+            <ModificarYacimiento
+              minerales={minerales}
+              status={status}
+              lugares={lugares}
+              yacimiento={yacimiento}
+              getYacimiento={this.getYacimiento}
+            />
+          ),
+          id: 3
         }
       ]
     };
