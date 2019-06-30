@@ -47,6 +47,21 @@ class Form extends Component {
     });
   }
 
+  handleGetEmpleado() {
+    fetch(`/api/empleados/${this.state.cedulaBuscada}`)
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ empleado: res.map(r => r) });
+      });
+    this.state.empleado.map(empl => {
+      this.setState({
+        id_empleado: empl.id
+      });
+    });
+
+    this.setState({ bool: true });
+  }
+
   getMunicipio = codigo => {
     fetch(`/api/lugar/${codigo}`)
       .then(res => res.json())
@@ -113,9 +128,10 @@ class Form extends Component {
   }
 
   handleGetEmpleado(e) {
-    e.preventDefault()
+    e.preventDefault();
     // this.setState(null);
-    this.props.getEmpleado(this.state.cedulaBuscada);
+    console.log(this.state.cedula);
+    this.props.handleGetEmpleado(this.state.cedulaBuscada);
     this.addInfoEmpleado(this.props.empleado);
     console.log(this.props.empleado);
     // this.setState({
@@ -204,7 +220,7 @@ class Form extends Component {
                 <input
                   className=""
                   placeholder="xx/yy/zz"
-                  type="text"
+                  type="date"
                   name="fnac"
                   noValidate
                   value={this.state.fnac}
@@ -217,7 +233,7 @@ class Form extends Component {
                 <input
                   className=""
                   placeholder="Ingrese nro telefónico"
-                  type="text"
+                  type="number"
                   name="telefono"
                   noValidate
                   value={this.state.telefono}
@@ -302,7 +318,7 @@ class Form extends Component {
               </div>
               <div className="ingresarUsuario">
                 <button type="submit" onClick={this.handleUpdateEmpleado(1)}>
-                  Ingresar Usuario
+                  Actualizar Usuario
                 </button>
               </div>
             </form>

@@ -15,13 +15,20 @@ export default class Empleado extends Component {
       empleado: [],
       empleadoList: [],
       lugarList: [],
-    //  horarioList: [],
+      //  horarioList: [],
       empleadoCedula: ""
     };
     this.getEmpleadoList = this.getEmpleadoList.bind(this);
-
+    this.handleGetEmpleado = this.handleGetEmpleado.bind(this);
   }
 
+  handleGetEmpleado(cedula) {
+    fetch(`/api/empleados/${cedula}`)
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ empleado: res.map(r => r) });
+      });
+  }
 
   getLugarList = () => {
     fetch("/api/lugar")
@@ -40,34 +47,33 @@ export default class Empleado extends Component {
         this.setState({ cargoList });
       });
   };
-deleteEmpleado = ced =>{
-  console.log(ced)
-  console.log(ced+'id de diego 0')
-  fetch(`/api/empleados/${ced}`, {method: 'DELETE'})
-  .then(res => res.json())
-
-}
+  deleteEmpleado = ced => {
+    console.log(ced);
+    console.log(ced + "id de diego 0");
+    fetch(`/api/empleados/${ced}`, { method: "DELETE" }).then(res =>
+      res.json()
+    );
+  };
   getEmpleadoList = () => {
     fetch("/api/empleados")
       .then(res => res.json())
       .then(res => {
         var empleadoList = res.map(r => r);
-          this.setState({ empleadoList });
-        
+        this.setState({ empleadoList });
       });
   };
-//removeEmpleado =()=>{}
+  //removeEmpleado =()=>{}
   componentDidMount() {
-   // this.getCargoList();
+    this.getCargoList();
     this.getEmpleadoList();
-    //this.getLugarList();
+    this.getLugarList();
   }
   render() {
     var empleados = this.state.empleadoList;
     var cargos = this.state.cargoList;
     var lugares = this.state.lugarList;
     var horarios = this.state.horarioList;
-    var empleado= this.state.empleado;
+    var empleado = this.state.empleado;
     var consult = {
       consult: [
         "Nombre",
@@ -129,7 +135,6 @@ deleteEmpleado = ced =>{
               empleado={empleados}
               lugares={lugares}
               getEmpleado={this.handleGetEmpleado}
-              
             />
           ),
           id: 3

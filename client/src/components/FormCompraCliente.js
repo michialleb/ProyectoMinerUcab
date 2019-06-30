@@ -2,6 +2,17 @@ import React, { Component } from "react";
 import "../styles/Form.css";
 import "../styles/ConsultTable.css";
 import { FaSistrix } from "react-icons/fa";
+import Factura from "./Factura";
+import ActivarProyecto from "./ActivarProyecto";
+import Services from "./Services";
+
+function ChangeCompra(props) {
+  const mineralDisponible = true;
+  if (mineralDisponible) {
+    return <Services />;
+  }
+  return null;
+}
 
 class FormCompraCliente extends Component {
   constructor() {
@@ -14,12 +25,13 @@ class FormCompraCliente extends Component {
       rif: "",
       ci: "",
       cantidad: "",
-      fechaentrega: "",
       mineral: "",
+      presentacion: "",
+      mineral2: "",
       nombreMineral: [],
       tipoCliente: "",
-      presentaciones:[],
-      inventarioList: [],
+      presentaciones: [],
+      inventario: [],
       mineralDisponible: false,
       1: "",
       2: ""
@@ -29,26 +41,9 @@ class FormCompraCliente extends Component {
     this.Persona = this.Persona.bind(this);
     this.Empresa = this.Empresa.bind(this);
     this.add = this.add.bind(this);
-    this.getPresentacionList = this.getPresentacionList.bind(this);
+    this.revisarInventario = this.revisarInventario.bind(this);
   }
- 
-  handleRevisarInventario = ()=> {
-    fetch(`/api/inventario`)
-    .then(res => res.json())
-    .then(res => {
-      var inventario = res.map(r => r);
-       this.setState({inventario});
-    })
-    .then(res => {
-      if (this.state.inventarioList && this.state.inventarioList.length){
-        this.state.inventarioList.map((inventario) => {
-          if ((inventario.mineral == this.state.mineral) &&  (inventario.cantidad >= this.state.cantidad)){
-            this.setState({ mineralDisponible : !this.state.mineralDisponible});
-          }
-        });
-      }
-    })
-  }
+
   handleChange(e) {
     e.preventDefault();
     let target = e.target;
@@ -60,18 +55,34 @@ class FormCompraCliente extends Component {
     });
   }
 
-  getPresentacionList = (nombreMineral) => {
-    fetch(`/api/minerales/presentacion/:${nombreMineral}`)
+  revisarInventario() {
+    console.log("inventario");
+    fetch(`/api/inventario`)
       .then(res => res.json())
       .then(res => {
-        console.log(res);
-        var presentaciones = res.map(r => r);
-          this.setState({ presentaciones });
-        
+        this.setState({ inventario: res.map(r => r) });
+      })
+      .then(res => {
+        console.log("revisando inventario" + this.state.inventario);
+        let verifi = false;
+        if (this.state.inventario && this.state.inventario.length) {
+          this.state.inventario.map(inv => {
+            console.log(
+              "mineral inv " + inv.mineral + "mineral" + this.state.mineral
+            );
+            if (
+              inv.mineral == this.state.mineral &&
+             inv.cantidad >= this.state.cantidad
+            ) {
+              this.setState({
+                mineralDisponible: !this.state.mineralDisponible
+              });
+            }
+          });
+          console.log(this.state.mineralDisponible);
+        }
       });
-
-      console.log("estas son las presentaciones "+ this.state.presentaciones);
-  };
+  }
 
   Persona(e) {
     e.preventDefault();
@@ -124,6 +135,7 @@ class FormCompraCliente extends Component {
               onChange={this.handleChange}
             >
               <option />
+
               {this.props.minerales.map((mineral, i) => (
                 <option value={mineral.id_mineral} key={i}>
                   {mineral.mineral_nombre}{" "}
@@ -144,10 +156,6 @@ class FormCompraCliente extends Component {
     }
     return inputs;
   };
-
-componentDidMount(){
- this.getPresentacionList();
-}
 
   render() {
     return (
@@ -240,20 +248,39 @@ componentDidMount(){
                   value={this.state.presentacion}
                   onChange={this.handleChange}
                 >
-                  {console.log("aca papi " +this.state.mineral)}
+                  {console.log("aca papi " + this.state.mineral)}
                   <option />
-                  {this.getPresentacionList(this.state.mineral)}
-                  {this.state.presentaciones.map((presentacion, i) => (
-                    <option value={presentacion.nombre_presentacion} key={i}>
-                      {presentacion.nombre_presentacion}
-                    </option>
-                  ))}
+                  {this.props.minerales_presentacion.map((presentacion, i) => {
+                    if (presentacion.nombre_mineral == this.state.mineral) {
+                      return (
+                        <option
+                          value={presentacion.nombre_presentacion}
+                          key={i}
+                        >
+                          {presentacion.nombre_presentacion}
+                        </option>
+                      );
+                    }
+                    return null;
+                  })}
                 </select>
               </div>
 
-              <div>{this.add(this.state.cantidad)}</div>
+              <div className="ci">
+                <label htmlFor="ci">C.I</label>
+                <input
+                  className=""
+                  placeholder="Cantidad que desea comprar (toneladas)"
+                  type="number"
+                  name="cantidad"
+                  noValidate
+                  value={this.state.cantidad}
+                  onChange={this.handleChange}
+                />
+              </div>
+
               <div className="ingresarUsuario">
-                <button type="submit" onClick={this.handleAddMineral}>
+                <button type="submit" onClick={this.revisarInventario}>
                   Generar Compra
                 </button>
               </div>

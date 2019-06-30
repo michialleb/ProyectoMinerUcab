@@ -45,6 +45,21 @@ class Minerales {
     );
   }
 
+ 
+
+  static retrievePresentaciones( callback) {
+    db.query(
+      "select p.nombre_presentacion, m.nombre_mineral  \
+      from presentacion p, mineral m, mineral_presentacion mp\
+      where mp.fk_mineral = m.id_mineral\
+      and mp.fk_presentacion= p.id_presentacion",
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
 
 
   static retrieveAll(callback) {

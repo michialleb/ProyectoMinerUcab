@@ -13,7 +13,8 @@ export default class Clientes extends Component {
       mineralesList: [],
       lugarList: [],
       personaList: [],
-      empresaList: []
+      empresaList: [],
+      presentaciones: []
     };
   }
 
@@ -68,11 +69,25 @@ export default class Clientes extends Component {
       });
   };
 
+  getPresentaciones = () => {
+    console.log("holaa");
+    fetch(`/api/minerales/present/minerales`)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        var presentaciones = res.map(r => r);
+        this.setState({ presentaciones });
+      });
+    console.log(
+      "estas son las presentaciones aaa " + this.state.presentaciones
+    );
+  };
   componentDidMount() {
     this.getMineralesList();
     this.getLugarList();
     this.getEmpresaList();
     this.getPersonaList();
+    this.getPresentaciones();
   }
   render() {
     var minerales = this.state.mineralesList;
@@ -88,13 +103,7 @@ export default class Clientes extends Component {
           id: 0
         },
         {
-          form: (
-            <ConsultarCliente
-              personas={personas}
-              empresas={empresas}
-        
-            />
-          ),
+          form: <ConsultarCliente personas={personas} empresas={empresas} />,
           id: 1
         },
         {
@@ -108,6 +117,7 @@ export default class Clientes extends Component {
         {
           form: (
             <FormCompraCliente
+              minerales_presentacion={this.state.presentaciones}
               minerales={minerales}
               personas={personas}
               empresas={empresas}

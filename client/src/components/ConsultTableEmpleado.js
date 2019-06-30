@@ -37,7 +37,7 @@ class ConsultTableEmpleado extends Component {
               return (
                 <tr key={i}>
                   <td>{horario.dia}</td>
-                  <td>{horario.inicio}</td>
+                            <td>{horario.inicio}</td>
                   <td>{horario.salida}</td>
                 </tr>
               );

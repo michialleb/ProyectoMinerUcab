@@ -5,8 +5,8 @@ class Empleados {
   static retrieveAll(callback) {
     db.query(
       "select e.id_empleado as id, e.nombre_empleado as nombre,e.apellido_empleado as apellido,\
-    e.cedula_identidad as cedula ,e.fecha_nacimiento as fnac, e.sexo as sexo, \
-    c.tipo_cargo as cargo,uno.nombre_lugar as estado,dos.nombre_lugar as municipio\
+    e.cedula_identidad as cedula ,e.fecha_nacimiento as fnac, e.sexo as sexo, e.telefono_empleado as telefono \
+    ,c.tipo_cargo as cargo,uno.nombre_lugar as estado,dos.nombre_lugar as municipio\
     ,tres.nombre_lugar as provincia\
     from empleado e,cargo c,lugar uno, lugar dos, lugar tres\
     where e.fk_cargo=c.id_cargo and tres.id_lugar=e.fk_lugar and tres.fk_lugar=dos.id_lugar\
@@ -19,17 +19,10 @@ class Empleados {
   }
   //fecha_nacimiento=$4, fk_lugar=$5, sexo=$6, fk_cargo=$7
   static update(empleado, callback) {
-    console.log(empleado.nombre);
-    console.log(empleado.apellido);
-    console.log(empleado.fnac);
-    console.log(empleado.fk_lugar);
-    console.log(empleado.sexo);
-    console.log(empleado.fk_cargo);
-    console.log(empleado.cedula);
     db.query(
       "UPDATE empleado set nombre_empleado=$1,apellido_empleado=$2,fecha_nacimiento=$3,fk_lugar=$4,\
-       sexo=$5, fk_cargo=$6\
-       where cedula_identidad= $7",
+       sexo=$5, fk_cargo=$6, telefono_empleado = $7, correo_empleado=$8\
+       where cedula_identidad= $9",
       [
         empleado.nombre,
         empleado.apellido,
@@ -37,6 +30,8 @@ class Empleados {
         empleado.fk_lugar,
         empleado.sexo,
         empleado.fk_cargo,
+        empleado.telefono,
+        empleado.correo,
         empleado.cedula
       ],
       function(err, res) {
@@ -65,8 +60,8 @@ class Empleados {
   static retrieveCedula(cedula, callback) {
     db.query(
       "select e.id_empleado as id, e.nombre_empleado as nombre,e.apellido_empleado as apellido,\
-      e.cedula_identidad as cedula ,e.fecha_nacimiento as fnac, e.sexo as sexo, \
-      c.tipo_cargo as cargo, c.salario_empleado as salario, \
+      e.cedula_identidad as cedula ,e.fecha_nacimiento as fnac, e.sexo as sexo, e.correo_empleado as correo, \
+      c.tipo_cargo as cargo, c.salario_empleado as salario, e.telefono_empleado as telefono, \
       uno.nombre_lugar as estado,dos.nombre_lugar as municipio,tres.nombre_lugar as provincia\
       from empleado e,cargo c,lugar uno, lugar dos, lugar tres\
       where e.fk_cargo=c.id_cargo and e.cedula_identidad=$1 and tres.id_lugar=e.fk_lugar and tres.fk_lugar=dos.id_lugar\
@@ -82,8 +77,8 @@ class Empleados {
   static insert(empleado, callback) {
     db.query(
       "INSERT INTO empleado (nombre_empleado,apellido_empleado,cedula_identidad,\
-       fecha_nacimiento,fk_lugar,sexo,fk_cargo)\
-        VALUES ($1,$2,$3,$4,$5,$6,$7,$8)",
+       fecha_nacimiento,fk_lugar,sexo,fk_cargo,telefono_empleado,correo_empleado)\
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)",
       [
         empleado.nombre,
         empleado.apellido,
@@ -92,6 +87,8 @@ class Empleados {
         empleado.fk_lugar,
         empleado.sexo,
         empleado.fk_cargo,
+        empleado.telefono,
+        empleado.correo
       ],
 
       function(err, res) {
@@ -101,18 +98,16 @@ class Empleados {
     );
   }
 
-   static delete(ced, callback) {
+  static delete(ced, callback) {
     db.query(
       `DELETE FROM empleado where id_empleado=${ced}`,
-      
-      console.log(ced + ' de diego'),
+
+      console.log(ced + " de diego"),
       function(err, res) {
         if (err.error) return callback(err);
         callback(res);
       }
     );
   }
-
-  
 }
 module.exports = Empleados;

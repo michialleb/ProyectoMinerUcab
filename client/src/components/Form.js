@@ -12,7 +12,7 @@ class Form extends Component {
       cedula: "",
       fk_lugar: "",
       telefono: "",
-      correo:"",
+      correo: "",
       sexo: "",
       fk_cargo: "",
       estado: 0,
@@ -66,6 +66,7 @@ class Form extends Component {
   };
 
   buscarProvincias = (codigo, codigo2) => {
+    console.log(codigo + " " + codigo2);
     if (codigo != codigo2) {
       this.getProvincia(codigo2);
       this.setState({ municipio: codigo2 });

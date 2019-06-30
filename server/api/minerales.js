@@ -19,9 +19,17 @@ router.get("/:nombre", function(req, res) {
 });
 
 router.get("/presentacion/:nombreMineral", function(req, res) {
-  console.log("entro en el api con mineral");
   var nombreMineral = req.params.nombreMineral;
+  console.log("entro en el api con mineral" + nombreMineral);
   Minerales.retrievePresentacion(nombreMineral, function(err, presentaciones) {
+    if (err) return res.json(err);
+    return res.json(presentaciones);
+  });
+});
+
+router.get("/present/minerales", function(req, res) {
+  console.log("entro en el api con mineral");
+  Minerales.retrievePresentaciones(function(err, presentaciones) {
     if (err) return res.json(err);
     return res.json(presentaciones);
   });
