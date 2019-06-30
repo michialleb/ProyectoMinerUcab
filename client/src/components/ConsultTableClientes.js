@@ -56,6 +56,7 @@ class ConsultTableClientes extends Component {
       document.getElementById("btn-e").style.color = "#333";
     }
   }
+  
   addButtom = empresas =>{
     var emps = [];
     this.props.empresas.map(emp => {

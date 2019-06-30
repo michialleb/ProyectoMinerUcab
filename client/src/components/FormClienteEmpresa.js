@@ -102,25 +102,30 @@ class FormCliente extends Component {
   Persona() {
     document.getElementById("persona").style.display = "block";
     document.getElementById("empresa").style.display = "none";
-    if (document.getElementById("btn-p").style.background === "orange") {
-      document.getElementById("btn-p").style.background = "#333";
+    if (document.getElementById("btn-p").style.backgroundColor === "orange") {
+      document.getElementById("btn-p").style.backgroundColor = "#333";
       document.getElementById("btn-p").style.color = "orange";
+      document.getElementById("btn-e").style.backgroundColor = "orange";
     } else {
       document.getElementById("btn-p").style.background = "orange";
       document.getElementById("btn-p").style.color = "#333";
+      document.getElementById("btn-e").style.backgroundColor = "#333";
     }
   }
   Empresa() {
     document.getElementById("persona").style.display = "none";
     document.getElementById("empresa").style.display = "block";
-    if (document.getElementById("btn-e").style.background === "orange") {
-      document.getElementById("btn-e").style.background = "#333";
+    if (document.getElementById("btn-e").style.backgroundColor === "orange") {
+      document.getElementById("btn-e").style.backgroundColor = "#333";
       document.getElementById("btn-e").style.color = "orange";
+      document.getElementById("btn-p").style.backgroundColor = "orange";
     } else {
-      document.getElementById("btn-e").style.background = "orange";
+      document.getElementById("btn-e").style.backgroundColor = "orange";
       document.getElementById("btn-e").style.color = "#333";
+      document.getElementById("btn-p").style.backgroundColor = "#333";
     }
   }
+  
   render() {
     return (
       <>

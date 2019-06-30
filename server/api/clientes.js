@@ -23,7 +23,6 @@ router.get("/:cedula", function(req, res) {
     if (err) return res.json(err);
     return res.json(per);
   });
-
 });
 
 router.get("/empresa/:rif", function(req, res) {
@@ -65,5 +64,20 @@ router.post("/empresas", function(req, res) {
     return res.json(result);
   });
 });
-
+router.delete("/persona/:ced",function(req,res) {
+  console.log('entro');
+  var ced = req.params.ced;
+  Clientes.delete(ced, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
+router.delete("/empresa/:rif",function(req,res) {
+  console.log('entro');
+  var rif = req.params.rif;
+  Clientes.deleteE(rif, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
 module.exports = router;

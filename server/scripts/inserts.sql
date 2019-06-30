@@ -3556,15 +3556,22 @@ values
 (4,35,300),
 (4,36,200),
 (4,37,400),
-(4,38,500)
+(4,38,500);
 /*presentacion*/
 insert into presentacion(nombre_presentacion)
 values ('Polvo'),
 ('Liquido'),
 ('Molido'),
 ('Cilindrico'),
-('Lingotes');
-/*cargo fase*/
+('Lingotes'),
+('Natural');
+insert into mineral_presentacion
+(costo,fk_presentacion,fk_mineral)
+values (1000,1,1),(1000,1,2),(1000,1,3),(1000,1,4),(1000,1,5),(1000,1,6),(1000,1,7),(1000,1,8)
+,(1000,2,9),(1000,2,10),(1000,2,11),(1000,2,12),(1000,2,13),(1000,2,14),(1000,2,15),(1000,2,16)
+,(1000,2,17),(1000,2,18),(1000,2,19),(1000,2,20),(1000,3,1),(1000,3,2),(1000,3,4),(1000,4,1),(1000,5,1),
+/*aliados*/(2000,14),(1500,15),(1600,16),(1700,17);
+/*cargo fase*/ 
 insert into cargo_fase(cantidad,fk_cargo,costo,fk_fase)
 values
 (3,1,1000,793),
@@ -3755,7 +3762,7 @@ values (1,793,1,100000),
 /*7*/
 (1,856 ,4,100000),
 (1,857,5,100000),
-(1,858,6,100000),
+(1,858,6,100000);
 /*8*/
 
 
@@ -3779,3 +3786,58 @@ values (7,1),(8,2),(9,3),(10,4),(11,5),(12,6),(13,7),(14,8),(15,9),(16,10),
 (117,111),(118,112),(119,113),(120,114),(121,115),(122,116),(123,117),(124,118),(125,119),(126,120),
 (127,121),(128,122),(129,123),(130,124),(131,125),(132,126),(133,127),(134,128),(135,129),(136,130),
 (137,131),(138,132),(139,133),(140,134),(141,135),(142,136);
+
+insert into persona (cedula_identidad,nombre_persona,apellido_persona,fecha_nacimiento,correo_persona,telefono_persona,sexo,fk_lugar)
+values (9876,'Xavi','Alonso','02-02-1972','xavi@hot.com',1123212343,'M',368),
+(9877,'Alex','Zverev','03-03-1973','alex@hot.com',112327743,'M',369),
+(9878,'Garbine','Muguruza','06-06-1976','garbi@hot.com',7723212343,'F',368),
+(9879,'David','Ferrer','07-09-1965','ferrer@hot.com',9853212343,'M',370),
+(9880,'Nole','Djokovic','03-04-1972','noled@hot.com',1145452343,'M',372),
+(9881,'Roger','Federer','03-04-1962','rogerf@hot.com',2727452343,'M',372),
+(9882,'Fabio','Fognini','03-04-1978','fognini@hot.com',1145459873,'M',373),
+(9883,'Jhon','Isner','04-07-1972','isner@hot.com',1145452343,'M',372);
+
+insert into empresa (rif,nombre_empresa,correo_empresa,telefono_empresa,fk_lugar)
+values (11111,'Nole C.A','noleca@gmail.com',927472472,700),
+(11112,'Denis sh C.A','denisscs@gmail.com',927473432,701),
+(11113,'Becker C.A','borisbecker@gmail.com',934472472,702),
+(11114,'Nishikori C.A','japannishi@gmail.com',407472472,703),
+(11115,'Nadal C.A','nadalacdm@gmail.com',922322472,704),
+(11116,'Misca C.A','miscazverev@gmail.com',922327372,705),
+(11117,'Kirgios C.A','nickkigios@gmail.com',924232472,704),
+(11118,'Yamousoukro C.A','yomou@gmail.com',123322472,705),
+(11119,'Gandal C.A','gandal@gmail.com',2222122472,704);
+
+insert into compra_cliente (fecha_compra,monto_total_compra,cantidad,fk_empresa,
+						   fk_persona,fk_tipo_status,fk_mineral_presentacion)
+values ('12-12-2002',23333,20,1,null,3,4),
+('12-01-2001',23343,50,2,null,3,6),
+('11-29-2002',23000,2000,3,null,3,7),
+('05-05-2016',23500,30000,4,null,3,4),
+('12-12-2016',23333,15000,null,3,3,2),
+('06-12-2001',23203,20000,null,5,3,9),
+('01-14-2000',29000,29000,7,null,3,6),
+('12-12-2014',24000,60000,null,4,3,10);
+
+insert into compra_cliente_proyecto(fk_compra_cliente,fk_proyecto)
+values (1,89),(2,90),(3,91),(4,92),(5,93),(6,94),(7,95),(8,96);
+
+insert into compra_aliado(fecha_compra_aliado,monto_total,
+fk_empresa_aliada,fk_proyecto,fk_tipo_status,fk_mineral_presentacion)
+values ('12-12-2002',23000,1,89,3,1),
+('12-01-2001',23000,1,90,3,1),
+('11-29-2001',27000,2,91,3,2),
+('05-05-2016',39000,3,92,3,3),
+('12-12-2016',23000,4,93,3,4),
+('06-12-2001',24000,5,94,3,5),
+('01-14-2000',29000,6,95,3,6),
+('12-12-2014',23000,7,96,3,1);
+
+
+/*26,27,28 y 29 ids de min_pres*/
+insert into mineral_empresa (fk_mineral_presentacion,fk_empresa_aliada)
+values (26,1),(27,1),(28,1),(29,1),(26,2),(27,3),(28,4),(28,5),(29,6),(26,7)
+,(28,7),(28,8),(26,8),(27,9),(26,9),(28,10),(27,10),(28,11),(29,11),(26,12)
+,(29,12),(28,12),(28,13),(26,14),(28,15),(26,16),(28,16),(28,17),(29,17),(28,18)
+,(27,18),(28,19),(27,20),(28,20),(28,21),(26,21),(26,22),(27,22),(28,22);
+

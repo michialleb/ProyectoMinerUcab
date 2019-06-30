@@ -290,3 +290,12 @@ input {
 #eliminado{
   display: none;
 }
+#wrapper-e{
+  width: 8000px;
+  
+}
+#btn-ee, #btn-pp{
+  height: 60px;
+  width: 40%;
+}
+

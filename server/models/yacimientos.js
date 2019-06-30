@@ -46,6 +46,16 @@ class Yacimientos {
       }
     );
   }
+  static delete(nombre, callback) {
+    db.query(
+      `DELETE FROM yacimiento where nombre_yacimiento=${nombre}`,
+      
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
   // insertar por defecto status acttivo al ingresar yac (muchos a muchos)
   /*static insertstatusdefault(yacimiento,callback){
   db.query(

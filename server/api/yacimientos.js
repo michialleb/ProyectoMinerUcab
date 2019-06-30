@@ -31,4 +31,12 @@ router.post("/", function(req, res) {
     return res.json(result);
   })*/
 });
+router.delete("/:nombre",function(req,res) {
+  var nombre= req.params.nombre;
+  console.log(nombre+ ' de diego 1');
+  Yacimientos.delete(nombre, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
 module.exports = router;

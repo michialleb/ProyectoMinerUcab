@@ -42,7 +42,7 @@ create table Mineral(
 
 CREATE TABLE Mineral_presentacion(
     id_mineral_presentacion serial,
-    costo decimal(4,2) not null,
+    costo real not null,
     fk_presentacion integer not null,
     fk_mineral integer not null,
     CONSTRAINT pk_mineral_presentacion PRIMARY KEY (id_mineral_presentacion),
@@ -60,7 +60,7 @@ CREATE TABLE tipo_status(
 
 CREATE TABLE Empresa (
     id_cliente serial,
-    rif VARCHAR(11) NOT NULL UNIQUE,
+    rif bigint NOT NULL UNIQUE,
     nombre_empresa VARCHAR(50) NOT NULL,
 	correo_empresa varchar(100),
 	telefono_empresa bigint,
@@ -89,17 +89,17 @@ CREATE TABLE Empresa (
 CREATE TABLE Compra_Cliente (
      id_compra_cliente serial,
       fecha_compra DATE NOT NULL,
-      monto_total_compra decimal(4,2) NOT NULL,
-	  cantidad numeric(10,2),
+      monto_total_compra real NOT NULL,
+	  cantidad real,
       FK_Empresa integer,
       FK_Persona integer,
       fk_tipo_status integer not null,
 	  fk_mineral_presentacion integer not null,
       CONSTRAINT pk_id_compra_cliente PRIMARY KEY(id_compra_cliente),
       CONSTRAINT FK_compra_cliente_empresa FOREIGN KEY(FK_Empresa) 
-      REFERENCES Empresa(id_cliente),
+      REFERENCES Empresa(id_cliente) on delete cascade,
       CONSTRAINT FK_compra_cliente_persona FOREIGN KEY(FK_Persona) 
-      REFERENCES Persona(id_cliente),
+      REFERENCES Persona(id_cliente) on delete cascade,
 	  CONSTRAINT FK_min_pre_comp_cli FOREIGN KEY(FK_mineral_presentacion) 
       REFERENCES Mineral_Presentacion(id_mineral_presentacion),
       CONSTRAINT FK_compra_cliente_status FOREIGN KEY(fk_tipo_status) 
@@ -108,8 +108,8 @@ CREATE TABLE Compra_Cliente (
 
 /*CREATE TABLE Detalle_Compra_Cliente (
         id_detalle_compra_cliente serial, 
-        cantidad decimal(4,2) NOT NULL,
-        monto decimal(4,2) NOT NULL,
+        cantidad real NOT NULL,
+        monto real NOT NULL,
         FK_Compra_Cliente integer not null,
         FK_Mineral_Presentacion integer not null,
         CONSTRAINT pk_id_detalle_compra_cliente PRIMARY KEY(id_detalle_compra_cliente),
@@ -149,14 +149,14 @@ create table Yacimiento (
 CREATE TABLE compra_aliado (
      id_compra_aliado SERIAL,
      fecha_compra_aliado DATE NOT NULL,
-     monto_total decimal(4,2) NOT NULL,
-     fk_empresa_aliada INTEGER NOT NULL,
+     monto_total real NOT NULL,
+     fk_empresa_aliada INTEGER NOT NULL ,
      fk_proyecto INTEGER ,
      fk_tipo_status integer not null,
 	 fk_mineral_presentacion INTEGER not null,
       CONSTRAINT pk_compra_aliado PRIMARY KEY (id_compra_aliado),
      CONSTRAINT fk_empresa_compra_aliado FOREIGN KEY (fk_empresa_aliada)
-     REFERENCES empresa_aliada (id_empresa_aliada),
+     REFERENCES empresa_aliada (id_empresa_aliada) on delete cascade,
      CONSTRAINT fk_proyecto_compra_aliado FOREIGN KEY (fk_proyecto)
      REFERENCES proyecto (id_proyecto),
 	 CONSTRAINT fk_mineral_presentacion_com_al FOREIGN KEY (fk_mineral_presentacion)
@@ -167,8 +167,8 @@ CREATE TABLE compra_aliado (
 
 /*CREATE TABLE detalle_compra_aliado (
      id_detalle_compra_aliado SERIAL,
-     cantidad decimal(4,2) NOT NULL,
-     precio decimal(4,2) NOT NULL,
+     cantidad real NOT NULL,
+     precio real NOT NULL,
      fk_compra_aliado INTEGER not null,
      fk_mineral_presentacion INTEGER not null,
      CONSTRAINT pk_detalle_compra_aliado PRIMARY KEY (id_detalle_compra_aliado),
@@ -183,7 +183,7 @@ CREATE TABLE compra_aliado (
 create table Inventario(
     id_inventario serial,
     fecha_inventario DATE NOT NULL,
-    cantidad decimal(4,2) not null,
+    cantidad real not null,
     Fk_Compra_Aliado integer,
     Fk_Compra_Cliente integer,
     constraint pk_inventario  primary key (id_inventario),
@@ -199,7 +199,7 @@ create table Inventario(
 CREATE TABLE Cargo (
     id_cargo serial,
     tipo_cargo VARCHAR(100) NOT NULL,
-    salario_empleado INTEGER,
+    salario_empleado real,
     CONSTRAINT pk_id_cargo PRIMARY KEY(id_cargo)
     );
 
@@ -287,7 +287,7 @@ CREATE TABLE Horario (
      nombre_etapa VARCHAR(30) NOT NULL,
      duracion_etapa INTEGER NOT NULL,
      descripcion_etapa VARCHAR(40),
-     costo_etapa INTEGER NOT NULL ,                         /*not null?*/
+     costo_etapa real NOT NULL ,                         /*not null?*/
      numero_etapa INTEGER NOT NULL,
      fk_proyecto INTEGER NOT NULL,
      fk_tipo_status INTEGER NOT NULL,
@@ -304,7 +304,7 @@ create table Fase (
    nombre_fase  varchar(30) not null,
    descripcion_fase varchar (100),
    duracion_fase    integer not null,
-   costo_fase   integer not null,
+   costo_fase   real not null,
    fecha_inicio_fase date ,
    fecha_final_fase date ,
    fk_etapa_explotacion integer,
@@ -319,7 +319,7 @@ create table Fase (
 CREATE TABLE Cargo_Fase(
     id_cargo_fase serial,
     cantidad integer not null,
-    costo decimal(4,2) ,                            /*ver*/
+    costo real ,                            /*ver*/
     FK_Cargo integer not null,
     FK_Fase integer not null,
     CONSTRAINT pk_cargo_fase PRIMARY KEY(id_cargo_fase),
@@ -353,17 +353,17 @@ CREATE TABLE Horario_empleado(
 
 
 CREATE TABLE Mineral_Empresa (
-        id_mineral_empresa serial, 
-        cantidad decimal(4,2) NOT NULL,
+        id_mineral_empresa serial,
         FK_Mineral_presentacion integer,
         FK_Empresa_Aliada integer,
         CONSTRAINT pk_min_empr PRIMARY KEY(id_mineral_empresa),
         CONSTRAINT FK_mineral_pres_empresa FOREIGN KEY (FK_Mineral_presentacion) 
-        REFERENCES Mineral_presentacion(id_mineral_presentacion),
+        REFERENCES Mineral_presentacion(id_mineral_presentacion) on delete cascade,
         CONSTRAINT FK_mineral_empresa_aliada FOREIGN KEY (FK_Empresa_Aliada) 
-        REFERENCES empresa_aliada(id_empresa_aliada)
+        REFERENCES empresa_aliada(id_empresa_aliada) on delete cascade
 
         );
+        
 
 
 
@@ -385,7 +385,7 @@ CREATE TABLE Compra_cliente_proyecto(
  CREATE TABLE pago (
      id_pago SERIAL,
      fecha_pago DATE NOT NULL,
-     monto_total_pagado decimal(4,2) NOT NULL,
+     monto_total_pagado real NOT NULL,
      fk_compra_cliente INTEGER NOT NULL,
      CONSTRAINT pk_id_pago PRIMARY KEY (id_pago),
      CONSTRAINT fk_compra_cliente_pago FOREIGN KEY (fk_compra_cliente)
@@ -450,7 +450,7 @@ create table Mineral_Mineral (
 
 create table Mineral_Yacimiento(
     id_mineral_yacimiento serial,
-    cantidad integer not null,
+    cantidad real not null,
     fk_mineral integer not null,
     fk_yacimiento integer not null,
     constraint pk_mineral_yacimiento primary key (id_mineral_yacimiento),
@@ -484,7 +484,7 @@ CREATE TABLE maquinaria (
     id_maquinaria serial,
     cantidad integer not null,
     nombre_maquinaria varchar(100) not null,
-    costo_maquinaria decimal(4,2) not null,
+    costo_maquinaria real not null,
     CONSTRAINT pk_id_maquinaria PRIMARY KEY (id_maquinaria)
 );
 
