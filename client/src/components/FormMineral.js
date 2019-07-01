@@ -14,7 +14,9 @@ class FormMineral extends Component {
       valor: "",
       descripcion: "",
       inicio: "",
-      nacionalizacion: ""
+      nacionalizacion: "",
+      mineralList: [],
+      cantidadList: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
