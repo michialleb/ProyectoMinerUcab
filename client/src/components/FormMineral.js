@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
+import "../styles/multiSelect.css";
 import swal from "sweetalert";
+import Select from "react-select";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 class FormMineral extends Component {
   constructor() {
@@ -16,12 +19,13 @@ class FormMineral extends Component {
       inicio: "",
       nacionalizacion: "",
       mineralList: [],
-      cantidadList: []
+      cantidadList: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAddMineral = this.handleAddMineral.bind(this);
   }
+
   handleChange(e) {
     let target = e.target;
     let value = target.type === "checkbox" ? target.checked : target.value;
@@ -136,6 +140,16 @@ class FormMineral extends Component {
                   <option value={"Metalico"}>Metalico</option>
                   <option value={"No metalico"}>No metalico</option>
                 </select>
+              </div>
+
+              <div className="container">
+                <div className="row">
+                  <div className="col-md-4" />
+                  <div className="col-md-4">
+                    <Select isMulti />
+                  </div>
+                  <div className="col-md-4" />
+                </div>
               </div>
 
               <div className="ingresarUsuario">

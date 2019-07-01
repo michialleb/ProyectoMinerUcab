@@ -1649,7 +1649,7 @@ values
 ('CVG Vista al sol',null,null,1371,776322),
 ('CVG Carrazco',null,null,1380,435344),
 ('CVG Zaraza',null,null,1489,45645646),
-('CVG Dante',null,null,1487,4545645645)
+('CVG Dante',null,null,1487,4545645645),
 ('CVG Hukala','06-07-1980','Tiene la finalidad de producir cobre primario en diversas formas',607, 102192129,56546456),
 ('CVG Bacalum','09-08-1970','La industria minera promotora de eventos de alumnio ',588,9876756),
 ('CVG Vivelaz',null,null,365, 876546785),
@@ -1933,7 +1933,7 @@ values ('Proyecto Atapuerca',400,5,4),
 
 
 insert into etapa_explotacion(nombre_etapa,duracion_etapa,descripcion_etapa,costo_etapa,numero_etapa,fk_proyecto,fk_tipo_status)
-values ('Atapuerca',200,null,200000,1,1,4),
+values ('Atapuerca  ',200,null,200000,1,1,4),
 ('Atapuerca',200,null,210000,2,1,4),
 ('Ampurias',200,null,200000,1,2,4),
 ('Ampurias',200,null,210000,2,2,4),
@@ -3883,4 +3883,4 @@ insert into horario_empleado(fk_horario,fk_empl_horario_fase) values
 ,(1,65),(2,65),(5,65),(3,66),(4,66),(5,66),(1,67),(3,67),(6,67)
 ,(1,67),(5,68),(6,68),(1,69),(6,69),(8,69),(4,70),(5,70),(6,70)
 ,(7,71),(8,71),(9,71),(8,72),(6,72),(3,72),(1,73),(4,73),(3,73)
-,(6,74),(7,74),(9,74),(1,75),(3,75),(6,75),(1,76);(3,76);(4,76);
+,(6,74),(7,74),(9,74),(1,75),(3,75),(6,75),(1,76),(3,76),(4,76);

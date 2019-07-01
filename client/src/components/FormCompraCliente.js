@@ -13,7 +13,7 @@ function ChangeCompra(props) {
   if (mineralDisponible) {
     return <Services />;
   }
-   return null;
+  return null;
 }
 
 class FormCompraCliente extends Component {
@@ -21,22 +21,22 @@ class FormCompraCliente extends Component {
     super();
     this.state = {
       nombrePersona: "",
-     apellidoPersona: "",
-     nombreEmpresa: "",
-     documento: "",
-     rif: "",
-     ci: "",
-     cantidad: "",
-     mineral: "",
-     presentacion: "",
-     mineral2: "",
-     nombreMineral: [],
-     tipoCliente: "",
-     presentaciones: [],
-     inventario: [],
-     mineralDisponible: false,
-     procesarCompra: false,
-    mineralNoDisponible: false
+      apellidoPersona: "",
+      nombreEmpresa: "",
+      documento: "",
+      rif: "",
+      ci: "",
+      cantidad: "",
+      mineral: "",
+      presentacion: "",
+      mineral2: "",
+      nombreMineral: [],
+      tipoCliente: "",
+      presentaciones: [],
+      inventario: [],
+      mineralDisponible: false,
+      procesarCompra: false,
+      mineralNoDisponible: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -200,6 +200,13 @@ class FormCompraCliente extends Component {
                   </span>
                 </div>
 
+                <div id="empresa" className="secondName">
+                  <label htmlFor="empresa">Nombre Empresa:</label>
+                  <input value={this.state.nombreEmpresa} disabled />
+                  <label htmlFor="rig">Rif:</label>
+                  <input value={this.state.rif} disabled />
+                </div>
+
                 <div id="persona" className="firstName">
                   <label htmlFor="persona">Nombre Persona:</label>
                   <input value={this.state.nombrePersona} disabled />
@@ -207,13 +214,6 @@ class FormCompraCliente extends Component {
                   <input value={this.state.apellidoPersona} disabled />
                   <label htmlFor="ci">Cedula:</label>
                   <input value={this.state.ci} disabled />
-                </div>
-
-                <div id="empresa" className="secondName">
-                  <label htmlFor="empresa">Nombre Empresa:</label>
-                  <input value={this.state.nombreEmpresa} disabled />
-                  <label htmlFor="ci">Rif:</label>
-                  <input value={this.state.rif} disabled />
                 </div>
               </div>
 

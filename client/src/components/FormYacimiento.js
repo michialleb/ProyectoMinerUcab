@@ -3,6 +3,7 @@ import "../styles/Form.css";
 import ConfiguracionProyecto from "../components/ConfiguracionProyecto";
 import swal from "sweetalert";
 
+
 class FormYacimiento extends Component {
   constructor() {
     super();
@@ -22,6 +23,8 @@ class FormYacimiento extends Component {
       municipioList: [],
       provinciaList: []
     };
+   
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeMineral = this.handleChangeMineral.bind(this);
@@ -190,6 +193,8 @@ class FormYacimiento extends Component {
   }
   componentDidMount() {}
 
+
+
   render() {
     var cargoList = this.props.cargos;
     var maquinariaList = this.props.maquinaria;
@@ -274,7 +279,8 @@ class FormYacimiento extends Component {
                   ))}
                 </select>
               </div>
-              <div>
+              <div
+              >
                 <div className="add_minerales">
                   <label>Minerales </label>
                   <select
@@ -288,6 +294,7 @@ class FormYacimiento extends Component {
                         {mineral.nombre_mineral}
                       </option>
                     ))}
+                    
                   </select>
 
                   <table id="t01">
