@@ -1933,7 +1933,7 @@ values ('Proyecto Atapuerca',400,5,4),
 
 
 insert into etapa_explotacion(nombre_etapa,duracion_etapa,descripcion_etapa,costo_etapa,numero_etapa,fk_proyecto,fk_tipo_status)
-values ('Atapuerca',200,null,200000,1,1,4),
+values ('Atapuerca  ',200,null,200000,1,1,4),
 ('Atapuerca',200,null,210000,2,1,4),
 ('Ampurias',200,null,200000,1,2,4),
 ('Ampurias',200,null,210000,2,2,4),

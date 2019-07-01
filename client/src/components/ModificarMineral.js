@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
+import swal from "sweetalert";
+
+import { FaSistrix } from "react-icons/fa";
 
 class FormMineral extends Component {
   constructor(props) {
@@ -17,7 +20,10 @@ class FormMineral extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.addInfoMineral = this.addInfoMineral.bind(this);
+    this.handleGetMineral = this.handleGetMineral.bind(this);
   }
+
   handleChange(e) {
     let target = e.target;
     let value = target.type === "checkbox" ? target.checked : target.value;
@@ -28,12 +34,20 @@ class FormMineral extends Component {
     });
   }
 
-  handleUpdateMineral = () => {
+  handleUpdateMineral = e => {
+    e.preventDefault();
     fetch(`/api/minerales/modificar/`, {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ mineral: this.state })
-    }).then(res => res.json());
+    })
+      .then(res => res.json())
+      .catch(res => {})
+      .then(res => {
+        if (res.error)
+          swal("Error. Datos Invalidos", "Intente de nuevo!", "error");
+        else swal("Mineral modificado!", "Satisfactoriamente!", "success");
+      });
   };
 
   handleSubmit(e) {
@@ -42,29 +56,30 @@ class FormMineral extends Component {
     console.log("The form was submitted with the following data:");
   }
 
-  addInfoMineral = (e, mineral) => {
-    e.preventDefault();
-    e.stopPropagation();
+  addInfoMineral = mineral => {
     var m;
     var date1, date2;
     console.log("entroooo");
-    if (mineral != "") {
-      this.props.minerales.map(mine => {
-        if (mine.nombre_mineral === mineral) {
-          date1 = mine.fecha_ini_explotacion.split(["T"], [1]);
-          date2 = mine.fecha_nacionalizacion.split(["T"], [1]);
-          m = {
-            nombre: mine.nombre_mineral,
-            valor: mine.valor_economico,
-            descripcion: mine.descripcion_mineral,
-            explotacion: date1,
-            nacionalizacion: date2,
-            tipo: mine.tipo_mineral
-          };
-        }
+
+    mineral.map(mine => {
+      date1 = mine.fecha_ini_explotacion.split(["T"], [1]);
+      date2 = mine.fecha_nacionalizacion.split(["T"], [1]);
+
+      this.setState({
+        nombre: mine.nombre_mineral,
+        valor: mine.valor_economico,
+        descripcion: mine.descripcion_mineral,
+        explotacion: date1,
+        nacionalizacion: date2,
+        tipo: mine.tipo_mineral
       });
-    }
+    });
   };
+
+  handleGetMineral() {
+    this.props.getMinerales(this.state.mineralSeleccionado);
+    this.addInfoMineral(this.props.mineralBuscado);
+  }
 
   render() {
     return (
@@ -76,9 +91,6 @@ class FormMineral extends Component {
               name="mineralSeleccionado"
               value={this.state.mineralSeleccionado}
               onChange={this.handleChange}
-              onSelect={function(e) {
-                this.addInfoMineral(e, this.state.mineralSeleccionado);
-              }.bind(this)}
             >
               <option />
               {this.props.minerales.map((mineral, i) => (
@@ -87,6 +99,13 @@ class FormMineral extends Component {
                 </option>
               ))}
             </select>
+            <button
+              className="search"
+              type="button"
+              onClick={this.handleGetMineral}
+            >
+              {<FaSistrix />}
+            </button>
           </div>
 
           <div className="form-wrapper">

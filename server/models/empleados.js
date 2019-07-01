@@ -19,10 +19,34 @@ class Empleados {
   }
   //fecha_nacimiento=$4, fk_lugar=$5, sexo=$6, fk_cargo=$7
   static update(empleado, callback) {
+    if (empleado.nombre == "") {
+      empleado.nombre = null;
+    }
+
+    if (empleado.apellido == "") {
+      empleado.apellido = null;
+    }
+
+    if (empleado.fnac == "") {
+      empleado.fnac = null;
+    }
+
+    if (empleado.telefono == "") {
+      empleado.telefono = null;
+    }
+
+    if (empleado.correo == "") {
+      empleado.correo = null;
+    }
+
+    if (empleado.cedula == "") {
+      empleado.cedula = null;
+    }
+
     db.query(
       "UPDATE empleado set nombre_empleado=$1,apellido_empleado=$2,fecha_nacimiento=$3,fk_lugar=$4,\
-       sexo=$5, fk_cargo=$6, telefono_empleado = $7, correo_empleado=$8\
-       where cedula_identidad= $9",
+       sexo=$5, fk_cargo=$6, telefono_empleado = $7, correo_empleado=$8, cedula_identidad= $9\
+       where cedula_identidad= $10",
       [
         empleado.nombre,
         empleado.apellido,
@@ -32,7 +56,8 @@ class Empleados {
         empleado.fk_cargo,
         empleado.telefono,
         empleado.correo,
-        empleado.cedula
+        empleado.cedula,
+        empleado.cedulaBuscada
       ],
       function(err, res) {
         if (err.error) return callback(err);
@@ -75,15 +100,11 @@ class Empleados {
   }
 
   static insert(empleado, callback) {
-    console.log(empleado.nombre + ' michi en models');
-    if (empleado.nombre == "")
-    empleado.nombre=null
-    else if (empleado.apellido=="")
-    empleado.apellido=null
-    else if (empleado.cedula=="")
-    empleado.cedula=null
-    else if (empleado.fnac=="")
-    empleado.fnac = null
+    console.log(empleado.nombre + " michi en models");
+    if (empleado.nombre == "") empleado.nombre = null;
+    else if (empleado.apellido == "") empleado.apellido = null;
+    else if (empleado.cedula == "") empleado.cedula = null;
+    else if (empleado.fnac == "") empleado.fnac = null;
     db.query(
       "INSERT INTO empleado (nombre_empleado,apellido_empleado,cedula_identidad,\
        fecha_nacimiento,fk_lugar,sexo,fk_cargo,telefono_empleado,correo_empleado)\

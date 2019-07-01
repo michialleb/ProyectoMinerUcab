@@ -99,6 +99,7 @@ router.delete("/persona/:ced",function(req,res) {
     return res.json(result);
   });
 });
+
 router.delete("/empresa/:rif",function(req,res) {
   console.log('entro');
   var rif = req.params.rif;
@@ -108,6 +109,21 @@ router.delete("/empresa/:rif",function(req,res) {
   });
 });
 
+router.post("/update/persona", function(req, res) {
+  var persona = req.body.persona;
+  Clientes.updatePersona(persona, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
+
+router.post("/update/empresa", function(req, res) {
+  var empresa = req.body.empresa;
+  Clientes.updateEmpresa(empresa, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
 
 
 module.exports = router;

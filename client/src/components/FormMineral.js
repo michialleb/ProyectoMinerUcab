@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
-import swal from 'sweetalert';
-
+import "../styles/multiSelect.css";
+import swal from "sweetalert";
+import Select from "react-select";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 class FormMineral extends Component {
   constructor() {
@@ -15,12 +17,15 @@ class FormMineral extends Component {
       valor: "",
       descripcion: "",
       inicio: "",
-      nacionalizacion: ""
+      nacionalizacion: "",
+      mineralList: [],
+      cantidadList: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAddMineral = this.handleAddMineral.bind(this);
   }
+
   handleChange(e) {
     let target = e.target;
     let value = target.type === "checkbox" ? target.checked : target.value;
@@ -32,25 +37,21 @@ class FormMineral extends Component {
     console.log(this.state);
   }
 
-  handleAddMineral = (e) => {
-  e.preventDefault (e);
+  handleAddMineral = e => {
+    e.preventDefault(e);
     fetch("/api/minerales", {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ minerales: this.state })
-    }).then(res => res.json())
-    .catch (res =>{
-      //swal("Revisar campos obligatorios!", "You clicked the button!", "error");
-     })
-       .then (res =>{
-         if(res.error)
-         swal("Revisar campos vacios!", "Intente de nuevo!", "error")
-        
-        else 
-        swal("Mineral Ingresado!", "Satisfactoriamentes!", "success");
-        ;
+    })
+      .then(res => res.json())
+      .catch(res => {
+        //swal("Revisar campos obligatorios!", "You clicked the button!", "error");
       })
-      
+      .then(res => {
+        if (res.error) swal("Datos Invalidos!", "Intente de nuevo!", "error");
+        else swal("Mineral Ingresado!", "Satisfactoriamentes!", "success");
+      });
   };
 
   handleSubmit(e) {
@@ -117,8 +118,12 @@ class FormMineral extends Component {
               </div>
               <div className="status">
                 <label htmlFor="status">Valor aproximado:</label>
-                <select name="valor" value={this.state.valor} onChange={this.handleChange}>
-                  <option></option>
+                <select
+                  name="valor"
+                  value={this.state.valor}
+                  onChange={this.handleChange}
+                >
+                  <option />
                   <option value="Alto">Alto</option>
                   <option value="Medio">Medio</option>
                   <option value="Bajo">Bajo</option>
@@ -126,11 +131,25 @@ class FormMineral extends Component {
               </div>
               <div className="status">
                 <label htmlFor="status">Tipo:</label>
-                <select name="tipo" value={this.state.tipo} onChange={this.handleChange}>
-                  <option></option>
+                <select
+                  name="tipo"
+                  value={this.state.tipo}
+                  onChange={this.handleChange}
+                >
+                  <option />
                   <option value={"Metalico"}>Metalico</option>
                   <option value={"No metalico"}>No metalico</option>
                 </select>
+              </div>
+
+              <div className="container">
+                <div className="row">
+                  <div className="col-md-4" />
+                  <div className="col-md-4">
+                    <Select isMulti />
+                  </div>
+                  <div className="col-md-4" />
+                </div>
               </div>
 
               <div className="ingresarUsuario">
