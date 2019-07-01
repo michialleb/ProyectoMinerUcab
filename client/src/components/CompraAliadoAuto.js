@@ -5,25 +5,7 @@ import "../styles/Form.css";
 import swal from "sweetalert";
 import ActivarProyecto from "./ActivarProyecto";
 
-function  GetEmpresas (props){
 
-  var empresas=[];
-  props.ids.map((id)=>{
-    fetch(`/api/empresaAliada/empresa/mineral/${id}`)
-    .then(res => res.json())
-    .then(res => {
-       var empresa= res.map(r => r)
-       empresas.push( empresa);
-      })
-    });
-    return (
-          empresas.map((e)=>
-          ( <h4> e.nombre</h4>)
-      )
-    );
-      
-   
-}
 class CompraAliadoAuto extends Component {
   constructor(props) {
     super(props);
@@ -35,6 +17,17 @@ class CompraAliadoAuto extends Component {
       avanzarProyecto: false
     };
     this.handleAvanzarProyecto = this.handleAvanzarProyecto.bind(this);
+  }
+
+
+getEmpresa = (id)=> {
+      var empresas=[];
+      fetch(`/api/empresaAliada/empresa/mineral/${id}`)
+      .then(res => res.json())
+      .then(res => {
+        empresas= res.map(r => r)
+        return empresas;
+       })
   }
 
   getMineralesCompuestos(id_mineral) {
@@ -55,11 +48,27 @@ class CompraAliadoAuto extends Component {
       
   }
 
+  addCompraAliado(){
+    this.state.listaId.map((id,i)=>{
+      let compra={
+        cantidad: this.state.mineralesList[i].cantidad,
+        monto:  this.state.mineralesList[i].cantidad * this.state.mineralesList[i].costo,
+        empresas: this.getEmpresa(id),
+        id_mineral: this.props.id_mineral,
+        id_mineral_presentacion: this.state.mineralesList[i].id_mp
+      };
+      console.log(compra);
+   /*   fetch("/api/empresaAliada", {
+        method: "post",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ compra_aliado: compra })
+      }).then(res => res.json())*/
+    })
+   
+  }
+
   handleAvanzarProyecto(){
 
-   
-    console.log("holaaa")
-    
      swal({
       title: "Estás seguro?",
       text: "Comenzarás el proceso de configuración de la explotación",
@@ -72,6 +81,7 @@ class CompraAliadoAuto extends Component {
         swal("Poof! Your imaginary file has been deleted!", {
           icon: "success",
         });
+        this.addCompraAliado();
         this.setState({ avanzarProyecto: !this.state.avanzarProyecto});
       } else {
         swal("Your imaginary file is safe!");
@@ -91,7 +101,6 @@ class CompraAliadoAuto extends Component {
         <div  className={this.state.avanzarProyecto? "wrapper-c_no_show" : "wrapper-c"  }>
           <h7>Orden de Compra</h7>
           <div>
-            <GetEmpresas ids={this.state.listaId}/>
         </div>
           <MDBTable>
             <MDBTableHead>

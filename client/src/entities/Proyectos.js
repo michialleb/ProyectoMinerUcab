@@ -11,7 +11,7 @@ export default class Proyectos extends Component {
   }
 
   getProyectos = () => {
-    fetch("/api/proyectos")
+    fetch("/api/proyecto")
       .then(res => res.json())
       .then(res => {
         var proyectos = res.map(r => r);

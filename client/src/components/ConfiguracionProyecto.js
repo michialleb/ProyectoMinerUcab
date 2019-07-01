@@ -83,7 +83,7 @@ class ConfiguracionProyecto extends Component {
       cargos.map((cargo,i)=>{
         let cargoFase={
             cantidad: cargo.cantidad,
-            costo: cargo.costo,
+            costo: parseInt(cargo.costo),
             id_cargo: cargo.id_cargo,
             numero_etapa: (this.state.numeroEtapa -1),
             numero_fase: (this.state.numeroFase-1),
@@ -169,9 +169,18 @@ class ConfiguracionProyecto extends Component {
     document.getElementById("form_maquinaria").style.display="none";
     
   }
+  sumarCostoCargo(){
+    fetch(`/api/fases/:${this.state.id_fase}`, {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ id: this.state.id_fase })
+    }).then(res => res.json());
+  }
+
   handleIngresarMaquinaria(e, cargos){
     e.preventDefault();
     this.addCargos(cargos);
+    this.sumarCostoCargo();
     document.getElementById("form_maquinaria").style.display="block";
     document.getElementById("form_cargos").style.display="none";
     

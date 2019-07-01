@@ -3,8 +3,12 @@ var express = require("express");
 
 class Proyectos {
 
-
-
+  static retrieveAll(callback) {
+    db.query("SELECT * FROM proyecto", function(err, res) {
+      if (err.error) return callback(err);
+      callback(res);
+    });
+  }
   static insert(proyecto, callback) {
       console.log(proyecto.nombre);
     db.query(

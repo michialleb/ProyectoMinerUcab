@@ -14,4 +14,14 @@ router.post("/", function(req, res) {
   
 });
 
+router.post("/:id", function(req, res) {
+  var id = req.body.id;
+
+  Fases.update(id, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+  
+});
+
 module.exports = router;

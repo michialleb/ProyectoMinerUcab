@@ -17,7 +17,7 @@ class ConsultTableProyectos extends Component {
       let p = {
         nombre: proyec.nombre_proyecto,
         yacimiento: proyec.yacimiento,
-        duración: proyec.duracion,
+        duracion: proyec.duracion_proyecto,
         ver_mas: (
                <button
                        onClick={function(e) {

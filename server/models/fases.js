@@ -28,5 +28,22 @@ class Fases {
       }
     );
   }
+
+  static update(id_fase,callback){
+    db.query(
+        "update fase set costo_fase=(select ( f.costo_fase + SUM(fc.costo))\
+        from cargo_fase fc, fase f \
+        where f.id_fase=$1 and fc.fk_fase=f.id_fase \
+        group by f.costo_fase) where id_fase=$2;",
+        [id_fase,
+        id_fase
+        ],
+        function(err, res) {
+          if (err.error) return callback(err);
+          callback(res);
+        }
+
+    );
+  }
 }
 module.exports = Fases;
