@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
 import ConfiguracionProyecto from "../components/ConfiguracionProyecto";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
 class FormYacimiento extends Component {
   constructor() {
@@ -121,92 +121,82 @@ class FormYacimiento extends Component {
     }
   };
 
-  handleIngresarYacimiento = (e) => {
+  handleIngresarYacimiento = e => {
     e.preventDefault();
     this.handleAddYacimiento();
-  
   };
 
-  handleIngresarMinerales =(e)=> {
+  handleIngresarMinerales = e => {
     e.preventDefault();
     this.generarProyectoE();
-    console.log('generando ory');
-   this.state.mineralList.map((mineral,i) => {
-      let mineral_yacimiento={
-        mineral:mineral,
+    console.log("generando ory");
+    this.state.mineralList.map((mineral, i) => {
+      let mineral_yacimiento = {
+        mineral: mineral,
         cantidad: this.state.cantidadList[i],
         nombre: this.state.nombre
-      }
+      };
       this.handleAddMineralYacimiento(mineral_yacimiento);
-   })  
-    document.getElementById("form-yac").style.display="none";
-  }
+    });
+    document.getElementById("form-yac").style.display = "none";
+  };
 
-
-  handleAddYacimiento = (e) => {
+  handleAddYacimiento = e => {
     fetch("/api/yacimientos", {
       method: "post",
       headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ yacimiento:  this.state})
-    }).then(res => res.json())
-    .catch (res =>{
-      //swal("Revisar campos obligatorios!", "You clicked the button!", "error");
-     })
-       .then (res =>{
-         if(res.error)
-         swal("Campo invalido!", "Intente de nuevo!", "error");
-        else 
-        swal("Yacimiento  Ingresado!", "Satisfactoriamente!", "success");
-        ;
+      body: JSON.stringify({ yacimiento: this.state })
+    })
+      .then(res => res.json())
+      .catch(res => {
+        //swal("Revisar campos obligatorios!", "You clicked the button!", "error");
       })
-
-      
-    
+      .then(res => {
+        if (res.error) swal("Campo invalido!", "Intente de nuevo!", "error");
+        else swal("Yacimiento  Ingresado!", "Satisfactoriamente!", "success");
+      });
   };
 
-  handleAddMineralYacimiento = (yacimiento) => {
+  handleAddMineralYacimiento = yacimiento => {
     fetch("/api/mineralYacimiento", {
       method: "post",
       headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ yacimiento: yacimiento})
-    }).then(res => res.json())
-
+      body: JSON.stringify({ yacimiento: yacimiento })
+    }).then(res => res.json());
   };
 
-  generarProyectoE (){
-    let proyecto ={
+  generarProyectoE() {
+    let proyecto = {
       nombre: this.state.nombre,
       duracion_proyecto: 0
-    }
-    console.log('generando proyecto');
-    
-  fetch("/api/proyecto", {
+    };
+    console.log("generando proyecto");
+
+    fetch("/api/proyecto", {
       method: "post",
       headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ proyecto:  proyecto})
-    }).then(res => res.json())
-    .catch(function (error) {
-      console.log('Request failed', error);
-    });
-  };
-
-
- 
+      body: JSON.stringify({ proyecto: proyecto })
+    })
+      .then(res => res.json())
+      .catch(function(error) {
+        console.log("Request failed", error);
+      });
+  }
 
   handleSubmit(e) {
     e.preventDefault();
     console.log("The form was submitted with the following data:");
     console.log(this.state);
   }
-componentDidMount(){}
- 
+  componentDidMount() {}
+
   render() {
-    var cargoList=this.props.cargos;
-    var maquinariaList=this.props.maquinaria;
+    var cargoList = this.props.cargos;
+    var maquinariaList = this.props.maquinaria;
     return (
       <>
         <div id="form-yac" className="wrapper">
-          <div  className="form-wrapper">
+          <div className="form-wrapper">
             <h5>Ingresar Yacimiento</h5>
             <form className="form" noValidate>
               <div className="firstName">
@@ -286,7 +276,7 @@ componentDidMount(){}
               </div>
               <div>
                 <div className="add_minerales">
-                  <label>Minerales                   </label>
+                  <label>Minerales </label>
                   <select
                     name="mineral"
                     value={this.state.mineral}
@@ -318,7 +308,8 @@ componentDidMount(){}
                             <button
                               numero={i}
                               name={mineral}
-                              onClick={this.onDelete}>
+                              onClick={this.onDelete}
+                            >
                               x
                             </button>
                           </td>
@@ -326,7 +317,6 @@ componentDidMount(){}
                       );
                     })}
                   </table>
-                
                 </div>
               </div>
               <div className="ingresarUsuario">
@@ -339,15 +329,17 @@ componentDidMount(){}
                   Ingresar Minerales
                 </button>
               </div>
-              
             </form>
-          </div> 
+          </div>
         </div>
-        <div id="form-etapa">\
-        <ConfiguracionProyecto  nombreProyecto={"Proyecto "+ this.state.nombre}
-                   cargoList={cargoList} 
-                   maquinariaList={maquinariaList} 
-                   handleAddEtapa={this.handleAddEtapa}/>
+        <div id="form-etapa">
+          \
+          <ConfiguracionProyecto
+            nombreProyecto={"Proyecto " + this.state.nombre}
+            cargoList={cargoList}
+            maquinariaList={maquinariaList}
+            handleAddEtapa={this.handleAddEtapa}
+          />
         </div>
       </>
     );
