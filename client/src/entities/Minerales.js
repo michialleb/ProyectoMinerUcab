@@ -11,8 +11,8 @@ export default class Minerales extends Component {
     super();
 
     this.state = {
-      mineralesList: "",
-      mineralBuscado: ""
+      mineralesList: [],
+      mineralBuscado: []
     };
   }
 
@@ -36,6 +36,7 @@ export default class Minerales extends Component {
 
   componentDidMount() {
     this.getMineralesList();
+    
   }
   render() {
     var minerales = this.state.mineralesList;
@@ -71,6 +72,7 @@ export default class Minerales extends Component {
           form: (
             <ModificarMineral
               minerales={minerales}
+              mineralBuscado = {mineralBuscado}
               getMinerales={this.getMineral}
             />
           ),
