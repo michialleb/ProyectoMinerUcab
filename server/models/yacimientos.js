@@ -50,10 +50,26 @@ class Yacimientos {
   }
 
   static update(yacim, callback) {
+    if (yacim.nombre == "") {
+      yacim.nombre = null;
+    }
+
+    if (yacim.kilometros == "") {
+      yacim.kilometros = null;
+    }
+    
     db.query(
-      "UPDATE yacimiento set nombre_yacimiento=$1, kilometros=$2, fk_tipo_status=$3, fk_lugar=$4\
-       where nombre_yacimiento = $1",
-      [yacim.nombre, yacim.kilometros, yacim.status, yacim.direccion],
+      "UPDATE yacimiento set nombre_yacimiento = $1, kilometros=$2,\
+      fk_tipo_status=(select id_tipo_status from tipo_status where nombre_tipo_status = $3 ), \
+      fk_lugar = (select id_lugar from lugar where nombre_lugar = $4)\
+         where nombre_yacimiento = $5",
+      [
+        yacim.nombre,
+        yacim.kilometros,
+        yacim.fkStatus,
+        yacim.direccion,
+        yacim.nombreBuscado
+      ],
       function(err, res) {
         if (err.error) return callback(err);
         callback(res);

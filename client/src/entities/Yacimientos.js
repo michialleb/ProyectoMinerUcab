@@ -26,7 +26,7 @@ export default class Yacimientos extends Component {
       .then(res => {
         var yacimientoUnico = res.map(r => r);
         this.setState({ yacimientoUnico });
-      });
+      })
   };
 
   getLugarList = () => {

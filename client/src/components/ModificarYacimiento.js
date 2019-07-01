@@ -5,8 +5,8 @@ import swal from "sweetalert";
 import { FaSistrix } from "react-icons/fa";
 
 class FormYacimiento extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       yacimientoList: [],
@@ -79,7 +79,7 @@ class FormYacimiento extends Component {
       [name]: value
     });
 
-    console.log(this.props.status);
+    console.log(this.state.direccion);
   }
   onDelete(e) {
     let minerales = this.state.mineralList;
@@ -152,23 +152,6 @@ class FormYacimiento extends Component {
     document.getElementById("form-yac").style.display = "none";
   };
 
-  handleAddYacimiento = e => {
-    fetch("/api/yacimientos", {
-      method: "post",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ yacimiento: this.state })
-    })
-      .then(res => res.json())
-      .catch(res => {
-        //swal("Revisar campos obligatorios!", "You clicked the button!", "error");
-      })
-      .then(res => {
-        if (res.error)
-          swal("Revisar campos vacios!", "Intente de nuevo!", "error");
-        else swal("Yacimiento  Ingresado!", "Satisfactoriamentes!", "success");
-      });
-  };
-
   handleAddMineralYacimiento = yacimiento => {
     fetch("/api/mineralYacimiento", {
       method: "post",
@@ -198,22 +181,19 @@ class FormYacimiento extends Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log("The form was submitted with the following data:");
-    console.log(this.state);
   }
 
   addInfoYacimiento(yacimiento) {
     yacimiento.map(yaci => {
       this.setState({
         nombre: yaci.nombre_yacimiento,
-        direccion: yaci.direccion,
+        direccion: yaci.provincia,
         kilometros: yaci.kilometros,
         estadoAnterior: yaci.estado,
         municipioAnterior: yaci.municipio,
         provinciaAnteriror: yaci.provincia,
         fkStatus: yaci.nombre_status
       });
-      console.log("addinfo");
-      console.log(yaci);
     });
   }
 
@@ -222,17 +202,24 @@ class FormYacimiento extends Component {
     this.addInfoYacimiento(this.props.yacimiento);
   }
 
-  handleUpdateYacimiento(e) {
+  handleUpdateYacimiento = e => {
     e.preventDefault();
-    console.log("entro en el handle");
+
     fetch(`/api/yacimientos/actualizar/update`, {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ yacim: this.state })
-    }).then(res => res.json());
-  }
-
-  componentDidMount() {}
+    })
+      .then(res => res.json())
+      .catch(res => {
+        //swal("Revisar campos obligatorios!", "You clicked the button!", "error");
+      })
+      .then(res => {
+        if (res.error)
+          swal("Error. Uno o mas campos vacios!", "Intente de nuevo!", "error");
+        else swal("Yacimiento modificado!", "Satisfactoriamente!", "success");
+      });
+  };
 
   render() {
     var cargoList = this.props.cargos;
@@ -251,6 +238,7 @@ class FormYacimiento extends Component {
               placeholder="Ingrese el nombre"
               type="text"
               name="nombreBuscado"
+              required
               noValidate
               value={this.state.nombreBuscado}
               onChange={this.handleChange}
@@ -274,6 +262,7 @@ class FormYacimiento extends Component {
                   type="text"
                   name="nombre"
                   noValidate
+                  required
                   value={this.state.nombre}
                   onChange={this.handleChange}
                 />
@@ -286,6 +275,7 @@ class FormYacimiento extends Component {
                   type="number"
                   name="kilometros"
                   noValidate
+                  required
                   value={this.state.kilometros}
                   onChange={this.handleChange}
                 />
@@ -302,7 +292,7 @@ class FormYacimiento extends Component {
                 </label>
                 <select
                   className="lugares"
-                  type="number"
+                  type="text"
                   name="estado2"
                   value={this.state.estado2}
                   onChange={this.handleChange}
@@ -317,7 +307,7 @@ class FormYacimiento extends Component {
                 {this.buscarMunicipios(this.state.estado, this.state.estado2)}
                 <select
                   className="lugares"
-                  type="number"
+                  type="text"
                   name="municipio2"
                   value={this.state.municipio2}
                   onChange={this.handleChange}
@@ -335,14 +325,14 @@ class FormYacimiento extends Component {
                 )}
                 <select
                   className="lugares"
-                  type="number"
+                  type="text"
                   name="direccion"
                   value={this.state.direccion}
                   onChange={this.handleChange}
                 >
                   <option> </option>
                   {this.state.provinciaList.map((lugar, i) => (
-                    <option value={lugar.id_lugar} key={i}>
+                    <option value={lugar.nombre_lugar} key={i}>
                       {lugar.nombre_lugar}
                     </option>
                   ))}
@@ -414,12 +404,7 @@ class FormYacimiento extends Component {
               </div>
 
               <div className="ingresarUsuario">
-                <button
-                  type="submit"
-                  onClick={function(e) {
-                    this.handleUpdateYacimiento(e);
-                  }.bind(this)}
-                >
+                <button type="submit" onClick={this.handleUpdateYacimiento}>
                   Modificar Yacimiento
                 </button>
               </div>
