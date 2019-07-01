@@ -6,6 +6,7 @@ create table Lugar (
     constraint fk_lugar_lugar foreign key (fk_lugar) 
     references Lugar (id_lugar),
     constraint pk_id_lugar primary key (id_lugar));
+alter sequence lugar_id_lugar_seq restart with 1;
 
 CREATE TABLE empresa_aliada (
      id_empresa_aliada SERIAL,
@@ -20,12 +21,12 @@ CREATE TABLE empresa_aliada (
      REFERENCES Lugar (id_lugar),
      CONSTRAINT pk_id_empresa_aliada PRIMARY KEY (id_empresa_aliada)
 );
-
+alter sequence empresa_aliada_id_empresa_aliada_seq restart with 1;
 create table Presentacion(
 	id_presentacion serial,
 	nombre_presentacion varchar(300) not null,
 	constraint pk_id_presentacion primary key (id_presentacion));
-
+alter sequence presentacion_id_presentacion_seq restart with 1;
 create table Mineral(
     id_mineral serial,
     nombre_mineral varchar (50) not null,
@@ -40,7 +41,7 @@ create table Mineral(
     constraint check_tipo_mineral check 
 	(tipo_mineral in ('Metalico','No metalico'))
 );
-
+alter sequence mineral_id_mineral_seq restart with 1;
 CREATE TABLE Mineral_presentacion(
     id_mineral_presentacion serial,
     costo real not null,
@@ -52,13 +53,13 @@ CREATE TABLE Mineral_presentacion(
     CONSTRAINT fk_mineral_presentacion FOREIGN KEY (fk_mineral) 
     REFERENCES Mineral(id_mineral) on delete cascade
 );
-
+alter sequence mineral_presentacion_id_mineral_presentacion_seq restart with 1;
 CREATE TABLE tipo_status(
      id_tipo_status SERIAL,
      nombre_tipo_status VARCHAR(300) NOT NULL,
      CONSTRAINT pk_id_tipo_status PRIMARY KEY (id_tipo_status)
 );
-
+alter sequence tipo_status_id_tipo_status_seq restart with 1;
 CREATE TABLE Empresa (
     id_cliente serial,
     rif bigint NOT NULL UNIQUE,
@@ -70,7 +71,7 @@ CREATE TABLE Empresa (
     REFERENCES Lugar (id_lugar),
     CONSTRAINT pk_id_empresa PRIMARY KEY(id_cliente)
     );
-
+alter sequence empresa_id_cliente_seq restart with 1;
     CREATE TABLE Persona (
     id_cliente serial,
     cedula_identidad integer NOT NULL UNIQUE,
@@ -86,7 +87,7 @@ CREATE TABLE Empresa (
     CONSTRAINT check_sexo_pers CHECK(sexo in('M','F')), 
     CONSTRAINT pk_id_persona PRIMARY KEY(id_cliente)
     );
-
+alter sequence persona_id_cliente_seq restart with 1;
 CREATE TABLE Compra_Cliente (
      id_compra_cliente serial,
       fecha_compra DATE NOT NULL,
@@ -107,6 +108,7 @@ CREATE TABLE Compra_Cliente (
       REFERENCES tipo_status(id_tipo_status)
       );
 
+alter sequence compra_cliente_id_compra_cliente_seq restart with 1;
 /*CREATE TABLE Detalle_Compra_Cliente (
         id_detalle_compra_cliente serial, 
         cantidad real NOT NULL,
@@ -132,7 +134,7 @@ create table Yacimiento (
     constraint fk_status_yacimiento foreign key (fk_tipo_status) 
     references tipo_status (id_tipo_status)
     );
-
+alter sequence yacimiento_id_yacimiento_seq restart with 1;
 
 	CREATE TABLE proyecto (
      id_proyecto SERIAL,
@@ -146,7 +148,7 @@ create table Yacimiento (
      CONSTRAINT fk_tipo_status FOREIGN KEY (fk_tipo_status)
      REFERENCES Tipo_Status (id_tipo_status));
 
-
+alter sequence proyecto_id_proyecto_seq restart with 1;
 CREATE TABLE compra_aliado (
      id_compra_aliado SERIAL,
      fecha_compra_aliado DATE NOT NULL,
@@ -167,6 +169,7 @@ CREATE TABLE compra_aliado (
      REFERENCES tipo_status(id_tipo_status)
 );
 
+alter sequence compra_aliado_id_compra_aliado_Seq restart with 1;
 /*CREATE TABLE detalle_compra_aliado (
      id_detalle_compra_aliado SERIAL,
      cantidad real NOT NULL,
@@ -182,18 +185,6 @@ CREATE TABLE compra_aliado (
 
 
 /*detalle compra aliado y compra cliente*/
-create table Inventario(
-    id_inventario serial,
-    fecha_inventario DATE NOT NULL,
-    cantidad real not null,
-    Fk_Compra_Aliado integer,
-    Fk_Compra_Cliente integer,
-    constraint pk_inventario  primary key (id_inventario),
-    constraint fk_compra_aliado_inventario foreign key (Fk_Compra_Aliado)
-    references Compra_Aliado (id_compra_aliado),
-    constraint fk_compra_cliente_inventario foreign key (Fk_Compra_cliente)
-    references Compra_Cliente (id_compra_cliente)
-);
 
 
 
@@ -205,6 +196,7 @@ CREATE TABLE Cargo (
     CONSTRAINT pk_id_cargo PRIMARY KEY(id_cargo)
     );
 
+alter sequence cargo_id_cargo_seq restart with 1;
 
 CREATE TABLE Permiso (
     id_permiso serial,
@@ -213,13 +205,14 @@ CREATE TABLE Permiso (
     CONSTRAINT pk_id_permiso PRIMARY KEY(id_permiso)
     );
 
+alter sequence permiso_id_permiso_seq restart with 1;
 CREATE TABLE Rol (
     id_rol serial,
     tipo_rol VARCHAR(15) NOT NULL,
     descripcion_rol VARCHAR(225), 
     CONSTRAINT pk_id_rol PRIMARY KEY(id_rol)
     );
-
+alter sequence rol_id_rol_seq restart with 1;
 CREATE TABLE Permiso_Rol (
     id_permiso_rol serial,
     FK_Permiso integer,
@@ -231,6 +224,7 @@ CREATE TABLE Permiso_Rol (
     REFERENCES Rol(id_rol)
     );
 
+alter sequence permiso_rol_id_permiso_rol_seq restart with 1;
 
 
 CREATE TABLE Empleado (
@@ -253,6 +247,7 @@ CREATE TABLE Empleado (
 	
     );
 	
+alter sequence empleado_id_empleado_seq restart with 1;
 
 
 CREATE TABLE Usuario (
@@ -274,6 +269,7 @@ CREATE TABLE Usuario (
     REFERENCES Rol (id_rol)
     );
 
+alter sequence usuario_id_usuario_seq restart with 1;
 CREATE TABLE Horario (
     id_horario serial,
     hora_inicio time NOT NULL,
@@ -284,6 +280,7 @@ CREATE TABLE Horario (
     'Viernes','Sabado','Domingo'))
     );
 
+alter sequence horario_id_horario_seq restart with 1;
     CREATE TABLE etapa_explotacion (
      id_etapa SERIAL,
      nombre_etapa VARCHAR(30) NOT NULL,
@@ -300,6 +297,7 @@ CREATE TABLE Horario (
      REFERENCES tipo_status(id_tipo_status)
 );
 
+alter sequence etapa_explotacion_id_etapa_seq restart with 1;
 create table Fase (
    id_fase  serial,
    numero_fase integer not null,
@@ -318,6 +316,7 @@ create table Fase (
      REFERENCES tipo_status(id_tipo_status)
 );
 
+alter sequence fase_id_fase_seq restart with 1;
 CREATE TABLE Cargo_Fase(
     id_cargo_fase serial,
     cantidad integer not null,
@@ -330,7 +329,7 @@ CREATE TABLE Cargo_Fase(
      CONSTRAINT fk_fase_en_cargos FOREIGN KEY (FK_Fase)
     REFERENCES Fase(id_fase) on delete cascade
 );
-
+alter sequence Cargo_Fase_id_cargo_fase_seq restart with 1;
 CREATE TABLE Empleado_Fase_Cargo(
     id_empleado_cargo_fase serial,
     FK_Empleado integer not null,
@@ -341,6 +340,8 @@ CREATE TABLE Empleado_Fase_Cargo(
     CONSTRAINT fk_cargos_de_Fase FOREIGN KEY (FK_Cargo_Fase)
     REFERENCES Cargo_Fase(id_cargo_fase) on delete cascade
 );
+
+alter sequence Empleado_Fase_Cargo_id_empleado_cargo_fase_seq restart with 1;
 CREATE TABLE Horario_empleado(
     id_horario_empleado serial,
     FK_horario integer not null,
@@ -353,6 +354,7 @@ CREATE TABLE Horario_empleado(
 );
 
 
+alter sequence Empleado_Fase_Cargo_id_empleado_cargo_fase_seq restart with 1;
 
 CREATE TABLE Mineral_Empresa (
         id_mineral_empresa serial,
@@ -365,7 +367,7 @@ CREATE TABLE Mineral_Empresa (
         REFERENCES empresa_aliada(id_empresa_aliada) on delete cascade
 
         );
-        
+        alter sequence mineral_empresa_id_mineral_empresa_seq restart with 1;
 
 
 
@@ -382,6 +384,7 @@ CREATE TABLE Compra_cliente_proyecto(
     REFERENCES proyecto(id_proyecto) on delete cascade
 );
       
+alter sequence compra_cliente_proyecto_id_compra_cliente_proyecto_seq restart with 1;
  
 
  CREATE TABLE pago (
@@ -394,7 +397,7 @@ CREATE TABLE Compra_cliente_proyecto(
      REFERENCES Compra_Cliente(id_compra_cliente)
 );
 
-
+alter sequence pago_id_pago_seq restart with 1;
 create table Tipo_Pago(
     id_tipo_pago serial,
     numero integer not null unique,
@@ -410,17 +413,7 @@ create table Tipo_Pago(
     constraint  tipo_pago check (tipo in ('Transferencia','Tarjeta_Credito', 'Cheque', 'Tarjeta_Debito'))
 );
 
-CREATE TABLE pago_pago (
-     id_pago_pago SERIAL,
-     monto_total_pagado INTEGER NOT NULL,
-     fk_tipo_pago INTEGER,
-     fk_pago INTEGER,
-     CONSTRAINT pk_id_pago_pago PRIMARY KEY (id_pago_pago),
-     CONSTRAINT fk_tipo_pago_pago FOREIGN KEY (fk_tipo_pago)
-     REFERENCES Tipo_Pago(id_tipo_pago),
-     CONSTRAINT fk_pago_pago FOREIGN KEY (fk_pago)
-     REFERENCES pago (id_pago)
-);
+alter sequence tipo_pago_id_tipo_pago_seq restart with 1;
 
 
 /*CREATE TABLE tipo_pago_banco (
@@ -447,6 +440,7 @@ create table Mineral_Mineral (
   references Mineral(id_mineral)
 );
 
+alter sequence mineral_mineral_id_mineral_mineral_seq restart with 1;
 
 
 
@@ -462,6 +456,7 @@ create table Mineral_Yacimiento(
     references Yacimiento (id_yacimiento) on delete cascade 
     );
 	
+alter sequence mineral_yacimiento_id_mineral_yacimiento_seq restart with 1;
 
 
 
@@ -490,6 +485,7 @@ CREATE TABLE maquinaria (
     CONSTRAINT pk_id_maquinaria PRIMARY KEY (id_maquinaria)
 );
 
+alter sequence maquinaria_id_maquinaria_seq restart with 1;
 CREATE TABLE Maquinaria_Fase (
     id_maquinaria_fase serial,
     cantidad integer not null,
@@ -503,6 +499,7 @@ CREATE TABLE Maquinaria_Fase (
     REFERENCES maquinaria(id_maquinaria)
 );
 
+alter sequence maquinaria_fase_id_maquinaria_fase_seq restart with 1;
 CREATE TABLE Maquinaria_Activa(
     id_maquinaria_activa serial,
     fk_fase integer not null,
@@ -515,7 +512,7 @@ CREATE TABLE Maquinaria_Activa(
      CONSTRAINT fk_status_maq_act FOREIGN KEY (fk_tipo_status)
      REFERENCES tipo_status(id_tipo_status)
 );
-
+alter sequence maquinaria_activa_id_maquinaria_activa_seq restart with 1;
 
 
 

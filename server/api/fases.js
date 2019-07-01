@@ -24,4 +24,24 @@ router.post("/:id", function(req, res) {
   
 });
 
+router.get("/cargo/fase/:id_fase", function(req, res) {
+ 
+  var id_fase = req.params.id_fase;
+  console.log("aqui llego con" +id_fase);
+
+  Fases.retrieveCargoFase(id_fase, function(err, cargos) {
+    if (err) return res.json(err);
+    return res.json(cargos);
+  });
+});
+
+router.get("/get/maquinaria/fase/:id_fase", function(req, res) {
+  var id_fase = req.params.id_fase;
+  Fases.retrieveMaquinariaFase(id_fase, function(err, cargos) {
+    if (err) return res.json(err);
+    return res.json(cargos);
+  });
+});
+
+
 module.exports = router;

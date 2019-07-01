@@ -11,7 +11,9 @@ class ConsultTableProyectos extends Component {
     super(props);
     this.state = {
       proyectoList: [],
-      statusEtapa: []
+      statusEtapa: [],
+      cargosFase: [],
+      maquinariaFase:[]
     };
     this.handleGetInfo = this.handleGetInfo.bind(this);
   }
@@ -33,11 +35,56 @@ class ConsultTableProyectos extends Component {
         
     })
   }
-  handleStatusFase=(id)=>{
+  handleCargoFase=(idFase)=>{
+    console.log(idFase);
+    fetch(`/api/fases/cargo/fase/${idFase}`)
+    .then(res =>res.json())
+    .then(res =>{
+      this.setState({cargosFase: res.map((r=>r))})
+    }).then(res =>{
+      console.log("hola");
+        swal(
+          <table id="t02">
+          <tr>
+            <th>Cargos</th>  
+          </tr>
 
-  }
+          {this.state.cargosFase.map((cargo, i) => {
+            return (
+              <tr key={i}>
+                <td> {cargo.cargo}</td>
+              </tr>
+            );
+          })}
+        </table>
+        )
+  })
+}
+handleMaquinariaFase=(idFase)=>{
+  fetch(`/api/fases/get/maquinaria/fase/${idFase}`)
+  .then(res =>res.json())
+  .then(res =>{
+    this.setState({maquinariaFase: res.map((r=>r))})
+  }).then (res =>{
+    swal(
+      <table id="t02">
+      <tr>
+        <th>Maquinaria Necesitada</th>  
+      </tr>
+
+      {this.state.maquinariaFase.map((maquinaria, i) => {
+        return (
+          <tr key={i}>
+            <td> {maquinaria.maquinaria}</td>
+          </tr>
+        );
+      })}
+    </table>
+    )
+  })
+}
+
   
-
   handleGetInfo =(id_proyecto)=>{
     fetch(`/api/proyecto/etapa/fase/${id_proyecto}`)
     .then(res => res.json())
@@ -62,18 +109,23 @@ class ConsultTableProyectos extends Component {
               <tr key={i}>
                 <td>{proyecto.etapa}</td>
                 <td>
-                  <div className="horario">
+                  <div className="horario2">
                   <button  onClick={function(e) {
                        this.handleStatusEtapa(proyecto.idetapa);
                        }.bind(this)} > Status Etapa</button></div>
                 </td>
                 <td>{proyecto.fase}</td>
                 <td>
-                  <div className="horario">
+                  <div className="horario2">
                   <button  onClick={function(e) {
-                       this.handleMasInfoFase(proyecto.idfase);
-                       }.bind(this)}> Mas Info Fase</button></div>
+                       this.handleCargoFase(proyecto.idfase);
+                       }.bind(this)}> Cargos Fase</button></div>
+                    <div className="horario2">
+                  <button  onClick={function(e) {
+                       this.handleMaquinariaFase(proyecto.idfase);
+                       }.bind(this)}> Maquinaria Fase</button></div>
                 </td>
+                
               </tr>
             );
           })}

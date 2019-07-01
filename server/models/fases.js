@@ -3,6 +3,34 @@ var express = require("express");
 
 class Fases {
 
+  static retrieveCargoFase(idFase,callback) {
+    db.query(
+      "select c.tipo_cargo  as cargo\
+      from cargo c, cargo_fase cf, fase f \
+      where f.id_fase=$1\
+      and f.id_fase=cf.fk_fase\
+      and cf.fk_cargo =c.id_cargo",[idFase],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+  static retrieveMaquinariaFase(idFase,callback) {
+    db.query(
+      " select m.nombre_maquinaria as maquinaria\
+      from maquinaria m, fase f, maquinaria_fase mf\
+      where f.id_fase=$1\
+      and   mf.fk_fase=f.id_fase\
+      and mf.fk_maquinaria=m.id_maquinaria",[idFase],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+  
+ 
   static insert(fase, callback) {
     db.query(
       "insert into Fase (numero_fase, nombre_fase,duracion_fase,costo_fase,\
@@ -28,6 +56,7 @@ class Fases {
       }
     );
   }
+  
 
   static update(id_fase,callback){
     db.query(

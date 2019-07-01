@@ -95,7 +95,7 @@ class ConfiguracionProyecto extends Component {
       fetch("/api/cargos/cargoFase", {
         method: "post",
         headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ fase:  fase})
+        body: JSON.stringify({ fase: cargoFase})
       }).then(res => res.json())
       .then (res=> {
         this.setState({id_fase: res[0].id_fase});
