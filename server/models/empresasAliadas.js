@@ -44,7 +44,8 @@ class EmpresasAliadas {
         if (err.error) return callback(err);
         callback(res);
       }
-    );}
+    )
+  }
 
   static retrieveAll(callback) {
     db.query("SELECT * FROM empresa_aliada", function(err, res) {
