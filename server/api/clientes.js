@@ -49,22 +49,6 @@ router.get("/empresa/:rif", function(req, res) {
   });
 });
 
-/*router.get("/:cedula", function(req, res) {
-  var cedula = req.params.cedula;
-  Clientes.retrieveCedula(cedula, function(err, clientes) {
-    if (err) return res.json(err);
-    return res.json(clientes);
-  });
-});
-
-router.post("/:update", function(req, res) {
-  var cliente = req.body.cliente;
-  Clientes.update(cliente, function(err, result) {
-    if (err) return res.json(err);
-    return res.json(result);
-  });
-});*/
-
 router.post("/", function(req, res) {
   var cliente = req.body.cliente;
   Clientes.insertPersona(cliente, function(err, result) {
@@ -80,6 +64,7 @@ router.post("/empresas", function(req, res) {
     return res.json(result);
   });
 });
+
 router.delete("/persona/:ced",function(req,res) {
   console.log('entro');
   var ced = req.params.ced;
@@ -88,6 +73,7 @@ router.delete("/persona/:ced",function(req,res) {
     return res.json(result);
   });
 });
+
 router.delete("/empresa/:rif",function(req,res) {
   console.log('entro');
   var rif = req.params.rif;
@@ -96,4 +82,22 @@ router.delete("/empresa/:rif",function(req,res) {
     return res.json(result);
   });
 });
+
+router.post("/update/persona", function(req, res) {
+  var persona = req.body.persona;
+  Clientes.updatePersona(persona, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
+
+router.post("/update/empresa", function(req, res) {
+  var empresa = req.body.empresa;
+  Clientes.updateEmpresa(empresa, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
+
+
 module.exports = router;

@@ -89,20 +89,5 @@ class Yacimientos {
       }
     );
   }
-  // insertar por defecto status acttivo al ingresar yac (muchos a muchos)
-  /*static insertstatusdefault(yacimiento,callback){
-  db.query(
-    `INSERT INTO status_yacimiento(fk_yacimiento,fk_tipo_status) \
-    VALUES ((SELECT id_yacimiento from yacimiento\
-    where nombre_yacimiento=$1),2)`, 
-    [
-      yacimiento.nombre
-    ],
-
-    function(err, res) {
-      if (err.error) return callback(err);
-    }
-          );
-}*/
 }
 module.exports = Yacimientos;

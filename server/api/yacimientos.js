@@ -20,8 +20,6 @@ router.get("/:nombre", function(req, res) {
 
 router.post("/actualizar/update", function(req, res) {
   var yacim = req.body.yacim;
-  console.log("entro en el api yacimiento");
-  console.log(yacim);
   Yacimientos.update(yacim, function(err, result) {
     if (err) return res.json(err);
     return res.json(result);
@@ -36,14 +34,9 @@ router.post("/", function(req, res) {
       return res.json(result);
     });
   }
-  /*Yacimientos.insertstatusdefault(yacimiento,function(err,result){
-    if (err) return res.json(err);
-    return res.json(result);
-  })*/
 });
 router.delete("/:nombre", function(req, res) {
   var nombre = req.params.nombre;
-  console.log(nombre + " de diego 1");
   Yacimientos.delete(nombre, function(err, result) {
     if (err) return res.json(err);
     return res.json(result);
