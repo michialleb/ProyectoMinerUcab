@@ -1649,8 +1649,8 @@ values
 ('CVG Vista al sol',null,null,1371,776322),
 ('CVG Carrazco',null,null,1380,435344),
 ('CVG Zaraza',null,null,1489,45645646),
-('CVG Dante',null,null,1487,4545645645)
-('CVG Hukala','06-07-1980','Tiene la finalidad de producir cobre primario en diversas formas',607, 102192129,56546456),
+('CVG Dante',null,null,1487,4545645645),
+('CVG Hukala','06-07-1980','Tiene la finalidad de producir cobre primario en diversas formas',607, 102192129),
 ('CVG Bacalum','09-08-1970','La industria minera promotora de eventos de alumnio ',588,9876756),
 ('CVG Vivelaz',null,null,365, 876546785),
 ('CVG Conturre','09-11-1982',null,373,980997654),
@@ -3913,10 +3913,10 @@ values('Fusilina','Alto','07-09-19','06-23-1970','Metalico'),
 ('Pololo','Bajo','05-11-19','06-23-1970','Metalico'),
 ('Cristaleta','Bajo','08-10-19','06-23-1970','Metalico'),
 ('Salera','Bajo','07-19-19','06-23-1970','Metalico'),
-('Pampera','Bajo','07-07-19','06-23-1970','Metalico'),
+('Pampera','Bajo','07-07-19','06-23-1970','Metalico');
 
-insert into mineral_presentacion (fk_mineral,fk_presentacion) values 
-(25,6),(26,6),(27,6),(28,6),(29,6),(30,6);
+insert into mineral_presentacion (fk_mineral,fk_presentacion,costo) values 
+(25,6,1000),(26,6,1200),(27,6,1300),(28,6,1400),(29,6,1500),(30,6,1600);
 
 insert into mineral_mineral (fk_mineral,fk_mineral_comp,cantidad)
 values (1,25),(1,26),(2,24),(2,27),(3,25),(3,30),(5,30),(5,29),(6,23),(6,28),(7,22),(8,30),(7,29),(8,24),(9,29),(9,25),(10,25),(10,26),(11,26),(11,27),(12,26),(12,28),(13,29),(13,29),(14,30),(14,29),(15,26),(16,23),(16,26),(17,25),(17,28),(18,26),(18,27)

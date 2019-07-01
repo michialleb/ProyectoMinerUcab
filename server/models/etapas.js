@@ -25,5 +25,19 @@ class Etapas {
       }
     );
   }
+
+  static retrieveStatusEtapa(idEtapa, callback) {
+    db.query(
+      "select s.nombre_tipo_status as status\
+       from tipo_status s, etapa_explotacion e \
+       where e.fk_tipo_status= s.id_tipo_status\
+       and e.id_etapa= $1",
+      [idEtapa],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
 }
 module.exports = Etapas;

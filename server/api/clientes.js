@@ -49,21 +49,16 @@ router.get("/empresa/:rif", function(req, res) {
   });
 });
 
-/*router.get("/:cedula", function(req, res) {
-  var cedula = req.params.cedula;
-  Clientes.retrieveCedula(cedula, function(err, clientes) {
+router.get("/factura/compra/cliente/getInfo/:id_mineral_presentacion", function(req, res) {
+
+  var id_mineral_presentacion = req.params.id_mineral_presentacion;
+  Clientes.retrieveMineralPresentacion(id_mineral_presentacion, function(err, empre) {
     if (err) return res.json(err);
-    return res.json(clientes);
+    return res.json(empre);
   });
 });
 
-router.post("/:update", function(req, res) {
-  var cliente = req.body.cliente;
-  Clientes.update(cliente, function(err, result) {
-    if (err) return res.json(err);
-    return res.json(result);
-  });
-});*/
+
 
 router.post("/", function(req, res) {
   var cliente = req.body.cliente;
@@ -80,6 +75,22 @@ router.post("/empresas", function(req, res) {
     return res.json(result);
   });
 });
+router.post("/compra/persona", function(req, res) {
+  var compra = req.body.compra;
+  Clientes.CompraClientePersona(compra, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
+
+router.post("/proyecto/compra/persona", function(req, res) {
+  var proyecto = req.body.proyecto;
+  Clientes.AgregarProyectoCompraCliente(proyecto, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
+
 router.delete("/persona/:ced",function(req,res) {
   console.log('entro');
   var ced = req.params.ced;
@@ -96,4 +107,7 @@ router.delete("/empresa/:rif",function(req,res) {
     return res.json(result);
   });
 });
+
+
+
 module.exports = router;

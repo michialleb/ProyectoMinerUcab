@@ -26,20 +26,31 @@ class EmpresasAliadas {
       }
     ); 
   }
+ 
 
   static CompraAliado(compra, callback) {
-    
+    var f= new Date;
+    var Fecha=f.getMonth()+'-'+f.getDate()+'-'+f.getFullYear();
     db.query(
       "insert into compra_aliado (cantidad, fecha_compra_aliado,\
       monto_total, fk_empresa_aliada, fk_proyecto,fk_tipo_status,fk_mineral_presentacion) \
-      values (1000, '12-03-2019', 1000, 2,(select p.id_proyecto \
+      values ($1, $2, $3, (select id_empresa_aliada from empresa_aliada\
+       where nombre_empresa=$4 ),(select p.id_proyecto \
       from proyecto p, mineral_yacimiento my, yacimiento y\
       where p.fk_yacimiento = y.id_yacimiento\
       and my.fk_yacimiento =y.id_yacimiento\
-      and my.cantidad>=1000\
-      and my.fk_mineral= 4\
-      and y.fk_tipo_status=7 limit 1), 2, 1);",
-      [id_mineral_presentacion],
+      and my.cantidad>=$5\
+      and my.fk_mineral= $6\
+      and y.fk_tipo_status=7 limit 1), $7, $8);",
+      [compra.cantidad,
+      Fecha,
+      compra.monto,
+      compra.empresas,
+      compra.cantidad,
+      compra.id_mineral,
+      2,
+      compra.id_mineral_presentacion
+      ],
       function(err, res) {
         if (err.error) return callback(err);
         callback(res);

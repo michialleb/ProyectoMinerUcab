@@ -140,7 +140,6 @@ class FormCompraCliente extends Component {
   getIdMineral = mineral => {
     let id = 0;
     this.props.minerales.map(m => {
-      console.log("m: " + m.nombre_mineral);
       if (m.nombre_mineral == mineral) {
         id = m.id_mineral;
       }
@@ -149,6 +148,20 @@ class FormCompraCliente extends Component {
     return id;
   };
 
+  getIdMineralPresentacion = (presentacion,mineral) => {
+    let id = 0;
+    console.log("p");
+    this.props.minerales_presentacion.map(m => {
+   
+      if ((m.nombre_presentacion == presentacion) && (m.nombre_mineral ==  mineral) ){
+        console.log(m.nombre_presentacion +" es"+presentacion );
+        console.log(m.nombre_mineral +" es"+mineral );
+        id = m.id_mineral_presentacion;
+      }
+    });
+    console.log(id);
+    return id;
+  };
   render() {
     return (
       <>
@@ -157,6 +170,9 @@ class FormCompraCliente extends Component {
             this.state.procesarCompra ? "wrapper-c_no_show" : "wrapper-c"
           }
         >
+          <div> 
+            <h4>{}</h4>
+          </div>
           <div className="titulo">
             <form className="form" noValidate>
               <h5 id="ordenTitulo">Orden de Compra</h5>
@@ -295,7 +311,14 @@ class FormCompraCliente extends Component {
         </div>
 
         <div>
-          {this.state.mineralDisponible ? <Factura /> : null}
+          {this.state.mineralDisponible ? <Factura  id_mineral_presentacion={this.getIdMineralPresentacion(this.state.presentacion,this.state.mineral)} 
+                                                    nombre_persona= {this.state.nombrePersona}
+                                                    id_mineral={this.getIdMineral(this.state.mineral)}
+                                                    apellido_persona ={this.state.apellidoPersona}
+                                                    cantidad={this.state.cantidad}
+                                                    cliente={this.state.ci}
+                                                    
+          /> : null}
 
           {this.state.mineralNoDisponible ? (
             <CompraAliadoAuto

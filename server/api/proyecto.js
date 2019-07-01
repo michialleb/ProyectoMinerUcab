@@ -9,6 +9,13 @@ router.get("/", function(req, res) {
     return res.json(proyectos);
   });
 });
+router.get("/etapa/fase/:id_proyecto", function(req, res) {
+  var id_proyecto=req.params.id_proyecto;
+  Proyecto.retrieveEtapaFase(id_proyecto,function(err, proyectos) {
+    if (err) return res.json(err);
+    return res.json(proyectos);
+  });
+});
 
 router.post("/", function(req, res) {
   var proyecto = req.body.proyecto;

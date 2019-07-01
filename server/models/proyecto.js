@@ -4,7 +4,10 @@ var express = require("express");
 class Proyectos {
 
   static retrieveAll(callback) {
-    db.query("SELECT * FROM proyecto", function(err, res) {
+    db.query("SELECT p.id_proyecto as id, p.nombre_proyecto as proyecto, y.nombre_yacimiento as yacimiento, p.duracion_proyecto as duracion, s.nombre_tipo_status as status \
+              from proyecto p, yacimiento y, tipo_status s \
+              where p.fk_yacimiento= y.id_yacimiento \
+              and p.fk_tipo_status= s.id_tipo_status", function(err, res) {
       if (err.error) return callback(err);
       callback(res);
     });
@@ -27,6 +30,21 @@ class Proyectos {
         callback(res);
       }
     );
+  }
+
+  static retrieveEtapaFase(id_proyecto,callback) {
+    db.query(
+    "select p.nombre_proyecto as proyecto, e.nombre_etapa as etapa, f.nombre_fase  as fase,\
+    e.id_etapa as idEtapa, f.id_fase as idFase \
+    from proyecto p, etapa_explotacion e,  fase f \
+    where e.fk_proyecto=$1\
+    and p.id_proyecto=e.fk_proyecto\
+    and f.fk_etapa_explotacion=e.id_etapa",[
+      id_proyecto
+    ], function(err, res) {
+      if (err.error) return callback(err);
+      callback(res);
+    });
   }
 }
 module.exports = Proyectos;

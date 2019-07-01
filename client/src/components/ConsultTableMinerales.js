@@ -20,7 +20,6 @@ class ConsultTableMinerales extends Component {
         if (res !== []) this.setState({ compuestosList: res.map(r => r) });
       })
       .then(res => {
-       
           swal(
             <div>
               <ListGroup>
@@ -42,6 +41,7 @@ class ConsultTableMinerales extends Component {
         tipo: min.tipo_mineral,
         valor: min.valor_economico,
         ver_mas: (
+          <div className="horario">
           <button
             onClick={function(e) {
               this.handleGetInfo(min.id_mineral);
@@ -50,6 +50,7 @@ class ConsultTableMinerales extends Component {
             {" "}
             Ver más
           </button>
+          </div>
         )
       };
       mineral.push(m);

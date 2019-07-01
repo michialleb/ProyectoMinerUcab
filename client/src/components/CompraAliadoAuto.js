@@ -14,7 +14,8 @@ class CompraAliadoAuto extends Component {
       costoMinerales: [],
       total:0,
       listaId: [], 
-      avanzarProyecto: false
+      avanzarProyecto: false,
+      empresasList:[]
     };
     this.handleAvanzarProyecto = this.handleAvanzarProyecto.bind(this);
   }
@@ -26,8 +27,11 @@ getEmpresa = (id)=> {
       .then(res => res.json())
       .then(res => {
         empresas= res.map(r => r)
-        return empresas;
+        this.setState({empresasList: empresas});
+        console.log("aqui estoy"+ empresas);
+       return empresas;
        })
+       
   }
 
   getMineralesCompuestos(id_mineral) {
@@ -40,7 +44,8 @@ getEmpresa = (id)=> {
         var total= 0, id=[];
         mineralesList.map((m)=>{
            total=(m.costo * m.cantidad) + total;
-          id.push(m.id);
+         
+          id.push(m.id_mp);
         })
         
         this.setState({total: total, listaId:id})
@@ -50,14 +55,23 @@ getEmpresa = (id)=> {
 
   addCompraAliado(){
     this.state.listaId.map((id,i)=>{
-      let compra={
-        cantidad: this.state.mineralesList[i].cantidad,
-        monto:  this.state.mineralesList[i].cantidad * this.state.mineralesList[i].costo,
-        empresas: this.getEmpresa(id),
-        id_mineral: this.props.id_mineral,
-        id_mineral_presentacion: this.state.mineralesList[i].id_mp
-      };
-      console.log(compra);
+      fetch(`/api/empresaAliada/empresa/mineral/${id}`)
+      .then(res => res.json())
+      .then(res => {
+        let compra={
+          cantidad: this.state.mineralesList[i].cantidad,
+          monto:  this.state.mineralesList[i].cantidad * this.state.mineralesList[i].costo,
+          empresas:res[0].nombre_empresa,
+          id_mineral: this.props.id_mineral,
+          id_mineral_presentacion: this.state.mineralesList[i].id_mp
+        };
+        fetch("/api/empresaAliada", {
+          method: "post",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({ compra: compra })
+        }).then(res => res.json())
+       })
+    
    /*   fetch("/api/empresaAliada", {
         method: "post",
         headers: { "Content-type": "application/json" },
@@ -99,6 +113,7 @@ getEmpresa = (id)=> {
       <>
         
         <div  className={this.state.avanzarProyecto? "wrapper-c_no_show" : "wrapper-c"  }>
+        <div className="form-wrapper">
           <h7>Orden de Compra</h7>
           <div>
         </div>
@@ -137,6 +152,7 @@ getEmpresa = (id)=> {
           <buttom className="ingresarUsuario" onClick ={function(e) {
                     this.handleAvanzarProyecto(e);
                   }.bind(this)}> Aceptar compra </buttom>
+          </div>
           </div>
           {this.state.avanzarProyecto ? <ActivarProyecto /> : null}
        
