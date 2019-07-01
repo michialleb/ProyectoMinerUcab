@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
 import { FaSistrix } from "react-icons/fa";
+import swal from "sweetalert";
 
 class Form extends Component {
   constructor(props) {
@@ -78,12 +79,20 @@ class Form extends Component {
     }
   };
 
-  handleUpdateEmpleado = update => {
-    fetch(`/api/empleados/${update}`, {
+  handleUpdateEmpleado = e => {
+    e.preventDefault();
+    fetch(`/api/empleados/actualizar`, {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ empleado: this.state })
-    }).then(res => res.json());
+    })
+      .then(res => res.json())
+      .catch(res => {})
+      .then(res => {
+        if (res.error)
+          swal("Error. Datos invalidos!", "Intente de nuevo!", "error");
+        else swal("Empleado modificado!", "Satisfactoriamente!", "success");
+      });
   };
 
   handleSubmit(e) {
@@ -96,13 +105,12 @@ class Form extends Component {
   addInfoEmpleado(empleado) {
     empleado.map(empl => {
       var date = empl.fnac.split(["T"], [1]);
-      console.log(date);
       this.setState({
         nombre: empl.nombre,
         apellido: empl.apellido,
         fnac: date,
         cedula: empl.cedula,
-        direccion: empl.direccion,
+        fk_lugar: empl.provincia,
         telefono: empl.telefono,
         sexo: empl.sexo,
         fk_cargo: empl.cargo,
@@ -111,11 +119,8 @@ class Form extends Component {
         provinciaAnteriror: empl.provincia,
         correo: empl.correo
       });
-      console.log("addinfo");
-      console.log(empl);
     });
   }
-
 
   handleGetEmpleado(e) {
     e.preventDefault();
@@ -138,7 +143,6 @@ class Form extends Component {
               value={this.state.cedulaBuscada}
               onChange={this.handleChange}
             />
-
             <button
               className="search"
               type="button"
@@ -240,7 +244,15 @@ class Form extends Component {
               </div>
 
               <div className="direccion">
-                <label htmlFor="direccion">Dirección</label>
+                <label htmlFor="direccion">
+                  {" "}
+                  Dirección: <br />
+                  {this.state.estadoAnterior +
+                    ", " +
+                    this.state.municipioAnterior +
+                    ", " +
+                    this.state.provinciaAnteriror}
+                </label>
                 <select
                   className="lugares"
                   type="text"
@@ -303,8 +315,8 @@ class Form extends Component {
                 </select>
               </div>
               <div className="ingresarUsuario">
-                <button type="submit" onClick={this.handleUpdateEmpleado(1)}>
-                  Actualizar Usuario
+                <button type="submit" onClick={this.handleUpdateEmpleado}>
+                  Modificar Empleado
                 </button>
               </div>
             </form>

@@ -10,6 +10,7 @@ create table Lugar (
 CREATE TABLE empresa_aliada (
      id_empresa_aliada SERIAL,
      nombre_empresa VARCHAR(300) NOT NULL,
+     rif bigint,
      fecha_creacion_empresa DATE,
      descripcion_empresa VARCHAR(300),
 	 correo_empresa varchar(100),
@@ -90,7 +91,7 @@ CREATE TABLE Compra_Cliente (
      id_compra_cliente serial,
       fecha_compra DATE NOT NULL,
       monto_total_compra real NOT NULL,
-	  cantidad real,
+	  cantidad real NOT NULL,
       FK_Empresa integer,
       FK_Persona integer,
       fk_tipo_status integer not null,
@@ -121,7 +122,7 @@ CREATE TABLE Compra_Cliente (
 
 create table Yacimiento (
     id_yacimiento serial,
-    nombre_yacimiento varchar (50) not null,
+    nombre_yacimiento varchar (50) not null UNIQUE,
     fk_lugar integer not null,
     fk_tipo_status integer not null,
     kilometros real not null,
@@ -149,6 +150,7 @@ create table Yacimiento (
 CREATE TABLE compra_aliado (
      id_compra_aliado SERIAL,
      fecha_compra_aliado DATE NOT NULL,
+     cantidad real NOT NULL,
      monto_total real NOT NULL,
      fk_empresa_aliada INTEGER NOT NULL ,
      fk_proyecto INTEGER ,

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
 class Form extends Component {
   constructor() {
@@ -75,23 +75,23 @@ class Form extends Component {
     }
   };
 
-  handleAddEmpleado = (e) => {
+  handleAddEmpleado = e => {
     e.preventDefault();
     fetch(`/api/empleados/`, {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ empleado: this.state })
-    }).then(res => res.json())
-    .catch (res =>{
-      //swal("Revisar campos obligatorios!", "You clicked the button!", "error");
-     })
-       .then (res =>{
-         if(res.error)
-         swal("Revisar campos vacios!", "Intente de nuevo!", "error")
-        else 
-        swal("Mineral Ingresado!", "Satisfactoriamentes!", "success");
-        ;
+    })
+      .then(res => res.json())
+      .catch(res => {
+        //swal("Revisar campos obligatorios!", "You clicked the button!", "error");
       })
+      .then(res => {
+        if (res.error) {
+          console.log("error es: " + res.error);
+          swal("Datos invalidos", "Intente de nuevo!", "error");
+        } else swal("Empleado Ingresado!", "Satisfactoriamentes!", "success");
+      });
   };
 
   handleSubmit(e) {

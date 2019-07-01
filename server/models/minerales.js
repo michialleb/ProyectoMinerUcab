@@ -15,11 +15,17 @@ class Minerales {
 
   static retrieveMineralCompuesto(id_mineral, callback) {
     db.query(
-      "select m.nombre_mineral as nombre, m.id_mineral id\
-       from mineral m, mineral_mineral mm\
-       where  mm.fk_mineral_comp = m.id_mineral  \
-       and mm.fk_mineral = $1",
-      [id_mineral],
+     "select DISTINCT  info.nombre as nombre, info.id as id, info.cantidad as cantidad, \
+      mp.costo as costo, mp.id_mineral_presentacion as id_mp \
+      from  mineral_presentacion mp, presentacion p,\
+           (select m.nombre_mineral as nombre, m.id_mineral id, mm.cantidad as cantidad \
+            from mineral m, mineral_mineral mm, mineral_presentacion mp \
+            where  mm.fk_mineral_comp = m.id_mineral \
+            and mm.fk_mineral = $1) as info  \
+            where mp.fk_mineral = info.id\
+            and   mp.fk_presentacion =p.id_presentacion\
+            and   p.nombre_presentacion = $2",
+      [id_mineral, 'Natural'],
       function(err, res) {
         if (err.error) return callback(err);
         callback(res);
@@ -27,20 +33,7 @@ class Minerales {
     );
   }
 
-  static retrieveCostoMineralCompuesto(id_mineral, callback) {
-    db.query(
-      "select m.nombre_mineral,p.nombre_presentacion,a.costo as costo, a.id_mineral_presentacion as id \
-      from mineral m, presentacion p, mineral_presentacion a\
-      where a.fk_mineral =m.id_mineral and\
-      a.fk_presentacion=p.id_presentacion\
-      and m.id_mineral=$1 and p.nombre_presentacion='Natural'",
-      [id_mineral],
-      function(err, res) {
-        if (err.error) return callback(err);
-        callback(res);
-      }
-    );
-  }
+ 
 
   static retrievePresentacion(nombreMineral, callback) {
     console.log("entro al  model con nombre: " + nombreMineral);
@@ -73,17 +66,22 @@ class Minerales {
   }
 
   static update(mineral, callback) {
+    if (mineral.nombre == "") {
+      mineral.nombre = null;
+    }
+
     db.query(
-      "UPDATE mineral set nombre_mineral=$1, descripccion_mineral=$2, valor_economico=$3,\
+      "UPDATE mineral set nombre_mineral=$1, descripcion_mineral=$2, valor_economico=$3,\
       fecha_nacionalizacion=$4, fecha_ini_explotacion=$5, tipo_mineral=$6\
-        where nombre_mineral= $1",
+        where nombre_mineral= $7",
       [
         mineral.nombre,
         mineral.descripcion,
         mineral.valor,
         mineral.nacionalizacion,
         mineral.explotacion,
-        mineral.tipo
+        mineral.tipo,
+        mineral.mineralSeleccionado
       ],
       function(err, res) {
         if (err.error) return callback(err);
@@ -99,8 +97,7 @@ class Minerales {
     });
   }
   static insert(mineral, callback) {
-    if (mineral.nombre =="")
-        mineral.nombre=null;
+    if (mineral.nombre == "") mineral.nombre = null;
     db.query(
       "INSERT INTO mineral (nombre_mineral,tipo_mineral,valor_economico,\
         descripcion_mineral,fecha_ini_explotacion,fecha_nacionalizacion) \
@@ -121,14 +118,13 @@ class Minerales {
     );
   }
   static delete(nombre, callback) {
-    db.query(
-      'DELETE FROM mineral where nombre_mineral=$1',[nombre],
-      function(err, res) {
-        if (err.error) return callback(err);
-        callback(res);
-        
-      }
-    );
+    db.query("DELETE FROM mineral where nombre_mineral=$1", [nombre], function(
+      err,
+      res
+    ) {
+      if (err.error) return callback(err);
+      callback(res);
+    });
   }
 }
 

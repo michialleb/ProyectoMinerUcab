@@ -26,7 +26,7 @@ router.get("/empl/:id", function(req, res) {
   });
 });
 
-router.post("/:update", function(req, res) {
+router.post("/actualizar", function(req, res) {
   var empleado = req.body.empleado;
   Empleados.update(empleado, function(err, result) {
     if (err) return res.json(err);

@@ -10,7 +10,7 @@ class Etapas {
     db.query(
       "INSERT INTO etapa_explotacion(nombre_etapa,numero_etapa,fk_proyecto,\
         fk_tipo_status,duracion_etapa,costo_etapa) VALUES ($1,$2,(SELECT id_proyecto FROM proyecto\
-        WHERE nombre_proyecto=$3),4,$4,$5)",
+        WHERE nombre_proyecto=$3),4,$4,$5) returning id_etapa",
       [
         etapa.nombre,
         etapa.numero,
