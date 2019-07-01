@@ -15,7 +15,9 @@ class ConfiguracionProyecto extends Component {
             nombreEtapa: "",
             numeroFase: 1,
             costoFase: 0,
-            duracionFase:0
+            duracionFase:0,
+            id_etapa:0,
+            id_fase:0
     };
     this.handleChange = this.handleChange.bind(this);   
     this.handleIngresarFase = this.handleIngresarFase.bind(this);
@@ -23,7 +25,7 @@ class ConfiguracionProyecto extends Component {
     this.handleIngresarMaquinaria = this.handleIngresarMaquinaria.bind(this);
     this.handleAgregarOtraEtapa = this.handleAgregarOtraEtapa.bind(this);
     this.handleAceptarCambiosMaquinaria = this.handleAceptarCambiosMaquinaria.bind(this);
-   
+   this.handleIngresarOtraFase = this.handleIngresarOtraFase.bind(this);
   }
   
   handleChange(e) {
@@ -47,11 +49,13 @@ class ConfiguracionProyecto extends Component {
         method: "post",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ etapa:  etapa})
-      }).then(res => res.json());
+      }).then(res => res.json())
+      .then (res=> {
+        this.setState({id_etapa: res[0].id_etapa});
+      })
   }
 
   addFase (nombreFase,duracionFase,costoFase){
-
     let fase={
         nombreFase: nombreFase,
         duracion: duracionFase,
@@ -65,7 +69,10 @@ class ConfiguracionProyecto extends Component {
         method: "post",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ fase:  fase})
-      }).then(res => res.json());
+      }).then(res => res.json())
+      .then (res=> {
+        this.setState({id_fase: res[0].id_fase});
+      })
   }
  sumarCostoAFase (costo){
      let costoFase= parseInt(this.state.costoFase) + parseInt(costo);
@@ -145,7 +152,7 @@ class ConfiguracionProyecto extends Component {
 
   handleIngresarOtraFase(e, maquinaria){
     e.preventDefault();
-    this.addMaquinaria(maquinaria).bind(this); 
+    this.addMaquinaria(maquinaria); 
     document.getElementById("form_fase").style.display="block";
     document.getElementById("form_maquinaria").style.display="none";
 }
@@ -196,9 +203,9 @@ class ConfiguracionProyecto extends Component {
       </div>
       <div id ="form_maquinaria">
           <FormMaquinaria 
+           handleIngresarOtraFase={this.handleIngresarOtraFase}
           handleAceptarCambiosMaquinaria={this.handleAceptarCambiosMaquinaria}
           handleAgregarOtraEtapa={this.handleAgregarOtraEtapa}
-          handleIngresarOtraFase={this.handleIngresarOtraFase}
           maquinariaList={this.props.maquinariaList} />
       </div>
       <div id ="form_finalizar">

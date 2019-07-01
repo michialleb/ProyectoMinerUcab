@@ -42,13 +42,7 @@ router.get("/mineralCompuesto/:id_mineral", function(req, res) {
     return res.json(minerales);
   });
 });
-router.get("/mineralCompuesto/costo/:id_mineral", function(req, res) {
-  var id_mineral = req.params.id_mineral;
-  Minerales.retrieveCostoMineralCompuesto(id_mineral, function(err, minerales) {
-    if (err) return res.json(err);
-    return res.json(minerales);
-  });
-});
+
 
 
 router.post("/modificar", function(req, res) {

@@ -12,7 +12,7 @@ class Fases {
                                 where fk_proyecto= (select id_proyecto\
                                 from proyecto \
                                 where nombre_proyecto=$5)\
-                                and numero_etapa= $6), 4);",
+                                and numero_etapa= $6), 4) returning id_fase;",
       [
         fase.numeroFase,
         fase.nombreFase,

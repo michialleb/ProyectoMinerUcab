@@ -45,7 +45,7 @@ class Yacimientos {
       [yacimiento.nombre, yacimiento.kilometros, yacimiento.direccion],
 
       function(err, res) {
-        if (err.error) return callback(err);
+        if (err.error) {return callback(err);}
         callback(res);
       }
     );
