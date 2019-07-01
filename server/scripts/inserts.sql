@@ -1598,59 +1598,66 @@ INSERT INTO lugar(
 	( 'PARROQUIA', 359, '23 de enero');
 
     /*empresa aliada*/
-insert into empresa_aliada(nombre_empresa,fecha_creacion_empresa,descripcion_empresa,fk_lugar)
+insert into empresa_aliada(nombre_empresa,fecha_creacion_empresa,descripcion_empresa,fk_lugar,rif)
 values 
-('CVG Venalum','06-29-1973','Tiene la finalidad de producir aluminio primario en diversas formas para fines de exportación',609),
-('CVG Minerven','05-30-1970','La empresa es una organización líder en la industria minera y promotora del desarrollo integral de la región, mediante la participación de inversiones que agreguen valor a la industria y mejoren la calidad de vida de las comunidades. ',588),
-('CVG Mivelaz',null,null,365),
-('CVG Veneral','08-12-1992',null,373),
-('CVG Fistral',null,null,386),
-('CVG Promoven','05-06-2002','La segunda compañía minera más grande del mundo (con un segundo lugar en la producción de níquel, cobre, aluminio y alúmina.)',407),
-('CVG Prosein',null,'Tiene presencia en más de 40 países y cuenta con más de 60.000 empleados, con un fuerte dominio en cuanto a producción de hierro, uranio, cobre, carbón y diamantes',450),
-('CVG Pascal','11-11-1911',null,461),
-('CVG Salice','12-12-1912',null,477),
-('CVG Granada','08-08-1988',null,492),
-('CVG Jazcal',null,null,521),
-('CVG Boenflontein','06-06-1998',null,536),
-('CVG Riga','09-30-1995','Destaca en la producción de cobre, mineral de hierro, níquel, carbón metalúrgico y carbón térmico y diamantes; es el mayor productor mundial de platino, con alrededor del 40% de la producción mundial.',828),
-('CVG Jartum','03-22-1915',null,642),
-('CVG Tunez',null,null,660),
-('CVG Valeben','05-05-1975',null,671),
-('CVG Damasco','08-03-2005','Es el productor de más bajo costo de cobre del mundo y uno de los mayores productores mundiales de oro. ',677),
-('CVG Cairo','08-28-1976',null,682),
-('CVG Guaire','07-09-1980',null,696),
-('CVG Diaven','06-13-1984',null,712),
-('CVG Salicin',null,null,781),
-('CVG Guazdal','08-03-1990',null,799),
-('CVG Namena',null,'Es el tercer productor de aluminio en el mundo, además tiene presencia en la industria aeroespacial, de construcción y automoción.',819),
-('CVG Viena','11-11-1911',null,823),
-('CVG Nairobi','01-20-1920',null,881),
-('CVG Abuja',null,null,892),
-('CVG Kigali','04-04-1984',null,909),
-('CVG Venoro',null,'Es una compañía que se ha destacado por establecer el uso de practicas sostenibles como estrategia para la industria de la minería. ',968),
-('CVG Lome','03-09-1945',null,1007),
-('CVG Dodoma','05-08-1999',null,1018),
-('CVG Harare','03-15-1974',null,1025),
-('CVG Kamberra','12-15-1984','Los activos de la empresa incluyen cuatro minas en Canadá, cuatro en México y cuatro en Centroamérica y Sudamérica.',1060),
-('CVG Simon Bolivar',null,null,1062),
-('CVG Orinoco',null,null,1069),
-('CVG Paez',null,null,1085),
-('CVG A.E.B','01-30-1979','Una cartera de activos duraderos y de alta calidad permite a la Empresa posicionarse para entregar un valor a largo plazo. ',1091),
-('CVG Leoni','09-10-1993',null,1131),
-('CVG Santa Barbara','12-18-1995',null,1136),
-('CVG Security','06-06-1969',null,1180),
-('CVG Patria','05-28-1979',null,1198),
-('CVG Hugo Chavez','05-26-1971',null,1249),
-('CVG Minedam','10-14-1930',null,1266),
-('CVG Sifontes',null,null,1339),
-('CVG Güiye','08-29-1959',null,1344),
-('CVG Alianza','12-08-1973',null,1351),
-('CVG Unidos',null,null,1358),
-('CVG Vista al sol',null,null,1371),
-('CVG Carrazco',null,null,1380),
-('CVG Zaraza',null,null,1489),
-('CVG Dante',null,null,1487)
-;
+('CVG Venalum','06-29-1973','Tiene la finalidad de producir aluminio primario en diversas formas para fines de exportación',609,232332233),
+('CVG Minerven','05-30-1970','La empresa es una organización líder en la industria minera y promotora del desarrollo integral de la región, mediante la participación de inversiones que agreguen valor a la industria y mejoren la calidad de vida de las comunidades. ',588,33112223),
+('CVG Mivelaz',null,null,365,112242356),
+('CVG Veneral','08-12-1992',null,373,890865),
+('CVG Fistral',null,null,386,876544456),
+('CVG Promoven','05-06-2002','La segunda compañía minera más grande del mundo (con un segundo lugar en la producción de níquel, cobre, aluminio y alúmina.)',407,98566432),
+('CVG Prosein',null,'Tiene presencia en más de 40 países y cuenta con más de 60.000 empleados, con un fuerte dominio en cuanto a producción de hierro, uranio, cobre, carbón y diamantes',450,6532213),
+('CVG Pascal','11-11-1911',null,461,77665421),
+('CVG Salice','12-12-1912',null,477, 6722114677),
+('CVG Granada','08-08-1988',null,492,888666544),
+('CVG Jazcal',null,null,521,998822112),
+('CVG Boenflontein','06-06-1998',null,536,221444466),
+('CVG Riga','09-30-1995','Destaca en la producción de cobre, mineral de hierro, níquel, carbón metalúrgico y carbón térmico y diamantes; es el mayor productor mundial de platino, con alrededor del 40% de la producción mundial.',828,218731233),
+('CVG Jartum','03-22-1915',null,642,23455443),
+('CVG Tunez',null,null,660,675543234),
+('CVG Valeben','05-05-1975',null,671,7645433345),
+('CVG Damasco','08-03-2005','Es el productor de más bajo costo de cobre del mundo y uno de los mayores productores mundiales de oro. ',677,45343433),
+('CVG Cairo','08-28-1976',null,682,434446623),
+('CVG Guaire','07-09-1980',null,696,4343243455),
+('CVG Diaven','06-13-1984',null,712,564667533345),
+('CVG Salicin',null,null,781,455546645),
+('CVG Guazdal','08-03-1990',null,799,654355345),
+('CVG Namena',null,'Es el tercer productor de aluminio en el mundo, además tiene presencia en la industria aeroespacial, de construcción y automoción.',819,34434454),
+('CVG Viena','11-11-1911',null,823, 898879),
+('CVG Nairobi','01-20-1920',null,881,12122398),
+('CVG Abuja',null,null,892,32342355),
+('CVG Kigali','04-04-1984',null,909,56546455),
+('CVG Venoro',null,'Es una compañía que se ha destacado por establecer el uso de practicas sostenibles como estrategia para la industria de la minería. ',968,45345355),
+('CVG Lome','03-09-1945',null,1007,5345345),
+('CVG Dodoma','05-08-1999',null,1018,45435534),
+('CVG Harare','03-15-1974',null,1025,5354546),
+('CVG Kamberra','12-15-1984','Los activos de la empresa incluyen cuatro minas en Canadá, cuatro en México y cuatro en Centroamérica y Sudamérica.',1060,454545588),
+('CVG Simon Bolivar',null,null,1062,88776655),
+('CVG Orinoco',null,null,1069,6654433),
+('CVG Paez',null,null,1085,77664432),
+('CVG A.E.B','01-30-1979','Una cartera de activos duraderos y de alta calidad permite a la Empresa posicionarse para entregar un valor a largo plazo. ',1091,43535345),
+('CVG Leoni','09-10-1993',null,1131,234354346),
+('CVG Santa Barbara','12-18-1995',null,1136,345454),
+('CVG Security','06-06-1969',null,1180,44654464),
+('CVG Patria','05-28-1979',null,1198,67567684),
+('CVG Hugo Chavez','05-26-1971',null,1249,45665757),
+('CVG Minedam','10-14-1930',null,1266,56465667),
+('CVG Sifontes',null,null,1339,5677677),
+('CVG Güiye','08-29-1959',null,1344,8877665),
+('CVG Alianza','12-08-1973',null,1351,8776565),
+('CVG Unidos',null,null,1358,88776744),
+('CVG Vista al sol',null,null,1371,776322),
+('CVG Carrazco',null,null,1380,435344),
+('CVG Zaraza',null,null,1489,45645646),
+('CVG Dante',null,null,1487,4545645645)
+('CVG Hukala','06-07-1980','Tiene la finalidad de producir cobre primario en diversas formas',607, 102192129,56546456),
+('CVG Bacalum','09-08-1970','La industria minera promotora de eventos de alumnio ',588,9876756),
+('CVG Vivelaz',null,null,365, 876546785),
+('CVG Conturre','09-11-1982',null,373,980997654),
+('CVG Fismita',null,null,386,9873424),
+('CVG Promoven','05-08-2009','La tercera compañía minera más grande del mundo, pioneras en aluminio y alúmina.)',407, 9823144),
+('CVG Juverol',null,'Tiene presencia en más de 50 países, con un fuerte dominio en cuanto a producción de hierro, uranio, cobre, carbón y diamantes',450,9832455),
+('CVG Jumbolin','10-11-1991',null,461, 98344255);
 
 
 
@@ -3832,6 +3839,8 @@ values ('12-12-2002',23000,1,89,3,1),
 ('06-12-2001',24000,5,94,3,5),
 ('01-14-2000',29000,6,95,3,6),
 ('12-12-2014',23000,7,96,3,1);
+insert into compra_aliado (cantidad, fecha_compra_aliado, monto_total, fk_empresa_aliada,fk_proyecto,fk_tipo_status, fk_mineral_presentacion)
+values(60000, '12-09-2004', 100000, 2,4,3,4);
 
 
 /*26,27,28 y 29 ids de min_pres*/
@@ -3841,3 +3850,37 @@ values (26,1),(27,1),(28,1),(29,1),(26,2),(27,3),(28,4),(28,5),(29,6),(26,7)
 ,(29,12),(28,12),(28,13),(26,14),(28,15),(26,16),(28,16),(28,17),(29,17),(28,18)
 ,(27,18),(28,19),(27,20),(28,20),(28,21),(26,21),(26,22),(27,22),(28,22);
 
+insert into mineral_presentacion (fk_mineral,fk_presentacion,costo)
+values (21,6, 300),(22,6,1000),(23,6,2000),(24,6,500);
+
+insert into mineral_empresa (fk_mineral_presentacion, fk_empresa_aliada)
+values (35,1),(36,2),(37,3),(38,8),(23,2);
+
+insert into horario_empleado(fk_horario,fk_empl_horario_fase) values
+(1,1),(2,1),(3,1),(1,2),(2,2),(2,3),(2,4),(3,4),(4,4),
+(9,5),(8,5),(6,5),(6,6),(5,6),(7,6),(8,8),(3,8),(9,8)
+,(1,9),(2,9),(5,9),(3,10),(4,10),(5,10),(1,11),(3,11),(6,11)
+,(1,12),(5,12),(6,12),(1,13),(6,13),(8,13),(4,14),(5,14),(6,14)
+,(7,15),(8,15),(9,15),(8,16),(6,16),(3,16),(1,17),(4,17),(3,17)
+,(6,18),(7,18),(9,18),(1,19),(3,19),(6,19),(1,20),(3,20),(4,20),
+
+(1,21),(2,21),(3,21),(1,22),(2,22),(2,23),(2,24),(3,24),(4,24),
+(9,25),(8,25),(6,25),(6,26),(5,26),(7,26),(8,27),(3,27),(9,27)
+,(1,28),(2,28),(5,28),(3,29),(4,29),(5,29),(1,30),(3,30),(6,30)
+,(1,31),(5,31),(6,31),(1,32),(6,32),(8,32),(4,33),(5,33),(6,33)
+,(7,34),(8,34),(9,34),(8,35),(6,35),(3,35),(1,36),(4,36),(3,36)
+,(6,37),(7,37),(9,37),(1,38),(3,38),(6,38),(1,39),(3,39),(4,39),
+
+(1,40),(2,40),(3,40),(1,41),(2,41),(2,42),(2,43),(3,43),(4,43),
+(9,44),(8,44),(6,44),(6,45),(5,45),(7,45),(8,46),(3,46),(9,46)
+,(1,47),(2,47),(5,47),(3,48),(4,48),(5,48),(1,49),(3,49),(6,49)
+,(1,50),(5,50),(6,50),(1,51,(6,51,(8,51,(4,52),(5,52),(6,52)
+,(7,53),(8,53),(9,53),(8,54),(6,54),(3,54),(1,55),(4,55),(3,55)
+,(6,56),(7,56),(9,56),(1,57),(3,57),(6,57),(1,58),(3,58),(4,58),
+
+(1,59),(2,59),(3,59),(1,60),(2,60),(2,60),(2,61),(3,61),(4,61),
+(9,62),(8,62),(6,62),(6,63),(5,63),(7,63),(8,64),(3,64),(9,64)
+,(1,65),(2,65),(5,65),(3,66),(4,66),(5,66),(1,67),(3,67),(6,67)
+,(1,67),(5,68),(6,68),(1,69),(6,69),(8,69),(4,70),(5,70),(6,70)
+,(7,71),(8,71),(9,71),(8,72),(6,72),(3,72),(1,73),(4,73),(3,73)
+,(6,74),(7,74),(9,74),(1,75),(3,75),(6,75),(1,76);(3,76);(4,76);

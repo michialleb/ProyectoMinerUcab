@@ -154,10 +154,9 @@ class FormYacimiento extends Component {
      })
        .then (res =>{
          if(res.error)
-         swal("Revisar campos vacios!", "Intente de nuevo!", "error")
-        
+         swal("Campo invalido!", "Intente de nuevo!", "error");
         else 
-        swal("Yacimiento  Ingresado!", "Satisfactoriamentes!", "success");
+        swal("Yacimiento  Ingresado!", "Satisfactoriamente!", "success");
         ;
       })
 
