@@ -5,6 +5,7 @@ import "../styles/Form.css";
 import swal from "sweetalert";
 import ActivarProyecto from "./ActivarProyecto";
 
+
 class CompraAliadoAuto extends Component {
   constructor(props) {
     super(props);
@@ -34,7 +35,7 @@ getEmpresa = (id)=> {
   }
 
   getMineralesCompuestos(id_mineral) {
-    console.log("get costo mineral" + id_mineral);
+    console.log("get costo mineral"+id_mineral);
     fetch(`/api/minerales/mineralCompuesto/${id_mineral}`)
       .then(res => res.json())
       .then(res => {
@@ -87,22 +88,24 @@ getEmpresa = (id)=> {
       text: "Comenzarás el proceso de configuración de la explotación",
       icon: "warning",
       buttons: true,
-      dangerMode: true
-    }).then(willDelete => {
+      dangerMode: true,
+    })
+    .then((willDelete) => {
       if (willDelete) {
         swal("Poof! Your imaginary file has been deleted!", {
-          icon: "success"
+          icon: "success",
         });
         this.addCompraAliado();
         this.setState({ avanzarProyecto: !this.state.avanzarProyecto});
       } else {
         swal("Your imaginary file is safe!");
       }
-    });
+    })   
   }
-  // hacer la funcion costo
+  // hacer la funcion costo 
   componentDidMount() {
     this.getMineralesCompuestos(this.props.id_mineral);
+ 
   }
 
   render() {
@@ -124,12 +127,14 @@ getEmpresa = (id)=> {
               </tr>
             </MDBTableHead>
             <MDBTableBody>
-              {this.state.mineralesList.map(mineral => {
+              {this.state.mineralesList.map((mineral) => {
+                
                 return (
                   <tr>
                     <th>{mineral.nombre}</th>
                     <th>{mineral.cantidad}</th>
-                    <th> {mineral.costo}</th>
+                    <th> {mineral.costo}
+                    </th>
                     <th> {mineral.cantidad * mineral.costo} </th>
                   </tr>
                 );
@@ -137,8 +142,8 @@ getEmpresa = (id)=> {
             </MDBTableBody>
             <MDBTableHead>
               <tr>
-                <td />
-                <td />
+                <td></td>
+                <td></td>
                 <td>Subtotal</td>
                 <td> {this.state.total} </td>
               </tr>

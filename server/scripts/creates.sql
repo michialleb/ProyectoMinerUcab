@@ -208,7 +208,7 @@ CREATE TABLE Permiso (
 alter sequence permiso_id_permiso_seq restart with 1;
 CREATE TABLE Rol (
     id_rol serial,
-    tipo_rol VARCHAR(15) NOT NULL,
+    tipo_rol VARCHAR(70) NOT NULL,
     descripcion_rol VARCHAR(225), 
     CONSTRAINT pk_id_rol PRIMARY KEY(id_rol)
     );
