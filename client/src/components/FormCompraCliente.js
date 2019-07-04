@@ -322,8 +322,10 @@ class FormCompraCliente extends Component {
 
           {this.state.mineralNoDisponible ? (
             <CompraAliadoAuto
+              id_mineral_presentacion={this.getIdMineralPresentacion(this.state.presentacion,this.state.mineral)} 
               id_mineral={this.getIdMineral(this.state.mineral)}
               cantidad={this.state.cantidad}
+              cliente={this.state.ci}
             />
           ) : null}
         </div>

@@ -3,7 +3,6 @@ drop table maquinaria_fase;
 drop table maquinaria;
 drop table mineral_yacimiento;
 drop table mineral_mineral;
-drop table pago_pago;
 drop table pago;
 drop table compra_cliente_proyecto;
 drop table mineral_empresa;
@@ -19,7 +18,6 @@ drop table permiso_rol;
 drop table rol;
 drop table permiso;
 drop table cargo;
-drop table inventario;
 drop table compra_aliado;
 drop table proyecto;
 drop table yacimiento;
@@ -35,12 +33,12 @@ drop table lugar;
 drop table tipo_pago;
 
 
+
 alter sequence maquinaria_activa_id_maquinaria_activa_seq restart with 1;
 alter sequence maquinaria_fase_id_maquinaria_fase_seq restart with 1;
 alter sequence maquinaria_id_maquinaria_seq restart with 1;
 alter sequence mineral_yacimiento_id_mineral_yacimiento_seq restart with 1;
 alter sequence mineral_mineral_id_mineral_mineral_seq restart with 1;
-alter sequence pago_pago_id_pago_pago_seq restart with 1;
 alter sequence pago_id_pago_seq restart with 1;
 alter sequence cargo_id_cargo_seq restart with 1;
 alter sequence compra_cliente_proyecto_id_compra_cliente_proyecto_seq restart with 1;
@@ -57,7 +55,6 @@ alter sequence permiso_rol_id_permiso_rol_seq restart with 1;
 alter sequence rol_id_rol_seq restart with 1;
 alter sequence permiso_id_permiso_seq restart with 1;
 alter sequence cargo_id_cargo_seq restart with 1;
-alter sequence inventario_id_inventario_seq restart with 1;
 alter sequence compra_aliado_id_compra_aliado_Seq restart with 1;
 alter sequence proyecto_id_proyecto_seq restart with 1;
 alter sequence yacimiento_id_yacimiento_seq restart with 1;

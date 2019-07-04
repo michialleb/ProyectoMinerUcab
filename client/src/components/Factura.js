@@ -21,7 +21,8 @@ class Factura extends Component {
           monto:  this.state.total,
           cliente:this.props.cliente,
           id_mineral: this.props.id_mineral,
-          id_mineral_presentacion: this.props.id_mineral_presentacion
+          id_mineral_presentacion: this.props.id_mineral_presentacion,
+          status:3
         };
         console.log(compra);
         
@@ -30,7 +31,7 @@ class Factura extends Component {
           headers: { "Content-type": "application/json" },
           body: JSON.stringify({ compra: compra })
         }).then(res => res.json())
-        .then (res =>{
+       /* .then (res =>{
           let proyecto ={
              id_mineral: this.props.id_mineral,
              cantidad: this.props.cantidad,
@@ -42,11 +43,10 @@ class Factura extends Component {
             body: JSON.stringify({ proyecto: proyecto})
           }).then(res => res.json())
 
-        })
+        })*/
       
   }
   handleTerminarCompra(){
-
     swal({
      title: "Estás seguro?",
      text: "Tu compra será procesada",
@@ -56,16 +56,17 @@ class Factura extends Component {
    })
    .then((willDelete) => {
      if (willDelete) {
-       swal("Poof! Your imaginary file has been deleted!", {
+       swal("Gracias por preferirnos", {
          icon: "success",
        });
        this.addCompraCliente();
       // this.setState({ compra: !this.state.compra});
      } else {
-       swal("Your imaginary file is safe!");
+       swal("Estaremos aquií luego");
      }
    })   
- }
+ };
+
   getInfo(id_mineral_presentacion){
     fetch(`/api/clientes/factura/compra/cliente/getInfo/${id_mineral_presentacion}`)
     .then(res => res.json())
@@ -74,12 +75,10 @@ class Factura extends Component {
      var total=0;
      mineral.map((m)=>{
       total= m.costo * this.props.cantidad
-     })
-    console.log(res);
+     });
      this.setState({ mineral: mineral});
-     this.setState({total:total})
-     
-     })
+     this.setState({total:total}) 
+     });
   }
 
   componentDidMount(){
@@ -127,7 +126,7 @@ class Factura extends Component {
               <tr>
                 <td></td>
                 <td></td>
-                <td>Subtotal</td>
+                <td>Total a pagar</td>
                 <td> {this.state.total} </td>
               </tr>
             </MDBTableHead>

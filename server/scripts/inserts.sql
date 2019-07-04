@@ -1808,6 +1808,8 @@ values ('Atapuerca',364,1,205.34),
 ('Jose Felix',1494,1,139.54)
 /*Dto capital*/
 ;
+insert into yacimiento (nombre_yacimiento, fk_lugar,fk_tipo_status,kilometros) 
+values('Con carbon', 56, 7,888),('Con carbon2', 60, 7,888), ('Con carbon3', 63, 7,888);
 
 /*inserts de proyectos*/
 insert into proyecto(nombre_proyecto,duracion_proyecto,fk_yacimiento,fk_tipo_status)
@@ -4038,8 +4040,7 @@ insert into compra_cliente_proyecto(fk_compra_cliente,fk_proyecto)
 values (1,89),(2,90),(3,91),(4,92),(5,93),(6,94),(7,95),(8,96);
 
 insert into compra_aliado (cantidad, fecha_compra_aliado, monto_total, fk_empresa_aliada,fk_proyecto,fk_tipo_status, fk_mineral_presentacion)
-values(60000, '12-09-2004', 100000, 2,4,3,4),(700000, '12-09-2014', 10000, 3,5,3,4),(90000, '12-09-2013', 1000000, 7,7,3,4),(80000, '10-09-2004', 110000, 3,9,3,4),
-(60000,'12-03-2004',10000000,3,4,3,4),(50000,'04-04-1998',500000,8,4,2,4);
+values (90000, '12-09-2013', 1000000, 7,7,3,4);
 
 
 /*26,27,28 y 29 ids de min_pres*/
@@ -4051,6 +4052,8 @@ values (21,1),(22,1),(23,1),(21,1),(23,2),(24,3),(21,4),(22,5),(23,6),(24,7)
 
 insert into mineral_presentacion (fk_mineral,fk_presentacion,costo)
 values (21,6, 300),(22,6,1000),(23,6,2000),(24,6,500);
+insert into mineral_presentacion (costo, fk_presentacion, fk_mineral)
+values (2000,6,21),(2000,6,22),(2000,6,23),(2000,6,24);
 
 insert into mineral_empresa (fk_mineral_presentacion, fk_empresa_aliada)
 values (22,1),(23,2),(24,3),(22,8),(21,2);

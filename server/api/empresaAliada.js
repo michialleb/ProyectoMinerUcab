@@ -20,6 +20,7 @@ router.get("/:nombre", function(req, res) {
 
 router.post("/",function(req,res){
   var compra= req.body.compra;
+  console.log("esta haciend la compra ");
   EmpresasAliadas.CompraAliado(compra, function(err, empresasAliadas) {
     if (err) return res.json(err);
     return res.json(empresasAliadas);

@@ -52,9 +52,9 @@ router.get("/empresa/:rif", function(req, res) {
 router.get("/factura/compra/cliente/getInfo/:id_mineral_presentacion", function(req, res) {
 
   var id_mineral_presentacion = req.params.id_mineral_presentacion;
-  Clientes.retrieveMineralPresentacion(id_mineral_presentacion, function(err, empre) {
+  Clientes.retrieveMineralPresentacion(id_mineral_presentacion, function(err, mineral) {
     if (err) return res.json(err);
-    return res.json(empre);
+    return res.json(mineral);
   });
 });
 
