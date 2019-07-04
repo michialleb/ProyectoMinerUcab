@@ -23,7 +23,7 @@ class FormCompraCliente extends Component {
       nombrePersona: "",
      apellidoPersona: "",
      nombreEmpresa: "",
-     documento: "",
+     documento: 0,
      rif: "",
      ci: "",
      cantidad: "",
@@ -49,7 +49,7 @@ class FormCompraCliente extends Component {
   handleChange(e) {
     e.preventDefault();
     let target = e.target;
-    let value = target.type === "checkbox" ? target.checked : target.value;
+    let value = target.value;
     let name = target.name;
 
     this.setState({
@@ -116,15 +116,16 @@ class FormCompraCliente extends Component {
 
   handleGetCliente(e) {
     e.preventDefault();
-    console.log(this.state.tipoCliente);
-    if ((this.state.tipoCliente = "Persona")) {
-      this.props.getPersonaCedula(this.state.documento);
+    if (this.state.tipoCliente == "Persona") {
       this.props.personas.map(persona => {
-        this.setState({
-          ci: persona.cedula,
-          nombrePersona: persona.nombre,
-          apellidoPersona: persona.apellido
-        });
+        if (persona.cedula == this.state.documento){
+          console.log("entro en el if ")
+          this.setState({
+            ci: persona.cedula,
+            nombrePersona: persona.nombre,
+            apellidoPersona: persona.apellido
+          });
+        }
       });
     } else {
       this.props.getEmpresaRif(this.state.documento);
