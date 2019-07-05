@@ -32,7 +32,7 @@ class Login extends Component {
             <Route path="/proyectos" component={Proyectos} />
             <Route path="/minerales" component={Minerales} />
             <Route path="/info" component={InfoRelevante} />
-            <Route path="/aliados" component={InfoRelevante} />
+            <Route path="/aliados" component={Aliados} />
 
             <div className="Login">
               <div className="Login__Aside">

@@ -10,5 +10,19 @@ class Status {
       callback(res);
     });
   }
+  static updateCompraAliado(compra, callback) {
+    db.query(
+      "UPDATE compra_aliado set fk_tipo_status=$1 \
+       where id_compra_aliado=$2",
+      [
+        compra.id_status,
+        compra.id_compra, 
+      ],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
 }
 module.exports = Status;

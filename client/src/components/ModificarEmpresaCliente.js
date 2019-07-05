@@ -112,7 +112,7 @@ class FormCliente extends Component {
   }
 
   handleUpdateEmpresa = e => {
-    console.log("Entroo");
+  
     e.preventDefault();
     fetch(`/api/empleados/update/empresa`, {
       method: "post",

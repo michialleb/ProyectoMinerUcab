@@ -1,11 +1,4 @@
 import React, { Component } from "react";
-import {
-  HashRouter as Router,
-  Route,
-  Link,
-  NavLink,
-  Switch
-} from "react-router-dom";
 import Menu from "../components/Menu";
 import Banner from "../components/Banner";
 class Sesion extends Component {

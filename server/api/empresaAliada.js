@@ -36,5 +36,13 @@ router.get("/empresa/mineral/:id_mineral_presentacion", function(req, res) {
   })
 });  
 
+router.get("/get/empresa/compras/aliados", function(req, res) {
+ EmpresasAliadas.retrieveCompraAliado(function(err, empresasAliadas) {
+   if (err) return res.json(err);
+   return res.json(empresasAliadas);
+ })
+});  
+
+
 
 module.exports = router;

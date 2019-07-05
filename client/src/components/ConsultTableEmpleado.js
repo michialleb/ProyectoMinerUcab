@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import "../styles/ConsultTable.css";
-//import { FaSistrix } from "react-icons/fa";
 import swal from "@sweetalert/with-react";
-//import ModalHorarios from "./ModalHorarios";
-
 import { MDBDataTable } from "mdbreact";
 
 class ConsultTableEmpleado extends Component {

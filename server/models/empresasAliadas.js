@@ -26,8 +26,27 @@ class EmpresasAliadas {
       }
     ); 
   }
- 
-
+  static retrieveCompraAliado(callback) {
+    
+    db.query(
+      "select ca.id_compra_aliado as id, ca.fecha_compra_aliado as fecha,\
+      ca.monto_total as monto, (select e.nombre_empresa from empresa_aliada e where e.id_empresa_aliada=ca.fk_empresa_aliada ) as empresa, \
+      ca.fk_proyecto as proyecto, (select s.nombre_tipo_status from tipo_status s where s.id_tipo_status=ca.fk_tipo_status )as status, \
+      m.nombre_mineral as mineral, p.nombre_presentacion as presentacion \
+      from compra_aliado as ca\
+      left outer join mineral_presentacion  mp\
+      on ca.fk_mineral_presentacion=mp.id_mineral_presentacion\
+      inner join mineral m\
+      on mp.fk_mineral=m.id_mineral\
+      inner join presentacion p\
+      on mp.fk_presentacion=p.id_presentacion",
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    ); 
+  }
+  
   static CompraAliado(compra, callback) {
     var f= new Date;
     var Fecha=f.getMonth()+'-'+f.getDate()+'-'+f.getFullYear();
@@ -64,6 +83,8 @@ class EmpresasAliadas {
       callback(res);
     });
   }
+
+  
 }
 
 module.exports = EmpresasAliadas;

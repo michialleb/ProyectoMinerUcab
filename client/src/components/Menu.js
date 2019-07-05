@@ -13,7 +13,6 @@ import {
 import Account from "./Account";
 import LogOut from "./LogOut";
 import { HashRouter as Router, Route, Link, NavLink } from "react-router-dom";
-import perfil from "../images/perfil.png";
 import MenuCrud from "./MenuCrud";
 import "../styles/Menu.css";
 

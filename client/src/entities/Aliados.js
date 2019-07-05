@@ -8,21 +8,46 @@ export default class Aliados extends Component {
     super();
 
     this.state = {
-    
+      comprasList:[],
+      statusList:[]
     };
   }
-  
+   
+  getComprasList = () => {
+    fetch("/api/empresaAliada/get/empresa/compras/aliados")
+      .then(res => res.json())
+      .then(res => {
+        var comprasList = res.map(r => r);
+        this.setState({ comprasList });
+      });
+  };
+  getStatusList = () => {
+    fetch("/api/status/buscar")
+      .then(res => res.json())
+      .then(res => {
+        var statusList = res.map(r => r);
+        this.setState({ statusList });
+      });
+  };
+  componentDidMount(){
+    this.getComprasList();
+    this.getStatusList();
+  }
+ 
   render() {
   
     var crud = {
-      options: ["Consultar Compras Aliados"],
+      options: ["Consultar Compras Aliados", ""],
       content: [
         {
-          form: <ConsultTableAliados />,
-          id: 0
-        }
-      ],
-      a: <Hero />
+            form: (
+              <ConsultTableAliados compras={this.state.comprasList} 
+                                   status={this.state.statusList} />
+            ),
+            id: 0
+          }
+      ]
+   
     };
 
     return <Menu crud={crud} />;
