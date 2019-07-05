@@ -16,24 +16,14 @@ class CompraAliadoAuto extends Component {
       listaId: [], 
       avanzarProyecto: false,
       empresasList:[],
-      montoMineralComprado:0
+      montoMineralComprado:0,
+      id_proyecto:0
     };
     this.handleAvanzarProyecto = this.handleAvanzarProyecto.bind(this);
   }
 
 
-getEmpresa = (id)=> {
-      var empresas=[];
-      fetch(`/api/empresaAliada/empresa/mineral/${id}`)
-      .then(res => res.json())
-      .then(res => {
-        empresas= res.map(r => r)
-        this.setState({empresasList: empresas});
-        console.log("aqui estoy"+ empresas);
-       return empresas;
-       })
-       
-  }
+
 
   getMineralesCompuestos(id_mineral) {
     console.log("get id mineral"+id_mineral);
@@ -62,7 +52,6 @@ getEmpresa = (id)=> {
       id_mineral_presentacion: this.props.id_mineral_presentacion,
       status:2
     };
-    console.log("compra a insertar"+compra);
     fetch("/api/clientes/compra/persona", {
       method: "post",
       headers: { "Content-type": "application/json" },
@@ -80,13 +69,18 @@ getEmpresa = (id)=> {
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ proyecto: proyecto})
       }).then(res => res.json())
+       .then(res=>{
+        this.setState({id_proyecto: res[0].fk_proyecto});
+      })
+      .then(res=>{
+        this.setState({ avanzarProyecto: !this.state.avanzarProyecto});
+      })
     })
   
 }
 
   addCompraAliado(){
     this.state.listaId.map((id,i)=>{
-      console.log("entrando con id" + id);
       fetch(`/api/empresaAliada/empresa/mineral/${id}`)
       .then(res => res.json())
       .then(res => {
@@ -126,7 +120,7 @@ getEmpresa = (id)=> {
           icon: "success",
         });
         this.addCompraAliado();
-        this.setState({ avanzarProyecto: !this.state.avanzarProyecto});
+        
       } else {
         swal("Your imaginary file is safe!");
       }
@@ -144,7 +138,8 @@ getEmpresa = (id)=> {
      this.setState({montoMineralComprado: total}) 
      });
   }
-  // hacer la funcion costo 
+
+ 
   componentDidMount() {
     this.getMineralesCompuestos(this.props.id_mineral);
     this.getInfo(this.props.id_mineral_presentacion);
@@ -196,7 +191,7 @@ getEmpresa = (id)=> {
                   }.bind(this)}> Aceptar compra </buttom>
           </div>
           </div>
-          {this.state.avanzarProyecto ? <ActivarProyecto /> : null}
+          {this.state.avanzarProyecto ? <ActivarProyecto proyecto={this.state.id_proyecto} /> : null}
        
       </>
     );

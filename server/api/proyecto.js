@@ -17,6 +17,16 @@ router.get("/etapa/fase/:id_proyecto", function(req, res) {
   });
 });
 
+router.get("/buscar/proyecto/mineral/:obj", function(req, res) {
+ 
+  var obj=req.params.obj;
+  console.log("en api" + obj)
+  Proyecto.buscarProyecto(obj,function(err, proyecto) {
+    if (err) return res.json(err);
+    return res.json(proyecto);
+  });
+});
+
 router.post("/", function(req, res) {
   var proyecto = req.body.proyecto;
 

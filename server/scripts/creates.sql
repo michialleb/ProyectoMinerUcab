@@ -238,6 +238,9 @@ CREATE TABLE Empleado (
 	telefono_empleado bigint,
     FK_Lugar INTEGER NOT NULL, 
     fk_cargo integer not null,
+    fk_tipo_status integer,
+    CONSTRAINT fk_empleado_status foreign key (fk_tipo_status)
+    REFERENCES tipo_status (id_tipo_status),
     CONSTRAINT fk_lugar_empleado FOREIGN KEY (FK_Lugar)
     REFERENCES Lugar (id_lugar),
     CONSTRAINT check_sexo_emp CHECK(sexo in('M','F')), 

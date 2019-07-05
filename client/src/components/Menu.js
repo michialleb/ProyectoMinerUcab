@@ -58,6 +58,11 @@ export default class Menu extends Component {
         tipo: "/clientes"
       },
       {
+        icon: <FaUser />,
+        title: "Aliados",
+        tipo: "/aliados"
+      },
+      {
         icon: <FaBoxOpen />,
         title: "Inventario",
         tipo: "/inventario"

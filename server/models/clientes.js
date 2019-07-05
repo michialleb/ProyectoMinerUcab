@@ -54,7 +54,7 @@ class Clientes {
         and my.fk_yacimiento =y.id_yacimiento\
         and my.cantidad>=$2\
         and my.fk_mineral= $3\
-        and y.fk_tipo_status=7 limit 1))",
+        and y.fk_tipo_status=7 limit 1)) returning fk_proyecto",
       [proyecto.compra_cliente,
       proyecto.cantidad,
       proyecto.id_mineral

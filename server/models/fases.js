@@ -30,7 +30,51 @@ class Fases {
     );
   }
   
+  static retrieveFaseProyecto(id_proyecto, callback) {
+    db.query(
+      " select f.id_fase id, f.nombre_fase nombre \
+      from fase f, proyecto p, etapa_explotacion e \
+      where f.fk_etapa_explotacion=e.id_etapa\
+      and e.fk_proyecto=p.id_proyecto\
+      and	p.id_proyecto=$1",
+      [id_proyecto],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+   static retrieveFaseEmpleado(id_fase, callback) {
+    db.query(
+      "select e.id_empleado as id, e.nombre_empleado as nombre, e.apellido_empleado as apellido,\
+      e.cedula_identidad as cedula, (select c.tipo_cargo from cargo c where c.id_cargo=e.fk_cargo) as cargo,\
+      (select c.id_cargo from cargo c where c.id_cargo=e.fk_cargo) as id_cargo \
+      from empleado e\
+      where fk_cargo in (select fk_cargo from cargo_fase where fk_fase=$1)\
+      and fk_tipo_status=7\
+      order by fk_cargo;",
+      [id_fase],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
  
+  static retrieveFaseCargo(id_fase, callback) {
+    db.query(
+      "select c.id_cargo as cargo, cf.cantidad as cantidad\
+      from cargo c, cargo_fase cf\
+      where cf.fk_fase=$1\
+      and cf.fk_cargo=c.id_cargo",
+      [id_fase],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
   static insert(fase, callback) {
     db.query(
       "insert into Fase (numero_fase, nombre_fase,duracion_fase,costo_fase,\
@@ -56,8 +100,44 @@ class Fases {
       }
     );
   }
-  
+  static insertEmpleadoFase(emp_fase, callback) {
+    db.query(
+      "insert into empleado_fase_cargo (fk_empleado, fk_cargo_fase)\
+      values ($1,(select id_cargo_fase\
+             from cargo_fase\
+             where fk_cargo=$2\
+             and fk_fase=$3)) returning id_empleado_cargo_fase;",
+      [
+        emp_fase.id_empleado,
+        emp_fase.id_cargo,
+        emp_fase.id_fase
+       
+      ],
 
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+  static insertEmpleadoHorario(horario_emp, callback) {
+    db.query(
+      "insert into horario_empleado (fk_horario, fk_empl_horario_fase)\
+      values ($1,$2);",
+      [
+        horario_emp.id_horario,
+        horario_emp.id_empleado
+      ],
+
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+  
+  
   static update(id_fase,callback){
     db.query(
         "update fase set costo_fase=(select ( f.costo_fase + SUM(fc.costo))\

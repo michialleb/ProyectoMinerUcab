@@ -77,36 +77,13 @@ class ConfiguracionProyecto extends Component {
         this.setState({ id_fase: res[0].id_fase });
       });
   }
-  sumarCostoAFase(costo) {
+ /* sumarCostoAFase(costo) {
     let costoFase = parseInt(this.state.costoFase) + parseInt(costo);
     this.setState({ costoFase: costoFase });
     console.log(this.state.costoFase);
-  }
-  addCargos(cargos) {
-    cargos.map((cargo, i) => {
-      let cargoFase = {
-        cantidad: cargo.cantidad,
-        costo: cargo.costo,
-        id_cargo: cargo.id_cargo,
-        numero_etapa: this.state.numeroEtapa - 1,
-        numero_fase: this.state.numeroFase - 1,
-        nombre_proyecto: this.props.nombreProyecto
-      };
-      fetch("/api/cargos/cargoFase", {
-        method: "post",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ fase: cargoFase})
-      }).then(res => res.json())
-      .then (res=> {
-        this.setState({id_fase: res[0].id_fase});
-      })
-    })
-}
- sumarCostoAFase (costo){
-     let costoFase= parseInt(this.state.costoFase) + parseInt(costo);
-     this.setState({costoFase : costoFase});
-     console.log(this.state.costoFase);
- }
+  }*/
+ 
+ 
   addCargos (cargos){
       cargos.map((cargo,i)=>{
         let cargoFase={
@@ -155,11 +132,7 @@ class ConfiguracionProyecto extends Component {
     document.getElementById("form_fase").style.display = "block";
   }
 
-  sumarCostoAFase = () => {
-    this.setState(prevState => ({
-      costoFase: prevState.costoFase + 1
-    }));
-  };
+ 
   handleIngresarCargos(e, nombreFase, duracionFase, costoFase) {
     e.preventDefault();
     var costo = parseInt(costoFase) + parseInt(this.state.costoFase);
@@ -167,7 +140,7 @@ class ConfiguracionProyecto extends Component {
     let duracion = parseInt(duracionFase) + parseInt(this.state.duracionFase);
     let numero = this.state.numeroFase + 1; // cuenta las fases que se van agregando
     this.addFase(nombreFase, duracionFase, costoFase);
-    this.sumarCostoAFase();
+
     console.log("costo nuevo =" + this.state.costoFase);
     this.setState({
       numeroFase: numero,

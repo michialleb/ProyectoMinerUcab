@@ -17,6 +17,7 @@ import Clientes from "../entities/Clientes";
 import Proyectos from "../entities/Proyectos";
 import Minerales from "../entities/Minerales";
 import InfoRelevante from "../entities/InfoRelevante";
+import Aliados from "../entities/Aliados";
 class Login extends Component {
   render() {
     return (
@@ -31,6 +32,7 @@ class Login extends Component {
             <Route path="/proyectos" component={Proyectos} />
             <Route path="/minerales" component={Minerales} />
             <Route path="/info" component={InfoRelevante} />
+            <Route path="/aliados" component={InfoRelevante} />
 
             <div className="Login">
               <div className="Login__Aside">

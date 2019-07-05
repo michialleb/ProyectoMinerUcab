@@ -73,7 +73,7 @@ export default class Clientes extends Component {
   };
 
   getPresentaciones = () => {
-    console.log("holaa");
+  
     fetch(`/api/minerales/present/minerales`)
       .then(res => res.json())
       .then(res => {
@@ -81,9 +81,6 @@ export default class Clientes extends Component {
         var presentaciones = res.map(r => r);
         this.setState({ presentaciones });
       });
-    console.log(
-      "estas son las presentaciones aaa " + this.state.presentaciones
-    );
   };
   componentDidMount() {
     this.getMineralesList();

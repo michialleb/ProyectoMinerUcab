@@ -46,5 +46,22 @@ class Proyectos {
       callback(res);
     });
   }
+  static buscarProyecto(obj,callback) {
+    console.log(obj.cant);
+    console.log(obj.id_mineral);
+    db.query(
+    "select p.id_proyecto \
+    from proyecto p, mineral_yacimiento my, yacimiento y\
+    where p.fk_yacimiento = y.id_yacimiento\
+    and my.fk_yacimiento =y.id_yacimiento\
+    and my.cantidad>=$1\
+    and my.fk_mineral= $2\
+    and y.fk_tipo_status=7 limit 1",[obj.cant, obj.id_mineral], function(err, res) {
+      if (err.error) return callback(err);
+      callback(res);
+    });
+  }
+
+ 
 }
 module.exports = Proyectos;
