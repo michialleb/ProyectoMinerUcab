@@ -62,6 +62,20 @@ class Proyectos {
     });
   }
 
+  static updateProyecto(proyecto, callback) {
+    db.query(
+      "UPDATE proyecto set fk_tipo_status=$1\
+       where id_proyecto= $2 returning fk_yacimiento",
+      [
+        proyecto.id_status,
+        proyecto.id_proyecto
+      ],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
  
 }
 module.exports = Proyectos;

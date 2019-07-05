@@ -38,5 +38,20 @@ class Status {
       }
     );
   }
+
+  static updateStatusYacimiento(yacimiento, callback) {
+    db.query(
+      "UPDATE yacimiento set fk_tipo_status=$1 \
+       where id_yacimiento=$2",
+      [
+        yacimiento.id_status,
+        yacimiento.id_yacimiento, 
+      ],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
 }
 module.exports = Status;

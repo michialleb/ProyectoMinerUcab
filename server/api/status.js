@@ -27,5 +27,13 @@ router.post("/modificarStatus/cliente", function(req, res) {
   });
 });
 
+router.post("/modificar/status/yacimiento", function(req, res) {
+  var yacimiento = req.body.yacimiento;
+  Status.updateStatusYacimiento(yacimiento, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
+
 
 module.exports = router;

@@ -60,7 +60,7 @@ class ConsultTableProyectos extends Component {
         )
   })
 }
-handleMaquinariaFase=(idFase)=>{
+  handleMaquinariaFase=(idFase)=>{
   fetch(`/api/fases/get/maquinaria/fase/${idFase}`)
   .then(res =>res.json())
   .then(res =>{
@@ -82,9 +82,8 @@ handleMaquinariaFase=(idFase)=>{
     </table>
     )
   })
-}
+  }
 
-  
   handleGetInfo =(id_proyecto)=>{
     fetch(`/api/proyecto/etapa/fase/${id_proyecto}`)
     .then(res => res.json())
@@ -134,7 +133,50 @@ handleMaquinariaFase=(idFase)=>{
       // this.setState({ selected : !this.state.selected});
     });
   }
+  iniciarYacimiento(proyecto, id_yacimiento){
+  let yacimiento={
+      id_yacimiento: id_yacimiento,
+      id_status:2
+  }
+  fetch(`/api/status/modificar/status/yacimiento`, {
+    method: "post",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify({ yacimiento: yacimiento})
+  }).then(res => res.json())
+    .then(res=>{
+      if (res.error)
+      swal2("Error al explotar yacimiento!", "Intente de nuevo!", "error");
+    
+    });
+  }
+  iniciar(id_proyecto){
+    let proyecto={
+      id_status: 2,
+      id_proyecto:id_proyecto
+    }
+    fetch(`/api/proyecto/cambiarStatus`, {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ proyecto: proyecto})
+    }).then(res => res.json())
+      .then(res=>{
+        if (res.error)
+        swal2("Error al iniciar le proyecto!", "Intente de nuevo!", "error");
+        else   this.iniciarYacimiento(proyecto,res[0].fk_yacimiento);
+      })
+      
+    
+  
+    
+  }
+ handleIniciar=(id_proyecto, status)=>{
+ if (status==='Asignado'){
+  this.iniciar(id_proyecto);
+ }else{
+  swal2("El proyecto no ha sido asignado aún!", "Inicie otro proyecto!", "warning");
 
+ }
+ }
   addBotton = proyectos => {
     var proyecto = [];
     this.props.proyectos.map(proyec => {
@@ -149,6 +191,15 @@ handleMaquinariaFase=(idFase)=>{
                        onClick={function(e) {
                        this.handleGetInfo(proyec.id);
                        }.bind(this)}  >  Ver más 
+             </button>
+             </div>
+        ),
+        iniciar: (
+          <div className="horario">
+               <button
+                       onClick={function(e) {
+                       this.handleIniciar(proyec.id, proyec.status);
+                       }.bind(this)}  >  Iniciar
              </button>
              </div>
         )

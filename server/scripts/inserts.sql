@@ -5,7 +5,8 @@ values('Activo'),
 ('Inactivo'),
 ('Ocupada'),
 ('Desocupada'),
-('Disponible');
+('Disponible'),
+('Asignado'); 
 /*INSERTS MINERALES*/
 INSERT INTO Mineral(nombre_mineral,valor_economico,
     descripcion_mineral,
