@@ -163,6 +163,7 @@ class ConsultTableClientes extends Component {
               <th>Costo</th>
               <th>Total </th>
               <th>Status</th>
+              <th></th>
             </tr>
 
             {this.state.comprasEmpresaList.map((compra, i) => {
@@ -205,6 +206,7 @@ class ConsultTableClientes extends Component {
               <th>Cantidad</th>
               <th>Total </th>
               <th>Status</th>
+              <th>      </th>
             </tr>
 
             {this.state.comprasList.map((compra, i) => {
