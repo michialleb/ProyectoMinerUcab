@@ -19,5 +19,13 @@ router.post("/modificarStatus", function(req, res) {
   });
 });
 
+router.post("/modificarStatus/cliente", function(req, res) {
+  var compra = req.body.compra;
+  Status.updateCompraCliente(compra, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
+
 
 module.exports = router;

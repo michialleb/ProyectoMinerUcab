@@ -175,13 +175,14 @@ class Clientes {
 
   static retrieveCompraCliente(id_cliente, callback) {
     db.query(
-      "select m.nombre_mineral as mineral, p.nombre_presentacion as presentacion,\
-       c.cantidad as cantidad, c.monto_total_compra as total,  c.fecha_compra as fecha\
-     from mineral m, presentacion p, mineral_presentacion mp, compra_cliente c \
-     where (c.fk_persona = $1 or c.fk_empresa =$1) \
-     and  c.fk_mineral_presentacion  = mp.id_mineral_presentacion \
-     and mp.fk_mineral = m.id_mineral \
-     and mp.fk_presentacion = p.id_presentacion",
+      "select c.id_compra_cliente as id, m.nombre_mineral as mineral, p.nombre_presentacion as presentacion,\
+      c.cantidad as cantidad, c.monto_total_compra as total,  c.fecha_compra as fecha,\
+    (select s.nombre_tipo_status from tipo_status  s where s.id_tipo_status=c.fk_tipo_status) as status\
+    from mineral m, presentacion p, mineral_presentacion mp, compra_cliente c \
+    where (c.fk_persona = $1) \
+    and  c.fk_mineral_presentacion  = mp.id_mineral_presentacion \
+    and mp.fk_mineral = m.id_mineral \
+    and mp.fk_presentacion = p.id_presentacion",
       [id_cliente],
       function(err, res) {
         if (err.error) return callback(err);
@@ -192,8 +193,9 @@ class Clientes {
 
   static retrieveCompraClienteEmpresa(id_cliente, callback) {
     db.query(
-      "select m.nombre_mineral as mineral, p.nombre_presentacion as presentacion, \
-      c.cantidad as cantidad, c.monto_total_compra as total, c.fecha_compra as fecha\
+      "select c.id_compra_cliente as id, m.nombre_mineral as mineral, p.nombre_presentacion as presentacion, \
+      c.cantidad as cantidad, c.monto_total_compra as total, c.fecha_compra as fecha,\
+      (select s.nombre_tipo_status from tipo_status  s where s.id_tipo_status=c.fk_tipo_status) as status\
      from mineral m, presentacion p, mineral_presentacion mp, compra_cliente c \
      where (c.fk_empresa = $1) \
      and  c.fk_mineral_presentacion  = mp.id_mineral_presentacion \

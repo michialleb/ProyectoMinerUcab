@@ -24,5 +24,19 @@ class Status {
       }
     );
   }
+  static updateCompraCliente(compra, callback) {
+    db.query(
+      "UPDATE compra_cliente set fk_tipo_status=$1 \
+       where id_compra_cliente=$2",
+      [
+        compra.id_status,
+        compra.id_compra, 
+      ],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
 }
 module.exports = Status;
