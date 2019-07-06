@@ -17,6 +17,9 @@ import Clientes from "../entities/Clientes";
 import Proyectos from "../entities/Proyectos";
 import Minerales from "../entities/Minerales";
 import InfoRelevante from "../entities/InfoRelevante";
+import Usuarios from "../entities/Usuarios";
+import Roles from "../entities/Roles";
+
 class Login extends Component {
   render() {
     return (
@@ -27,6 +30,8 @@ class Login extends Component {
             <Route path="/empleados" component={Empleado} />
             <Route path="/clientes" component={Clientes} />
             <Route path="/inventario" component={Inventario} />
+            <Route path="/users" component={Usuarios} />
+            <Route path="/roles" component={Roles} />
             <Route path="/yacimientos" component={Yacimientos} />
             <Route path="/proyectos" component={Proyectos} />
             <Route path="/minerales" component={Minerales} />

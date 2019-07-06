@@ -4093,3 +4093,15 @@ insert into horario_empleado(fk_horario,fk_empl_horario_fase) values
 ,(1,67),(5,68),(6,68),(1,69),(6,69),(8,69),(4,70),(5,70),(6,70)
 ,(7,71),(8,71),(9,71),(8,72),(6,72),(3,72),(1,73),(4,73),(3,73)
 ,(6,74),(7,74),(9,74),(1,75),(3,75),(6,75),(1,76),(3,76),(4,76);
+
+
+insert into permiso (nombre_permiso, descripcion_permiso) values
+('todo','puede realizar cualquier operacion en todo el sistema'),
+('adminEmp','puede administrar a los empleados'),
+('adminCli','puede administrar a los clientes'),
+('adminYac','puede administrar a los yacimientos y proyectos'),
+('adminMin','puede administrar a los minerales'),
+('consultaEmp','puede solo consultar a los empleados'),
+('consultaCli','puede solo consultar a los clientes'),
+('consultaYac','puede solo consultar a los yacimientos'),
+('consultaMin','puede solo consultar a los minerales');

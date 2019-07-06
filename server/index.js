@@ -29,6 +29,8 @@ app.use("/api/maquinaria", require("./api/maquinaria"));
 app.use("/api/proyecto", require("./api/proyecto"));
 app.use("/api/etapas", require("./api/etapas"));
 app.use("/api/fases", require("./api/fases"));
+app.use("/api/roles", require("./api/roles"));
+app.use("/api/usuarios", require("./api/usuarios"));
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}...`);

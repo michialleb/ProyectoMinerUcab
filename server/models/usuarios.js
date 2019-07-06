@@ -9,6 +9,25 @@ class Usuarios {
     });
   }
 
+  static retrieveAllPersonas(callback) {
+    db.query("SELECT * from personas_sistema", function(err, res) {
+      if (err.error) return callback(err);
+      callback(res);
+    });
+  }
+
+  static retrieveUsuariosPorCedula(cedula, callback) {
+    console.log("entro en query con cedula: " + cedula);
+    db.query(
+      "SELECT usuario,nombre from usuariospersonas where cedula= $1",
+      [cedula],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
   static insert(usuario, callback) {
     db.query(
       "INSERT INTO usuarios (usuario_nombre,usuario_apellido,usuario_user,usuario_cedula,usuario_password,usuario_correo)\
