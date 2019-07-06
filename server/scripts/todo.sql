@@ -4500,18 +4500,12 @@ values (1,793,1,100000),
 
 create table Tipo_Pago(
     id_tipo_pago serial,
-    numero integer not null unique,
-    concepto varchar (50),
-    numero_confirmacion integer,
-    tipo_tarjeta_credito varchar (15),
-    fecha_vencimiento date,
-    codigo_secreto integer,
     tipo varchar (30) not null,
     banco varchar(50) not null,
     constraint pk_id_tipo_pago primary key (id_tipo_pago),
-    constraint check_tipo_tarjeta_credito check (tipo_tarjeta_credito in ('Visa', 'MasterCard')),
     constraint  tipo_pago check (tipo in ('Transferencia','Tarjeta_Credito', 'Cheque', 'Tarjeta_Debito'))
 );
+
 alter sequence tipo_pago_id_tipo_pago_seq restart with 1;
 
 CREATE TABLE pago (
@@ -4528,15 +4522,14 @@ CREATE TABLE pago (
 );
 alter sequence pago_id_pago_seq restart with 1;
 
-insert into tipo_pago(numero,concepto,numero_confirmacion,tipo_tarjeta_credito,fecha_vencimiento,
-codigo_secreto,tipo,banco) values (1029300,'x',13,'Visa','12-12-2012',1234,'Tarjeta_Credito','banesco'),
-(1029300,'x',13,'Visa','12-12-2012',1234,'Tarjeta_Credito','mercantil'),
-(1029301,'x',13,'Visa','12-12-2012',1234,'Tarjeta_Credito','provincial'),
-(1029302,'x',13,'Visa','12-12-2012',1234,'Tarjeta_Credito','bancopro'),
-(1029303,'x',13,'Visa','12-12-2012',1234,'Tarjeta_Credito','venezolana'),
-(1029304,'x',13,'Visa','12-12-2012',1234,'Tarjeta_Credito','bod'),
-(1029305,'x',13,'Visa','12-12-2012',1234,'Tarjeta_Credito','bancaribe'),
-(1029306,'x',13,'Visa','12-12-2012',1234,'Tarjeta_Credito','bofa');
+insert into tipo_pago(tipo,banco) values ('Tarjeta_Credito','banesco'),
+('Transferencia','mercantil'),
+('Transferencia','provincial'),
+('Cheque','bancopro'),
+('Cheque','venezolana'),
+('Tarjeta_Debito','bod'),
+('Tarjeta_Debito','bancaribe'),
+('Tarjeta_Credito','bofa');
 /*8
 insert into  pago (fecha_pago,monto_total_pagado,fk_compra_cliente,fk_tipo_pago)
 values ('12-12-2012',2000,1,1),('08-12-2008',2000,2,1),('07-07-2012',2000,3,1),('06-12-2012',2000,4,1),

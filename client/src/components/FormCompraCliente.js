@@ -5,16 +5,9 @@ import { FaSistrix } from "react-icons/fa";
 import Factura from "./Factura";
 import ActivarProyecto from "./ActivarProyecto";
 import CompraAliadoAuto from "./CompraAliadoAuto";
-import Services from "./Services";
 import swal from "sweetalert";
 
-function ChangeCompra(props) {
-  const mineralDisponible = true;
-  if (mineralDisponible) {
-    return <Services />;
-  }
-   return null;
-}
+
 
 class FormCompraCliente extends Component {
   constructor() {
@@ -26,7 +19,7 @@ class FormCompraCliente extends Component {
      documento: 0,
      rif: "",
      ci: "",
-     cantidad: "",
+     cantidad: 0,
      mineral: "",
      presentacion: "",
      mineral2: "",
@@ -34,9 +27,9 @@ class FormCompraCliente extends Component {
      tipoCliente: "",
      presentaciones: [],
      inventario: [],
-     mineralDisponible: false,
      procesarCompra: false,
-    mineralNoDisponible: false
+    mineralNoDisponible: false,
+    mineralDisponible: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -78,10 +71,10 @@ class FormCompraCliente extends Component {
           if (inv.mineral == this.state.mineral) {
             if (inv.presentacion == this.state.presentacion) {
               let c = inv.cantidad - this.state.cantidad;
+              console.log(c);
               if (c > 0) {
-                this.setState({
-                  mineralDisponible: true
-                });
+               console.log("entro");
+               this.setState({mineralDisponible:true})
               }
             }
           }

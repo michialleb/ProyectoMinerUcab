@@ -5,7 +5,7 @@ class Fases {
 
   static retrieveCargoFase(idFase,callback) {
     db.query(
-      "select c.tipo_cargo  as cargo\
+      "select c.tipo_cargo  as cargo, cf.id_cargo_fase as id\
       from cargo c, cargo_fase cf, fase f \
       where f.id_fase=$1\
       and f.id_fase=cf.fk_fase\
@@ -69,6 +69,24 @@ class Fases {
       where cf.fk_fase=$1\
       and cf.fk_cargo=c.id_cargo",
       [id_fase],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+  static updateStatusFase(fase, callback) {
+    console.log("llego aqui")
+    db.query(
+      "UPDATE fase set fk_tipo_status=(select id_tipo_status \
+                                                    from tipo_status \
+                                                    where nombre_tipo_status=$1) \
+       where id_fase=$2",
+      [
+        fase.id_status,
+       fase.id_fase
+      ],
       function(err, res) {
         if (err.error) return callback(err);
         callback(res);

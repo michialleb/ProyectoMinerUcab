@@ -317,4 +317,6 @@ input {
   height: 60px;
   width: 40%;
 }
-
+.Pago_no_show{
+ display:none;
+}

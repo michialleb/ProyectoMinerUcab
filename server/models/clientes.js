@@ -67,7 +67,6 @@ class Clientes {
   }
 // recuerda rela parcial parcial compra cliente y proyecto
   static CompraClientePersona(compra, callback) {
-    console.log("añadiendo compra al cliente");
     var f= new Date;
     var Fecha=f.getMonth()+'-'+f.getDate()+'-'+f.getFullYear();
     db.query(
@@ -75,7 +74,7 @@ class Clientes {
       monto_total_compra, fk_persona, fk_tipo_status,fk_mineral_presentacion) \
       values ($1, $2, $3, (select id_cliente\
                            from persona \
-                           where cedula_identidad = $4), $5, $6) returning id_compra_cliente;",
+                           where cedula_identidad = $4), $5, $6) returning id_compra_cliente,fecha_compra;",
       [compra.cantidad,
       Fecha,
       compra.monto,

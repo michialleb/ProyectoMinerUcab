@@ -34,7 +34,8 @@ class Proyectos {
 
   static retrieveEtapaFase(id_proyecto,callback) {
     db.query(
-    "select p.nombre_proyecto as proyecto, e.nombre_etapa as etapa, f.nombre_fase  as fase,\
+    "select p.nombre_proyecto as proyecto, e.nombre_etapa as etapa, e.fk_tipo_status as e_status,\
+    f.nombre_fase  as fase, f.fk_tipo_status f_status,\
     e.id_etapa as idEtapa, f.id_fase as idFase \
     from proyecto p, etapa_explotacion e,  fase f \
     where e.fk_proyecto=$1\

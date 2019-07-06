@@ -30,6 +30,7 @@ app.use("/api/proyecto", require("./api/proyecto"));
 app.use("/api/etapas", require("./api/etapas"));
 app.use("/api/fases", require("./api/fases"));
 app.use("/api/horarios", require("./api/horarios"));
+app.use("/api/tipo_pago", require("./api/tipo_pago"));
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}...`);

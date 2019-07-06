@@ -6,7 +6,8 @@ export default class Proyectos extends Component {
   constructor() {
     super();
     this.state= {
-      proyectos:[]
+      proyectos:[],
+      statusList:[]
     }
   }
 
@@ -19,8 +20,18 @@ export default class Proyectos extends Component {
       });
   };
 
+  getStatusList = () => {
+    fetch("/api/status/buscar")
+      .then(res => res.json())
+      .then(res => {
+        var statusList = res.map(r => r);
+        this.setState({ statusList });
+      });
+  };
+
   componentDidMount() {
     this.getProyectos();
+    this.getStatusList();
   }
 
   render() {
@@ -32,6 +43,7 @@ export default class Proyectos extends Component {
           form: (
             <ConsultTableProyectos
               proyectos={this.state.proyectos}
+              status={this.state.statusList}
             />
           ),
           id: 0

@@ -69,6 +69,24 @@ class Status {
     );
   }
 
+  static updateStatusEtapa(etapa, callback) {
+    db.query(
+      "UPDATE etapa_explotacion set fk_tipo_status=(select id_tipo_status \
+                                                    from tipo_status \
+                                                    where nombre_tipo_status=$1) \
+       where id_etapa=$2",
+      [
+        etapa.id_status,
+       etapa.id_etapa
+      ],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+ 
   static updateStatusFaseUno(fase, callback) {
     db.query(
       "UPDATE fase set fk_tipo_status=$1 \

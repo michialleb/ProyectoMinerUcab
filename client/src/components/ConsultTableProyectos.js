@@ -13,9 +13,11 @@ class ConsultTableProyectos extends Component {
       proyectoList: [],
       statusEtapa: [],
       cargosFase: [],
-      maquinariaFase:[]
+      maquinariaFase:[],
+      status: []
     };
     this.handleGetInfo = this.handleGetInfo.bind(this);
+    this.handleChangeStatus =this.handleChangeStatus.bind(this);
   }
 
 
@@ -35,8 +37,75 @@ class ConsultTableProyectos extends Component {
         
     })
   }
-  handleCargoFase=(idFase)=>{
-    console.log(idFase);
+  
+  handleChangeStatus(e) {
+    let target = e.target;
+    let value = target.value;
+   this.setState({
+      status: value
+    }); 
+  }
+  modificarStatusEtapa(id_etapa){
+    let etapa={ id_etapa: id_etapa, id_status: this.state.status}
+    console.log(this.state.status);
+    fetch(`/api/status/modificar/status/proyecto/etapa/status/modificar/manual`, {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ etapa: etapa})
+    }).then(res => res.json())
+    
+  }
+  modificarStatusFase(id_fase){
+    let fase={ id_fase: id_fase, id_status: this.state.status}
+    fetch(`/api/fases/modificar/status/proyecto/etapa/status/modificar/buscar`, {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ fase: fase})
+    }).then(res => res.json())
+  }
+  cambiarStatusEtapa(id_etapa){
+    swal(
+      <select
+      onChange={this.handleChangeStatus} >
+      <option />
+      {this.props.status.map((s, i) => (
+        <option value={s.nombre_tipo_status} key={i}>
+          {s.nombre_tipo_status}
+        </option>
+      ))}
+    </select>
+     ).then (res=>{
+      this.modificarStatusEtapa(id_etapa);
+     })
+  }
+
+  
+  cambiarStatusFase(id_fase, status){
+    let st="Status ";
+    this.props.status.map((s)=>{
+  
+       if (s.id_tipo_status==status){
+         st=st+s.nombre_tipo_status
+       }
+    })
+    swal(
+      <div>
+      <span> <h5>{st}</h5></span>
+      <select
+      onChange={this.handleChangeStatus} >
+      <option />
+      {this.props.status.map((s, i) => (
+        <option value={s.nombre_tipo_status} key={i}>
+          {s.nombre_tipo_status}
+        </option>
+      ))}
+    </select>
+    </div>
+     ).then (res=>{
+      this.modificarStatusFase(id_fase);
+     })
+  }
+  handleCargoFase=(idFase, status)=>{
     fetch(`/api/fases/cargo/fase/${idFase}`)
     .then(res =>res.json())
     .then(res =>{
@@ -46,7 +115,8 @@ class ConsultTableProyectos extends Component {
         swal(
           <table id="t02">
           <tr>
-            <th>Cargos</th>  
+            <th>Cargos</th> 
+            <th></th>  
           </tr>
 
           {this.state.cargosFase.map((cargo, i) => {
@@ -111,18 +181,29 @@ class ConsultTableProyectos extends Component {
                   <div className="horario2">
                   <button  onClick={function(e) {
                        this.handleStatusEtapa(proyecto.idetapa);
-                       }.bind(this)} > Status Etapa</button></div>
+                       }.bind(this)} > Status Etapa</button>
+                   <button  onClick={function(e) {
+                       this.cambiarStatusEtapa(proyecto.idetapa);
+                       }.bind(this)} >Cambiar</button>     
+                       </div>
                 </td>
                 <td>{proyecto.fase}</td>
                 <td>
                   <div className="horario2">
                   <button  onClick={function(e) {
-                       this.handleCargoFase(proyecto.idfase);
+                       this.handleCargoFase(proyecto.idfase, proyecto.f_status);
                        }.bind(this)}> Cargos Fase</button></div>
                     <div className="horario2">
                   <button  onClick={function(e) {
                        this.handleMaquinariaFase(proyecto.idfase);
-                       }.bind(this)}> Maquinaria Fase</button></div>
+                       }.bind(this)}> Maquinaria Fase</button>
+                    </div>
+                    <div className="horario2">
+                    <button  onClick={function(e) {
+                       this.cambiarStatusFase(proyecto.idfase,proyecto.f_status);
+                       }.bind(this)} >Cambiar</button> 
+                    </div>
+                     
                 </td>
                 
               </tr>

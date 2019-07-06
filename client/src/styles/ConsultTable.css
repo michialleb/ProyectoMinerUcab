@@ -60,3 +60,6 @@ table#t02 th {
 .horarioEmp{
   margin-top: 50px;
 }
+.no_empleados{
+ display: none;
+}

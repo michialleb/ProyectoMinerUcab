@@ -4269,3 +4269,13 @@ insert into permiso_rol(fk_permiso,fk_rol) values
 	
 insert into mineral_mineral (fk_mineral,fk_mineral_comp,cantidad)
 values (3,21);
+
+insert into tipo_pago(tipo,banco) values ('Tarjeta_Credito','banesco'),
+('Transferencia','mercantil'),
+('Transferencia','provincial'),
+('Cheque','bancopro'),
+('Cheque','venezolana'),
+('Tarjeta_Debito','bod'),
+('Tarjeta_Debito','bancaribe'),
+('Tarjeta_Credito','bofa');
+/*8

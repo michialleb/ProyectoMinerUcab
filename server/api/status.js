@@ -59,5 +59,13 @@ router.post("/modificar/status/proyecto/etapa/fase/empleados", function(req, res
 });
 
 
+router.post("/modificar/status/proyecto/etapa/status/modificar/manual", function(req, res) {
+  var etapa = req.body.etapa;
+  Status.updateStatusEtapa(etapa, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
+
 
 module.exports = router;

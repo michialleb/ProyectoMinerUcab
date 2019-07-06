@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../styles/Form.css";
 import { MDBTable, MDBTableBody, MDBTableHead } from "mdbreact";
 import swal from "sweetalert";
+import Pago from "./Pago";
 class Factura extends Component {
 
   constructor(props) {
@@ -9,7 +10,9 @@ class Factura extends Component {
     this.state = {
      mineral:[], 
      total:0,
-     compra :false
+     compra :false,
+     fecha_compra:"",
+     id_compra:0
     };
 
   
@@ -24,13 +27,17 @@ class Factura extends Component {
           id_mineral_presentacion: this.props.id_mineral_presentacion,
           status:3
         };
-        console.log(compra);
+
         
         fetch("/api/clientes/compra/persona", {
           method: "post",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify({ compra: compra })
         }).then(res => res.json())
+          .then(res=>{
+            this.setState({fecha_compra:  res[0].fecha_compra.split(["T"], [1]), id_compra: res[0].id_compra_cliente })
+         
+          })
        /* .then (res =>{
           let proyecto ={
              id_mineral: this.props.id_mineral,
@@ -88,7 +95,7 @@ class Factura extends Component {
     return (
       <>
        {console.log(this.props.nombre_persona)}
-        <div  className={this.state.avanzarProyecto? "wrapper-c_no_show" : "wrapper-c"  }>
+        <div  className={this.state.id_compra!==0? "wrapper-c_no_show" : "wrapper-c"  }>
         <div className="form-wrapper">
           <h7>Factura: </h7>
           <div>
@@ -134,8 +141,11 @@ class Factura extends Component {
           <buttom className="ingresarUsuario" onClick ={function(e) {
                     this.handleTerminarCompra(e);
                   }.bind(this)}> Aceptar compra </buttom>
+         
           </div>
           </div>
+          <Pago  className={this.state.id_compra!==0 ? "Pago": "Pago_no_show"}
+          fecha={this.state.fecha_compra} id_compra={this.state.id_compra}></Pago>
       </>
     );
   }

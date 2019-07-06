@@ -109,18 +109,7 @@ CREATE TABLE Compra_Cliente (
       );
 
 alter sequence compra_cliente_id_compra_cliente_seq restart with 1;
-/*CREATE TABLE Detalle_Compra_Cliente (
-        id_detalle_compra_cliente serial, 
-        cantidad real NOT NULL,
-        monto real NOT NULL,
-        FK_Compra_Cliente integer not null,
-        FK_Mineral_Presentacion integer not null,
-        CONSTRAINT pk_id_detalle_compra_cliente PRIMARY KEY(id_detalle_compra_cliente),
-        CONSTRAINT FK_detalle_compra_cliente_compra_cliente FOREIGN KEY(FK_Compra_Cliente)
-        REFERENCES Compra_Cliente(id_compra_cliente),
-        CONSTRAINT FK_mineral_presentacion FOREIGN KEY(FK_Mineral_Presentacion)
-        REFERENCES Mineral_presentacion(id_mineral_presentacion)
-     );*/
+
 
 create table Yacimiento (
     id_yacimiento serial,
@@ -403,16 +392,9 @@ alter sequence compra_cliente_proyecto_id_compra_cliente_proyecto_seq restart wi
 alter sequence pago_id_pago_seq restart with 1;
 create table Tipo_Pago(
     id_tipo_pago serial,
-    numero integer not null unique,
-    concepto varchar (50),
-    numero_confirmacion integer,
-    tipo_tarjeta_credito varchar (15),
-    fecha_vencimiento date,
-    codigo_secreto integer,
     tipo varchar (30) not null,
     banco varchar(50) not null,
     constraint pk_id_tipo_pago primary key (id_tipo_pago),
-    constraint check_tipo_tarjeta_credito check (tipo_tarjeta_credito in ('Visa', 'MasterCard')),
     constraint  tipo_pago check (tipo in ('Transferencia','Tarjeta_Credito', 'Cheque', 'Tarjeta_Debito'))
 );
 

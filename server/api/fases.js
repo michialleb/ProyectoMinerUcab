@@ -85,5 +85,12 @@ router.get("/get/proyecto/empleados/cargos/:id_fase", function(req, res) {
   });
 });
 
+router.post("/modificar/status/proyecto/etapa/status/modificar/buscar", function(req, res) {
+  var fase = req.body.fase;
+  Fases.updateStatusFase(fase, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
 
 module.exports = router;
