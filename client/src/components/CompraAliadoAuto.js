@@ -4,6 +4,7 @@ import { MDBTable, MDBTableBody, MDBTableHead } from "mdbreact";
 import "../styles/Form.css";
 import swal from "sweetalert";
 import ActivarProyecto from "./ActivarProyecto";
+import swal2 from 'sweetalert';
 
 
 class CompraAliadoAuto extends Component {
@@ -63,14 +64,16 @@ class CompraAliadoAuto extends Component {
          cantidad: this.props.cantidad,
          compra_cliente: res[0].id_compra_cliente
       }
-      console.log("proyecto a insertar"+ proyecto);
+    
       fetch("/api/clientes/proyecto/compra/persona", {
         method: "post",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ proyecto: proyecto})
       }).then(res => res.json())
        .then(res=>{
-        this.setState({id_proyecto: res[0].fk_proyecto});
+        
+        if (res[0].fk_proyecto==null) swal2("No se encontraron yacimientos disponibles", "Intente de nuevo!", "error")
+         else this.setState({id_proyecto: res[0].fk_proyecto});
       })
       .then(res=>{
         this.setState({ avanzarProyecto: !this.state.avanzarProyecto});

@@ -35,5 +35,29 @@ router.post("/modificar/status/yacimiento", function(req, res) {
   });
 });
 
+router.post("/modificar/status/proyecto/etapa", function(req, res) {
+  var proyecto = req.body.proyecto;
+  Status.updateStatusEtapaUno(proyecto, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
+ 
+router.post("/modificar/status/proyecto/etapa/fase", function(req, res) {
+  var fase = req.body.fase;
+  Status.updateStatusFaseUno(fase, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
+router.post("/modificar/status/proyecto/etapa/fase/empleados", function(req, res) {
+  var fase = req.body.fase;
+  Status.updateStatusEmpleados(fase, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
+
+
 
 module.exports = router;

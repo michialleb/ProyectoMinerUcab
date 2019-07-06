@@ -53,5 +53,54 @@ class Status {
       }
     );
   }
+
+  static updateStatusEtapaUno(proyecto, callback) {
+    db.query(
+      "UPDATE etapa_explotacion set fk_tipo_status=$1 \
+       where fk_proyecto=$2 and numero_etapa=1 returning id_etapa",
+      [
+        proyecto.id_status,
+        proyecto.id_proyecto
+      ],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+  static updateStatusFaseUno(fase, callback) {
+    db.query(
+      "UPDATE fase set fk_tipo_status=$1 \
+       where fk_etapa_explotacion=$2 and numero_fase=1 returning id_fase",
+      [
+        fase.id_status,
+        fase.id_etapa
+      ],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+  static updateStatusEmpleados(fase, callback) {
+    console.log("cambiando");
+    db.query(
+      "update empleado set fk_tipo_status=$1 where id_empleado in (select fk_empleado\
+        from empleado_fase_cargo \
+        where fk_cargo_fase in (select id_cargo_fase\
+                   from cargo_fase\
+                   where fk_fase=$2))",
+      [
+        fase.id_status,
+        fase.id_fase
+      ],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
 }
 module.exports = Status;

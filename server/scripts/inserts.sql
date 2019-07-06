@@ -1810,7 +1810,7 @@ values ('Atapuerca',364,1,205.34),
 /*Dto capital*/
 ;
 insert into yacimiento (nombre_yacimiento, fk_lugar,fk_tipo_status,kilometros) 
-values('Con carbon', 56, 7,888),('Con carbon2', 60, 7,888), ('Con carbon3', 63, 7,888);
+values('Con carbon', 56, 7,888),('Con carbon 2', 60, 7,888), ('Con carbon 3', 63, 8,888);
 
 /*inserts de proyectos*/
 insert into proyecto(nombre_proyecto,duracion_proyecto,fk_yacimiento,fk_tipo_status)
@@ -1932,7 +1932,13 @@ values ('Proyecto Atapuerca',400,5,4),
 ('Proyecto San Antonio',420,109,3),
 ('Proyecto La vela',230,110,3),
 ('Proyecto Km 33',230,111,3),
-('Proyecto Diaspor',220,112,3);
+('Proyecto Diaspor',220,112,3),
+
+('Proyecto Con carbon', 30, 121,7),
+('Proyecto Con carbon 2', 30, 122,7),
+('Proyecto Con carbon 3', 30, 123,8);
+
+
 
 
 insert into etapa_explotacion(nombre_etapa,duracion_etapa,descripcion_etapa,costo_etapa,numero_etapa,fk_proyecto,fk_tipo_status)
@@ -2128,7 +2134,13 @@ values ('Atapuerca  ',200,null,200000,1,1,4),
 ('Km 33',200,null,200000,1,95,3),
 ('Km 33',200,null,210000,2,95,1),
 ('Diaspor',200,null,200000,1,96,3),
-('Diaspor',200,null,210000,2,96,1);
+('Diaspor',200,null,210000,2,96,1),
+('Con carbon', 200, null, 210,1,97,7),
+('Con carbon',200, null, 210,2,97,7),
+('Con carbon 2', 200, null, 210,1,98,7),
+('Con carbon 2',200, null, 210,2,98,7),
+('Con carbon 3', 200, null, 210,1,99,8),
+('Con carbon 3',200, null, 210,2,99,8);
 
 /*Cargo*/
 
@@ -3114,7 +3126,43 @@ values
 (4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',192,3),
 (5,'Perforaciones exploratorias',10,30000,'03-25-2019',192,3),
 (6,'Analisis',10,30000,'04-15-2019',192,3),
-(7,'Preparacion de informe',10,30000,'05-05-2019',192,3);
+(7,'Preparacion de informe',10,30000,'05-05-2019',192,3),
+
+(1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',193,7),
+(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',193,7),
+(1,'Restitucion topografica',20,30000,'01-05-2019',194,7),
+(2,'Fotointerpretacion',20,30000,'01-25-2019',194,7),
+(3,'Cartografia geologica',20,30000,'02-15-2019',194,7),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',194,7),
+(5,'Perforaciones exploratorias',10,30000,'03-25-2019',194,7),
+(6,'Analisis',10,30000,'04-15-2019',194,7),
+(7,'Preparacion de informe',10,30000,'05-05-2019',194,7),
+
+(1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',195,7),
+(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',195,7),
+(1,'Restitucion topografica',20,30000,'01-05-2019',196,7),
+(2,'Fotointerpretacion',20,30000,'01-25-2019',196,7),
+(3,'Cartografia geologica',20,30000,'02-15-2019',196,7),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',196,7),
+(5,'Perforaciones exploratorias',10,30000,'03-25-2019',196,7),
+(6,'Analisis',10,30000,'04-15-2019',196,7),
+(7,'Preparacion de informe',10,30000,'05-05-2019',196,7),
+
+(1,'Restitucion topografica',20,30000,'01-05-2019',197,8),
+(2,'Fotointerpretacion',20,30000,'01-25-2019',197,8),
+(3,'Cartografia geologica',20,30000,'02-15-2019',197,7),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',197,8),
+(5,'Perforaciones exploratorias',10,30000,'03-25-2019',197,8),
+(6,'Analisis',10,30000,'04-15-2019',197,8),
+(7,'Preparacion de informe',10,30000,'05-05-2019',197,8);
+
+(1,'Restitucion topografica',20,30000,'01-05-2019',198,8),
+(2,'Fotointerpretacion',20,30000,'01-25-2019',198,8),
+(3,'Cartografia geologica',20,30000,'02-15-2019',198,7),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',198,8),
+(5,'Perforaciones exploratorias',10,30000,'03-25-2019',198,8),
+(6,'Analisis',10,30000,'04-15-2019',198,8),
+(7,'Preparacion de informe',10,30000,'05-05-2019',198,8);
 
 
 /*Horario*/
@@ -3563,10 +3611,11 @@ INSERT INTO empleado (nombre_empleado,apellido_empleado,telefono_empleado,sexo,c
 
 insert into mineral_mineral (fk_mineral,fk_mineral_comp,cantidad)
 values 
-(4,21,300),
-(4,22,200),
-(4,23,400),
-(4,24,500);
+(4,21,30),
+(4,22,20),
+(4,23,40),
+(4,24,50),
+(1,21,50);
 /*presentacion*/
 insert into presentacion(nombre_presentacion)
 values ('Polvo'),
@@ -3584,8 +3633,6 @@ values (1000,1,1),(1000,1,2),(1000,1,3),(1000,1,4),(1000,1,5),(1000,1,6),(1000,1
 /*cargo fase*/ 
 insert into cargo_fase(cantidad,fk_cargo,costo,fk_fase)
 values
-
-
 (3,1,1000,1),
 (3,2,1000,1),
 (3,3,1000,1),
@@ -3935,7 +3982,81 @@ values
 (3,14,1000,860),
 (3,15,1000,861),
 (3,16,1000,862),
-(3,17,1000,863);
+(3,17,1000,863),
+/*Proyecto 8*/
+(3,1,1000,865),
+(3,2,1000,865),
+(3,3,1000,866),
+(3,4,1000,866),
+(3,5,1000,867),
+(3,6,1000,867),
+(3,7,1000,868),
+(3,8,1000,868),
+(3,9,1000,869),
+(3,2,1000,869),
+
+(3,1,1000,870),
+(3,2,1000,870),
+(3,3,1000,871),
+(3,2,1000,871),
+(3,4,1000,872),
+(3,5,1000,872),
+(3,6,1000,873),
+(3,7,1000,873),
+(3,8,1000,874),
+(3,9,1000,874),
+(3,9,1000,875),
+(3,3,1000,875),
+
+(3,1,1000,876),
+(3,2,1000,876),
+(3,3,1000,877),
+(3,4,1000,877),
+(3,4,1000,878),
+(3,5,1000,878),
+(3,6,1000,879),
+(3,7,1000,879),
+(3,8,1000,880),
+(3,9,1000,880),
+(3,9,1000,881),
+(3,3,1000,881),
+
+
+(3,1,1000,882),
+(3,2,1000,882),
+(3,3,1000,883),
+(3,4,1000,883),
+(3,3,1000,884),
+(3,4,1000,884),
+(3,5,1000,885),
+(3,6,1000,885),
+(3,7,1000,886),
+(3,8,1000,886),
+(3,9,1000,887),
+(3,3,1000,887),
+(3,1,1000,888),
+(3,3,1000,888),
+(3,1,1000,889),
+(3,3,1000,889),
+(3,1,1000,890),
+(3,3,1000,890),
+
+
+(3,1,1000,891),
+(3,2,1000,891),
+(3,4,1000,892),
+(3,3,1000,892),
+(3,4,1000,893),
+(3,5,1000,893),
+(3,6,1000,894),
+(3,7,1000,894),
+(3,8,1000,895),
+(3,9,1000,895),
+(3,3,1000,896),
+(3,1,1000,896),
+(3,3,1000,897),
+(3,1,1000,897);
+
 
 insert into maquinaria (nombre_maquinaria,cantidad,costo_maquinaria)
 values ('Dragalina',100,10000),
@@ -3980,13 +4101,52 @@ values (1,793,1,100000),
 /*7*/
 (1,856 ,4,100000),
 (1,857,5,100000),
-(1,858,6,100000);
+(1,858,6,100000),
 /*8*/
+(1,865 ,4,100000),
+(1,866,5,100000),
+(1,867,6,100000),
 
+(1,867 ,4,100000),
+(1,868,5,100000),
+(1,869,6,100000),
 
+(1,870 ,4,100000),
+(1,871,5,100000),
+(1,872,6,100000),
 
+(1,873 ,4,100000),
+(1,874,5,100000),
+(1,875,6,100000),
 
+(1,876 ,4,100000),
+(1,877,5,100000),
+(1,878,6,100000),
 
+(1,879 ,4,100000),
+(1,880,5,100000),
+(1,881,6,100000),
+
+(1,882 ,4,100000),
+(1,883,5,100000),
+(1,884,6,100000),
+
+(1,885 ,4,100000),
+(1,886,5,100000),
+(1,887,6,100000),
+
+(1,888 ,4,100000),
+(1,889,5,100000),
+(1,890,6,100000),
+
+(1,891 ,4,100000),
+(1,892,5,100000),
+(1,893,6,100000),
+
+(1,894 ,4,100000),
+(1,895,5,100000),
+(1,896,6,100000),
+(1,897 ,4,100000);
 
 
 insert into empleado_fase_cargo(fk_empleado,fk_cargo_fase)
@@ -4053,8 +4213,7 @@ values (21,1),(22,1),(23,1),(21,1),(23,2),(24,3),(21,4),(22,5),(23,6),(24,7)
 
 insert into mineral_presentacion (fk_mineral,fk_presentacion,costo)
 values (21,6, 300),(22,6,1000),(23,6,2000),(24,6,500);
-insert into mineral_presentacion (costo, fk_presentacion, fk_mineral)
-values (2000,6,21),(2000,6,22),(2000,6,23),(2000,6,24);
+
 
 insert into mineral_empresa (fk_mineral_presentacion, fk_empresa_aliada)
 values (22,1),(23,2),(24,3),(22,8),(21,2);
@@ -4086,7 +4245,8 @@ values
 (10,31,200),(22,33,200),(19,18,200),(20,96,200),(5,7,200),(14,59,200),(15,8,200),(9,102,200),(1,74,200),(24,7,200),
 (5,74,200),(14,41,200),(9,92,200),(12,87,200),(6,90,200),(21,30,200),(6,57,200),(2,45,200),(19,61,200),(20,65,200),
 (21,18,200),(9,88,200),(13,92,200),(3,92,200),(3,106,200),(10,65,200),(4,36,200),(14,106,200),(11,36,200),(9,21,200),
-(2,4,200),(11,42,200),(24,29,200),(22,95,200),(23,88,200),(23,99,200),(2,32,200),(4,91,200),(9,62,200),(3,83,200);
+(2,4,200),(11,42,200),(24,29,200),(22,95,200),(23,88,200),(23,99,200),(2,32,200),(4,91,200),(9,62,200),(3,83,200),(4,121,3000000000),
+(4,122,32400000000),(4,123,933444400000000);
 
 
 insert into permiso(nombre_permiso)

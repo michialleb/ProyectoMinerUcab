@@ -157,6 +157,7 @@ class ActivarProyecto extends Component {
   }
 
   getFases(id_proyecto){
+    console.log(id_proyecto);
     fetch(`/api/fases/proyecto/${id_proyecto}`)
     .then(res => res.json())
     .then(res => {

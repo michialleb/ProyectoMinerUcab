@@ -133,7 +133,60 @@ class ConsultTableProyectos extends Component {
       // this.setState({ selected : !this.state.selected});
     });
   }
+
+  cambiarStatusEmpleado(id_fase){
+    let fase={
+      id_fase:id_fase,
+      id_status:5
+    }
+    console.log("cambiando empl");
+    fetch(`/api/status/modificar/status/proyecto/etapa/fase/empleados`, {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ fase: fase})
+    }).then(res => res.json())
+      .then(res=>{
+        console.log("emp"+res);
+        if (res.error)
+        swal2("Error al asignar los empleados!", "Intente de nuevo!", "error");
+        else swal2("La explotación ha iniciado!", "Todo bien", "success");;
+      });
+  }
+  iniciarFase(id_etapa){
+    let fase={
+      id_etapa: id_etapa,
+      id_status:2
+    }
+    fetch(`/api/status/modificar/status/proyecto/etapa/fase`, {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ fase: fase})
+    }).then(res => res.json())
+      .then(res=>{
+        console.log("fas"+ res)
+        if (res.error)
+        swal2("Error al iniciar fase!", "Intente de nuevo!", "error");
+        else this.cambiarStatusEmpleado(res[0].id_fase);
+      });
+  }
+  iniciarEtapa(proyecto){
+    fetch(`/api/status/modificar/status/proyecto/etapa`, {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ proyecto: proyecto})
+    }).then(res => res.json())
+      .then(res=>{
+       
+        if (res.error)
+        swal2("Error al iniciar etapa!", "Intente de nuevo!", "error");
+        
+        else this.iniciarFase(res[0].id_etapa);
+        console.log("eta"+res[0].id_etapa);
+      });
+    
+  }
   iniciarYacimiento(proyecto, id_yacimiento){
+    
   let yacimiento={
       id_yacimiento: id_yacimiento,
       id_status:2
@@ -144,9 +197,10 @@ class ConsultTableProyectos extends Component {
     body: JSON.stringify({ yacimiento: yacimiento})
   }).then(res => res.json())
     .then(res=>{
+      console.log("yac"+res);
       if (res.error)
       swal2("Error al explotar yacimiento!", "Intente de nuevo!", "error");
-    
+      else this.iniciarEtapa(proyecto)
     });
   }
   iniciar(id_proyecto){
@@ -160,6 +214,7 @@ class ConsultTableProyectos extends Component {
       body: JSON.stringify({ proyecto: proyecto})
     }).then(res => res.json())
       .then(res=>{
+        console.log("pro"+res);
         if (res.error)
         swal2("Error al iniciar le proyecto!", "Intente de nuevo!", "error");
         else   this.iniciarYacimiento(proyecto,res[0].fk_yacimiento);
@@ -172,12 +227,16 @@ class ConsultTableProyectos extends Component {
  handleIniciar=(id_proyecto, status)=>{
  if (status==='Asignado'){
   this.iniciar(id_proyecto);
- }else{
+ } else if (status==='En ejecucion'){
+  swal2("El proyecto está en explotacioón!", "Inicie otro proyecto!", "warning");
+ }
+ else{
   swal2("El proyecto no ha sido asignado aún!", "Inicie otro proyecto!", "warning");
 
  }
  }
-  addBotton = proyectos => {
+  
+ addBotton = proyectos => {
     var proyecto = [];
     this.props.proyectos.map(proyec => {
       let p = {
