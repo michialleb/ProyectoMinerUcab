@@ -17,8 +17,8 @@ router.get("/allPersonas", function(req, res) {
   });
 });
 
-router.get("/:cedula", function(req, res) {
-  var cedula = req.paramas.cedula;
+router.get("/usuario/:cedula", function(req, res) {
+  var cedula = req.params.cedula;
   console.log("entro en el api con la cedula: " + cedula);
   Usuarios.retrieveUsuariosPorCedula(cedula, function(err, usuarios) {
     if (err) return res.json(err);
@@ -26,10 +26,9 @@ router.get("/:cedula", function(req, res) {
   });
 });
 
-router.post("/", function(req, res) {
-  var usuario = req.body.usuario;
-
-  Usuarios.insert(usuario, function(err, result) {
+router.post("/insertar", function(req, res) {
+  var user = req.body.user;
+  Usuarios.insert(user, function(err, result) {
     if (err) return res.json(err);
     return res.json(result);
   });

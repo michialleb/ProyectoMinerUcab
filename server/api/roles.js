@@ -35,4 +35,12 @@ router.post("/", function(req, res) {
   });
 });
 
+router.post("/permisoRol", function(req, res) {
+  var rol= req.body.rol;
+  Roles.insertPermisoRol(rol, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
+
 module.exports = router;

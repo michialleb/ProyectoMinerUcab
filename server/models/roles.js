@@ -37,11 +37,26 @@ class Roles {
     );
   }
 
+  static insertPermisoRol(rol, callback) {
+    
+      db.query(
+        "INSERT INTO permiso_rol (fk_permiso, fk_rol) \
+        VALUES ((SELECT id_permiso FROM permiso WHERE nombre_permiso=$1), $2)",
+        [rol.permiso, rol.id_rol],
+
+        function(err, res) {
+          if (err.error) return callback(err);
+          callback(res);
+        }
+      );
+    
+  }
+
   static insert(rol, callback) {
     if (rol.tipo_rol == "") rol.tipo_rol = null;
 
     db.query(
-      "INSERT INTO rol (tipo_rol,descripcion_rol) VALUES ($1,$2)",
+      "INSERT INTO rol (tipo_rol,descripcion_rol) VALUES ($1,$2) returning id_rol",
       [rol.tipo_rol, rol.descripcion],
 
       function(err, res) {

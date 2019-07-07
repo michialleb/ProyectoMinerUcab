@@ -11,17 +11,18 @@ class FormUsuarios extends Component {
     super(props);
     this.state = {
       usuariosList: [],
-      nombre: "pedro",
+      nombre: "",
       usuario: "",
       contrasena: "",
       fk_empleado: "",
       fk_cliente: "",
-      fk_rol: ""
+      fk_rol: 0
       // permisosList:[]
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleGetUsuarios = this.handleGetUsuarios.bind(this);
     this.handleCrearUsuario = this.handleCrearUsuario.bind(this);
+    this.handleAddUsuario = this.handleAddUsuario.bind(this);
   }
 
   handleChange(e) {
@@ -29,14 +30,46 @@ class FormUsuarios extends Component {
     let value = target.value;
     let name = target.name;
 
+    console.log(value);
     this.setState({
       [name]: value
     });
   }
 
+  handleAddUsuario(nombre, cedula, e) {
+    e.preventDefault();
+    let user = {
+      nombre_usuario: this.state.usuario,
+      contraseña: this.state.contrasena,
+      rol: parseInt(this.state.fk_rol),
+      nombre_persona: nombre,
+      cedula_persona: cedula
+    };
+    fetch(`/api/usuarios/insertar`, {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ user: user })
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          console.log("error es: " + res.error);
+          swal("Datos invalidos", "Intente de nuevo!", "error");
+        } else {
+          swal("Usuario ingresado!", "Satisfactoriamentes!", "success");
+          this.setState({
+            nombre: "",
+            usuario: "",
+            contrasena: "",
+            fk_rol: 0
+          });
+        }
+      });
+  }
+
   handleGetUsuarios = (cedula, nombre) => {
-    console.log("entro en el handel de usuarios con " + cedula + nombre);
-    fetch(`/api/usuarios/${cedula}`)
+    console.log("entro en el handel de usuarios con " + cedula);
+    fetch(`/api/usuarios/usuario/${cedula}`)
       .then(res => res.json())
       .then(res => {
         if (res !== []) this.setState({ usuariosList: res.map(r => r) });
@@ -56,10 +89,9 @@ class FormUsuarios extends Component {
     //  console.log(this.state.permisosList);
   };
 
-  handleCrearUsuario = () => {
-
+  handleCrearUsuario = (nombre, cedula) => {
     swal(
-      <>
+      <div>
         <div className="form-wrapper">
           <h5>Creacion de usuario </h5>
           <form className="form" noValidate>
@@ -70,7 +102,7 @@ class FormUsuarios extends Component {
                 type="text"
                 name="nombre"
                 disabled
-                value={this.state.nombre}
+                value={nombre}
               />
             </div>
             <div className="secondName">
@@ -81,7 +113,6 @@ class FormUsuarios extends Component {
                 type="text"
                 name="usuario"
                 noValidate
-                value={this.state.usuario}
                 onChange={this.handleChange}
               />
             </div>
@@ -94,7 +125,6 @@ class FormUsuarios extends Component {
                 type="password"
                 name="contrasena"
                 noValidate
-                value={this.state.contrasena}
                 onChange={this.handleChange}
               />
             </div>
@@ -102,10 +132,9 @@ class FormUsuarios extends Component {
             <div className="cargo">
               <label htmlFor="cargo">Rol</label>
               <select
-                name="fk_cargo"
+                name="fk_rol"
                 type="number"
                 id="selected"
-                value={this.state.fk_rol}
                 onChange={this.handleChange}
               >
                 <option />
@@ -118,13 +147,18 @@ class FormUsuarios extends Component {
             </div>
 
             <div className="ingresarUsuario">
-              <button type="submit" onClick={this.handleAddUsuario}>
+              <button
+                type="submit"
+                onClick={function(e) {
+                  this.handleAddUsuario(nombre, cedula, e);
+                }.bind(this)}
+              >
                 Ingresar Usuario
               </button>
             </div>
           </form>
         </div>
-      </>
+      </div>
     );
   };
 
@@ -148,7 +182,14 @@ class FormUsuarios extends Component {
         ),
         crear_usuario: (
           <div className="horario">
-            <button onClick={this.handleCrearUsuario}> Crear Usuario</button>
+            <button
+              onClick={function(e) {
+                this.handleCrearUsuario(pers.nombre, pers.cedula);
+              }.bind(this)}
+            >
+              {" "}
+              Crear Usuario
+            </button>
           </div>
         )
       };
