@@ -10,6 +10,15 @@ router.get("/buscar", function(req, res) {
   });
 });
 
+router.post("/agregarPago", function(req, res) {
+  
+    var pag = req.body.pag;
+    Tipo_pago.insertPago(pag, function(err, result) {
+      if (err) return res.json(err);
+      return res.json(result);
+    });
+  });
+
 
 
 

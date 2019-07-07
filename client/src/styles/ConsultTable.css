@@ -63,3 +63,15 @@ table#t02 th {
 .no_empleados{
  display: none;
 }
+.no_credito{
+  display:none
+}
+.no_credito{
+  display:none;
+}
+.no_debito{
+  display:none
+}
+.no_transferencia{
+  display:none
+}

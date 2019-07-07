@@ -384,9 +384,12 @@ alter sequence compra_cliente_proyecto_id_compra_cliente_proyecto_seq restart wi
      fecha_pago DATE NOT NULL,
      monto_total_pagado real NOT NULL,
      fk_compra_cliente INTEGER NOT NULL,
+     fk_tipo_pago integer not null,
      CONSTRAINT pk_id_pago PRIMARY KEY (id_pago),
      CONSTRAINT fk_compra_cliente_pago FOREIGN KEY (fk_compra_cliente)
-     REFERENCES Compra_Cliente(id_compra_cliente)
+     REFERENCES Compra_Cliente(id_compra_cliente),
+     CONSTRAINT fk_tipo_pago_pago FOREIGN KEY (fk_tipo_pago)
+     REFERENCES Tipo_pago (id_tipo_pago)
 );
 
 alter sequence pago_id_pago_seq restart with 1;
@@ -395,7 +398,7 @@ create table Tipo_Pago(
     tipo varchar (30) not null,
     banco varchar(50) not null,
     constraint pk_id_tipo_pago primary key (id_tipo_pago),
-    constraint  tipo_pago check (tipo in ('Transferencia','Tarjeta_Credito', 'Cheque', 'Tarjeta_Debito'))
+    constraint  tipo_pago check (tipo in ('Transferencia','Tarjeta_Credito','Tarjeta_Debito'))
 );
 
 alter sequence tipo_pago_id_tipo_pago_seq restart with 1;

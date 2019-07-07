@@ -1,10 +1,10 @@
 
 import React, { Component } from "react";
 import "../styles/ConsultTable.css";
+import "../styles/Form.css";
 import swal from "@sweetalert/with-react";
+import Pago from "./Pago";
 import { MDBListGroup, MDBListGroupItem, MDBContainer,MDBDataTable  } from "mdbreact";
-
-
 
 class ActivarProyecto extends Component {
   constructor(props) {
@@ -23,13 +23,17 @@ class ActivarProyecto extends Component {
       cargosList:[],
       cargosAgregados:[],
       horarios:[],
-      configurar:false
+      configurar:false,
+      procesarPago:false
     
     };
   this.handleChangeHorario=this.handleChangeHorario.bind(this);
-  
+  this.procesarCambios = this.procesarCambios.bind(this);
   }
 
+  procesarCambios(){
+  this.setState({procesarPago: true})
+  }
   addHorario(id_horario){
       let horario_emp={
         id_horario: id_horario,
@@ -203,17 +207,24 @@ class ActivarProyecto extends Component {
     };
     return (
       <>
-     <MDBContainer>
-        <MDBListGroup style={{ width: "18rem" }}>
-          {this.state.fasesList.map((fase)=>{
-           return  <MDBListGroupItem onClick={(function (e) {this.getEmpleadosCargo(e,fase.id)}).bind(this)}>{fase.nombre}</MDBListGroupItem>
-          })}
-        </MDBListGroup>
-      </MDBContainer>
-    <div className={ this.state.configurar ? "tabla_no_show" : "tablaemp"  }>
+        <div className={this.state.procesarPago ? "wrapper-c_no_show" : "wrapper-c"  }>
+          <div className="form-wrapper">
+            <h5>Asignar Empleados</h5>
+            <div className="ingresarUsuario">
+               <button type="submit" onClick={this.procesarCambios}>
+                 Procesar Cambios
+              </button>
+            </div>
+            <MDBContainer>
+                 <MDBListGroup style={{ width: "18rem" }}>
+                {this.state.fasesList.map((fase)=>{
+                   return  <MDBListGroupItem onClick={(function (e) {this.getEmpleadosCargo(e,fase.id)}).bind(this)}>{fase.nombre}</MDBListGroupItem>})}
+                 </MDBListGroup>
+           </MDBContainer>
+          <div className={ this.state.configurar ? "tabla_no_show" : "tablaemp"  }>
           <MDBDataTable btn striped bordered hover data={data} />
-   </div>
-   <div className={this.state.configurar ? "horarioEmp" : "horarioEmp_no"} >
+        </div>
+       <div className={this.state.configurar ? "horarioEmp" : "horarioEmp_no"} >
    <div>
         <select
          name="horario"
@@ -234,6 +245,13 @@ class ActivarProyecto extends Component {
             }.bind(this)}> Aceptar </button>
       </div>
    </div>
+  
+   </div>
+   </div>
+        <Pago fecha_compra={this.props.fecha_compra}
+         id_compra={this.props.id_compra}
+         total={this.props.total}
+         className={this.state.procesarPago ? "Pago": "Pago_no_show"} ></Pago>
   
       </>
     );

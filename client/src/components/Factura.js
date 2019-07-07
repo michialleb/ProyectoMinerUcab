@@ -12,7 +12,8 @@ class Factura extends Component {
      total:0,
      compra :false,
      fecha_compra:"",
-     id_compra:0
+     id_compra:0,
+     procesarPago:false
     };
 
   
@@ -27,30 +28,16 @@ class Factura extends Component {
           id_mineral_presentacion: this.props.id_mineral_presentacion,
           status:3
         };
-
-        
         fetch("/api/clientes/compra/persona", {
           method: "post",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify({ compra: compra })
         }).then(res => res.json())
           .then(res=>{
-            this.setState({fecha_compra:  res[0].fecha_compra.split(["T"], [1]), id_compra: res[0].id_compra_cliente })
-         
+            let h=res[0].fecha_compra.split(["T"]);
+      
+           this.setState({fecha_compra:  h[0], id_compra: res[0].id_compra_cliente, procesarPago: true})
           })
-       /* .then (res =>{
-          let proyecto ={
-             id_mineral: this.props.id_mineral,
-             cantidad: this.props.cantidad,
-             compra_cliente: res[0].id_compra_cliente
-          }
-          fetch("/api/clientes/proyecto/compra/persona", {
-            method: "post",
-            headers: { "Content-type": "application/json" },
-            body: JSON.stringify({ proyecto: proyecto})
-          }).then(res => res.json())
-
-        })*/
       
   }
   handleTerminarCompra(){
@@ -69,7 +56,7 @@ class Factura extends Component {
        this.addCompraCliente();
       // this.setState({ compra: !this.state.compra});
      } else {
-       swal("Estaremos aquií luego");
+       swal("Estaremos aquí luego");
      }
    })   
  };
@@ -95,7 +82,7 @@ class Factura extends Component {
     return (
       <>
        {console.log(this.props.nombre_persona)}
-        <div  className={this.state.id_compra!==0? "wrapper-c_no_show" : "wrapper-c"  }>
+        <div  className={this.state.procesarPago ? "wrapper-c_no_show" : "wrapper-c"  }>
         <div className="form-wrapper">
           <h7>Factura: </h7>
           <div>
@@ -144,8 +131,10 @@ class Factura extends Component {
          
           </div>
           </div>
-          <Pago  className={this.state.id_compra!==0 ? "Pago": "Pago_no_show"}
-          fecha={this.state.fecha_compra} id_compra={this.state.id_compra}></Pago>
+          <Pago  className={this.state.procesarPago ? "Pago": "Pago_no_show"}
+          fecha_compra={this.state.fecha_compra} 
+          id_compra={this.state.id_compra}
+          total={this.state.total}></Pago>
       </>
     );
   }

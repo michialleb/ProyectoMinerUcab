@@ -39,7 +39,7 @@ router.post("/", function(req, res) {
 
 router.post("/cambiarStatus", function(req, res) {
   var proyecto = req.body.proyecto;
-  console.log(proyecto.id_proyecto)
+  console.log("cambiando el status del proyecto"+proyecto.id_proyecto)
   Proyecto.updateProyecto(proyecto, function(err, result) {
     if (err) return res.json(err);
     return res.json(result);

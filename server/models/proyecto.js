@@ -48,8 +48,6 @@ class Proyectos {
     });
   }
   static buscarProyecto(obj,callback) {
-    console.log(obj.cant);
-    console.log(obj.id_mineral);
     db.query(
     "select p.id_proyecto \
     from proyecto p, mineral_yacimiento my, yacimiento y\

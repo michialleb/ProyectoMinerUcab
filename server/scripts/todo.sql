@@ -4525,8 +4525,6 @@ alter sequence pago_id_pago_seq restart with 1;
 insert into tipo_pago(tipo,banco) values ('Tarjeta_Credito','banesco'),
 ('Transferencia','mercantil'),
 ('Transferencia','provincial'),
-('Cheque','bancopro'),
-('Cheque','venezolana'),
 ('Tarjeta_Debito','bod'),
 ('Tarjeta_Debito','bancaribe'),
 ('Tarjeta_Credito','bofa');
