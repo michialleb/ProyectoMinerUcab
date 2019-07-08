@@ -21,6 +21,7 @@ import "../styles/Menu.css";
 
 // link de react-icons https://react-icons.netlify.com/#/icons/fa
 export default class Menu extends Component {
+
   constructor(props) {
     super(props);
   }

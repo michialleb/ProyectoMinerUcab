@@ -4,7 +4,8 @@ import {
   Route,
   Link,
   NavLink,
-  Switch
+  Switch,
+  Redirect
 } from "react-router-dom";
 import "../Login.css";
 import SignUpForm from "../pages/SignUpForm";
@@ -20,13 +21,31 @@ import InfoRelevante from "../entities/InfoRelevante";
 import Usuarios from "../entities/Usuarios";
 import Roles from "../entities/Roles";
 
+const PrivateRoute = ({ component: Component, ...rest }) => (
+ 
+  <Route
+    {...rest}
+    render={props =>
+      props.match.params.id_nombre !== null ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: "/sign-in",
+            state: { from: props.location }
+          }}
+        />
+      )
+    }
+  />
+);
+
 class Login extends Component {
   render() {
     return (
       <>
         <Router basename="/login/">
           <Switch>
-            <Route exact path="/sesion" component={Sesion} />
             <Route path="/empleados" component={Empleado} />
             <Route path="/clientes" component={Clientes} />
             <Route path="/inventario" component={Inventario} />
@@ -36,6 +55,10 @@ class Login extends Component {
             <Route path="/proyectos" component={Proyectos} />
             <Route path="/minerales" component={Minerales} />
             <Route path="/info" component={InfoRelevante} />
+            <PrivateRoute
+              path="/protected/:id_usuario/:cedula/:rol/:nombre"
+              component={Sesion}
+            />
 
             <div className="Login">
               <div className="Login__Aside">

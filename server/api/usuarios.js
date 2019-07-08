@@ -26,6 +26,15 @@ router.get("/usuario/:cedula", function(req, res) {
   });
 });
 
+router.get("/log/in/:nombre_usuario", function(req, res) {
+  var nombre_usuario = req.params.nombre_usuario;
+
+  Usuarios.ingresarUsuario(nombre_usuario,  function(err, usuarios) {
+    if (err) return res.json(err);
+    return res.json(usuarios);
+  });
+});
+
 router.post("/insertar", function(req, res) {
   var user = req.body.user;
   Usuarios.insert(user, function(err, result) {

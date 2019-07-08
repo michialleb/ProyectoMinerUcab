@@ -16,7 +16,7 @@ class Sesion extends Component {
         {
           form:  <Banner
           banner="welcome"
-          title="Bienvenido"
+          title={this.props.match.params.nombre}
           subtitle="" />,
           id: 0
         }

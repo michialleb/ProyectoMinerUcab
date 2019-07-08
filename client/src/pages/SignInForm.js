@@ -8,11 +8,17 @@ class SignInForm extends Component {
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      id_usuario: 0,
+      nombre: "",
+      tipo_rol: "",
+      cedula: 0,
+      ing: true
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.ingresar = this.ingresar.bind(this);
   }
 
   handleChange(e) {
@@ -32,6 +38,25 @@ class SignInForm extends Component {
     console.log(this.state);
   }
 
+  ingresar(e) {
+    e.preventDefault();
+    var nombre_usuario = this.state.email;
+    fetch(`/api/usuarios/log/in/${nombre_usuario}`)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        if (res[0].contraseña != this.state.password) {
+          res[0].contraseña = null;
+        }
+        this.setState({
+          id_usuario: res[0].id_usuario,
+          nombre: res[0].nombre,
+          tipo_rol: res[0].tipo_rol,
+          cedula: res[0].cedula
+        });
+      });
+  }
+
   render() {
     return (
       <>
@@ -46,10 +71,10 @@ class SignInForm extends Component {
                 Correo Electronico
               </label>
               <input
-                type="email"
+                type="text"
                 id="email"
                 className="FormField__Input"
-                placeholder="Introduce tu correo electronico"
+                placeholder="Introduce tu usuario"
                 name="email"
                 value={this.state.email}
                 onChange={this.handleChange}
@@ -72,7 +97,13 @@ class SignInForm extends Component {
             </div>
 
             <div className="FormField">
-              <Link to="/sesion" className="FormField__Button mr-20">
+              <Link
+                to={`/protected/${this.state.id_usuario}/${this.state.cedula}/${
+                  this.state.tipo_rol
+                }/${this.state.nombre}`}
+                className="FormField__Button mr-20"
+                onClick={this.ingresar}
+              >
                 Iniciar Sesion
               </Link>
               <Link to="/" className="FormField__Link">

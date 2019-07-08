@@ -522,13 +522,13 @@ CREATE TABLE Maquinaria_Activa(
 
 create view usuariospersonas as (
 select u.nombre_usuario as usuario, u.contraseña , concat (e.nombre_empleado,' ', e.apellido_empleado) as nombre,
-	   r.tipo_rol, e.cedula_identidad as cedula
+	   r.tipo_rol, e.cedula_identidad as cedula, u.id_usuario
 from usuario u inner join empleado e on u.fk_empleado = e.id_empleado 
 	inner join rol r on u.fk_rol = r.id_rol
 where u.fk_empleado is not null 
 union all
 select u.nombre_usuario as usuario, u.contraseña , concat (c.nombre_persona,' ', c.apellido_persona) as nombre,
-	   r.tipo_rol, c.cedula_identidad as cedula
+	   r.tipo_rol, c.cedula_identidad as cedula, u.id_usuario
 from usuario u inner join persona c on u.fk_cliente_persona = c.id_cliente
 	inner join rol r on u.fk_rol = r.id_rol
 	where u.fk_cliente_persona is not null 

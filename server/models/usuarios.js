@@ -54,5 +54,19 @@ class Usuarios {
       );
     }
   }
+
+  static ingresarUsuario(user,callback) {
+      db.query(
+        "SELECT * FROM usuariospersonas where usuario= $1",
+        [user],
+        function(err, res) {
+          if (err.error) return callback(err);
+          callback(res);
+        }
+      );
+    
+  }
 }
+
+
 module.exports = Usuarios;
