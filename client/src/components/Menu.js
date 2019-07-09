@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import {
   FaHome,
   FaUser,
+  FaUserCog,
+  FaListOl,
   FaHammer,
   FaBoxOpen,
   FaHardHat,
@@ -19,6 +21,7 @@ import "../styles/Menu.css";
 
 // link de react-icons https://react-icons.netlify.com/#/icons/fa
 export default class Menu extends Component {
+
   constructor(props) {
     super(props);
   }
@@ -61,6 +64,16 @@ export default class Menu extends Component {
         icon: <FaBoxOpen />,
         title: "Inventario",
         tipo: "/inventario"
+      },
+      {
+        icon: <FaUserCog />,
+        title: "Gestion de usuarios",
+        tipo: "/users"
+      },
+      {
+        icon: <FaListOl />,
+        title: "Gestion de roles",
+        tipo: "/roles"
       },
       {
         icon: <FaBook />,

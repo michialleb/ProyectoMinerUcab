@@ -169,3 +169,10 @@
   padding-bottom: 2px;
   margin-left: 5px;
 }
+.sesion_no_show{
+  display:none
+}
+
+.FormCenter_no{
+  display:none;
+}

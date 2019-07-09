@@ -71,3 +71,4 @@ alter sequence presentacion_id_presentacion_seq restart with 1;
 alter sequence empresa_aliada_id_empresa_aliada_seq restart with 1;
 alter sequence lugar_id_lugar_seq restart with 1;
 alter sequence tipo_pago_id_tipo_pago_seq restart with 1;
+alter sequence usuario_id_usuario_seq restart with 1;
