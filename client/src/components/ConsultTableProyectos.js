@@ -105,6 +105,10 @@ class ConsultTableProyectos extends Component {
       this.modificarStatusFase(id_fase);
      })
   }
+
+  handleVerUsuarios(){
+    
+  }
   handleCargoFase=(idFase, status)=>{
     fetch(`/api/fases/cargo/fase/${idFase}`)
     .then(res =>res.json())
@@ -123,6 +127,14 @@ class ConsultTableProyectos extends Component {
             return (
               <tr key={i}>
                 <td> {cargo.cargo}</td>
+                <td>
+                  <div className="horario">
+                  <button   onClick={function(e) {
+                       this.handleVerUsuarios();
+                       }.bind(this)}> Empleados </button> 
+                  </div>
+               </td>
+                   
               </tr>
             );
           })}
@@ -220,7 +232,6 @@ class ConsultTableProyectos extends Component {
       id_fase:id_fase,
       id_status:5
     }
-    console.log("cambiando empl");
     fetch(`/api/status/modificar/status/proyecto/etapa/fase/empleados`, {
       method: "post",
       headers: { "Content-type": "application/json" },

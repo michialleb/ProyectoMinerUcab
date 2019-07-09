@@ -77,21 +77,59 @@ class Fases {
   }
 
   static updateStatusFase(fase, callback) {
-    console.log("llego aqui")
-    db.query(
-      "UPDATE fase set fk_tipo_status=(select id_tipo_status \
-                                                    from tipo_status \
-                                                    where nombre_tipo_status=$1) \
-       where id_fase=$2",
-      [
-        fase.id_status,
-       fase.id_fase
-      ],
-      function(err, res) {
-        if (err.error) return callback(err);
-        callback(res);
-      }
-    );
+    var f= new Date;
+    var Fecha=f.getMonth()+'-'+f.getDate()+'-'+f.getFullYear();
+    if (fase.id_status=="En ejecucion"){
+      db.query(
+        "UPDATE fase set fk_tipo_status=(select id_tipo_status \
+                                                      from tipo_status \
+                                                      where nombre_tipo_status=$1),\
+                                                      fecha_inicio_fase=$3 \
+         where id_fase=$2",
+        [
+          fase.id_status,
+         fase.id_fase,
+         Fecha
+        ],
+        function(err, res) {
+          if (err.error) return callback(err);
+          callback(res);
+        }
+      );
+    }else if(fase.id_status=="Finalizado"){
+      db.query(
+        "UPDATE fase set fk_tipo_status=(select id_tipo_status \
+                                                      from tipo_status \
+                                                      where nombre_tipo_status=$1),\
+                                                      fecha_final_fase=$3\
+         where id_fase=$2",
+        [
+          fase.id_status,
+          fase.id_fase,
+          Fecha
+        ],
+        function(err, res) {
+          if (err.error) return callback(err);
+          callback(res);
+        }
+      );
+    }else {
+      db.query(
+        "UPDATE fase set fk_tipo_status=(select id_tipo_status \
+                                        from tipo_status \
+                                         where nombre_tipo_status=$1)\
+         where id_fase=$2",
+        [
+          fase.id_status,
+         fase.id_fase
+        ],
+        function(err, res) {
+          if (err.error) return callback(err);
+          callback(res);
+        }
+      );
+    }
+    
   }
   static insert(fase, callback) {
     db.query(
