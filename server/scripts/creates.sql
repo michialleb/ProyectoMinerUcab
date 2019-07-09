@@ -503,4 +503,28 @@ CREATE TABLE Maquinaria_Activa(
 alter sequence maquinaria_activa_id_maquinaria_activa_seq restart with 1;
 
 
+///////////////////////////////////// VISTAS //////////////////////////////////////////////////
 
+create view usuariospersonas as (
+select u.nombre_usuario as usuario, u.contraseña , concat (e.nombre_empleado,' ', e.apellido_empleado) as nombre,
+	   r.tipo_rol, e.cedula_identidad as cedula, u.id_usuario
+from usuario u inner join empleado e on u.fk_empleado = e.id_empleado 
+	inner join rol r on u.fk_rol = r.id_rol
+where u.fk_empleado is not null 
+union all
+select u.nombre_usuario as usuario, u.contraseña , concat (c.nombre_persona,' ', c.apellido_persona) as nombre,
+	   r.tipo_rol, c.cedula_identidad as cedula, u.id_usuario
+from usuario u inner join persona c on u.fk_cliente_persona = c.id_cliente
+	inner join rol r on u.fk_rol = r.id_rol
+	where u.fk_cliente_persona is not null 
+)
+
+create view personas_Sistema as(
+select concat ('Empleado: ',e.nombre_empleado ,' ',e.apellido_empleado) as nombre, 
+	e.cedula_identidad as cedula 
+	from empleado e
+union all
+select concat ('Cliente: ',c.nombre_persona ,' ',c.apellido_persona) as nombre, 
+	c.cedula_identidad as cedula 
+	from persona c
+)

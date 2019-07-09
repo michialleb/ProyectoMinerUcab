@@ -4231,7 +4231,23 @@ insert into horario_empleado(fk_horario,fk_empl_horario_fase) values
 ,(1,28),(2,28),(5,28),(3,29),(4,29),(5,29),(1,30),(3,30),(6,30)
 ,(1,31),(5,31),(6,31),(1,32),(6,32),(8,32),(4,33),(5,33),(6,33)
 ,(7,34),(8,34),(9,34),(8,35),(6,35),(3,35),(1,36),(4,36),(3,36)
-,(6,37),(7,37),(9,37),(1,38),(3,38),(6,38),(1,39),(3,39),(4,39);
+,(6,37),(7,37),(9,37),(1,38),(3,38),(6,38),(1,39),(3,39),(4,39),
+
+(1,40),(2,40),(3,40),(1,41),(2,41),(2,42),(2,43),(3,43),(4,43),
+(9,44),(8,44),(6,44),(6,45),(5,45),(7,45),(8,46),(3,46),(9,46)
+,(1,47),(2,47),(5,47),(3,48),(4,48),(5,48),(1,49),(3,49),(6,49)
+,(1,50),(5,50),(6,50),(1,51,(6,51,(8,51,(4,52),(5,52),(6,52)
+,(7,53),(8,53),(9,53),(8,54),(6,54),(3,54),(1,55),(4,55),(3,55)
+,(6,56),(7,56),(9,56),(1,57),(3,57),(6,57),(1,58),(3,58),(4,58),
+
+(1,59),(2,59),(3,59),(1,60),(2,60),(2,60),(2,61),(3,61),(4,61),
+(9,62),(8,62),(6,62),(6,63),(5,63),(7,63),(8,64),(3,64),(9,64)
+,(1,65),(2,65),(5,65),(3,66),(4,66),(5,66),(1,67),(3,67),(6,67)
+,(1,67),(5,68),(6,68),(1,69),(6,69),(8,69),(4,70),(5,70),(6,70)
+,(7,71),(8,71),(9,71),(8,72),(6,72),(3,72),(1,73),(4,73),(3,73)
+,(6,74),(7,74),(9,74),(1,75),(3,75),(6,75),(1,76),(3,76),(4,76);
+
+
 
 
 insert into mineral_yacimiento (fk_mineral,fk_yacimiento,cantidad)
@@ -4249,9 +4265,6 @@ values
 (4,122,32400000000),(4,123,933444400000000);
 
 
-insert into permiso(nombre_permiso)
-values ('Consulta de empleados'),('Administracion de empleados'),('Vista de Perfil'),
-('Consulta de minerales'),('Consulta de acimientos');
 
 insert into rol(tipo_rol)
 values ('Administrador'),('Empleado'),('Chofer'),('Usuario trabajador'),('Comprador');
@@ -4276,4 +4289,15 @@ insert into tipo_pago(tipo,banco) values ('Tarjeta_Credito','banesco'),
 ('Tarjeta_Debito','bod'),
 ('Tarjeta_Debito','bancaribe'),
 ('Tarjeta_Credito','bofa');
-/*8
+
+
+insert into permiso (nombre_permiso, descripcion_permiso) values
+('todo','puede realizar cualquier operacion en todo el sistema'),
+('adminEmp','puede administrar a los empleados'),
+('adminCli','puede administrar a los clientes'),
+('adminYac','puede administrar a los yacimientos y proyectos'),
+('adminMin','puede administrar a los minerales'),
+('consultaEmp','puede solo consultar a los empleados'),
+('consultaCli','puede solo consultar a los clientes'),
+('consultaYac','puede solo consultar a los yacimientos'),
+('consultaMin','puede solo consultar a los minerales');
