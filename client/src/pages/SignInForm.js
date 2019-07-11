@@ -9,11 +9,12 @@ class SignInForm extends Component {
     this.state = {
       email: "",
       password: "",
-      id_usuario: 0,
+      id_usuario: 5,
       nombre: "",
       tipo_rol: "",
       cedula: 0,
-      ing: true
+      ing: true,
+      resp: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -46,7 +47,7 @@ class SignInForm extends Component {
       .then(res => {
         console.log(res);
         if (res[0].contraseña != this.state.password) {
-          res[0].contraseña = null;
+          res[0].id_usuario = null;
         }
         this.setState({
           id_usuario: res[0].id_usuario,
@@ -54,7 +55,9 @@ class SignInForm extends Component {
           tipo_rol: res[0].tipo_rol,
           cedula: res[0].cedula
         });
-      });
+        this.forceUpdate();
+      })
+      .then(res => {});
   }
 
   render() {
@@ -97,15 +100,14 @@ class SignInForm extends Component {
             </div>
 
             <div className="FormField">
-              <Link
-                to={`/protected/${this.state.id_usuario}/${this.state.cedula}/${
-                  this.state.tipo_rol
-                }/${this.state.nombre}`}
+              <button
                 className="FormField__Button mr-20"
                 onClick={this.ingresar}
               >
-                Iniciar Sesion
-              </Link>
+                <Link to={`/protected/${this.state.id_usuario}/7/6/6`}>
+                  Iniciar Sesion
+                </Link>
+              </button>
               <Link to="/" className="FormField__Link">
                 Crear cuenta
               </Link>
