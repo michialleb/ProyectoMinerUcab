@@ -15,12 +15,14 @@ export default class Empleado extends Component {
       empleado: [],
       empleadoList: [],
       lugarList: [],
+      statusList:[],
       //  horarioList: [],
       empleadoCedula: ""
     };
     this.getEmpleadoList = this.getEmpleadoList.bind(this);
     this.handleGetEmpleado = this.handleGetEmpleado.bind(this);
     this.handleGetHorario = this.handleGetHorario.bind(this);
+  
   }
 
   handleGetHorario = id => {
@@ -71,11 +73,21 @@ export default class Empleado extends Component {
         this.setState({ empleadoList });
       });
   };
+
+  getStatusList = () => {
+    fetch("/api/status/buscar")
+      .then(res => res.json())
+      .then(res => {
+        var statusList = res.map(r => r);
+        this.setState({ statusList });
+      });
+  };
   //removeEmpleado =()=>{}
   componentDidMount() {
     this.getCargoList();
     this.getEmpleadoList();
     this.getLugarList();
+    this.getStatusList();
   }
   render() {
     var empleados = this.state.empleadoList;
@@ -118,6 +130,7 @@ export default class Empleado extends Component {
               getEmpleado={this.handleGetEmpleado}
               getHorarios={this.handleGetHorario}
               horarios={horarios}
+              status={this.state.statusList}
             />
           ),
           id: 1

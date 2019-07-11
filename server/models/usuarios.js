@@ -66,6 +66,22 @@ class Usuarios {
       );
     
   }
+
+  static retrievePermisosUsuario(id_usuario, callback) {
+    db.query(
+      "select p.nombre_permiso  as nombre_permiso\
+      from permiso p, permiso_rol mp, usuario u \
+      where u.id_usuario =$1\
+      and	  mp.fk_rol = u.fk_rol\
+      and   mp.fk_permiso = p.id_permiso",
+      [id_usuario],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+  
 }
 
 

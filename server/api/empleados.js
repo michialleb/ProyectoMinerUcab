@@ -34,6 +34,15 @@ router.post("/actualizar", function(req, res) {
   });
 });
 
+router.post("/actualizar/status", function(req, res) {
+  var empleado = req.body.empleado;
+  Empleados.updateStatusEmpleado(empleado, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
+
+
 router.post("/", function(req, res) {
   var empleado = req.body.empleado;
   console.log('michi en api');

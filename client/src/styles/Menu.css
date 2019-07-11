@@ -47,21 +47,22 @@ body {
   margin: 0;
 }
 
-.sidenav ul li {
+/*.sidenav ul li {
   text-decoration: none;
   padding: 20px 10px;
   text-align: inline;
   font-size: 13px;
   color: #fff;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-.sidenav-links {
+}*/
+/*.sidenav-links {
   text-decoration: none;
   color: #fff;
-}
+}*/
 .sidenav ul li:hover {
   background: orange;
   color: #fff;
+
 }
 .sidenav-show {
   width: 250px;
@@ -137,6 +138,59 @@ body {
 .log-btn {
   cursor: pointer;
   margin-left: 95px;
+}
+
+.no_empleados, 
+.no_minerales,
+.no_yacimientos,
+.no_proyectos,
+.no_clientes,
+.no_aliados,
+.no_inventario,
+.no_users,
+.no_roles,
+.no_info {
+ display: none;
+}
+
+.empleados, 
+.minerales,
+.yacimientos,
+.proyectos,
+.clientes,
+.aliados,
+.inventario,
+.users,
+.roles,
+.info,
+.home {
+  text-decoration: none;
+  color: #fff;
+  text-decoration: none;
+  padding: 20px 10px;
+  text-align: inline;
+  font-size: 13px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  list-style: none;
+  padding: 20px;
+  position: flex;
+
+ 
+}
+
+.empleados:hover,
+.minerales:hover,
+.yacimientos:hover,
+.proyectos:hover,
+.clientes:hover,
+.aliados:hover,
+.inventario:hover,
+.users:hover,
+.roles:hover,
+.info:hover,
+.home:hover{
+
+ 
 }
 
 @media screen and (min-width: 768px) {

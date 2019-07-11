@@ -90,7 +90,7 @@ class Form extends Component {
         if (res.error) {
           console.log("error es: " + res.error);
           swal("Datos invalidos", "Intente de nuevo!", "error");
-        } else swal("Empleado Ingresado!", "Satisfactoriamentes!", "success");
+        } else swal("Empleado Ingresado!", "Satisfactoriamente!", "success");
       });
   };
 

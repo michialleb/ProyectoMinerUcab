@@ -9,7 +9,6 @@ router.get("/buscar", function(req, res) {
     return res.json(tipo_pago);
   });
 });
-
 router.post("/agregarPago", function(req, res) {
   
     var pag = req.body.pag;

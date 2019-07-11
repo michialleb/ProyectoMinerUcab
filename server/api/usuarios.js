@@ -43,4 +43,14 @@ router.post("/insertar", function(req, res) {
   });
 });
 
+router.get("/log/in/permisos/:id_usuario", function(req, res) {
+  var id_usuario = req.params.id_usuario;
+
+  Usuarios.retrievePermisosUsuario(id_usuario,  function(err, usuarios) {
+    if (err) return res.json(err);
+    return res.json(usuarios);
+  });
+});
+
+
 module.exports = router;

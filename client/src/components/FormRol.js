@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
 import swal from "sweetalert";
-import Select from "react-select";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Multiselect from "multiselect-dropdown-react";
+
 
 class FormRol extends Component {
   constructor() {

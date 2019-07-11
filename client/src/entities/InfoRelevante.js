@@ -1,18 +1,15 @@
 import React, { Component } from "react";
 import Menu from "../components/Menu";
+import Reportes from "../components/Reportes";
 
 export default class InfoRelevante extends Component {
   render() {
     var crud = {
-      options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar"],
+      options: ["Reportes"],
       content: [
         {
-          form: null,
+          form: <Reportes/>,
           id: 0
-        },
-        {
-          form: null,
-          id: 1
         }
       ]
     };

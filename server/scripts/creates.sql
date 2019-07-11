@@ -517,7 +517,7 @@ select u.nombre_usuario as usuario, u.contraseña , concat (c.nombre_persona,' '
 from usuario u inner join persona c on u.fk_cliente_persona = c.id_cliente
 	inner join rol r on u.fk_rol = r.id_rol
 	where u.fk_cliente_persona is not null 
-)
+);
 
 create view personas_Sistema as(
 select concat ('Empleado: ',e.nombre_empleado ,' ',e.apellido_empleado) as nombre, 
@@ -527,4 +527,4 @@ union all
 select concat ('Cliente: ',c.nombre_persona ,' ',c.apellido_persona) as nombre, 
 	c.cedula_identidad as cedula 
 	from persona c
-)
+);

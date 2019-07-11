@@ -4292,12 +4292,14 @@ insert into tipo_pago(tipo,banco) values ('Tarjeta_Credito','banesco'),
 
 
 insert into permiso (nombre_permiso, descripcion_permiso) values
-('todo','puede realizar cualquier operacion en todo el sistema'),
+('admintodo','puede realizar cualquier operacion en todo el sistema'),
 ('adminEmp','puede administrar a los empleados'),
-('adminCli','puede administrar a los clientes'),
-('adminYac','puede administrar a los yacimientos y proyectos'),
+('adminCli','puede administrar las ventas a clientes'),
+('adminYac','puede administrar a los yacimientos'),
 ('adminMin','puede administrar a los minerales'),
-('consultaEmp','puede solo consultar a los empleados'),
-('consultaCli','puede solo consultar a los clientes'),
-('consultaYac','puede solo consultar a los yacimientos'),
-('consultaMin','puede solo consultar a los minerales');
+('adminPro','puede  administrar los proyectos'),
+('adminAli','puede administrar las compras a los aliados'),
+('adminInv','puede consultar el inventario'),
+('adminUser','puede administrar los usuarios'),
+('adminRol', 'puede administrar los roles'),
+('adminInfo', 'puede consultar los reportes');

@@ -17,6 +17,7 @@ import LogOut from "./LogOut";
 import { HashRouter as Router, Route, Link, NavLink } from "react-router-dom";
 import MenuCrud from "./MenuCrud";
 import "../styles/Menu.css";
+import { get } from "http";
 
 // link de react-icons https://react-icons.netlify.com/#/icons/fa
 export default class Menu extends Component {
@@ -32,63 +33,77 @@ export default class Menu extends Component {
       {
         icon: <FaHome />,
         title: "Home",
-        tipo: "/"
+        tipo: "/sesion",
+        className:"home"
       },
       {
         icon: <FaHardHat />,
         title: "Empleados",
-        tipo: "/empleados"
+        tipo: "/empleados",
+        className: localStorage.getItem('adminEmp')  || localStorage.getItem('adminTodo')? "empleados" : "no_empleados"
       },
       {
         icon: <FaGem />,
         title: "Minerales",
-        tipo: "/minerales"
+        tipo: "/minerales",
+        className: localStorage.getItem('adminMin') || localStorage.getItem('adminTodo') ? "minerales" : "no_minerales"
       },
       {
         icon: <FaHammer />,
         title: "Yacimientos",
-        tipo: "/yacimientos"
+        tipo: "/yacimientos",
+        className: localStorage.getItem('adminYac') || localStorage.getItem('adminTodo')? "yacimientos" : "no_yacimientos"
       },
       {
         icon: <FaBuilding />,
         title: "Proyectos",
-        tipo: "/proyectos"
+        tipo: "/proyectos",
+        className: localStorage.getItem('adminPro') || localStorage.getItem('adminTodo') ? "proyectos" : "no_proyectos"
       },
       {
         icon: <FaUser />,
         title: "Clientes",
-        tipo: "/clientes"
+        tipo: "/clientes",
+        className: localStorage.getItem('adminCli') || localStorage.getItem('adminTodo') ? "clientes" : "no_clientes"
+
       },
       {
         icon: <FaUser />,
         title: "Aliados",
-        tipo: "/aliados"
+        tipo: "/aliados",
+        className: localStorage.getItem('adminAli') || localStorage.getItem('adminTodo') ? "aliados" : "no_aliados"
       },
       {
         icon: <FaBoxOpen />,
         title: "Inventario",
-        tipo: "/inventario"
+        tipo: "/inventario",
+        className: localStorage.getItem('adminInv')  || localStorage.getItem('adminTodo')? "inventario" : "no_inventario"
       },
       {
         icon: <FaUserCog />,
         title: "Gestion de usuarios",
-        tipo: "/users"
+        tipo: "/users",
+        className: localStorage.getItem('adminUser')  || localStorage.getItem('adminTodo') ? "users" : "no_users"
       },
       {
         icon: <FaListOl />,
         title: "Gestion de roles",
-        tipo: "/roles"
+        tipo: "/roles",
+        className: localStorage.getItem('adminRol')  || localStorage.getItem('adminTodo') ? "roles" : "no_roles"
       },
       {
         icon: <FaBook />,
         title: "Información Relevante",
-        tipo: "/info"
+        tipo: "/info",
+        className: localStorage.getItem('adminInfo') || localStorage.getItem('adminTodo') ? "info" : "no_info"
       }
     ]
   };
   desplegar = () => {
     this.setState({ isOpen: !this.state.isOpen });
   };
+
+ 
 
   render() {
     return (
@@ -111,7 +126,7 @@ export default class Menu extends Component {
               {this.state.option.map((item, index) => {
                 return (
                   <li key={index}>
-                    <Link to={item.tipo} className="sidenav-links">
+                    <Link to={item.tipo} className={item.className}>
                       <span className="icons">{item.icon}</span>
                       <span>{item.title}</span>
                     </Link>

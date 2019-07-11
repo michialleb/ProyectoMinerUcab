@@ -53,6 +53,9 @@ class ConsultTableProyectos extends Component {
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ etapa: etapa})
     }).then(res => res.json())
+      .then (res=>{
+        this.setState({status: ""})
+      })
     
   }
   modificarStatusFase(id_fase){
