@@ -12,7 +12,7 @@ export default class Roles extends Component {
 
     this.state = {
       personasList: [],
-      rolesList:[]
+      rolesList: []
     };
   }
 
@@ -47,23 +47,11 @@ export default class Roles extends Component {
     };
 
     var crud = {
-      options: ["Gestionar", "Eliminar ", "Modificar"],
+      options: ["Gestionar"],
       content: [
         {
-          form: <FormUsuario personas={personas} roles = {roles} />,
+          form: <FormUsuario personas={personas} roles={roles} />,
           id: 0
-        },
-        {
-          form: "",
-          id: 1
-        },
-        {
-          form: "",
-          id: 2
-        },
-        {
-          form: "",
-          id: 3
         }
       ]
     };

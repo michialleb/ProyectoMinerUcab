@@ -21,7 +21,7 @@ import InfoRelevante from "../entities/InfoRelevante";
 import Usuarios from "../entities/Usuarios";
 import Roles from "../entities/Roles";
 
-/*const PrivateRoute = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
@@ -38,7 +38,7 @@ import Roles from "../entities/Roles";
     }
   />
 );
-*/
+
 
 class Login extends Component {
   render() {

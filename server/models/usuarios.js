@@ -19,7 +19,9 @@ class Usuarios {
   static retrieveUsuariosPorCedula(cedula, callback) {
     console.log("entro en query con cedula: " + cedula);
     db.query(
-      "SELECT usuario,nombre from usuariospersonas where cedula= $1",
+      "SELECT usuario,contraseña, nombre, tipo_rol, id_rol \
+      from usuariospersonas  \
+       where cedula= $1",
       [cedula],
       function(err, res) {
         if (err.error) return callback(err);
@@ -55,18 +57,46 @@ class Usuarios {
     }
   }
 
-  static ingresarUsuario(user,callback) {
-      db.query(
-        "SELECT * FROM usuariospersonas where usuario= $1",
-        [user],
-        function(err, res) {
-          if (err.error) return callback(err);
-          callback(res);
-        }
-      );
-    
+  static update(user, callback) {
+    db.query(
+      "UPDATE usuario set nombre_usuario = $1 , contraseña=$2 , \
+        fk_rol = (select id_rol from rol where tipo_rol = $3) \
+        WHERE nombre_usuario = $4  ",
+      [
+        user.nombre_usuario,
+        user.contraseña,
+        user.rol,
+        user.nombre_usuario_viejo
+      ],
+
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+  static ingresarUsuario(user, callback) {
+    db.query(
+      "SELECT * FROM usuariospersonas where usuario= $1",
+      [user],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+  static delete(id, callback) {
+    console.log("entro en el model con nombre: " + id);
+    db.query(`DELETE FROM usuario where nombre_usuario=$1`, [id], function(
+      err,
+      res
+    ) {
+      if (err.error) return callback(err);
+      callback(res);
+    });
   }
 }
-
 
 module.exports = Usuarios;

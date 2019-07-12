@@ -130,7 +130,7 @@ class Empleados {
 
   static delete(ced, callback) {
     db.query(
-      `DELETE FROM empleado where id_empleado=${ced}`,
+      `DELETE FROM empleado where =${ced}`,
 
       console.log(ced + " de diego"),
       function(err, res) {

@@ -26,6 +26,7 @@ class ConsultTableRol extends Component {
             <tr>
               <th>Tipo de permiso</th>
               <th>Descripcion</th>
+              <th />
             </tr>
 
             {this.state.permisosList.map((per, i) => {
@@ -33,6 +34,10 @@ class ConsultTableRol extends Component {
                 <tr key={i}>
                   <td>{per.nombre_permiso}</td>
                   <td>{per.descripcion_permiso}</td>
+                  <td>
+                    {" "}
+                    <button className="btn_eliminar"> Eliminar </button>
+                  </td>
                 </tr>
               );
             })}
