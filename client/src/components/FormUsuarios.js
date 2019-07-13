@@ -115,6 +115,7 @@ class FormUsuarios extends Component {
                     {user.usuario}
                   </button>
                   <button
+                    key={i}
                     className="btn_eliminar"
                     onClick={function(e) {
                       this.deleteUsuario(i, e);

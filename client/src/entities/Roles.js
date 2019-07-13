@@ -12,7 +12,8 @@ export default class Roles extends Component {
 
     this.state = {
       rolesList: [],
-      permisosList: []
+      permisosList: [],
+      permisosNoAsignados:[]
     };
   }
 
@@ -25,6 +26,7 @@ export default class Roles extends Component {
         this.setState({ permisosList });
       });
   };
+  
 
   getRolesList = () => {
     fetch("/api/roles")
