@@ -16,7 +16,10 @@ class FormUsuarios extends Component {
       contrasena: "",
       fk_empleado: "",
       fk_cliente: "",
-      fk_rol: 0
+      fk_rol: 0,
+      nuevoUsuario: "",
+      nuevaContra: "",
+      nuevoFkRol: ""
       // permisosList:[]
     };
     this.handleChange = this.handleChange.bind(this);
@@ -30,7 +33,8 @@ class FormUsuarios extends Component {
     let value = target.value;
     let name = target.name;
 
-    console.log(value);
+    console.log("el state esta cambiando:" + value);
+
     this.setState({
       [name]: value
     });
@@ -67,6 +71,25 @@ class FormUsuarios extends Component {
       });
   }
 
+  deleteUsuario(i, e) {
+    e.preventDefault();
+    let id = "";
+    this.state.usuariosList.map((user, n) => {
+      if (n == i) {
+        id = user.usuario;
+      }
+    });
+
+    fetch(`/api/usuarios/eliminar/${id}`, { method: "DELETE" })
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+        } else {
+          swal("Usuario eliminado", "Satisfactoriamentes!", "success");
+        }
+      });
+  }
+
   handleGetUsuarios = (cedula, nombre) => {
     console.log("entro en el handel de usuarios con " + cedula);
     fetch(`/api/usuarios/usuario/${cedula}`)
@@ -78,11 +101,32 @@ class FormUsuarios extends Component {
         swal(
           <div>
             <label> Usuarios asociados a {nombre} </label>
-            <ListGroup>
-              {this.state.usuariosList.map(user => {
-                return <ListGroup.Item>{user.usuario}</ListGroup.Item>;
-              })}
-            </ListGroup>
+
+            {this.state.usuariosList.map((user, i) => {
+              return (
+                <>
+                  <button
+                    key={i}
+                    className="btn_Usuarios"
+                    onClick={function(e) {
+                      this.handleModificarUsuario(i, e);
+                    }.bind(this)}
+                  >
+                    {user.usuario}
+                  </button>
+                  <button
+                    key={i}
+                    className="btn_eliminar"
+                    onClick={function(e) {
+                      this.deleteUsuario(i, e);
+                    }.bind(this)}
+                  >
+                    {" "}
+                    eliminar{" "}
+                  </button>
+                </>
+              );
+            })}
           </div>
         );
       });
@@ -161,6 +205,145 @@ class FormUsuarios extends Component {
       </div>
     );
   };
+
+  handleModificarUsuario = (i, e) => {
+    e.preventDefault();
+    //console.log("esta es la key: " + i);
+    //console.log(this.state);
+    let usuario = "";
+    let nombre = "";
+    this.state.usuariosList.map((user, n) => {
+      if (n == i) {
+        nombre = user.nombre;
+
+        this.setState({
+          nombre: user.nombre,
+          nuevoUsuario: user.usuario,
+          nuevaContra: user.contraseña,
+          nuevoFkRol: user.tipo_rol,
+          usuario: user.usuario,
+          contrasena: user.contraseña,
+          fk_rol: user.tipo_rol
+        });
+      }
+    });
+
+    console.log("usuarios buscados en la lista: " + usuario + " " + nombre);
+
+    swal(
+      <div>
+        <div className="form-wrapper">
+          <h5>Modificacion de usuario </h5>
+          <form className="form" noValidate>
+            <div className="firstName">
+              <label htmlFor="firstName">Nombre Persona</label>
+              <input
+                className=""
+                type="text"
+                name="nombre"
+                disabled
+                value={nombre}
+              />
+            </div>
+
+            <div className="secondName">
+              <label htmlFor="secondName">Nombre de usuario</label>
+              <input
+                className=""
+                placeholder={this.state.nuevoUsuario}
+                type="text"
+                name="nuevoUsuario"
+                noValidate
+                onChange={this.handleChange}
+              />
+            </div>
+
+            <div className="secondName">
+              <label htmlFor="secondName">Contraseña</label>
+              <input
+                className=""
+                placeholder={this.state.nuevaContra}
+                type="password"
+                name="nuevaContra"
+                noValidate
+                onChange={this.handleChange}
+              />
+            </div>
+
+            <div className="cargo">
+              <label htmlFor="cargo">Rol: {this.state.nuevoFkRol} </label>
+              <select
+                name="nuevoFkRol"
+                type="number"
+                id="selected"
+                onChange={this.handleChange}
+              >
+                <option />
+                {this.props.roles.map((rol, i) => (
+                  <option value={rol.tipo_rol} key={i}>
+                    {rol.tipo_rol}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="ingresarUsuario">
+              <button
+                onClick={function(e) {
+                  this.handleUpdateUsuario(e);
+                }.bind(this)}
+              >
+                Modificar Usuario
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  };
+
+  handleUpdateUsuario(e) {
+    if (this.state.nuevoUsuario == "")
+      this.setState({ nuevoUsuario: this.state.usuario });
+    if (this.state.nuevaContra == "")
+      this.setState({ nuevaContra: this.state.contrasena });
+    if (this.state.nuevoFkRol == "")
+      this.setState({ nuevoFkRol: this.state.fk_rol });
+
+    console.log("rol: " + this.state.nuevoFkRol);
+    //console.log("contra a pone: " + this.state.contrasena);
+    e.preventDefault();
+    let user = {
+      nombre_persona: this.state.nombre,
+      nombre_usuario_viejo: this.state.usuario,
+      nombre_usuario: this.state.nuevoUsuario,
+      contraseña: this.state.nuevaContra,
+      rol: this.state.nuevoFkRol
+    };
+    fetch(`/api/usuarios/modificar/upd`, {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ user: user })
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          console.log("error es: " + res.error);
+          swal("Datos invalidos", "Intente de nuevo!", "error");
+        } else {
+          swal("Usuario Modificado!", "Satisfactoriamentes!", "success");
+          this.setState({
+            nombre: "",
+            usuario: "",
+            contrasena: "",
+            nuevoUsuario: "",
+            nuevaContra: "",
+            nuevoFkRol: "",
+            fk_rol: 0
+          });
+        }
+      });
+  }
 
   addBotton = () => {
     var personas = [];

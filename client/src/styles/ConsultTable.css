@@ -73,5 +73,76 @@ table#t02 th {
   display:none
 }
 .no_transferencia{
-  display:none
+  display:none;
+}
+.btn_eliminar {
+  height: 10px;
+  border-radius: 13px;
+  background-color: rgb(228, 95, 33);
+  order: none;
+  color: #ffffff;
+  text-align: center;
+  font-size: 15px;
+  margin-top: -10%;
+  margin-left: 65%;
+  width: 30%;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.btn_eliminar:hover {
+  opacity: 100;
+  background: rgb(231, 52, 39);
+  color: rgb(255, 255, 255);
+}
+
+.btn_eliminarPermiso {
+  height: 42px;
+  border-radius: 13px;
+  background-color: rgb(228, 95, 33);
+  order: none;
+  color: #ffffff;
+  text-align: center;
+  font-size: 15px;
+  margin-top: 5%;
+  margin-left: -8%;
+  width: 100%;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.btn_eliminarPermiso:hover {
+  opacity: 100;
+  background: rgb(231, 52, 39);
+  color: rgb(255, 255, 255);
+}
+
+.add {
+  display: block;
+  border-radius: 28px;
+  background-color: rgb(66, 228, 33);
+  order: none;
+  color: #ffffff;
+  margin-top: -50%;
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 30%;
+  margin-left: 350%;
+  height: 45px;
+  width: 45%;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.permisoSelect {
+  display: flex;
+  margin-left: 25%;
+  border-radius: 20px;
+  width: 50%;
+  background-color: rgb(216, 148, 45);
+}
+
+.permisoSelect:hover {
+  background: rgb(235, 87, 61);
+  color: white;
 }

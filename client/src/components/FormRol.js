@@ -67,20 +67,6 @@ class FormRol extends Component {
   }
 
 
-
-  addData = () => {
-    var permisos = [];
-    this.props.permisos.map(per => {
-      let m = {
-        name: per.nombre_permiso,
-        value: per.nombre_permiso
-      };
-      permisos.push(m);
-    });
-
-    return permisos;
-  };
-
   handleChangePermisos(e) {
     e.preventDefault();
     let permisos = this.state.permisoList;
