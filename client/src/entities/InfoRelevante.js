@@ -19,7 +19,7 @@ export default class InfoRelevante extends Component {
 
     this.handleChange = this.handleChange.bind(this);
   }
-
+  //hola
   handleGetEmpleado = (cedula, e) => {
     fetch(`/api/empleados/${cedula}`)
       .then(res => res.json())
