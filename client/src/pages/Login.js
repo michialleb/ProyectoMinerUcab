@@ -22,11 +22,10 @@ import Usuarios from "../entities/Usuarios";
 import Roles from "../entities/Roles";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
- 
   <Route
     {...rest}
     render={props =>
-      props.match.params.id_nombre !== null ? (
+      props.match.params.id_usuario !== null ? (
         <Component {...props} />
       ) : (
         <Redirect
@@ -39,6 +38,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     }
   />
 );
+
 
 class Login extends Component {
   render() {
