@@ -44,10 +44,10 @@ class ActivarProyecto extends Component {
         method: "post",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ horario_emp: horario_emp })
-      }).then(res => res.json());
-
-  
-   
+      }).then(res => res.json())
+      .then(res =>{
+        console.log("fase" + this.state.id_fase);
+      })
   }
 
   handleChangeHorario(e){
@@ -59,47 +59,59 @@ class ActivarProyecto extends Component {
          id=m.id_horario
     });
     this.addHorario(id);
-    
-
-    
-
   }
   handleRegresar(){
     this.setState({configurar: !this.state.configurar, horarios: []});
+    fetch(`/api/fases/get/proyecto/empleados/cargos/${this.state.id_fase}`)
+    .then(res => res.json())
+    .then(res => {
+      this.setState({empleadosList: res.map((r=>r))})})
   }
+
   handleConfigurar(id_cargo, id_empleado){
     let numero=0, cantidad=0;
     this.state.cargosList.map((cl)=>{
-
       if (cl.cargo==id_cargo){
         cantidad=cl.cantidad;
       }
     })
+    console.log(this.state.cargosAgregados);
+    console.log("con id"+ id_cargo)
     this.state.cargosAgregados.map((c)=>{
       if (c==id_cargo){
         numero++;
       }
     });
-    console.log(numero +" -"+ cantidad);
+    console.log("has agregado "+ numero +" y necesitas" + cantidad)
     if (numero<cantidad){
-      let cargo=[];
+      let cargo=this.state.cargosAgregados;
       cargo.push(id_cargo);
       this.setState({configurar: !this.state.configurar, id_cargo:id_cargo, id_empleado: id_empleado, cargosAgregados:cargo});
-      console.log(this.state.id_empleado);
       let empleado_fase={
         id_cargo:id_cargo,
         id_fase:this.state.id_fase,
-        id_empleado: id_empleado
-      }
-      fetch("/api/fases/empleado/fase", {
+        id_empleado: id_empleado,
+        id_status: "Asignado"
+      } 
+      fetch("/api/empleados/actualizar/status", {
         method: "post",
         headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ empleado_fase: empleado_fase })
+        body: JSON.stringify({ empleado: empleado_fase })
       }).then(res => res.json())
+    
         .then(res=>{
-          console.log(res[0].id_empleado_cargo_fase);
-          this.setState({id_empleado_fase: res[0].id_empleado_cargo_fase})
+          fetch("/api/fases/empleado/fase", {
+            method: "post",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({ empleado_fase: empleado_fase })
+          }).then(res => res.json())
+            .then(res=>{
+              this.setState({id_empleado_fase: res[0].id_empleado_cargo_fase})
+            })
         })
+     
+    }else {
+      swal("Ya tienes la cantidad suficiente de empleados", "por este cargo","error");
     }
    
   }
@@ -129,7 +141,7 @@ class ActivarProyecto extends Component {
     return empleados;
   };
   getEmpleadosCargo(e,id_fase){
-    this.setState({id_fase: id_fase});
+    this.setState({id_fase: id_fase, cargosAgregados: []});
     fetch(`/api/fases/get/proyecto/empleados/cargos/${id_fase}`)
     .then(res => res.json())
     .then(res => {
@@ -161,12 +173,35 @@ class ActivarProyecto extends Component {
   }
 
   getFases(id_proyecto){
-    console.log(id_proyecto);
-    fetch(`/api/fases/proyecto/${id_proyecto}`)
+    fetch(`/api/fases/proyecto/${id_proyecto}`) //buscaFases de un proyecto
     .then(res => res.json())
     .then(res => {
-      this.setState({fasesList:res.map((r=>r))});
+      var fasesList= res.map((r=>r));
+      this.setState({fasesList:fasesList});
+      fasesList.map((f)=>{
+        fetch(`/api/maquinaria/maquinariaCantidad/${f.id}`) //busca la maquinaria necesaria para cada fase
+        .then(res => res.json())
+        .then(res=>{
+          var maquinaria= res.map((r=>r));
+          maquinaria.map((m)=>{
+            var i=0;
+            let maqui ={
+              id_maquinaria: m.maquinaria,
+              id_tipo_status:8,
+              id_fase: f.id
+            }
+            for (i=0; i<m.cantidad ; i++){
+              fetch("/api/maquinaria/maquinaria/activa", {
+                method: "post",
+                headers: { "Content-type": "application/json" },
+                body: JSON.stringify({ maqui: maqui })
+              }).then(res => res.json());
 
+              
+            }
+          })
+        })
+      })
     });
   }
   componentDidMount(){

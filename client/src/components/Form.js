@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
 import swal from "sweetalert";
+import ReactPDF from "react-pdf";
+var fs = require("fs");
+var request = require("request");
+
+
 
 class Form extends Component {
   constructor() {
@@ -77,7 +82,9 @@ class Form extends Component {
 
   handleAddEmpleado = e => {
     e.preventDefault();
-    fetch(`/api/empleados/`, {
+ 
+ 
+  fetch(`/api/empleados/`, {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ empleado: this.state })
@@ -91,7 +98,7 @@ class Form extends Component {
           console.log("error es: " + res.error);
           swal("Datos invalidos", "Intente de nuevo!", "error");
         } else swal("Empleado Ingresado!", "Satisfactoriamente!", "success");
-      });
+      }); 
   };
 
   handleSubmit(e) {

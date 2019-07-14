@@ -10,7 +10,7 @@ class ConsultTableEmpleado extends Component {
     this.state = {
       empl: [],
       horarioList: [],
-      status:""
+      status:"",
     };
 
     this.handleGetHorario = this.handleGetHorario.bind(this);
@@ -19,17 +19,26 @@ class ConsultTableEmpleado extends Component {
   }
 
   handleGetHorario = id => {
+    var nombre_f="", n="";
     fetch(`/api/empleados/empl/${id}`)
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         if (res !== []) this.setState({ horarioList: res.map(r => r) });
       })
       .then(res => {
-        if (this.state.horarioList.length!=0){
+        fetch(`/api/empleados/empledo/fase/${id}`)
+        .then(res => res.json())
+        .then(res => {
+           nombre_f= res.map(r => r)
+           nombre_f.map((nom)=>{
+              n=nom.nombre_fase;
+          })
+        if ((this.state.horarioList.length!=0) &&(n!="")){
+
           swal(
             <table id="t02">
-                <label>{" Salario Actual :  "+ this.state.horarioList[0].salario }</label>
+              <label> {"  Fase : " + n}</label>
+              <label>{" Salario Actual :  "+ this.state.horarioList[0].salario }</label>
               <label>Horario del empleado </label>
               <tr>
                 <th>Dia de semana</th>
@@ -51,7 +60,7 @@ class ConsultTableEmpleado extends Component {
         }else {
           swal(<label>El empleado no está asignado a ninguna fase </label>)
         }
-        
+      });
         // this.setState({ selected : !this.state.selected});
       });
     console.log(this.state.horarioList);

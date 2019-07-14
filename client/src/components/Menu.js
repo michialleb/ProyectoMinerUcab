@@ -17,7 +17,7 @@ import LogOut from "./LogOut";
 import { HashRouter as Router, Route, Link, NavLink } from "react-router-dom";
 import MenuCrud from "./MenuCrud";
 import "../styles/Menu.css";
-import { get } from "http";
+
 
 // link de react-icons https://react-icons.netlify.com/#/icons/fa
 export default class Menu extends Component {
@@ -103,7 +103,7 @@ export default class Menu extends Component {
     this.setState({ isOpen: !this.state.isOpen });
   };
 
- 
+  componentDidMount(){ this.setState()  }
 
   render() {
     return (

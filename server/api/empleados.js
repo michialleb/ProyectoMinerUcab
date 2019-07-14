@@ -26,6 +26,14 @@ router.get("/empl/:id", function(req, res) {
   });
 });
 
+router.get("/empledo/fase/:id_empleado", function(req, res) {
+  var id_empleado = req.params.id_empleado;
+  Empleados.retrieveEmpleadoFaseActual(id_empleado, function(err, empleados) {
+    if (err) return res.json(err);
+    return res.json(empleados);
+  });
+});
+
 router.post("/actualizar", function(req, res) {
   var empleado = req.body.empleado;
   Empleados.update(empleado, function(err, result) {

@@ -5,7 +5,7 @@ class Fases {
 
   static retrieveCargoFase(idFase,callback) {
     db.query(
-      "select c.tipo_cargo  as cargo, cf.id_cargo_fase as id\
+      "select c.tipo_cargo  as cargo, cf.id_cargo_fase as id, cf.cantidad as cantidad\
       from cargo c, cargo_fase cf, fase f \
       where f.id_fase=$1\
       and f.id_fase=cf.fk_fase\
@@ -18,7 +18,7 @@ class Fases {
   }
   static retrieveMaquinariaFase(idFase,callback) {
     db.query(
-      " select m.nombre_maquinaria as maquinaria\
+      " select m.nombre_maquinaria as maquinaria, mf.cantidad as cantidad, m.id_maquinaria id\
       from maquinaria m, fase f, maquinaria_fase mf\
       where f.id_fase=$1\
       and   mf.fk_fase=f.id_fase\

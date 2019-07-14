@@ -144,7 +144,7 @@ class CompraAliadoAuto extends Component {
     })
     .then((willDelete) => {
       if (willDelete) {
-        swal("Poof! Your imaginary file has been deleted!", {
+        swal("Bien! Se encontró un yacimiento disponible!", {
           icon: "success",
         });
         this.addCompraAliado();

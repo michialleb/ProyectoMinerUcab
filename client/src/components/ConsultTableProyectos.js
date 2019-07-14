@@ -14,10 +14,12 @@ class ConsultTableProyectos extends Component {
       statusEtapa: [],
       cargosFase: [],
       maquinariaFase:[],
-      status: []
+      status: [],
+      maquinariaActiva: []
     };
     this.handleGetInfo = this.handleGetInfo.bind(this);
     this.handleChangeStatus =this.handleChangeStatus.bind(this);
+    this.handleVerMaquinaria =this.handleVerMaquinaria.bind(this)
   }
 
 
@@ -47,13 +49,13 @@ class ConsultTableProyectos extends Component {
   }
   modificarStatusEtapa(id_etapa){
     let etapa={ id_etapa: id_etapa, id_status: this.state.status}
-    console.log(this.state.status);
     fetch(`/api/status/modificar/status/proyecto/etapa/status/modificar/manual`, {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ etapa: etapa})
     }).then(res => res.json())
       .then (res=>{
+
         this.setState({status: ""})
       })
     
@@ -65,6 +67,7 @@ class ConsultTableProyectos extends Component {
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ fase: fase})
     }).then(res => res.json())
+  // cambiar estatus de empleado a en ejecucion 
   }
   cambiarStatusEtapa(id_etapa){
     swal(
@@ -82,7 +85,61 @@ class ConsultTableProyectos extends Component {
      })
   }
 
-  
+  cambiarStatusEmpleado(id_fase){
+    let fase={
+      id_fase:id_fase,
+      id_status:5
+    }
+    fetch(`/api/status/modificar/status/proyecto/etapa/fase/empleados`, {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ fase: fase})
+    }).then(res => res.json())
+      .then(res=>{
+        console.log("emp"+res);
+        if (res.error)
+        swal2("Error al asignar los empleados!", "Intente de nuevo!", "error");
+        else swal2("La explotación ha iniciado!", "Todo bien", "success");
+      });
+  }
+
+  modificarStatusMaquinaria (id_fase, status){
+    let maqui={
+      id_fase: id_fase,
+      id_status: status
+    }
+    fetch(`/api/maquinaria/update/maquinaria/activa`, {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ maqui: maqui})
+    }).then(res => res.json())
+      .then (res=>{
+        if (res.error)
+        swal2("Error !", "Intente de nuevo!", "error");
+      })
+    
+  }
+  modificarStatusMaquinariaActivaManual(id_fase, id_maquinaria){
+    // no funciona no se por que
+    console.log(id_fase +" " + id_maquinaria);
+    let maqui={
+      id_fase: id_fase,
+      id_status: this.state.status,
+      id_maquinaria: id_maquinaria
+    }
+    fetch(`/api/maquinaria/update/status/maquinaria/activa/manual`, {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ maqui: maqui})
+    }).then(res => res.json())
+      .then (res=>{
+        console.log("este es el res"+ res)
+        if (res.error)
+        swal2("Error !", "Intente de nuevo!", "error");
+        else
+        swal2("Status  Modificado !", "Exitosamente!", "success");
+      })
+  }
   cambiarStatusFase(id_fase, status){
     let st="Status ";
     this.props.status.map((s)=>{
@@ -108,6 +165,21 @@ class ConsultTableProyectos extends Component {
       this.modificarStatusFase(id_fase);
      })
   }
+  cambiarStatusMaquinaria(id_fase, id_maquinaria){
+     swal(
+      <select
+      onChange={this.handleChangeStatus} >
+      <option />
+      {this.props.status.map((s, i) => (
+        <option value={s.nombre_tipo_status} key={i}>
+          {s.nombre_tipo_status}
+        </option>
+      ))}
+    </select>
+     ).then (res=>{
+      this.modificarStatusMaquinariaActivaManual(id_fase, id_maquinaria);
+     })
+  }
 
   handleVerUsuarios(){
     
@@ -118,11 +190,11 @@ class ConsultTableProyectos extends Component {
     .then(res =>{
       this.setState({cargosFase: res.map((r=>r))})
     }).then(res =>{
-      console.log("hola");
         swal(
           <table id="t02">
           <tr>
             <th>Cargos</th> 
+            <th>Cantidad</th>  
             <th></th>  
           </tr>
 
@@ -130,6 +202,7 @@ class ConsultTableProyectos extends Component {
             return (
               <tr key={i}>
                 <td> {cargo.cargo}</td>
+                <td> {cargo.cantidad}</td>
                 <td>
                   <div className="horario">
                   <button   onClick={function(e) {
@@ -145,27 +218,80 @@ class ConsultTableProyectos extends Component {
         )
   })
 }
+
+  handleVerMaquinaria =(id_fase, id_maquinaria)=> {
+    fetch(`/api/maquinaria/maquinaria/activa/fase/${id_fase}/${id_maquinaria}`)
+    .then(res => res.json())
+    .then(res =>{
+      let maquinariaActiva =res.map((r=>r));
+      this.setState({maquinariaActiva: maquinariaActiva})
+        swal(
+          <table id="t02">
+          <tr>
+            <th>Maquinaria</th> 
+            <th>Status</th>  
+            <th></th>  
+          </tr>
+
+          {this.state.maquinariaActiva.map((maquina, i) => {
+            return (
+              <tr key={i}>
+                <td> {maquina.nombre}</td>
+                <td> {maquina.status}</td>
+                <td>
+                  <div className="horario">
+                  <button   onClick={function(e) {
+                       this.cambiarStatusMaquinaria();
+                       }.bind(this)}> Cambiar Status </button> 
+                  </div>
+               </td>
+                   
+              </tr>
+            );
+          })}
+        </table>
+        );
+  });
+}
+
   handleMaquinariaFase=(idFase)=>{
+  var maquinariaFase=[];
   fetch(`/api/fases/get/maquinaria/fase/${idFase}`)
   .then(res =>res.json())
   .then(res =>{
-    this.setState({maquinariaFase: res.map((r=>r))})
+    maquinariaFase=res.map((r=>r));
+    this.setState({maquinariaFase: maquinariaFase})
   }).then (res =>{
-    swal(
-      <table id="t02">
-      <tr>
-        <th>Maquinaria Necesitada</th>  
-      </tr>
-
-      {this.state.maquinariaFase.map((maquinaria, i) => {
-        return (
-          <tr key={i}>
-            <td> {maquinaria.maquinaria}</td>
-          </tr>
-        );
-      })}
-    </table>
-    )
+    if (maquinariaFase.length!=0){
+      swal(
+        <table id="t02">
+        <tr>
+          <th>Maquinaria Necesitada</th>  
+          <th>Cantidad</th>  
+          <th></th>  
+        </tr>
+  
+        {this.state.maquinariaFase.map((maquinaria, i) => {
+          return (
+            <tr key={i}>
+              <td> {maquinaria.maquinaria}</td>
+               <td>{maquinaria.cantidad}</td> 
+               <td> 
+               <div className="horario">
+                    <button   onClick={function(e) {
+                         this.handleVerMaquinaria(idFase, maquinaria.id);
+                         }.bind(this)}> Más detalle </button> 
+                    </div>
+              </td> 
+            </tr>
+          );
+        })}
+      </table>
+      )
+    } else {
+      swal("Esta fase no tiene asignada maquinarias ","", "warning")
+    }
+    
   })
   }
 
@@ -229,24 +355,9 @@ class ConsultTableProyectos extends Component {
       // this.setState({ selected : !this.state.selected});
     });
   }
+ 
 
-  cambiarStatusEmpleado(id_fase){
-    let fase={
-      id_fase:id_fase,
-      id_status:5
-    }
-    fetch(`/api/status/modificar/status/proyecto/etapa/fase/empleados`, {
-      method: "post",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ fase: fase})
-    }).then(res => res.json())
-      .then(res=>{
-        console.log("emp"+res);
-        if (res.error)
-        swal2("Error al asignar los empleados!", "Intente de nuevo!", "error");
-        else swal2("La explotación ha iniciado!", "Todo bien", "success");;
-      });
-  }
+  
   iniciarFase(id_etapa){
     let fase={
       id_etapa: id_etapa,
@@ -258,10 +369,10 @@ class ConsultTableProyectos extends Component {
       body: JSON.stringify({ fase: fase})
     }).then(res => res.json())
       .then(res=>{
-        console.log("fas"+ res)
         if (res.error)
         swal2("Error al iniciar fase!", "Intente de nuevo!", "error");
-        else this.cambiarStatusEmpleado(res[0].id_fase);
+        else {this.cambiarStatusEmpleado(res[0].id_fase)
+              this.modificarStatusMaquinaria (res[0].id_fase, "Ocupada")};
       });
   }
   iniciarEtapa(proyecto){
@@ -319,7 +430,7 @@ class ConsultTableProyectos extends Component {
   
     
   }
- handleIniciar=(id_proyecto, status)=>{
+  handleIniciar=(id_proyecto, status)=>{
  if (status==='Asignado'){
   this.iniciar(id_proyecto);
  } else if (status==='En ejecucion'){
@@ -331,7 +442,7 @@ class ConsultTableProyectos extends Component {
  }
  }
   
- addBotton = proyectos => {
+  addBotton = proyectos => {
     var proyecto = [];
     this.props.proyectos.map(proyec => {
       let p = {

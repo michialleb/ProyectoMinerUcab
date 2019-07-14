@@ -488,18 +488,19 @@ CREATE TABLE Maquinaria_Fase (
 );
 
 alter sequence maquinaria_fase_id_maquinaria_fase_seq restart with 1;
-CREATE TABLE Maquinaria_Activa(
-    id_maquinaria_activa serial,
-    fk_fase integer not null,
-    fk_maquinaria integer not null,
-    fk_tipo_status integer not null,
-     CONSTRAINT fk_fase2_maq_act FOREIGN KEY (fk_fase)
-     REFERENCES fase(id_fase) on delete cascade,
-     CONSTRAINT fk_fase_maq2 FOREIGN KEY (fk_fase)
-     REFERENCES maquinaria(id_maquinaria) on delete cascade ,
-     CONSTRAINT fk_status_maq_act FOREIGN KEY (fk_tipo_status)
-     REFERENCES tipo_status(id_tipo_status)
-);
+create table maquinaria_activa (
+  id_maquinaria_activa serial,
+  fk_maquinaria integer not null,
+  fk_fase integer not null,
+  fk_tipo_status integer not null,
+  constraint pk_maquinaria_activa primary key (id_maquinaria_activa),
+  constraint fk_maquinaria_activa foreign key (fk_maquinaria)
+  references maquinaria (id_maquinaria),
+  constraint fk_maquinaria_activa_fase foreign key (fk_fase)
+  references fase (id_fase),
+  constraint fk_maquinaria_activa_status foreign key (fk_tipo_status)
+  references tipo_status (id_tipo_status)
+)
 alter sequence maquinaria_activa_id_maquinaria_activa_seq restart with 1;
 
 

@@ -321,3 +321,12 @@ input {
 .Pago_no_show{
  display:none;
 }
+
+.btn-report{
+  position: relative;
+}
+.table-report{
+  margin-top: 5%;
+  margin-left: 50%;
+}
+

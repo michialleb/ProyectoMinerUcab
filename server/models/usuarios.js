@@ -8,6 +8,14 @@ class Usuarios {
       callback(res);
     });
   }
+  
+  static retrieveDatosUsuariosView(callback) {
+    db.query("SELECT usuario, contraseña, nombre, id_usuario \
+              FROM usuariospersonas", function(err, res) {
+      if (err.error) return callback(err);
+      callback(res);
+    });
+  }
 
   static retrieveAllPersonas(callback) {
     db.query("SELECT * from personas_sistema", function(err, res) {

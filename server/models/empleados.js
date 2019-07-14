@@ -120,6 +120,23 @@ class Empleados {
     );
   }
 
+  static retrieveEmpleadoFaseActual(id_empleado, callback) {
+    db.query(
+      "select f.nombre_fase  as nombre_fase\
+      from fase f, empleado_fase_cargo efc, cargo_fase fc\
+      where efc.fk_empleado=$1\
+      and fc.id_cargo_fase = efc.fk_cargo_fase\
+      and fc.fk_fase= f.id_fase\
+      and f.fk_tipo_status=$2",
+      [id_empleado, 2],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+
   static insert(empleado, callback) {
     console.log(empleado.nombre + " michi en models");
     if (empleado.nombre == "") empleado.nombre = null;

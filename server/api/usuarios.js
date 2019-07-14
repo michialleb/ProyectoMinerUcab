@@ -17,6 +17,14 @@ router.get("/allPersonas", function(req, res) {
   });
 });
 
+router.get("/all/usuarios/users/passwords", function(req, res) {
+  Usuarios.retrieveDatosUsuariosView(function(err, usuarios) {
+    if (err) return res.json(err);
+    return res.json(usuarios);
+  });
+});
+
+
 router.get("/usuario/:cedula", function(req, res) {
   var cedula = req.params.cedula;
   console.log("entro en el api con la cedula: " + cedula);

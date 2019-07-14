@@ -22,24 +22,7 @@ import Aliados from "../entities/Aliados";
 import Usuarios from "../entities/Usuarios";
 import Roles from "../entities/Roles";
 
-/*const PrivateRoute = ({ component: Component, ...rest }) => (
- 
-  <Route
-    {...rest}
-    render={props =>
-      props.match.params.id_usuario !==null  ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{
-            pathname: "/sign-in",
-            state: { from: props.location }
-          }}
-        />
-      )
-    }
-  />
-);*/
+
 
 class Login extends Component {
   render() {
@@ -58,7 +41,7 @@ class Login extends Component {
             <Route path="/info" component={InfoRelevante} />
             <Route path="/aliados" component={Aliados} />
             <Route path="/sesion" component={Sesion} />
-         
+          
 
             <div className="Login">
               <div className="Login__Aside">

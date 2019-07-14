@@ -4532,3 +4532,18 @@ insert into tipo_pago(tipo,banco) values ('Tarjeta_Credito','banesco'),
 insert into  pago (fecha_pago,monto_total_pagado,fk_compra_cliente,fk_tipo_pago)
 values ('12-12-2012',2000,1,1),('08-12-2008',2000,2,1),('07-07-2012',2000,3,1),('06-12-2012',2000,4,1),
 ('12-12-2012',2000,5,1),('03-03-2012',2000,6,1),('08-08-2013',2000,7,1),('12-12-2012',2000,8,1);*/
+
+create table maquinaria_activa (
+  id_maquinaria_activa serial,
+  fk_maquinaria integer not null,
+  fk_fase integer not null,
+  constraint pk_maquinaria_activa primary key (id_maquinaria_activa),
+  constraint fk_maquinaria_activa foreign key (fk_maquinaria)
+  references maquinaria (id_maquinaria),
+  constraint fk_maquinaria_activa_fase foreign key (fk_fase)
+  references fase (id_fase)
+)
+
+alter sequence maquinaria_activa_id_maquinaria_activa_seq restart with 1;
+
+/*colocar los inserts de maquinaria activa*/

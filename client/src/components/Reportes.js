@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
 import swal from "sweetalert";
+import { MDBListGroup, MDBListGroupItem, MDBContainer,MDBDataTable  } from "mdbreact";
+
 
 class Reportes extends Component {
   constructor() {
@@ -10,25 +12,31 @@ class Reportes extends Component {
     
     };
 
-   this.mostrarMinerales = this.mostrarMinerales.bind(this);
+  this.getReporte1 = this.getReporte1.bind(this);
   }
 
   
-mostrarMinerales(){
- 
-    fetch(`http://localhost:8080/jasperserver/rest_v2/reports/reports/Reportes/ReportePrueba.pdf?ID_MINERAL=4`)
-      .then(res => res.json())
-      .then(res => {
-        console.log("se logro");
-      });
+ getReporte1(){
+  var url = "http://localhost:8080/jasperserver/rest_v2/reports/reports/Reportes/ReporteEm.pdf";
+  window.open(url);
+ }
 
-}
   render() {
     return (
       <>
-         <div className="ingresarUsuario">
-         <button onClick={this.mostrarMinerales}>Minerales</button>
-         </div>
+      <div>
+      <MDBContainer className="table-report">
+           
+           <MDBListGroup style={{ width: "75rem" , padding:0, margin:0 }}>
+           <ul>
+             <button  className ="btn-report" onClick={this.getReporte1}>
+                Empresa Aliada con más compras realizadas
+             </button>
+          </ul>
+          </MDBListGroup>
+       </MDBContainer>
+      </div>
+      
        
       </>
     );
