@@ -57,7 +57,6 @@ class FormUsuarios extends Component {
       .then(res => res.json())
       .then(res => {
         if (res.error) {
-          console.log("error es: " + res.error);
           swal("Datos invalidos", "Intente de nuevo!", "error");
         } else {
           swal("Usuario ingresado!", "Satisfactoriamentes!", "success");
@@ -95,6 +94,7 @@ class FormUsuarios extends Component {
     fetch(`/api/usuarios/usuario/${cedula}`)
       .then(res => res.json())
       .then(res => {
+        console.log(res);
         if (res !== []) this.setState({ usuariosList: res.map(r => r) });
       })
       .then(res => {

@@ -25,7 +25,7 @@ class Usuarios {
   }
 
   static retrieveUsuariosPorCedula(cedula, callback) {
-    console.log("entro en query con cedula: " + cedula);
+   
     db.query(
       "SELECT usuario,contraseña, nombre, tipo_rol, id_rol \
       from usuariospersonas  \
