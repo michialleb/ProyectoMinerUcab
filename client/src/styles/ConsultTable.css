@@ -56,6 +56,27 @@ table#t02 th {
   color: #ffffff;
   text-align: center;
   font-size: 15px;
+  margin-top: -10%;
+  margin-left: 65%;
+  width: 30%;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.btn_eliminar:hover {
+  opacity: 100;
+  background: rgb(231, 52, 39);
+  color: rgb(255, 255, 255);
+}
+
+.btn_eliminarPermiso {
+  height: 42px;
+  border-radius: 13px;
+  background-color: rgb(228, 95, 33);
+  order: none;
+  color: #ffffff;
+  text-align: center;
+  font-size: 15px;
   margin-top: 5%;
   margin-left: -8%;
   width: 100%;
@@ -63,7 +84,7 @@ table#t02 th {
   cursor: pointer;
 }
 
-.btn_eliminar:hover {
+.btn_eliminarPermiso:hover {
   opacity: 100;
   background: rgb(231, 52, 39);
   color: rgb(255, 255, 255);

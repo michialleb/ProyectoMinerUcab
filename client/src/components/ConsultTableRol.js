@@ -174,7 +174,7 @@ class ConsultTableRol extends Component {
                   <td>
                     {" "}
                     <button
-                      className="btn_eliminar"
+                      className="btn_eliminarPermiso"
                       onClick={function(e) {
                         this.deletePermiso(i, e, id_rol);
                       }.bind(this)}
@@ -221,9 +221,9 @@ class ConsultTableRol extends Component {
 
   UpdateRol = rol => {
     this.setState({
-      tipo_rol:rol.tipo_rol,
-      id_rol : rol.id_rol
-    })
+      tipo_rol: rol.tipo_rol,
+      id_rol: rol.id_rol
+    });
     swal(
       <div className="form-wrapper">
         <h5>Ingresar Rol </h5>
@@ -272,8 +272,8 @@ class ConsultTableRol extends Component {
     e.preventDefault();
     let rol = {
       tipo_rol: this.state.nuevo_rol,
-      descripcion_rol : this.state.nueva_descripcion,
-      id_rol :this.state.id_rol
+      descripcion_rol: this.state.nueva_descripcion,
+      id_rol: this.state.id_rol
     };
 
     fetch(`/api/roles/modificar`, {
@@ -289,11 +289,11 @@ class ConsultTableRol extends Component {
         } else {
           swal("Rol Modificado!", "Satisfactoriamente!", "success");
           this.setState({
-        nuevo_rol:"",
-        nueva_descripcion:"",
-        tipo_rol:"",
-        descripcion_rol:"",
-        id_rol: 0
+            nuevo_rol: "",
+            nueva_descripcion: "",
+            tipo_rol: "",
+            descripcion_rol: "",
+            id_rol: 0
           });
         }
       });
