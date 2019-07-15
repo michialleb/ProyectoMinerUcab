@@ -12,12 +12,13 @@ export default class InfoRelevante extends Component {
       fi: "",
       ff: "",
       empleado: "",
-      cedulaBuscada: "",
+      cedulaBuscada: 0,
       nombreEmpleado: "",
       año: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.generarReporte =this.generarReporte.bind(this);
   }
   //hola
   handleGetEmpleado = (cedula, e) => {
@@ -50,7 +51,58 @@ export default class InfoRelevante extends Component {
       [name]: value
     });
   }
+  generarReporte (e, numeroReporte){
+    var datei="";
+    var datef="";
+    var dateStringi="", dateStringf="";
+    e.preventDefault();
+    switch (numeroReporte) {
+      case 1 : 
+        console.log("hola");
+        window.open("http://localhost:8080/jasperserver/rest_v2/reports/reports/Reportes/ReporteEm.pdf");
+        break; 
+      case 5:
+          datei = new Date(this.state.fi);
+           dateStringi = new Date(datei.getTime() - (datei.getTimezoneOffset() * 60000 ))
+                              .toISOString()
+                              .split("T")[0];
+          
+          datef = new Date(this.state.ff);
+          dateStringf= new Date(datef.getTime() - (datef.getTimezoneOffset() * 60000 ))
+                             .toISOString()
+                              .split("T")[0];
+                              window.open(`http://localhost:8080/jasperserver/rest_v2/reports/reports/Reportes/Reporte5.pdf?FECHA_INICIO=${dateStringi}&FECHA_FINAL=${dateStringf}`);
+          break;
+      case 7:
+           datei = new Date(this.state.fi);
+           dateStringi = new Date(datei.getTime() - (datei.getTimezoneOffset() * 60000 ))
+                              .toISOString()
+                              .split("T")[0];
+          
+          datef = new Date(this.state.ff);
+          dateStringf= new Date(datef.getTime() - (datef.getTimezoneOffset() * 60000 ))
+                             .toISOString()
+                              .split("T")[0];
+  
+         window.open(`http://localhost:8080/jasperserver/rest_v2/reports/reports/Reportes/Reporte7.pdf?FECHA_INICIO=${dateStringi}&FECHA_FINAL=${dateStringf}&ID_EMPLEADO=${this.state.cedulaBuscada}`);
+          break;
+          case 10:
+              datei = new Date(this.state.fi);
+              dateStringi = new Date(datei.getTime() - (datei.getTimezoneOffset() * 60000 ))
+                                  .toISOString()
+                                  .split("T")[0];
+              
+              datef = new Date(this.state.ff);
+              dateStringf= new Date(datef.getTime() - (datef.getTimezoneOffset() * 60000 ))
+                                 .toISOString()
+                                  .split("T")[0];
 
+                                  window.open(`http://localhost:8080/jasperserver/rest_v2/reports/reports/Reportes/Reporte10.pdf?FECHA_INICIO=${dateStringi}&FECHA_FINAL=${dateStringf}`);
+            break;
+      default:
+        break;
+    }
+  }
   render() {
     var crud = {
       options: [
@@ -73,7 +125,7 @@ export default class InfoRelevante extends Component {
                 <h3> EMPRESA ALIADA A LA QUE SE REALIZARON MAS COMPRAS </h3>
                 <form className="form" noValidate>
                   <div className="ingresarUsuario">
-                    <button>Generar reporte</button>
+                    <button onClick={(function (e) {this.generarReporte(e,1)}).bind(this)}>Generar reporte</button>
                   </div>
                 </form>
               </div>
@@ -235,7 +287,7 @@ export default class InfoRelevante extends Component {
                     />
                   </div>
                   <div className="ingresarUsuario">
-                    <button>Generar reporte</button>
+                    <button  onClick={(function (e) {this.generarReporte(e,5)}).bind(this)}>Generar reporte</button>
                   </div>
                 </form>
               </div>
@@ -350,7 +402,7 @@ export default class InfoRelevante extends Component {
                     />
                   </div>
                   <div className="ingresarUsuario">
-                    <button>Generar reporte</button>
+                    <button onClick={(function (e) {this.generarReporte(e,7)}).bind(this)}>Generar reporte</button>
                   </div>
                 </form>
               </div>
@@ -455,7 +507,7 @@ export default class InfoRelevante extends Component {
                     />
                   </div>
                   <div className="ingresarUsuario">
-                    <button>Generar reporte</button>
+                    <button onClick={(function (e) {this.generarReporte(e,10)}).bind(this)}>Generar reporte</button>
                   </div>
                 </form>
               </div>

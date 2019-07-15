@@ -299,13 +299,14 @@ create table Fase (
    costo_fase   real not null,
    fecha_inicio_fase date ,
    fecha_final_fase date ,
+   fecha_estimada_fase date,
    fk_etapa_explotacion integer,
    fk_tipo_status INTEGER NOT NULL,
    constraint pk_fase primary key (id_fase),
    constraint fk_exploracion_etapa foreign key (fk_etapa_explotacion)
    references etapa_explotacion  (id_etapa) on delete cascade ,
    CONSTRAINT fk_tipo_status_fase FOREIGN KEY(fk_tipo_status)
-     REFERENCES tipo_status(id_tipo_status)
+   REFERENCES tipo_status(id_tipo_status)
 );
 
 alter sequence fase_id_fase_seq restart with 1;

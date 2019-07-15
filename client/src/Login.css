@@ -151,6 +151,19 @@
   padding-bottom: 5px;
 }
 
+.FormField__Link_btn{
+  background-color: rgb(169, 86, 18);
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  border-bottom: 1.5px solid orange;
+  padding-bottom: 5px;
+  border-left: 1.5px solid  rgb(169, 86, 18);
+  border-top: 1.5px solid  rgb(169, 86, 18);
+  border-right: 1.5px solid  rgb(169, 86, 18);
+  margin-right: 10px;
+}
+
 .FormField__CheckboxLabel {
   color: orangered;
   font-size: 0.9em;

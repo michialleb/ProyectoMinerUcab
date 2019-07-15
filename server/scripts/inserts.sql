@@ -1,3 +1,4 @@
+/*Debemos agregar a los inserts de fase lo de fecha estimada*/
 insert into tipo_status (nombre_tipo_status)
 values('Activo'),
 ('En ejecucion'),

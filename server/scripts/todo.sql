@@ -2923,6 +2923,7 @@ create table Fase (
    costo_fase   real not null,
    fecha_inicio_fase date ,
    fecha_final_fase date ,
+   fecha_estimada_fase date,
    fk_etapa_explotacion integer,
    fk_tipo_status INTEGER NOT NULL,
    constraint pk_fase primary key (id_fase),

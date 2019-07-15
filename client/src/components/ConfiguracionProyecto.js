@@ -16,7 +16,8 @@ class ConfiguracionProyecto extends Component {
       costoFase: 0,
       duracionFase: 0,
       id_etapa: 0,
-      id_fase: 0
+      id_fase: 0,
+      fecha_estimada_fase:""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleIngresarFase = this.handleIngresarFase.bind(this);
@@ -57,10 +58,11 @@ class ConfiguracionProyecto extends Component {
       });
   }
 
-  addFase(nombreFase, duracionFase, costoFase) {
+  addFase(nombreFase, duracionFase, costoFase, fecha_estimada_fase) {
     let fase = {
       nombreFase: nombreFase,
       duracion: duracionFase,
+      fecha_estimada_fase: fecha_estimada_fase,
       costo: costoFase,
       numeroFase: this.state.numeroFase,
       nombreProyecto: this.props.nombreProyecto,
@@ -133,13 +135,13 @@ class ConfiguracionProyecto extends Component {
   }
 
  
-  handleIngresarCargos(e, nombreFase, duracionFase, costoFase) {
+  handleIngresarCargos(e, nombreFase, duracionFase, costoFase, fecha_estimada_fase) {
     e.preventDefault();
     var costo = parseInt(costoFase) + parseInt(this.state.costoFase);
     console.log("costo " + costo);
     let duracion = parseInt(duracionFase) + parseInt(this.state.duracionFase);
     let numero = this.state.numeroFase + 1; // cuenta las fases que se van agregando
-    this.addFase(nombreFase, duracionFase, costoFase);
+    this.addFase(nombreFase, duracionFase, costoFase, fecha_estimada_fase);
 
     console.log("costo nuevo =" + this.state.costoFase);
     this.setState({

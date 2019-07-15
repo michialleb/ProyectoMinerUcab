@@ -36,15 +36,31 @@ from ((SELECT  M.nombre_mineral  AS nom, P.nombre_presentacion  AS pre, (dca.Can
 			
 order by inventario.fecha asc
 								  
+/* 5 Fases y Etapas de los proyectos que no han iniciado en un periodo de tiempo*/
+select et.nombre_etapa , x.nombre_fase, x.numero_fase
+from etapa_explotacion et,
+(select f.nombre_fase as nombre_fase, f.numero_fase as numero_fase, f.id_fase id_fase, f.fk_etapa_explotacion id_etapa
+from fase f, etapa_explotacion e, proyecto p
+where e.fk_proyecto = p.id_proyecto
+and   f.fk_etapa_explotacion = e.id_etapa
+and exists ( select fa.id_fase
+		     from fase fa, etapa_explotacion et
+		     where  et.id_etapa = fa.fk_etapa_explotacion
+		     and   	et.fk_proyecto = p.id_proyecto
+		     and  	fa.fecha_inicio_fase is null
+		     and  	fa.numero_fase =1
+		     and    et.numero_etapa =1
+		     and    fa.fecha_inicio_estimada between '2015-04-09' and '2015-05-20')) as x
+where et.id_etapa = x.id_etapa
+order by et.fk_proyecto, et.numero_etapa, x.numero_fase
 
-/* 7.- Total de proyectos en los que trabajó un empleado por período de tiempo.*/
-select nombre_empleado nombre , apellido_empleado apellido, y.cantidadProyecto cantidadProyectos
-from empleado e,(select x.empleado,count(distinct x.proyecto) as cantidadProyecto
-				 from (select distinct efc.fk_empleado as empleado, (select fk_proyecto from etapa_explotacion where id_etapa=f.fk_etapa_explotacion) as proyecto
-	  					 from cargo_fase cf, fase f, empleado_fase_cargo efc
-     					 where f.id_fase=cf.fk_fase
-						 and f.fecha_inicio_fase between '05-2-2023' and '05-21-2023'
- 					     and efc.fk_cargo_fase =cf.id_cargo_fase) as x, empleado e
-				 where  49 in (x.empleado)
-				 group by x.empleado) as y
-where id_empleado=49;
+
+/*7 - Total de proyectos en los que trabajó un empleado por período de tiempo.*/
+select count(distinct et.fk_proyecto)
+from empleado e, empleado_fase_cargo efc, fase f, etapa_explotacion et, cargo_fase cf
+where e.cedula_identidad = 99952
+and e.id_empleado = efc.fk_empleado
+and efc.fk_cargo_fase= cf.id_cargo_fase
+and cf.fk_fase = f.id_fase
+and f.fk_etapa_explotacion =et.id_etapa
+and f.fecha_inicio_fase between '1993-01-01' and '2028-01-01';
