@@ -26,7 +26,7 @@ export default class Yacimientos extends Component {
       .then(res => {
         var yacimientoUnico = res.map(r => r);
         this.setState({ yacimientoUnico });
-      })
+      });
   };
 
   getLugarList = () => {
@@ -46,13 +46,13 @@ export default class Yacimientos extends Component {
       });
   };
   getYacimientosList = () => {
-
-    console.log("entro en el yacimiento list")
+    console.log("entro en el yacimiento list");
     fetch("/api/yacimientos")
       .then(res => res.json())
       .then(res => {
         var yacimientosList = res.map(r => r);
         this.setState({ yacimientosList });
+        console.log(yacimientosList);
       });
   };
   getCargosList = () => {
