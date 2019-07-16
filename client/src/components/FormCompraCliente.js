@@ -5,38 +5,31 @@ import { FaSistrix } from "react-icons/fa";
 import Factura from "./Factura";
 import ActivarProyecto from "./ActivarProyecto";
 import CompraAliadoAuto from "./CompraAliadoAuto";
-import Services from "./Services";
 import swal from "sweetalert";
 
-function ChangeCompra(props) {
-  const mineralDisponible = true;
-  if (mineralDisponible) {
-    return <Services />;
-  }
-  return null;
-}
+
 
 class FormCompraCliente extends Component {
   constructor() {
     super();
     this.state = {
       nombrePersona: "",
-      apellidoPersona: "",
-      nombreEmpresa: "",
-      documento: "",
-      rif: "",
-      ci: "",
-      cantidad: "",
-      mineral: "",
-      presentacion: "",
-      mineral2: "",
-      nombreMineral: [],
-      tipoCliente: "",
-      presentaciones: [],
-      inventario: [],
-      mineralDisponible: false,
-      procesarCompra: false,
-      mineralNoDisponible: false
+     apellidoPersona: "",
+     nombreEmpresa: "",
+     documento: 0,
+     rif: "",
+     ci: "",
+     cantidad: 0,
+     mineral: "",
+     presentacion: "",
+     mineral2: "",
+     nombreMineral: [],
+     tipoCliente: "",
+     presentaciones: [],
+     inventario: [],
+     procesarCompra: false,
+    mineralNoDisponible: false,
+    mineralDisponible: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -49,7 +42,7 @@ class FormCompraCliente extends Component {
   handleChange(e) {
     e.preventDefault();
     let target = e.target;
-    let value = target.type === "checkbox" ? target.checked : target.value;
+    let value = target.value;
     let name = target.name;
 
     this.setState({
@@ -78,10 +71,10 @@ class FormCompraCliente extends Component {
           if (inv.mineral == this.state.mineral) {
             if (inv.presentacion == this.state.presentacion) {
               let c = inv.cantidad - this.state.cantidad;
+              console.log(c);
               if (c > 0) {
-                this.setState({
-                  mineralDisponible: true
-                });
+               console.log("entro");
+               this.setState({mineralDisponible:true})
               }
             }
           }
@@ -116,15 +109,16 @@ class FormCompraCliente extends Component {
 
   handleGetCliente(e) {
     e.preventDefault();
-    console.log(this.state.tipoCliente);
-    if ((this.state.tipoCliente = "Persona")) {
-      this.props.getPersonaCedula(this.state.documento);
+    if (this.state.tipoCliente == "Persona") {
       this.props.personas.map(persona => {
-        this.setState({
-          ci: persona.cedula,
-          nombrePersona: persona.nombre,
-          apellidoPersona: persona.apellido
-        });
+        if (persona.cedula == this.state.documento){
+          console.log("entro en el if ")
+          this.setState({
+            ci: persona.cedula,
+            nombrePersona: persona.nombre,
+            apellidoPersona: persona.apellido
+          });
+        }
       });
     } else {
       this.props.getEmpresaRif(this.state.documento);
@@ -140,7 +134,6 @@ class FormCompraCliente extends Component {
   getIdMineral = mineral => {
     let id = 0;
     this.props.minerales.map(m => {
-      console.log("m: " + m.nombre_mineral);
       if (m.nombre_mineral == mineral) {
         id = m.id_mineral;
       }
@@ -149,6 +142,20 @@ class FormCompraCliente extends Component {
     return id;
   };
 
+  getIdMineralPresentacion = (presentacion,mineral) => {
+    let id = 0;
+    console.log("p");
+    this.props.minerales_presentacion.map(m => {
+   
+      if ((m.nombre_presentacion == presentacion) && (m.nombre_mineral ==  mineral) ){
+        console.log(m.nombre_presentacion +" es"+presentacion );
+        console.log(m.nombre_mineral +" es"+mineral );
+        id = m.id_mineral_presentacion;
+      }
+    });
+    console.log(id);
+    return id;
+  };
   render() {
     return (
       <>
@@ -157,6 +164,9 @@ class FormCompraCliente extends Component {
             this.state.procesarCompra ? "wrapper-c_no_show" : "wrapper-c"
           }
         >
+          <div> 
+            <h4>{}</h4>
+          </div>
           <div className="titulo">
             <form className="form" noValidate>
               <h5 id="ordenTitulo">Orden de Compra</h5>
@@ -200,13 +210,6 @@ class FormCompraCliente extends Component {
                   </span>
                 </div>
 
-                <div id="empresa" className="secondName">
-                  <label htmlFor="empresa">Nombre Empresa:</label>
-                  <input value={this.state.nombreEmpresa} disabled />
-                  <label htmlFor="rig">Rif:</label>
-                  <input value={this.state.rif} disabled />
-                </div>
-
                 <div id="persona" className="firstName">
                   <label htmlFor="persona">Nombre Persona:</label>
                   <input value={this.state.nombrePersona} disabled />
@@ -214,6 +217,13 @@ class FormCompraCliente extends Component {
                   <input value={this.state.apellidoPersona} disabled />
                   <label htmlFor="ci">Cedula:</label>
                   <input value={this.state.ci} disabled />
+                </div>
+
+                <div id="empresa" className="secondName">
+                  <label htmlFor="empresa">Nombre Empresa:</label>
+                  <input value={this.state.nombreEmpresa} disabled />
+                  <label htmlFor="ci">Rif:</label>
+                  <input value={this.state.rif} disabled />
                 </div>
               </div>
 
@@ -295,12 +305,21 @@ class FormCompraCliente extends Component {
         </div>
 
         <div>
-          {this.state.mineralDisponible ? <Factura /> : null}
+          {this.state.mineralDisponible ? <Factura  id_mineral_presentacion={this.getIdMineralPresentacion(this.state.presentacion,this.state.mineral)} 
+                                                    nombre_persona= {this.state.nombrePersona}
+                                                    id_mineral={this.getIdMineral(this.state.mineral)}
+                                                    apellido_persona ={this.state.apellidoPersona}
+                                                    cantidad={this.state.cantidad}
+                                                    cliente={this.state.ci}
+                                                    
+          /> : null}
 
           {this.state.mineralNoDisponible ? (
             <CompraAliadoAuto
+              id_mineral_presentacion={this.getIdMineralPresentacion(this.state.presentacion,this.state.mineral)} 
               id_mineral={this.getIdMineral(this.state.mineral)}
               cantidad={this.state.cantidad}
+              cliente={this.state.ci}
             />
           ) : null}
         </div>

@@ -9,6 +9,23 @@ router.get("/", function(req, res) {
     return res.json(proyectos);
   });
 });
+router.get("/etapa/fase/:id_proyecto", function(req, res) {
+  var id_proyecto=req.params.id_proyecto;
+  Proyecto.retrieveEtapaFase(id_proyecto,function(err, proyectos) {
+    if (err) return res.json(err);
+    return res.json(proyectos);
+  });
+});
+
+router.get("/buscar/proyecto/mineral/:obj", function(req, res) {
+ 
+  var obj=req.params.obj;
+  console.log("en api" + obj)
+  Proyecto.buscarProyecto(obj,function(err, proyecto) {
+    if (err) return res.json(err);
+    return res.json(proyecto);
+  });
+});
 
 router.post("/", function(req, res) {
   var proyecto = req.body.proyecto;
@@ -18,6 +35,15 @@ router.post("/", function(req, res) {
     return res.json(result);
   });
   
+});
+
+router.post("/cambiarStatus", function(req, res) {
+  var proyecto = req.body.proyecto;
+  console.log("cambiando el status del proyecto"+proyecto.id_proyecto)
+  Proyecto.updateProyecto(proyecto, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
 });
 
 module.exports = router;

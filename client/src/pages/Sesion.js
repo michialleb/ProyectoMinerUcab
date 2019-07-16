@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import {
-  HashRouter as Router,
-  Route,
-  Link,
-  NavLink,
-  Switch
-} from "react-router-dom";
 import Menu from "../components/Menu";
 import Banner from "../components/Banner";
+
 class Sesion extends Component {
+  constructor(){
+    super();
+    this.state={
+    }
+   }
+
+
   render() {
     var crud = {
       options: [""],
@@ -16,8 +17,8 @@ class Sesion extends Component {
         {
           form:  <Banner
           banner="welcome"
-          title={this.props.match.params.nombre}
-          subtitle="" />,
+          title={"Bienvenido a MinerUcab "}
+          subtitle={localStorage.getItem('nombre_usuario')} />,
           id: 0
         }
       ]

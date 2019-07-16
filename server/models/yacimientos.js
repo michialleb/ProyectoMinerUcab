@@ -77,7 +77,6 @@ class Yacimientos {
     );
   }
 
-  // SI NO SIRVE EL DELETE YACIMIENTO CAMBIAR FORMA DE PARAMETROS ``
   static delete(nombre, callback) {
     console.log(nombre + " tete");
     db.query(

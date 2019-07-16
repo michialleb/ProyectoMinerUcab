@@ -18,26 +18,10 @@ import Clientes from "../entities/Clientes";
 import Proyectos from "../entities/Proyectos";
 import Minerales from "../entities/Minerales";
 import InfoRelevante from "../entities/InfoRelevante";
+import Aliados from "../entities/Aliados";
 import Usuarios from "../entities/Usuarios";
 import Roles from "../entities/Roles";
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      props.match.params.id_usuario !== null ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{
-            pathname: "/sign-in",
-            state: { from: props.location }
-          }}
-        />
-      )
-    }
-  />
-);
 
 
 class Login extends Component {
@@ -55,10 +39,9 @@ class Login extends Component {
             <Route path="/proyectos" component={Proyectos} />
             <Route path="/minerales" component={Minerales} />
             <Route path="/info" component={InfoRelevante} />
-            <PrivateRoute
-              path="/protected/:id_usuario/:cedula/:rol/:nombre"
-              component={Sesion}
-            />
+            <Route path="/aliados" component={Aliados} />
+            <Route path="/sesion" component={Sesion} />
+          
 
             <div className="Login">
               <div className="Login__Aside">

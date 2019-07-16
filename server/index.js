@@ -13,6 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
 app.use("/api/inventario", require("./api/inventario"));
 app.use("/api/usuarios", require("./api/usuarios"));
 app.use("/api/empleados", require("./api/empleados"));
@@ -29,6 +30,8 @@ app.use("/api/maquinaria", require("./api/maquinaria"));
 app.use("/api/proyecto", require("./api/proyecto"));
 app.use("/api/etapas", require("./api/etapas"));
 app.use("/api/fases", require("./api/fases"));
+app.use("/api/horarios", require("./api/horarios"));
+app.use("/api/tipo_pago", require("./api/tipo_pago"));
 app.use("/api/roles", require("./api/roles"));
 
 

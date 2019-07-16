@@ -17,6 +17,14 @@ router.get("/allPersonas", function(req, res) {
   });
 });
 
+router.get("/all/usuarios/users/passwords", function(req, res) {
+  Usuarios.retrieveDatosUsuariosView(function(err, usuarios) {
+    if (err) return res.json(err);
+    return res.json(usuarios);
+  });
+});
+
+
 router.get("/usuario/:cedula", function(req, res) {
   var cedula = req.params.cedula;
   console.log("entro en el api con la cedula: " + cedula);
@@ -40,6 +48,15 @@ router.post("/insertar", function(req, res) {
   Usuarios.insert(user, function(err, result) {
     if (err) return res.json(err);
     return res.json(result);
+  });
+});
+
+router.get("/log/in/permisos/:id_usuario", function(req, res) {
+  var id_usuario = req.params.id_usuario;
+
+  Usuarios.retrievePermisosUsuario(id_usuario,  function(err, usuarios) {
+    if (err) return res.json(err);
+    return res.json(usuarios);
   });
 });
 

@@ -52,7 +52,7 @@ class Minerales {
 
   static retrievePresentaciones(callback) {
     db.query(
-      "select p.nombre_presentacion, m.nombre_mineral  \
+      "select p.nombre_presentacion, m.nombre_mineral ,mp.id_mineral_presentacion \
       from presentacion p, mineral m, mineral_presentacion mp\
       where mp.fk_mineral = m.id_mineral\
       and mp.fk_presentacion= p.id_presentacion",

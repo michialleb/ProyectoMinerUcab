@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import Sesion from "./Sesion";
+import { isThisHour } from "date-fns";
 
 class SignInForm extends Component {
   constructor() {
@@ -9,19 +10,15 @@ class SignInForm extends Component {
     this.state = {
       email: "",
       password: "",
-      id_usuario: 5,
-      nombre: "",
-      tipo_rol: "",
-      cedula: 0,
-      ing: true,
-      resp: ""
+      usuariosLogin:[],
+      authen:false
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.ingresar = this.ingresar.bind(this);
+  //  this.handleSubmit = this.handleSubmit.bind(this);
+   
   }
-
+ 
   handleChange(e) {
     let target = e.target;
     let value = target.type === "checkbox" ? target.checked : target.value;
@@ -33,45 +30,69 @@ class SignInForm extends Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
-
+  //  e.preventDefault();
+    localStorage.setItem('user', this.state.email);
+    localStorage.setItem('password', this.state.password);
     console.log("The form was submitted with the following data:");
-    console.log(this.state);
   }
 
-  ingresar(e) {
-    e.preventDefault();
-    var nombre_usuario = this.state.email;
-    fetch(`/api/usuarios/log/in/${nombre_usuario}`)
-      .then(res => res.json())
-      .then(res => {
-        console.log(res);
-        if (res[0].contraseña != this.state.password) {
-          res[0].id_usuario = null;
-        }
-        this.setState({
-          id_usuario: res[0].id_usuario,
-          nombre: res[0].nombre,
-          tipo_rol: res[0].tipo_rol,
-          cedula: res[0].cedula
-        });
-        this.forceUpdate();
+  isAuthenticated(e){
+    var autenticar=this.state.authen;
+   this.state.usuariosLogin.map((users)=>{
+     if (users.usuario == localStorage.getItem('user')){
+       if (users.contraseña ==  parseInt(localStorage.getItem('password'))){
+          autenticar=this.getPermisos(users.id_usuario, users.nombre);
+       }
+     }
+   })
+
+  return autenticar;
+  }
+  
+  getPermisos (id_usuario, nombre){
+    fetch(`/api/usuarios/log/in/permisos/${id_usuario}`)
+    .then(res => res.json())
+    .then(res => {
+      var permisos = res.map((r => r)) ;
+      permisos.map((p)=>{
+        localStorage.setItem(p.nombre_permiso,JSON.stringify(p.nombre_permiso));
+        localStorage.setItem('id_usuario', id_usuario);
+        localStorage.setItem('nombre_usuario', nombre);
+
       })
-      .then(res => {});
+    
+    });
+    return true;
   }
 
+  getUsuarios (){
+    fetch("/api/usuarios/all/usuarios/users/passwords")
+    .then(res=> res.json())
+    .then(res=>{
+      if (res.error) console.log("error al obtener  usuarios");
+      else {
+           var l=res.map((r=>r));
+           this.setState({usuariosLogin : l})}   
+    })
+  }
+  
+  componentDidMount (){
+    this.getUsuarios();
+  }
   render() {
+    const isAlreayAuthenticared = this.isAuthenticated();
     return (
       <>
-        <div className="FormCenter">
+      <div >
+        {  isAlreayAuthenticared  ? <Redirect to='/sesion' /> : (
+          <div className="FormCenter">
           <form
-            onSubmit={this.handleSubmit}
+            onSubmit={this.handleSubmit.bind(this)}
             className="FormFields"
-            onSubmit={this.handleSubmit}
           >
             <div className="FormField">
               <label className="FormField__Label" htmlFor="email">
-                Correo Electronico
+                Usuario
               </label>
               <input
                 type="text"
@@ -100,23 +121,19 @@ class SignInForm extends Component {
             </div>
 
             <div className="FormField">
-              <button
-                className="FormField__Button mr-20"
-                onClick={this.ingresar}
-              >
-                <Link to={`/protected/${this.state.id_usuario}/7/6/6`}>
-                  Iniciar Sesion
-                </Link>
-              </button>
+              <button type="submit" className="FormField__Link_btn" > Iniciar Sesion </button>
               <Link to="/" className="FormField__Link">
                 Crear cuenta
               </Link>
             </div>
           </form>
         </div>
+        )}
+      </div>
       </>
     );
   }
 }
 
 export default SignInForm;
+

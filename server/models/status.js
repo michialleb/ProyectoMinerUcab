@@ -10,5 +10,115 @@ class Status {
       callback(res);
     });
   }
+  static updateCompraAliado(compra, callback) {
+    db.query(
+      "UPDATE compra_aliado set fk_tipo_status=$1 \
+       where id_compra_aliado=$2",
+      [
+        compra.id_status,
+        compra.id_compra, 
+      ],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+  static updateCompraCliente(compra, callback) {
+    db.query(
+      "UPDATE compra_cliente set fk_tipo_status=$1 \
+       where id_compra_cliente=$2",
+      [
+        compra.id_status,
+        compra.id_compra, 
+      ],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+  static updateStatusYacimiento(yacimiento, callback) {
+    db.query(
+      "UPDATE yacimiento set fk_tipo_status=$1 \
+       where id_yacimiento=$2",
+      [
+        yacimiento.id_status,
+        yacimiento.id_yacimiento, 
+      ],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+  static updateStatusEtapaUno(proyecto, callback) {
+    db.query(
+      "UPDATE etapa_explotacion set fk_tipo_status=$1 \
+       where fk_proyecto=$2 and numero_etapa=1 returning id_etapa",
+      [
+        proyecto.id_status,
+        proyecto.id_proyecto
+      ],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+  static updateStatusEtapa(etapa, callback) {
+    db.query(
+      "UPDATE etapa_explotacion set fk_tipo_status=(select id_tipo_status \
+                                                    from tipo_status \
+                                                    where nombre_tipo_status=$1) \
+       where id_etapa=$2",
+      [
+        etapa.id_status,
+       etapa.id_etapa
+      ],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+ 
+  static updateStatusFaseUno(fase, callback) {
+    db.query(
+      "UPDATE fase set fk_tipo_status=$1 \
+       where fk_etapa_explotacion=$2 and numero_fase=1 returning id_fase",
+      [
+        fase.id_status,
+        fase.id_etapa
+      ],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+  static updateStatusEmpleados(fase, callback) {
+    console.log("cambiando");
+    db.query(
+      "update empleado set fk_tipo_status=$1 where id_empleado in (select fk_empleado\
+        from empleado_fase_cargo \
+        where fk_cargo_fase in (select id_cargo_fase\
+                   from cargo_fase\
+                   where fk_fase=$2))",
+      [
+        fase.id_status,
+        fase.id_fase
+      ],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
 }
 module.exports = Status;

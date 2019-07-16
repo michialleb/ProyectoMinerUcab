@@ -17,10 +17,19 @@ export default class Clientes extends Component {
       lugarList: [],
       personaList: [],
       empresaList: [],
-      presentaciones: []
+      presentaciones: [],
+      statusList:[]
     };
   }
 
+  handleStatusList = () => {
+    fetch("/api/status/buscar")
+      .then(res => res.json())
+      .then(res => {
+        var statusList = res.map(r => r);
+        this.setState({ statusList });
+      });
+  };
   handleGetPersonaCedula = cedula => {
     fetch(`/api/clientes/${cedula}`)
       .then(res => res.json())
@@ -73,7 +82,7 @@ export default class Clientes extends Component {
   };
 
   getPresentaciones = () => {
-    console.log("holaa");
+  
     fetch(`/api/minerales/present/minerales`)
       .then(res => res.json())
       .then(res => {
@@ -81,9 +90,6 @@ export default class Clientes extends Component {
         var presentaciones = res.map(r => r);
         this.setState({ presentaciones });
       });
-    console.log(
-      "estas son las presentaciones aaa " + this.state.presentaciones
-    );
   };
   componentDidMount() {
     this.getMineralesList();
@@ -91,6 +97,7 @@ export default class Clientes extends Component {
     this.getEmpresaList();
     this.getPersonaList();
     this.getPresentaciones();
+    this.handleStatusList();
   }
   render() {
     var minerales = this.state.mineralesList;
@@ -118,7 +125,7 @@ export default class Clientes extends Component {
           id: 0
         },
         {
-          form: <ConsultarCliente personas={personas} empresas={empresas} />,
+          form: <ConsultarCliente status={this.state.statusList} personas={personas} empresas={empresas} />,
           id: 1
         },
         {

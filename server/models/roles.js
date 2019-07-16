@@ -108,4 +108,5 @@ class Roles {
     });
   }
 }
+
 module.exports = Roles;

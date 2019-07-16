@@ -45,6 +45,49 @@ class Clientes {
       }
     );
   }
+  static AgregarProyectoCompraCliente(proyecto, callback) {
+    db.query(
+      "insert into compra_cliente_proyecto (fk_compra_cliente, fk_proyecto) \
+      values ($1, (select p.id_proyecto \
+        from proyecto p, mineral_yacimiento my, yacimiento y\
+        where p.fk_yacimiento = y.id_yacimiento\
+        and my.fk_yacimiento =y.id_yacimiento\
+        and my.cantidad>=$2\
+        and my.fk_mineral= $3\
+        and y.fk_tipo_status=7 limit 1)) returning fk_proyecto",
+      [proyecto.compra_cliente,
+      proyecto.cantidad,
+      proyecto.id_mineral
+      ],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    )
+  }
+// recuerda rela parcial parcial compra cliente y proyecto
+  static CompraClientePersona(compra, callback) {
+    var f= new Date;
+    var Fecha=f.getMonth()+'-'+f.getDate()+'-'+f.getFullYear();
+    db.query(
+      "insert into compra_cliente (cantidad, fecha_compra,\
+      monto_total_compra, fk_persona, fk_tipo_status,fk_mineral_presentacion) \
+      values ($1, $2, $3, (select id_cliente\
+                           from persona \
+                           where cedula_identidad = $4), $5, $6) returning id_compra_cliente,fecha_compra;",
+      [compra.cantidad,
+      Fecha,
+      compra.monto,
+      compra.cliente,
+      compra.status,
+      compra.id_mineral_presentacion
+      ],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    )
+  }
 
   static retrieveEmpresa(callback) {
     db.query(
@@ -131,13 +174,14 @@ class Clientes {
 
   static retrieveCompraCliente(id_cliente, callback) {
     db.query(
-      "select m.nombre_mineral as mineral, p.nombre_presentacion as presentacion,\
-       c.cantidad as cantidad, c.monto_total_compra as total,  c.fecha_compra as fecha\
-     from mineral m, presentacion p, mineral_presentacion mp, compra_cliente c \
-     where (c.fk_persona = $1 or c.fk_empresa =$1) \
-     and  c.fk_mineral_presentacion  = mp.id_mineral_presentacion \
-     and mp.fk_mineral = m.id_mineral \
-     and mp.fk_presentacion = p.id_presentacion",
+      "select c.id_compra_cliente as id, m.nombre_mineral as mineral, p.nombre_presentacion as presentacion,\
+      c.cantidad as cantidad, c.monto_total_compra as total,  c.fecha_compra as fecha,\
+    (select s.nombre_tipo_status from tipo_status  s where s.id_tipo_status=c.fk_tipo_status) as status\
+    from mineral m, presentacion p, mineral_presentacion mp, compra_cliente c \
+    where (c.fk_persona = $1) \
+    and  c.fk_mineral_presentacion  = mp.id_mineral_presentacion \
+    and mp.fk_mineral = m.id_mineral \
+    and mp.fk_presentacion = p.id_presentacion",
       [id_cliente],
       function(err, res) {
         if (err.error) return callback(err);
@@ -148,8 +192,9 @@ class Clientes {
 
   static retrieveCompraClienteEmpresa(id_cliente, callback) {
     db.query(
-      "select m.nombre_mineral as mineral, p.nombre_presentacion as presentacion, \
-      c.cantidad as cantidad, c.monto_total_compra as total, c.fecha_compra as fecha\
+      "select c.id_compra_cliente as id, m.nombre_mineral as mineral, p.nombre_presentacion as presentacion, \
+      c.cantidad as cantidad, c.monto_total_compra as total, c.fecha_compra as fecha,\
+      (select s.nombre_tipo_status from tipo_status  s where s.id_tipo_status=c.fk_tipo_status) as status\
      from mineral m, presentacion p, mineral_presentacion mp, compra_cliente c \
      where (c.fk_empresa = $1) \
      and  c.fk_mineral_presentacion  = mp.id_mineral_presentacion \
@@ -224,6 +269,20 @@ class Clientes {
         empresa.correo,
         empresa.rifBuscado
       ],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+  static retrieveMineralPresentacion(id_mineral_presentacion, callback) {
+    db.query(
+      "select mp.costo as costo , m.nombre_mineral as mineral, p.nombre_presentacion as presentacion\
+      from mineral_presentacion mp, mineral m, presentacion p \
+      where mp.id_mineral_presentacion=$1 \
+      and mp.fk_mineral = m.id_mineral \
+      and mp.fk_presentacion = p.id_presentacion", 
+      [id_mineral_presentacion],
       function(err, res) {
         if (err.error) return callback(err);
         callback(res);

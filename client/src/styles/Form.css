@@ -242,6 +242,21 @@ input {
   letter-spacing: 1px;
   margin-bottom: 0.25em;
 }
+.horario2{
+  padding:5px;
+}
+.horario2 button{
+  background-color: orange;
+  color: #333;
+  border-radius: 0.5rem;
+  width: 100%;
+  margin-top: 1em;
+  padding: 8px 8px;
+  font-size: 0.2em;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 0.25em;
+}
 .ingresarUsuario button {
   background-color: orange;
   color: #fff;
@@ -344,6 +359,18 @@ input {
   height: 60px;
   width: 40%;
 }
+.Pago_no_show{
+ display:none;
+}
+
+.btn-report{
+  position: relative;
+}
+.table-report{
+  margin-top: 5%;
+  margin-left: 50%;
+}
+
 
 .btn_Usuarios {
   display: flex;

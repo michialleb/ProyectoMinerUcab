@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
 
-import { MDBDataTable, MDBBtn } from "mdbreact";
+import { MDBDataTable} from "mdbreact";
 
 class ConsultTableInventario extends Component {
   constructor() {
@@ -31,7 +31,7 @@ class ConsultTableInventario extends Component {
           width: 200
         }
       ],
-      rows: this.props.minerales
+      rows: this.props.inventario
     };
     return (
       <>

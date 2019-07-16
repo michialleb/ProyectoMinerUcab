@@ -47,7 +47,34 @@ table#t02 th {
   margin-top: 10px;
   font-size: 15px;
 }
-
+.menu_fase{
+  background-color: orange;
+  width: 100%;
+}
+.tabla_no_show{
+  display:none;
+}
+.horarioEmp_no{
+ display: none;
+}
+.horarioEmp{
+  margin-top: 50px;
+}
+.no_empleados{
+ display: none;
+}
+.no_credito{
+  display:none
+}
+.no_credito{
+  display:none;
+}
+.no_debito{
+  display:none
+}
+.no_transferencia{
+  display:none;
+}
 .btn_eliminar {
   height: 10px;
   border-radius: 13px;

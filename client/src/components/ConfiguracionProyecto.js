@@ -16,7 +16,8 @@ class ConfiguracionProyecto extends Component {
       costoFase: 0,
       duracionFase: 0,
       id_etapa: 0,
-      id_fase: 0
+      id_fase: 0,
+      fecha_estimada_fase:""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleIngresarFase = this.handleIngresarFase.bind(this);
@@ -57,10 +58,11 @@ class ConfiguracionProyecto extends Component {
       });
   }
 
-  addFase(nombreFase, duracionFase, costoFase) {
+  addFase(nombreFase, duracionFase, costoFase, fecha_estimada_fase) {
     let fase = {
       nombreFase: nombreFase,
       duracion: duracionFase,
+      fecha_estimada_fase: fecha_estimada_fase,
       costo: costoFase,
       numeroFase: this.state.numeroFase,
       nombreProyecto: this.props.nombreProyecto,
@@ -77,27 +79,30 @@ class ConfiguracionProyecto extends Component {
         this.setState({ id_fase: res[0].id_fase });
       });
   }
-  sumarCostoAFase(costo) {
+ /* sumarCostoAFase(costo) {
     let costoFase = parseInt(this.state.costoFase) + parseInt(costo);
     this.setState({ costoFase: costoFase });
     console.log(this.state.costoFase);
-  }
-  addCargos(cargos) {
-    cargos.map((cargo, i) => {
-      let cargoFase = {
-        cantidad: cargo.cantidad,
-        costo: cargo.costo,
-        id_cargo: cargo.id_cargo,
-        numero_etapa: this.state.numeroEtapa - 1,
-        numero_fase: this.state.numeroFase - 1,
-        nombre_proyecto: this.props.nombreProyecto
-      };
-      fetch("/api/cargos/cargoFase", {
-        method: "post",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ cargoFase: cargoFase })
-      }).then(res => res.json());
-    });
+  }*/
+ 
+ 
+  addCargos (cargos){
+      cargos.map((cargo,i)=>{
+        let cargoFase={
+            cantidad: cargo.cantidad,
+            costo: parseInt(cargo.costo),
+            id_cargo: cargo.id_cargo,
+            numero_etapa: (this.state.numeroEtapa -1),
+            numero_fase: (this.state.numeroFase-1),
+            nombre_proyecto:this.props.nombreProyecto
+        }
+        fetch("/api/cargos/cargoFase", {
+            method: "post",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({ cargoFase:  cargoFase})
+          }).then(res => res.json());  
+      });
+     
   }
 
   addMaquinaria(maquinaria) {
@@ -129,20 +134,15 @@ class ConfiguracionProyecto extends Component {
     document.getElementById("form_fase").style.display = "block";
   }
 
-  sumarCostoAFase = () => {
-    this.setState(prevState => ({
-      costoFase: prevState.costoFase + 1
-    }));
-  };
-  handleIngresarCargos(e, nombreFase, duracionFase, costoFase) {
+ 
+  handleIngresarCargos(e, nombreFase, duracionFase, costoFase, fecha_estimada_fase) {
     e.preventDefault();
     var costo = parseInt(costoFase) + parseInt(this.state.costoFase);
-    console.log("costo " + costo);
     let duracion = parseInt(duracionFase) + parseInt(this.state.duracionFase);
     let numero = this.state.numeroFase + 1; // cuenta las fases que se van agregando
-    this.addFase(nombreFase, duracionFase, costoFase);
-    this.sumarCostoAFase();
-    console.log("costo nuevo =" + this.state.costoFase);
+    this.addFase(nombreFase, duracionFase, costoFase, fecha_estimada_fase);
+
+ //   console.log("costo nuevo =" + this.state.costoFase);
     this.setState({
       numeroFase: numero,
       costoFase: costo,
@@ -169,11 +169,21 @@ class ConfiguracionProyecto extends Component {
     document.getElementById("form_etapa").style.display = "block";
     document.getElementById("form_maquinaria").style.display = "none";
   }
-  handleIngresarMaquinaria(e, cargos) {
+  sumarCostoCargo(){
+    fetch(`/api/fases/:${this.state.id_fase}`, {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ id: this.state.id_fase })
+    }).then(res => res.json());
+  }
+
+  handleIngresarMaquinaria(e, cargos){
     e.preventDefault();
     this.addCargos(cargos);
-    document.getElementById("form_maquinaria").style.display = "block";
-    document.getElementById("form_cargos").style.display = "none";
+    this.sumarCostoCargo();
+    document.getElementById("form_maquinaria").style.display="block";
+    document.getElementById("form_cargos").style.display="none";
+    
   }
   handleAceptarCambiosMaquinaria(e, maquinaria) {
     this.addMaquinaria(maquinaria);

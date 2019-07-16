@@ -356,13 +356,6 @@ CREATE TABLE Compra_cliente_proyecto(
 );
       
 
-create table Tipo_Pago(
-    id_tipo_pago serial,
-    tipo varchar (30) not null,
-    banco varchar(50) not null,
-    constraint pk_id_tipo_pago primary key (id_tipo_pago),
-    constraint  tipo_pago check (tipo in ('Transferencia','Tarjeta_Credito','Tarjeta_Debito'))
-);
 
  CREATE TABLE pago (
      id_pago SERIAL,

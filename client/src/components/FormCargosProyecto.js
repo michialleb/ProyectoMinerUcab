@@ -19,6 +19,8 @@ class FormCargosProyecto extends Component {
     this.onDelete = this.onDelete.bind(this);
   }
 
+ 
+
   handleChange(e) {
     let target = e.target;
     let value = target.value;

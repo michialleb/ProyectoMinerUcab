@@ -49,6 +49,17 @@ router.get("/empresa/:rif", function(req, res) {
   });
 });
 
+router.get("/factura/compra/cliente/getInfo/:id_mineral_presentacion", function(req, res) {
+
+  var id_mineral_presentacion = req.params.id_mineral_presentacion;
+  Clientes.retrieveMineralPresentacion(id_mineral_presentacion, function(err, mineral) {
+    if (err) return res.json(err);
+    return res.json(mineral);
+  });
+});
+
+
+
 router.post("/", function(req, res) {
   var cliente = req.body.cliente;
   Clientes.insertPersona(cliente, function(err, result) {
@@ -60,6 +71,21 @@ router.post("/", function(req, res) {
 router.post("/empresas", function(req, res) {
   var empresa = req.body.empresa;
   Clientes.insertEmpresa(empresa, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
+router.post("/compra/persona", function(req, res) {
+  var compra = req.body.compra;
+  Clientes.CompraClientePersona(compra, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
+
+router.post("/proyecto/compra/persona", function(req, res) {
+  var proyecto = req.body.proyecto;
+  Clientes.AgregarProyectoCompraCliente(proyecto, function(err, result) {
     if (err) return res.json(err);
     return res.json(result);
   });

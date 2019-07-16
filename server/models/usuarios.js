@@ -8,6 +8,14 @@ class Usuarios {
       callback(res);
     });
   }
+  
+  static retrieveDatosUsuariosView(callback) {
+    db.query("SELECT usuario, contraseña, nombre, id_usuario \
+              FROM usuariospersonas", function(err, res) {
+      if (err.error) return callback(err);
+      callback(res);
+    });
+  }
 
   static retrieveAllPersonas(callback) {
     db.query("SELECT * from personas_sistema", function(err, res) {
@@ -17,7 +25,7 @@ class Usuarios {
   }
 
   static retrieveUsuariosPorCedula(cedula, callback) {
-    console.log("entro en query con cedula: " + cedula);
+   
     db.query(
       "SELECT usuario,contraseña, nombre, tipo_rol, id_rol \
       from usuariospersonas  \
@@ -31,6 +39,7 @@ class Usuarios {
   }
 
   static insert(user, callback) {
+    if (user.nombre_usuario == "") user.nombre_usuario=null;
     var tipo = user.nombre_persona.split([":"], [1]);
     if (tipo == "Cliente") {
       db.query(
@@ -75,6 +84,23 @@ class Usuarios {
       }
     );
   }
+
+  static retrievePermisosUsuario(id_usuario, callback) {
+    db.query(
+      "select p.nombre_permiso  as nombre_permiso\
+      from permiso p, permiso_rol mp, usuario u \
+      where u.id_usuario =$1\
+      and	  mp.fk_rol = u.fk_rol\
+      and   mp.fk_permiso = p.id_permiso",
+      [id_usuario],
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+  
+
 
   static ingresarUsuario(user, callback) {
     db.query(

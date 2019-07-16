@@ -8,12 +8,12 @@ class FormFases extends Component {
     this.state = {
        nombreFase:"",
        duracionFase:"",
-       costoFase: ""
+       costoFase: "", 
+       estimada: ""
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    
-   
   }
   
   handleChange(e) {
@@ -61,9 +61,21 @@ class FormFases extends Component {
                       value={this.state.costoFase}
                       onChange={this.handleChange}></input>
               </div>
+              <div className="nacimiento">
+                <label htmlFor="nacimiento">Fecha estimada de inicio</label>
+                <input
+                  className=""
+                  placeholder="xx/yy/zz"
+                  type="date"
+                  name="estimada"
+                  noValidate
+                  value={this.state.estimada}
+                  onChange={this.handleChange}
+                />
+              </div>
               <div className="ingresarUsuario">
                 <button type="submit" 
-                       onClick={(function (e) {this.props.handleIngresarCargos(e,this.state.nombreFase,this.state.duracionFase,this.state.costoFase)}).bind(this)}>
+                       onClick={(function (e) {this.props.handleIngresarCargos(e,this.state.nombreFase,this.state.duracionFase,this.state.costoFase, this.state.estimada)}).bind(this)}>
                       Agregar cargos
                 </button>
               </div>

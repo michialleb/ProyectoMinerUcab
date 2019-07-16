@@ -2172,6 +2172,10 @@ values ('Atapuerca  ',200,null,200000,1,1,4),
 ('Con carbon 2',200, null, 210,2,98,7),
 ('Con carbon 3', 200, null, 210,1,99,8),
 ('Con carbon 3',200, null, 210,2,99,8);
+<<<<<<< HEAD
+=======
+
+>>>>>>> Steph
 /*Cargo*/
 
 insert into cargo(tipo_cargo,salario_empleado)
@@ -2194,7 +2198,7 @@ values ('Geologo',1000),
 ('Consultor',1000);
 
 insert into fase(numero_fase,nombre_fase,duracion_fase,costo_fase,
-				fecha_inicio_fase,fk_etapa_explotacion,
+				fecha_inicio_estimada,fk_etapa_explotacion,
 				fk_tipo_status)
 values 
 (1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',1,4),
@@ -2207,7 +2211,7 @@ values
 (6,'Analisis',10,30000,'04-15-2019',2,4),
 (7,'Preparacion de informe',10,30000,'05-05-2019',2,4),
 
-(1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',3,4),
+(1,'Recopilacion y analisis de informacion',100,100000,'01-04-2019',3,4),
 (2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',3,4),
 (1,'Restitucion topografica',20,30000,'01-05-2019',4,4),
 (2,'Fotointerpretacion',20,30000,'01-25-2019',4,4),
@@ -2253,7 +2257,7 @@ values
 (2,'Fotointerpretacion',20,30000,'01-25-2019',12,4),
 (3,'Cartografia geologica',20,30000,'02-15-2019',12,4),
 (4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',12,4),
-(5,'Perforaciones exploratorias',10,30000,'03-25-2019',12,4),
+(5,'Perforaciones exploratorias',10,30000,'03-25-2019',12,4),'04-05-2018',
 (6,'Analisis',10,30000,'04-15-2019',12,4),
 (7,'Preparacion de informe',10,30000,'05-05-2019',12,4),
 
@@ -2279,13 +2283,13 @@ values
 
 (1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',17,4),
 (2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',17,4),
-(1,'Restitucion topografica',20,30000,'01-05-2019',18,4),
-(2,'Fotointerpretacion',20,30000,'01-25-2019',18,4),
-(3,'Cartografia geologica',20,30000,'02-15-2019',18,4),
-(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',18,4),
-(5,'Perforaciones exploratorias',10,30000,'03-25-2019',18,4),
-(6,'Analisis',10,30000,'04-15-2019',18,4),
-(7,'Preparacion de informe',10,30000,'05-05-2019',18,4),
+(1,'Restitucion topografica',20,30000,'01-05-2019',18,4,),
+(2,'Fotointerpretacion',20,30000,'01-25-2019',18,4,),
+(3,'Cartografia geologica',20,30000,'02-15-2019',18,4,),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',18,4,),
+(5,'Perforaciones exploratorias',10,30000,'03-25-2019',18,4,),
+(6,'Analisis',10,30000,'04-15-2019',18,4,),
+(7,'Preparacion de informe',10,30000,'05-05-2019',18,4,),
 
 (1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',19,4),
 (2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',19,4),
@@ -2366,7 +2370,7 @@ values
 (5,'Perforaciones exploratorias',10,30000,'03-25-2019',34,4),
 (6,'Analisis',10,30000,'04-15-2019',34,4),
 (7,'Preparacion de informe',10,30000,'05-05-2019',34,4),
-
+/*****************/
 (1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',35,4),
 (2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',35,4),
 (1,'Restitucion topografica',20,30000,'01-05-2019',36,4),
@@ -3078,85 +3082,129 @@ values
 (6,'Analisis',10,30000,'04-15-2019',176,4),
 (7,'Preparacion de informe',10,30000,'05-05-2019',176,4),
 /*FASES DE PROYECTOS ACTIVOSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS*/
-(1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',177,3),
-(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',177,3),
-(1,'Restitucion topografica',20,30000,'01-05-2019',178,3),
-(2,'Fotointerpretacion',20,30000,'01-25-2019',178,3),
-(3,'Cartografia geologica',20,30000,'02-15-2019',178,3),
-(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',178,3),
-(5,'Perforaciones exploratorias',10,30000,'03-25-2019',178,3),
-(6,'Analisis',10,30000,'04-15-2019',178,3),
-(7,'Preparacion de informe',10,30000,'05-05-2019',178,3),
+insert into fase(numero_fase,nombre_fase,duracion_fase,costo_fase,
+				fecha_inicio_estimada,fk_etapa_explotacion,
+				fk_tipo_status,fecha_inicio_fase,fecha_final_Fase)
+values 
+(1,'Recopilacion y analisis de informacion',10,100000,'04-05-2018',177,3,'04-05-2018','04-15-2018'),
+(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',10,100000,'05-10-18',177,3,'05-10-18','05-23-18'),
+(1,'Restitucion topografica',20,30000,'01-05-2019',178,3,'01-05-2019','02-10-2019'),
+(2,'Fotointerpretacion',10,30000,'02-13-2019',178,3,'02-13-2019','02-23-2019'),
+(3,'Cartografia geologica',2,30000,'02-24-2019',178,3,'02-24-2019','02-26-2019'),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',178,3,'03-05-2019','03-15-2019'),
+(5,'Perforaciones exploratorias',5,30000,'03-25-2019',178,3,'03-25-2019','03-30-2019'),
+(6,'Analisis',8,30000,'04-15-2019',178,3,'04-15-2019','04-23-2019'),
+(7,'Preparacion de informe',10,30000,'05-05-2019',178,3,'05-05-2019','05-15-2019'),
 
-(1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',179,3),
-(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',179,3),
-(1,'Restitucion topografica',20,30000,'01-05-2019',180,3),
-(2,'Fotointerpretacion',20,30000,'01-25-2019',180,3),
-(3,'Cartografia geologica',20,30000,'02-15-2019',180,3),
-(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',180,3),
-(5,'Perforaciones exploratorias',10,30000,'03-25-2019',180,3),
-(6,'Analisis',10,30000,'04-15-2019',180,3),
-(7,'Preparacion de informe',10,30000,'05-05-2019',180,3),
+(1,'Recopilacion y analisis de informacion',23,100000,'04-05-2018',179,3,'04-05-2018','04-28-2018'),
+(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',10,100000,'05-10-18',179,3,'05-10-2018','05-20-2018'),
+(1,'Restitucion topografica',13,30000,'01-05-2019',180,3,'01-05-2019','01-18-2019'),
+(2,'Fotointerpretacion',3,30000,'01-25-2019',180,3,'01-28-2019'),
+(3,'Cartografia geologica',4,30000,'02-15-2019',180,3,'02-15-2019','02-19-2019'),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',180,3,'03-05-2019','03-30-2019'),
+(5,'Perforaciones exploratorias',4,30000,'03-01-2019',180,3,'03-01-2019','03-28-2019'),
+(6,'Analisis',6,30000,'04-15-2019',180,3,'04-15-2019','04-21-2019'),
+(7,'Preparacion de informe',10,30000,'05-05-2019',180,3,'05-05-2019','05-15-2019'),
 
-(1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',181,3),
-(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',181,3),
-(1,'Restitucion topografica',20,30000,'01-05-2019',182,3),
-(2,'Fotointerpretacion',20,30000,'01-25-2019',182,3),
-(3,'Cartografia geologica',20,30000,'02-15-2019',182,3),
-(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',182,3),
-(5,'Perforaciones exploratorias',10,30000,'03-25-2019',182,3),
-(6,'Analisis',10,30000,'04-15-2019',182,3),
-(7,'Preparacion de informe',10,30000,'05-05-2019',182,3),
+(1,'Recopilacion y analisis de informacion',12,100000,'04-05-2018',181,3,'04-05-2018','04-17-2018'),
+(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',10,100000,'05-10-18',181,3,'05-10-18','05-20-18'),
+(1,'Restitucion topografica',13,30000,'01-05-2019',182,3,'01-05-2019','01-20-2019'),
+(2,'Fotointerpretacion'2,30000,'01-25-2019',182,3,'01-25-2019','01-27-2019'),
+(3,'Cartografia geologica',6,30000,'02-15-2019',182,3,'02-15-2019','02-21-2019'),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',182,3,'03-05-2019','03-15-2019'),
+(5,'Perforaciones exploratorias',1,30000,'03-25-2019',182,3,'03-25-2019','03-26-2019'),
+(6,'Analisis',5,30000,'04-15-2019',182,3,'04-15-2019','04-20-2019'),
+(7,'Preparacion de informe',10,30000,'05-05-2019',182,3,'05-05-2019','05-15-2019'),
 
-(1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',183,3),
-(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',183,3),
-(1,'Restitucion topografica',20,30000,'01-05-2019',184,3),
-(2,'Fotointerpretacion',20,30000,'01-25-2019',184,3),
-(3,'Cartografia geologica',20,30000,'02-15-2019',184,3),
-(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',184,3),
-(5,'Perforaciones exploratorias',10,30000,'03-25-2019',184,3),
-(6,'Analisis',10,30000,'04-15-2019',184,3),
-(7,'Preparacion de informe',10,30000,'05-05-2019',184,3),
+(1,'Recopilacion y analisis de informacion',11,100000,'04-05-2018',183,3,'04-05-2018','04-16-2018'),
+(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',6,100000,'05-10-18',183,3,'05-10-18','05-16-18'),
+(1,'Restitucion topografica',20,30000,'01-05-2019',184,3,'01-05-2019','01-25-2019'),
+(2,'Fotointerpretacion',3,30000,'01-25-2019',184,3,'01-25-2019','01-28-2019'),
+(3,'Cartografia geologica',5,30000,'02-15-2019',184,3,'02-15-2019','02-20-2019'),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',184,3,'03-05-2019','03-15-2019'),
+(5,'Perforaciones exploratorias',10,30000,'03-25-2019',184,3,'03-25-2019','04-20-2019'),
+(6,'Analisis',4,30000,'04-15-2019',184,3,'04-15-2019','04-19-2019'),
+(7,'Preparacion de informe',6,30000,'05-05-2019',184,3,'05-05-2019','05-11-2019'),
 
-(1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',185,3),
-(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',185,3),
-(1,'Restitucion topografica',20,30000,'01-05-2019',186,3),
-(2,'Fotointerpretacion',20,30000,'01-25-2019',186,3),
-(3,'Cartografia geologica',20,30000,'02-15-2019',186,3),
-(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',186,3),
-(5,'Perforaciones exploratorias',10,30000,'03-25-2019',186,3),
-(6,'Analisis',10,30000,'04-15-2019',186,3),
-(7,'Preparacion de informe',10,30000,'05-05-2019',186,3),
+(1,'Recopilacion y analisis de informacion',5,100000,'04-05-2018',185,3,'04-05-2018','04-10-2018'),
+(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',4,100000,'05-10-18',185,3,'05-10-18','05-14-18'),
+(1,'Restitucion topografica',20,30000,'06-05-2019',186,3,'06-05-2019','06-25-2019'),
+(2,'Fotointerpretacion',2,30000,'07-25-2019',186,3,'07-25-2019','07-27-2019'),
+(3,'Cartografia geologica',4,30000,'08-15-2019',186,3,'08-15-2019','08-19-2019'),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'09-05-2019',186,3,'09-05-2019','09-15-2019'),
+(5,'Perforaciones exploratorias',2,30000,'09-25-2019',186,3,'09-25-2019','09-30-2019'),
+(6,'Analisis',3,30000,'10-15-2019',186,3,'10-15-2019','10-18-2019'),
+(7,'Preparacion de informe',5,30000,'05-05-2019',186,3,'05-05-2019','05-10-2019'),
 
-(1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',187,3),
-(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',187,3),
-(1,'Restitucion topografica',20,30000,'01-05-2019',188,3),
-(2,'Fotointerpretacion',20,30000,'01-25-2019',188,3),
-(3,'Cartografia geologica',20,30000,'02-15-2019',188,3),
-(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',188,3),
-(5,'Perforaciones exploratorias',10,30000,'03-25-2019',188,3),
-(6,'Analisis',10,30000,'04-15-2019',188,3),
-(7,'Preparacion de informe',10,30000,'05-05-2019',188,3),
+(1,'Recopilacion y analisis de informacion',20,100000,'04-05-2019',187,3,'04-05-2019','04-25-2019'),
+(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',20,100000,'05-10-19',187,3,'05-10-19','05-30-19'),
+(1,'Restitucion topografica',20,30000,'01-05-2019',188,3,'01-05-2019','01-25-2019'),
+(2,'Fotointerpretacion',2,30000,'08-25-2019',188,3,'08-25-2019','08-27-2019'),
+(3,'Cartografia geologica',6,30000,'08-15-2019',188,3,'08-15-2019','08-21-2019'),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'09-05-2019',188,3,'09-05-2019','09-15-2019'),
+(5,'Perforaciones exploratorias',4,30000,'09-25-2019',188,3,'09-25-2019','09-29-2019'),
+(6,'Analisis',10,30000,'10-15-2019',188,3,'10-15-2019','10-25-2019'),
+(7,'Preparacion de informe',3,30000,'10-25-2019',188,3,'10-25-2019','10-28-2019'),
 
-(1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',189,3),
-(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',189,3),
-(1,'Restitucion topografica',20,30000,'01-05-2019',190,3),
-(2,'Fotointerpretacion',20,30000,'01-25-2019',190,3),
-(3,'Cartografia geologica',20,30000,'02-15-2019',190,3),
-(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',190,3),
-(5,'Perforaciones exploratorias',10,30000,'03-25-2019',190,3),
-(6,'Analisis',10,30000,'04-15-2019',190,3),
-(7,'Preparacion de informe',10,30000,'05-05-2019',190,3),
+(1,'Recopilacion y analisis de informacion',6,100000,'04-05-2018',189,3,'04-05-2018','04-11-2018'),
+(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',10,100000,'05-10-18',189,3,'05-10-18','05-20-18'),
+(1,'Restitucion topografica',20,30000,'01-05-2019',190,3,'01-05-2019','01-25-2019'),
+(2,'Fotointerpretacion',4,30000,'01-25-2019',190,3,'01-25-2019','01-29-2019'),
+(3,'Cartografia geologica',6,30000,'02-15-2019',190,3,'02-15-2019','02-21-2019'),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',190,3,'03-05-2019','03-15-2019'),
+(5,'Perforaciones exploratorias',2,30000,'03-25-2019',190,3,'03-25-2019','03-27-2019'),
+(6,'Analisis',4,30000,'04-15-2019',190,3,'04-15-2019','04-19-2019'),
+(7,'Preparacion de informe',10,30000,'05-05-2019',190,3,'05-05-2019','05-15-2019'),
 
-(1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',191,3),
-(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',191,3),
-(1,'Restitucion topografica',20,30000,'01-05-2019',192,3),
-(2,'Fotointerpretacion',20,30000,'01-25-2019',192,3),
-(3,'Cartografia geologica',20,30000,'02-15-2019',192,3),
-(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',192,3),
-(5,'Perforaciones exploratorias',10,30000,'03-25-2019',192,3),
-(6,'Analisis',10,30000,'04-15-2019',192,3),
-(7,'Preparacion de informe',10,30000,'05-05-2019',192,3);
+(1,'Recopilacion y analisis de informacion',5,100000,'04-05-2018',191,3,'04-05-2018','04-14-2018'),
+(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',5,100000,'05-10-18',191,3,'05-10-18','05-15-18'),
+(1,'Restitucion topografica',20,30000,'01-05-2019',192,3,'01-05-2019','01-25-2019'),
+(2,'Fotointerpretacion',2,30000,'01-25-2019',192,3,'01-25-2019','01-27-2019'),
+(3,'Cartografia geologica',5,30000,'02-15-2019',192,3,'02-15-2019','02-20-2019'),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',192,3,'03-05-2019','03-15-2019'),
+(5,'Perforaciones exploratorias',4,30000,'03-25-2019',192,3,'03-25-2019','03-29-2019'),
+(6,'Analisis',10,30000,'04-15-2019',192,3,'04-15-2019','04-25-2019'),
+(7,'Preparacion de informe',10,30000,'05-05-2019',192,3,'05-05-2019','05-025-2019'),
+/*asignadas michi*/
+insert into fase(numero_fase,nombre_fase,duracion_fase,costo_fase,
+				fecha_inicio_estimada,fk_etapa_explotacion,
+				fk_tipo_status)
+values 
+(1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',193,7),
+(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',193,7),
+(1,'Restitucion topografica',20,30000,'01-05-2019',194,7),
+(2,'Fotointerpretacion',20,30000,'01-25-2019',194,7),
+(3,'Cartografia geologica',20,30000,'02-15-2019',194,7),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',194,7),
+(5,'Perforaciones exploratorias',10,30000,'03-25-2019',194,7),
+(6,'Analisis',10,30000,'04-15-2019',194,7),
+(7,'Preparacion de informe',10,30000,'05-05-2019',194,7),
+
+(1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',195,7),
+(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',195,7),
+(1,'Restitucion topografica',20,30000,'01-05-2019',196,7),
+(2,'Fotointerpretacion',20,30000,'01-25-2019',196,7),
+(3,'Cartografia geologica',20,30000,'02-15-2019',196,7),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',196,7),
+(5,'Perforaciones exploratorias',10,30000,'03-25-2019',196,7),
+(6,'Analisis',10,30000,'04-15-2019',196,7),
+(7,'Preparacion de informe',10,30000,'05-05-2019',196,7),
+
+(1,'Restitucion topografica',20,30000,'01-05-2019',197,8),
+(2,'Fotointerpretacion',20,30000,'01-25-2019',197,8),
+(3,'Cartografia geologica',20,30000,'02-15-2019',197,7),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',197,8),
+(5,'Perforaciones exploratorias',10,30000,'03-25-2019',197,8),
+(6,'Analisis',10,30000,'04-15-2019',197,8),
+(7,'Preparacion de informe',10,30000,'05-05-2019',197,8);
+
+(1,'Restitucion topografica',20,30000,'01-05-2019',198,8),
+(2,'Fotointerpretacion',20,30000,'01-25-2019',198,8),
+(3,'Cartografia geologica',20,30000,'02-15-2019',198,7),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',198,8),
+(5,'Perforaciones exploratorias',10,30000,'03-25-2019',198,8),
+(6,'Analisis',10,30000,'04-15-2019',198,8),
+(7,'Preparacion de informe',10,30000,'05-05-2019',198,8);
 
 insert into fase(numero_fase,nombre_fase,duracion_fase,costo_fase,
 				fecha_inicio_estimada,fk_etapa_explotacion,
@@ -3213,107 +3261,107 @@ values ('Lunes','06:00:00','12:00:00'),
 ('Viernes','09:00:00','16:00:00');
 
 /*Empleados*/
-INSERT INTO empleado (nombre_empleado,apellido_empleado,telefono_empleado,sexo,correo_empleado,cedula_identidad,fecha_nacimiento,fk_lugar,fk_cargo) 
-VALUES ('David','Rosario',4241702939,'M','semper@sociisnatoque.ca',100000,'07-07-79',1328,7),
-('Nora','Tyler',1630082485399,'F','fermentum.risus@Cras.edu',99999,'04-19-74',547,10),
-('Steel','Alvarez',1630082466399,'M','nisl.sem.consequat@tristiqueneque.com',99998,'08-30-64',1079,10),
-('Dakota','Spencer',1645882485399,'M','tincidunt@CurabiturmassaVestibulum.co.uk',99997,'11-21-59',1187,17),
-('Timothy','Travis',1630082489988,'M','elementum.purus@Donecestmauris.org',99996,'10-13-79',1423,17),
-('Rhea','Dunlap',1630082434444444,'F','Aenean.gravida.nunc@interdumenim.com',99995,'04-04-62',1048,17),
-('Phillip','Huffman',163004425399,'M','non@loremsemperauctor.com',99994,'11-05-73',771,6),
-('Kaitlin','Dudley',1630082484399,'M','ullamcorper@antebibendum.edu',99993,'03-01-66',1344,14),
-('Carla','Elliott',1630082483399,'F','Nunc@egetmagnaSuspendisse.ca',99992,'04-14-51',838,15),
-('Scott','Hull',1630082485399,'M','pede.Suspendisse.dui@vestibulum.ca',99991,'03-29-71',1141,13),
-('Hayes','Briggs',3630082485399,'M','vitae.semper@aliquamiaculislacus.com',99990,'09-26-76',697,5),
-('Joseph','Irwin',4630082485399,'M','ante.ipsum.primis@Proin.co.uk',99989,'07-01-78',893,11),
-('Pascale','Cummings',5630082485399,'M','Maecenas.mi@aliquamadipiscinglacus.com',99988,'08-08-55',994,8),
-('Idona','Martin',6630082485399,'F','vitae@arcu.co.uk',99987,'09-16-60',1199,6),
-('Wendy','Nielsen',7630082485399,'F','bibendum@elitafeugiat.net',99986,'01-01-53',627,4),
-('Maxwell','Bush',8630082485399,'M','a@adipiscingenimmi.edu',99985,'11-26-51',854,6),
-('Kennedy','Mayer',9630082485399,'M','feugiat@lobortisaugue.com',99984,'10-08-75',379,10),
-('Latifah','Case',1666041408499,'F','commodo@aliquet.co.uk',99983,'07-13-69',1343,12),
-('Ciara','Puckett',1656092370899,'F','urna.et@egetvolutpat.net',99982,'07-16-64',1360,2),
-('Justina','Short',1664102787799,'F','dui.in.sodales@euenimEtiam.ca',99981,'04-27-73',1165,2),
-('Lucy','Pace',1626022328499,'F','ipsum.porta@eu.org',99980,'12-24-50',632,10),
-('Kelsie','Downs',1611072969899,'F','libero.Proin@lectusNullam.edu',99979,'08-04-69',1312,8),
-('Kim','Clarke',1660011925299,'M','posuere@sedest.net',99978,'05-22-71',898,8),
-('Amity','Turner',1619040279499,'M','lacus.Quisque@vestibulumlorem.ca',99977,'05-01-66',472,17),
-('Charity','Mccray',1690020158399,'F','dolor.Donec.fringilla@neceleifendnon.edu',99976,'09-29-67',849,17),
-('Gloria','Henderson',1668082210999,'F','Duis@tincidunt.co.uk',99975,'05-27-55',599,14),
-('Russell','Wolfe',1626040954099,'M','in.hendrerit@dignissimmagnaa.com',99974,'03-27-72',942,13),
-('Bianca','Wooten',1652102233799,'F','eget.massa.Suspendisse@nulla.ca',99973,'07-24-78',1410,1),
-('Kato','Walton',1632061426699,'M','magna@eratvitaerisus.ca',99972,'09-25-66',1185,14),
-('Raymond','Leonard',1631070279499,'M','aliquam.arcu.Aliquam@tempus.edu',99971,'12-13-66',1336,10),
-('Hector','Bright',1695122878199,'M','parturient.montes@massa.net',99970,'01-03-57',858,13),
-('Sage','Dominguez',1648052149399,'M','lacinia.orci@fringillaporttitorvulputate.co.uk',99969,'12-02-55',654,8),
-('Callie','Freeman',1636062902599,'F','ridiculus.mus@Phaselluselitpede.edu',99968,'04-11-71',1178,3),
-('Philip','Chaney',1699081044899,'M','ultrices@atpedeCras.edu',99967,'02-27-65',463,16),
-('Yardley','Gilliam',1618060617899,'M','ligula.elit@justoProinnon.edu',99966,'12-26-65',953,17),
-('Patricia','Logan',1600071065699,'F','nunc.nulla@semper.ca',99965,'05-17-73',1223,13),
-('Jamal','Kaufman',1608041837999,'M','sed.turpis@sedsem.ca',99964,'02-11-77',965,1),
-('Kieran','Kelly',1661022020799,'F','tortor@eget.net',99963,'11-25-78',830,15),
-('Daria','Lowe',1638082796599,'F','malesuada.fames.ac@odiosagittis.org',99962,'02-28-70',1066,7),
-('Idona','Vance',1651020781699,'F','vitae.purus.gravida@magnaUt.ca',99961,'03-20-61',596,7),
-('Judah','Grimes',1640041622199,'M','vitae.mauris@Quisqueporttitoreros.org',99960,'06-16-72',1137,3),
-('Brandon','Acevedo',1674082087699,'M','sed.orci@noncursus.edu',99959,'01-04-67',509,3),
-('Boris','Sherman',1655070167999,'M','facilisis.magna.tellus@Nullamvelit.net',99958,'07-16-51',1120,15),
-('Melvin','Wiley',1665020655299,'M','ut.quam.vel@lobortisClass.net',99957,'09-13-55',421,8),
-('Rafael','Bryan',1637060520399,'M','elit.fermentum@inmagna.ca',99956,'04-14-73',1487,14),
-('Nicholas','Collins',1613081671799,'M','enim@Fuscealiquam.ca',99955,'02-19-62',1211,16),
-('Caldwell','Glenn',1600072301199,'M','in.molestie@velit.org',99954,'03-30-64',1079,11),
-('Latifah','Martinez',1627101667599,'F','dignissim.tempor@sempertellus.com',99953,'05-18-63',871,16),
-('Kermit','Rose',1654070851399,'M','Curae.Phasellus@aodiosemper.org',99952,'01-06-63',1437,6),
-('Simon','Watson',1678101903399,'M','ipsum.cursus@luctusut.com',99951,'06-24-66',1220,12),
-('Armando','Preston',1690010413899,'M','sit@magnisdis.com',99950,'01-08-56',563,10),
-('Idona','Bridges',1605120206699,'M','feugiat@malesuadavel.edu',99949,'03-23-78',380,10),
-('Finn','Stewart',1659112300999,'M','semper@mattissemperdui.ca',99948,'02-29-64',710,2),
-('Fredericka','Vinson',1617022795199,'M','pharetra@neque.org',99947,'11-13-59',1307,11),
-('Lynn','Blair',1635112512199,'M','lacus.Etiam.bibendum@ultricessitamet.org',99946,'11-30-81',373,11),
-('Demetria','Pollard',1602081723399,'F','id.ante.dictum@acfacilisisfacilisis.co.uk',99945,'04-14-80',733,14),
-('Leilani','Crane',1676082526299,'F','risus.Donec.nibh@dolorvitaedolor.org',99944,'07-11-72',691,3),
-('Maris','Nichols',1677053046699,'F','sed.hendrerit.a@tortoratrisus.ca',99943,'11-18-50',375,8),
-('Evan','Chaney',1633101904799,'F','odio@adipiscingelit.net',99942,'02-19-65',1042,5),
-('Donovan','Salas',1675072969899,'M','pede.Suspendisse@Donec.net',99941,'09-02-81',819,5),
-('Allegra','Riggs',1608081796899,'M','laoreet@ultricesposuere.net',99940,'11-04-76',1450,1),
-('Kameko','Dillon',1682022610099,'M','luctus.ipsum.leo@maurissit.org',99939,'02-05-77',1337,15),
-('Faith','Bright',1653122836899,'M','ullamcorper@Sednunc.ca',99938,'03-16-81',1240,17),
-('Ashton','Key',1649031908999,'M','at.augue.id@consectetuer.ca',99937,'01-07-60',686,15),
-('Nichole','Maddox',1683110557899,'F','a.odio@tempor.edu',99936,'05-23-74',561,3),
-('Angelica','Vance',1658080298599,'F','placerat.Cras@ipsumPhasellus.org',99935,'03-12-64',738,12),
-('Holmes','West',1625020899199,'M','amet@Phasellusdolor.com',99934,'07-01-50',1411,12),
-('Morgan','Mcclain',1644101060599,'M','purus.in.molestie@egetodio.co.uk',99933,'12-25-50',714,16),
-('Ariel','Whitehead',1600040356999,'M','ornare.placerat.orci@malesuadafamesac.ca',99932,'05-04-70',501,12),
-('Philip','Whitaker',1696100605399,'M','ut.quam.vel@nisimagna.net',99931,'11-08-54',666,2),
-('Philip','Barrett',1672121451999,'M','sociosqu@velit.co.uk',99930,'11-20-58',944,3),
-('Noble','Walton',1643122865599,'M','ut.quam@tempordiamdictum.edu',99929,'05-07-67',1490,2),
-('Gil','Gilmore',1682092565499,'M','Nullam@Praesent.net',99928,'12-07-60',493,2),
-('Dorothy','Coffey',1683050560899,'F','et.magnis.dis@Fuscediamnunc.co.uk',99927,'06-08-72',1370,12),
-('George','Finch',1666012807499,'M','ultrices.posuere.cubilia@inconsequat.edu',99926,'02-23-82',685,6),
-('Genevieve','Montgomery',1692030321599,'M','gravida@Etiamgravidamolestie.edu',99925,'11-01-75',1255,3),
-('Hanae','Cherry',1665021546299,'F','Cras@imperdietornareIn.net',99924,'08-24-77',1378,9),
-('Harlan','Wiggins',1618042276399,'M','enim@sedturpisnec.com',99923,'12-22-72',1115,5),
-('Brett','George',1605111891899,'F','auctor@eu.ca',99922,'01-21-52',1139,4),
-('Vincent','Blanchard',1671101042099,'M','Sed.pharetra.felis@metusfacilisislorem.com',99921,'04-22-53',586,10),
-('Allen','Manning',1665022765799,'M','elit@ut.ca',99920,'12-02-56',846,8),
-('Ciara','Crawford',1619080676099,'F','pellentesque.a@incursus.ca',99919,'01-15-76',696,3),
-('Lionel','Moon',1685080418599,'M','magnis@euodioPhasellus.com',99918,'09-20-81',1358,15),
-('Logan','Cervantes',1681082604799,'M','pharetra@tincidunttempusrisus.net',99917,'02-22-67',1281,4),
-('Kasimir','Alexander',1628060841099,'M','ornare@Aeneansed.ca',99916,'01-12-70',1486,2),
-('Baxter','Aguirre',1635122722599,'M','vitae@Curae.ca',99915,'01-22-58',854,14),
-('Vance','Park',1636031917099,'M','Aliquam.nec@felisorciadipiscing.ca',99914,'05-08-56',744,4),
-('Connor','Herring',1690082929899,'M','tempus.risus.Donec@iaculisodioNam.net',99913,'08-15-60',1315,17),
-('Carlos','Greer',1600012850899,'M','viverra.Donec@atsemmolestie.ca',99912,'12-20-78',1353,17),
-('Claire','Dunn',1608023086299,'F','et.ultrices.posuere@ligula.com',99911,'02-15-73',1373,3),
-('Dara','Valentine',1676070569799,'F','justo.faucibus@congueInscelerisque.org',99910,'04-05-69',756,10),
-('Jolene','Nunez',1608100540899,'F','mollis.Phasellus.libero@diam.edu',99909,'11-24-80',1083,16),
-('Cadman','Madden',1689122518399,'M','vitae.aliquam.eros@euismodac.com',99908,'09-30-75',929,6),
-('Evan','Terry',1696040331099,'M','nascetur@loremvitaeodio.edu',99907,'12-23-53',384,11),
-('Faith','Moody',1642032801299,'M','Lorem.ipsum.dolor@justo.edu',99906,'12-05-64',393,13),
-('Quinn','Monroe',1665081139899,'M','velit.Aliquam@urnajustofaucibus.ca',99905,'05-23-80',1333,6),
-('Arthur','Russo',1684072212699,'M','nulla.vulputate@idmagna.edu',99904,'11-19-70',1415,2),
-('Sydney','Talley',1680111218799,'M','Donec.elementum.lorem@ridiculusmus.edu',99903,'06-05-78',705,7),
-('Vielka','Klein',1666100975699,'M','est@laciniaorciconsectetuer.co.uk',99902,'05-11-79',961,2),
-('Omar','Pitts',1612111705299,'M','ante.blandit@Quisque.edu',99901,'06-03-52',1230,11);
+INSERT INTO empleado (nombre_empleado,apellido_empleado,telefono_empleado,sexo,correo_empleado,cedula_identidad,fecha_nacimiento,fk_lugar,fk_cargo, fk_tipo_status) 
+VALUES ('David','Rosario',4241702939,'M','semper@sociisnatoque.ca',100000,'07-07-79',1328,7,5),
+('Nora','Tyler',1630082485399,'F','fermentum.risus@Cras.edu',99999,'04-19-74',547,10,5),
+('Steel','Alvarez',1630082466399,'M','nisl.sem.consequat@tristiqueneque.com',99998,'08-30-64',1079,10,5),
+('Dakota','Spencer',1645882485399,'M','tincidunt@CurabiturmassaVestibulum.co.uk',99997,'11-21-59',1187,17,5),
+('Timothy','Travis',1630082489988,'M','elementum.purus@Donecestmauris.org',99996,'10-13-79',1423,17,5),
+('Rhea','Dunlap',1630082434444444,'F','Aenean.gravida.nunc@interdumenim.com',99995,'04-04-62',1048,17,5),
+('Phillip','Huffman',163004425399,'M','non@loremsemperauctor.com',99994,'11-05-73',771,6,5),
+('Kaitlin','Dudley',1630082484399,'M','ullamcorper@antebibendum.edu',99993,'03-01-66',1344,14,5),
+('Carla','Elliott',1630082483399,'F','Nunc@egetmagnaSuspendisse.ca',99992,'04-14-51',838,15,5),
+('Scott','Hull',1630082485399,'M','pede.Suspendisse.dui@vestibulum.ca',99991,'03-29-71',1141,13,5),
+('Hayes','Briggs',3630082485399,'M','vitae.semper@aliquamiaculislacus.com',99990,'09-26-76',697,5,5),
+('Joseph','Irwin',4630082485399,'M','ante.ipsum.primis@Proin.co.uk',99989,'07-01-78',893,11,5),
+('Pascale','Cummings',5630082485399,'M','Maecenas.mi@aliquamadipiscinglacus.com',99988,'08-08-55',994,8,5),
+('Idona','Martin',6630082485399,'F','vitae@arcu.co.uk',99987,'09-16-60',1199,6,5),
+('Wendy','Nielsen',7630082485399,'F','bibendum@elitafeugiat.net',99986,'01-01-53',627,4,5),
+('Maxwell','Bush',8630082485399,'M','a@adipiscingenimmi.edu',99985,'11-26-51',854,6,5),
+('Kennedy','Mayer',9630082485399,'M','feugiat@lobortisaugue.com',99984,'10-08-75',379,10,5),
+('Latifah','Case',1666041408499,'F','commodo@aliquet.co.uk',99983,'07-13-69',1343,12,5),
+('Ciara','Puckett',1656092370899,'F','urna.et@egetvolutpat.net',99982,'07-16-64',1360,2,5),
+('Justina','Short',1664102787799,'F','dui.in.sodales@euenimEtiam.ca',99981,'04-27-73',1165,2,5),
+('Lucy','Pace',1626022328499,'F','ipsum.porta@eu.org',99980,'12-24-50',632,10,5),
+('Kelsie','Downs',1611072969899,'F','libero.Proin@lectusNullam.edu',99979,'08-04-69',1312,8,5),
+('Kim','Clarke',1660011925299,'M','posuere@sedest.net',99978,'05-22-71',898,8,5),
+('Amity','Turner',1619040279499,'M','lacus.Quisque@vestibulumlorem.ca',99977,'05-01-66',472,17,5),
+('Charity','Mccray',1690020158399,'F','dolor.Donec.fringilla@neceleifendnon.edu',99976,'09-29-67',849,17,5),
+('Gloria','Henderson',1668082210999,'F','Duis@tincidunt.co.uk',99975,'05-27-55',599,14,5),
+('Russell','Wolfe',1626040954099,'M','in.hendrerit@dignissimmagnaa.com',99974,'03-27-72',942,13,5),
+('Bianca','Wooten',1652102233799,'F','eget.massa.Suspendisse@nulla.ca',99973,'07-24-78',1410,1,5),
+('Kato','Walton',1632061426699,'M','magna@eratvitaerisus.ca',99972,'09-25-66',1185,14,5),
+('Raymond','Leonard',1631070279499,'M','aliquam.arcu.Aliquam@tempus.edu',99971,'12-13-66',1336,10,5),
+('Hector','Bright',1695122878199,'M','parturient.montes@massa.net',99970,'01-03-57',858,13,5),
+('Sage','Dominguez',1648052149399,'M','lacinia.orci@fringillaporttitorvulputate.co.uk',99969,'12-02-55',654,8,5),
+('Callie','Freeman',1636062902599,'F','ridiculus.mus@Phaselluselitpede.edu',99968,'04-11-71',1178,3,5),
+('Philip','Chaney',1699081044899,'M','ultrices@atpedeCras.edu',99967,'02-27-65',463,16,5),
+('Yardley','Gilliam',1618060617899,'M','ligula.elit@justoProinnon.edu',99966,'12-26-65',953,17,5),
+('Patricia','Logan',1600071065699,'F','nunc.nulla@semper.ca',99965,'05-17-73',1223,13,5),
+('Jamal','Kaufman',1608041837999,'M','sed.turpis@sedsem.ca',99964,'02-11-77',965,1,5),
+('Kieran','Kelly',1661022020799,'F','tortor@eget.net',99963,'11-25-78',830,15,5),
+('Daria','Lowe',1638082796599,'F','malesuada.fames.ac@odiosagittis.org',99962,'02-28-70',1066,7,5),
+('Idona','Vance',1651020781699,'F','vitae.purus.gravida@magnaUt.ca',99961,'03-20-61',596,7,5),
+('Judah','Grimes',1640041622199,'M','vitae.mauris@Quisqueporttitoreros.org',99960,'06-16-72',1137,3,5),
+('Brandon','Acevedo',1674082087699,'M','sed.orci@noncursus.edu',99959,'01-04-67',509,3,5),
+('Boris','Sherman',1655070167999,'M','facilisis.magna.tellus@Nullamvelit.net',99958,'07-16-51',1120,15,5),
+('Melvin','Wiley',1665020655299,'M','ut.quam.vel@lobortisClass.net',99957,'09-13-55',421,8,5),
+('Rafael','Bryan',1637060520399,'M','elit.fermentum@inmagna.ca',99956,'04-14-73',1487,14,5),
+('Nicholas','Collins',1613081671799,'M','enim@Fuscealiquam.ca',99955,'02-19-62',1211,16,5),
+('Caldwell','Glenn',1600072301199,'M','in.molestie@velit.org',99954,'03-30-64',1079,11,5),
+('Latifah','Martinez',1627101667599,'F','dignissim.tempor@sempertellus.com',99953,'05-18-63',871,16,5),
+('Kermit','Rose',1654070851399,'M','Curae.Phasellus@aodiosemper.org',99952,'01-06-63',1437,6,5),
+('Simon','Watson',1678101903399,'M','ipsum.cursus@luctusut.com',99951,'06-24-66',1220,12,5),
+('Armando','Preston',1690010413899,'M','sit@magnisdis.com',99950,'01-08-56',563,10,5),
+('Idona','Bridges',1605120206699,'M','feugiat@malesuadavel.edu',99949,'03-23-78',380,10,5),
+('Finn','Stewart',1659112300999,'M','semper@mattissemperdui.ca',99948,'02-29-64',710,2,5),
+('Fredericka','Vinson',1617022795199,'M','pharetra@neque.org',99947,'11-13-59',1307,11,5),
+('Lynn','Blair',1635112512199,'M','lacus.Etiam.bibendum@ultricessitamet.org',99946,'11-30-81',373,11,5),
+('Demetria','Pollard',1602081723399,'F','id.ante.dictum@acfacilisisfacilisis.co.uk',99945,'04-14-80',733,14,5),
+('Leilani','Crane',1676082526299,'F','risus.Donec.nibh@dolorvitaedolor.org',99944,'07-11-72',691,3,5),
+('Maris','Nichols',1677053046699,'F','sed.hendrerit.a@tortoratrisus.ca',99943,'11-18-50',375,8,5),
+('Evan','Chaney',1633101904799,'F','odio@adipiscingelit.net',99942,'02-19-65',1042,5,5),
+('Donovan','Salas',1675072969899,'M','pede.Suspendisse@Donec.net',99941,'09-02-81',819,5,7),
+('Allegra','Riggs',1608081796899,'M','laoreet@ultricesposuere.net',99940,'11-04-76',1450,1,7),
+('Kameko','Dillon',1682022610099,'M','luctus.ipsum.leo@maurissit.org',99939,'02-05-77',1337,15,7),
+('Faith','Bright',1653122836899,'M','ullamcorper@Sednunc.ca',99938,'03-16-81',1240,17,7),
+('Ashton','Key',1649031908999,'M','at.augue.id@consectetuer.ca',99937,'01-07-60',686,15,7),
+('Nichole','Maddox',1683110557899,'F','a.odio@tempor.edu',99936,'05-23-74',561,3,7),
+('Angelica','Vance',1658080298599,'F','placerat.Cras@ipsumPhasellus.org',99935,'03-12-64',738,12,7),
+('Holmes','West',1625020899199,'M','amet@Phasellusdolor.com',99934,'07-01-50',1411,12,7),
+('Morgan','Mcclain',1644101060599,'M','purus.in.molestie@egetodio.co.uk',99933,'12-25-50',714,16,7),
+('Ariel','Whitehead',1600040356999,'M','ornare.placerat.orci@malesuadafamesac.ca',99932,'05-04-70',501,12,7),
+('Philip','Whitaker',1696100605399,'M','ut.quam.vel@nisimagna.net',99931,'11-08-54',666,2,7),
+('Philip','Barrett',1672121451999,'M','sociosqu@velit.co.uk',99930,'11-20-58',944,3,7),
+('Noble','Walton',1643122865599,'M','ut.quam@tempordiamdictum.edu',99929,'05-07-67',1490,2,7),
+('Gil','Gilmore',1682092565499,'M','Nullam@Praesent.net',99928,'12-07-60',493,2,7),
+('Dorothy','Coffey',1683050560899,'F','et.magnis.dis@Fuscediamnunc.co.uk',99927,'06-08-72',1370,12,7),
+('George','Finch',1666012807499,'M','ultrices.posuere.cubilia@inconsequat.edu',99926,'02-23-82',685,6,7),
+('Genevieve','Montgomery',1692030321599,'M','gravida@Etiamgravidamolestie.edu',99925,'11-01-75',1255,3,7),
+('Hanae','Cherry',1665021546299,'F','Cras@imperdietornareIn.net',99924,'08-24-77',1378,9,7),
+('Harlan','Wiggins',1618042276399,'M','enim@sedturpisnec.com',99923,'12-22-72',1115,5,7),
+('Brett','George',1605111891899,'F','auctor@eu.ca',99922,'01-21-52',1139,4,7),
+('Vincent','Blanchard',1671101042099,'M','Sed.pharetra.felis@metusfacilisislorem.com',99921,'04-22-53',586,10,7),
+('Allen','Manning',1665022765799,'M','elit@ut.ca',99920,'12-02-56',846,8,7),
+('Ciara','Crawford',1619080676099,'F','pellentesque.a@incursus.ca',99919,'01-15-76',696,3,7),
+('Lionel','Moon',1685080418599,'M','magnis@euodioPhasellus.com',99918,'09-20-81',1358,15,7),
+('Logan','Cervantes',1681082604799,'M','pharetra@tincidunttempusrisus.net',99917,'02-22-67',1281,4,7),
+('Kasimir','Alexander',1628060841099,'M','ornare@Aeneansed.ca',99916,'01-12-70',1486,2,7),
+('Baxter','Aguirre',1635122722599,'M','vitae@Curae.ca',99915,'01-22-58',854,14,7),
+('Vance','Park',1636031917099,'M','Aliquam.nec@felisorciadipiscing.ca',99914,'05-08-56',744,4,7),
+('Connor','Herring',1690082929899,'M','tempus.risus.Donec@iaculisodioNam.net',99913,'08-15-60',1315,17,7),
+('Carlos','Greer',1600012850899,'M','viverra.Donec@atsemmolestie.ca',99912,'12-20-78',1353,17,7),
+('Claire','Dunn',1608023086299,'F','et.ultrices.posuere@ligula.com',99911,'02-15-73',1373,3,7),
+('Dara','Valentine',1676070569799,'F','justo.faucibus@congueInscelerisque.org',99910,'04-05-69',756,10,7),
+('Jolene','Nunez',1608100540899,'F','mollis.Phasellus.libero@diam.edu',99909,'11-24-80',1083,16,7),
+('Cadman','Madden',1689122518399,'M','vitae.aliquam.eros@euismodac.com',99908,'09-30-75',929,6,7),
+('Evan','Terry',1696040331099,'M','nascetur@loremvitaeodio.edu',99907,'12-23-53',384,11,7),
+('Faith','Moody',1642032801299,'M','Lorem.ipsum.dolor@justo.edu',99906,'12-05-64',393,13,7),
+('Quinn','Monroe',1665081139899,'M','velit.Aliquam@urnajustofaucibus.ca',99905,'05-23-80',1333,6,7),
+('Arthur','Russo',1684072212699,'M','nulla.vulputate@idmagna.edu',99904,'11-19-70',1415,2,7),
+('Sydney','Talley',1680111218799,'M','Donec.elementum.lorem@ridiculusmus.edu',99903,'06-05-78',705,7,7),
+('Vielka','Klein',1666100975699,'M','est@laciniaorciconsectetuer.co.uk',99902,'05-11-79',961,2,7),
+('Omar','Pitts',1612111705299,'M','ante.blandit@Quisque.edu',99901,'06-03-52',1230,11,7);
 
 INSERT INTO empleado (nombre_empleado,apellido_empleado,telefono_empleado,sexo,correo_empleado,cedula_identidad,fecha_nacimiento,fk_lugar,fk_cargo)
  VALUES ('Hall','Guerrero',1684091611599,'M','natoque.penatibus.et@mollis.co.uk',11112,'01-21-75',645,15),
@@ -3645,10 +3693,11 @@ INSERT INTO empleado (nombre_empleado,apellido_empleado,telefono_empleado,sexo,c
 
 insert into mineral_mineral (fk_mineral,fk_mineral_comp,cantidad)
 values 
-(4,21,300),
-(4,22,200),
-(4,23,400),
-(4,24,500);
+(4,21,30),
+(4,22,20),
+(4,23,40),
+(4,24,50),
+(1,21,50);
 /*presentacion*/
 insert into presentacion(nombre_presentacion)
 values ('Polvo'),
@@ -3666,8 +3715,6 @@ values (1000,1,1),(1000,1,2),(1000,1,3),(1000,1,4),(1000,1,5),(1000,1,6),(1000,1
 /*cargo fase*/ 
 insert into cargo_fase(cantidad,fk_cargo,costo,fk_fase)
 values
-
-
 (3,1,1000,1),
 (3,2,1000,1),
 (3,3,1000,1),
@@ -4017,8 +4064,81 @@ values
 (3,14,1000,860),
 (3,15,1000,861),
 (3,16,1000,862),
-(3,17,1000,863);
-/*proyecto8*/
+(3,17,1000,863),
+/*Proyecto 8*/
+(3,1,1000,865),
+(3,2,1000,865),
+(3,3,1000,866),
+(3,4,1000,866),
+(3,5,1000,867),
+(3,6,1000,867),
+(3,7,1000,868),
+(3,8,1000,868),
+(3,9,1000,869),
+(3,2,1000,869),
+
+(3,1,1000,870),
+(3,2,1000,870),
+(3,3,1000,871),
+(3,2,1000,871),
+(3,4,1000,872),
+(3,5,1000,872),
+(3,6,1000,873),
+(3,7,1000,873),
+(3,8,1000,874),
+(3,9,1000,874),
+(3,9,1000,875),
+(3,3,1000,875),
+
+(3,1,1000,876),
+(3,2,1000,876),
+(3,3,1000,877),
+(3,4,1000,877),
+(3,4,1000,878),
+(3,5,1000,878),
+(3,6,1000,879),
+(3,7,1000,879),
+(3,8,1000,880),
+(3,9,1000,880),
+(3,9,1000,881),
+(3,3,1000,881),
+
+
+(3,1,1000,882),
+(3,2,1000,882),
+(3,3,1000,883),
+(3,4,1000,883),
+(3,3,1000,884),
+(3,4,1000,884),
+(3,5,1000,885),
+(3,6,1000,885),
+(3,7,1000,886),
+(3,8,1000,886),
+(3,9,1000,887),
+(3,3,1000,887),
+(3,1,1000,888),
+(3,3,1000,888),
+(3,1,1000,889),
+(3,3,1000,889),
+(3,1,1000,890),
+(3,3,1000,890),
+
+
+(3,1,1000,891),
+(3,2,1000,891),
+(3,4,1000,892),
+(3,3,1000,892),
+(3,4,1000,893),
+(3,5,1000,893),
+(3,6,1000,894),
+(3,7,1000,894),
+(3,8,1000,895),
+(3,9,1000,895),
+(3,3,1000,896),
+(3,1,1000,896),
+(3,3,1000,897),
+(3,1,1000,897);
+
 
 insert into maquinaria (nombre_maquinaria,cantidad,costo_maquinaria)
 values ('Dragalina',100,10000),
@@ -4063,13 +4183,52 @@ values (1,793,1,100000),
 /*7*/
 (1,856 ,4,100000),
 (1,857,5,100000),
-(1,858,6,100000);
+(1,858,6,100000),
 /*8*/
+(1,865 ,4,100000),
+(1,866,5,100000),
+(1,867,6,100000),
 
+(1,867 ,4,100000),
+(1,868,5,100000),
+(1,869,6,100000),
 
+(1,870 ,4,100000),
+(1,871,5,100000),
+(1,872,6,100000),
 
+(1,873 ,4,100000),
+(1,874,5,100000),
+(1,875,6,100000),
 
+(1,876 ,4,100000),
+(1,877,5,100000),
+(1,878,6,100000),
 
+(1,879 ,4,100000),
+(1,880,5,100000),
+(1,881,6,100000),
+
+(1,882 ,4,100000),
+(1,883,5,100000),
+(1,884,6,100000),
+
+(1,885 ,4,100000),
+(1,886,5,100000),
+(1,887,6,100000),
+
+(1,888 ,4,100000),
+(1,889,5,100000),
+(1,890,6,100000),
+
+(1,891 ,4,100000),
+(1,892,5,100000),
+(1,893,6,100000),
+
+(1,894 ,4,100000),
+(1,895,5,100000),
+(1,896,6,100000),
+(1,897 ,4,100000);
 
 
 insert into empleado_fase_cargo(fk_empleado,fk_cargo_fase)
@@ -4136,20 +4295,23 @@ values ('12-12-2002',23000,1,89,3,1,20),
  
 insert into compra_aliado (cantidad, fecha_compra_aliado, monto_total, fk_empresa_aliada,fk_proyecto,fk_tipo_status, fk_mineral_presentacion)
 values(60, '12-09-2004', 100000, 2,4,3,4);
+insert into compra_aliado (cantidad, fecha_compra_aliado, monto_total, fk_empresa_aliada,fk_proyecto,fk_tipo_status, fk_mineral_presentacion)
+values (90000, '12-09-2013', 1000000, 7,7,3,4);
 
 
 /*26,27,28 y 29 ids de min_pres*/
 insert into mineral_empresa (fk_mineral_presentacion,fk_empresa_aliada)
-values (26,1),(27,1),(28,1),(29,1),(26,2),(27,3),(28,4),(28,5),(29,6),(26,7)
-,(28,7),(28,8),(26,8),(27,9),(26,9),(28,10),(27,10),(28,11),(29,11),(26,12)
-,(29,12),(28,12),(28,13),(26,14),(28,15),(26,16),(28,16),(28,17),(29,17),(28,18)
-,(27,18),(28,19),(27,20),(28,20),(28,21),(26,21),(26,22),(27,22),(28,22);
+values (21,1),(22,1),(23,1),(21,1),(23,2),(24,3),(21,4),(22,5),(23,6),(24,7)
+,(21,7),(21,8),(22,8),(23,9),(24,9),(21,10),(22,10),(21,11),(22,11),(21,12)
+,(22,12),(23,12),(22,13),(22,14),(22,15),(23,16),(24,16),(21,17),(23,17),(21,18)
+,(22,18),(22,19),(23,20),(24,20),(22,21),(23,21),(22,22),(23,22),(24,22);
 
 insert into mineral_presentacion (fk_mineral,fk_presentacion,costo)
 values (21,6, 300),(22,6,1000),(23,6,2000),(24,6,500);
 
-/*sert into mineral_empresa (fk_mineral_presentacion, fk_empresa_aliada)
-values (35,1),(36,2),(37,3),(38,8),(23,2);*/
+
+insert into mineral_empresa (fk_mineral_presentacion, fk_empresa_aliada)
+values (22,1),(23,2),(24,3),(22,8),(21,2);
 
 insert into horario_empleado(fk_horario,fk_empl_horario_fase) values
 (1,1),(2,1),(3,1),(1,2),(2,2),(2,3),(2,4),(3,4),(4,4),
@@ -4166,11 +4328,54 @@ values('administrador','administra todo'),
 ('supervisor',null),
 ('vendedor',null);
 
+
+
+insert into mineral_yacimiento (fk_mineral,fk_yacimiento,cantidad)
+values
+(13,60,200),(21,1,200),(17,2,200),(14,117,200),(22,50,200),(2,117,200),(18,120,200),(8,26,200),(19,66,200),(24,39,200),
+(3,96,200),(12,24,200),(1,14,200),(6,22,200),(20,71,200),(1,11,200),(2,11,200),(4,116,200),(1,87,200),(12,31,200),
+(24,21,200),(22,80,200),(9,100,200),(16,22,200),(7,103,200),(18,85,200),(9,77,200),(9,11,200),(17,18,200),(13,107,200),
+(23,108,200),(13,87,200),(15,9,200),(24,30,200),(19,86,200),(18,105,200),(11,27,200),(1,94,200),(6,26,200),(13,48,200),
+(17,47,200),(10,114,200),(8,37,200),(24,19,200),(4,67,200),(20,77,200),(6,103,200),(3,9,200),(24,33,200),(19,14,200),
+(6,69,200),(22,78,200),(1,8,200),(2,103,200),(2,13,200),(12,84,200),(24,89,200),(5,11,200),(5,2,200),(22,17,200),
+(10,31,200),(22,33,200),(19,18,200),(20,96,200),(5,7,200),(14,59,200),(15,8,200),(9,102,200),(1,74,200),(24,7,200),
+(5,74,200),(14,41,200),(9,92,200),(12,87,200),(6,90,200),(21,30,200),(6,57,200),(2,45,200),(19,61,200),(20,65,200),
+(21,18,200),(9,88,200),(13,92,200),(3,92,200),(3,106,200),(10,65,200),(4,36,200),(14,106,200),(11,36,200),(9,21,200),
+(2,4,200),(11,42,200),(24,29,200),(22,95,200),(23,88,200),(23,99,200),(2,32,200),(4,91,200),(9,62,200),(3,83,200),(4,121,3000000000),
+(4,122,32400000000),(4,123,933444400000000);
+
+
+
+insert into rol(tipo_rol)
+values ('Administrador'),('EmpleadoBajo'),('Chofer'),('Usuario trabajador'),('Comprador');
+
+insert into permiso_rol(fk_permiso,fk_rol) values 
+(1,1),(1,2),(3,3),(4,3),(2,4);
+ 
+ 
+ insert into usuario (nombre_usuario,contraseña,fk_cliente_persona,fk_cliente_empresa,fk_empleado,fk_rol)
+ values ('Gonzala','sssss',4,null,null,1),
+ ('Garshd','ewefef',3,null,null,1),
+  ('Brava','ewasef',5,null,null,1),
+   ('Tetecruz','ewtfef',2,null,null,1),
+    ('Michi15','e33fef',1,null,null,1);
+	
+insert into mineral_mineral (fk_mineral,fk_mineral_comp,cantidad)
+values (3,21);
+
+insert into tipo_pago(tipo,banco) values ('Tarjeta_Credito','banesco'),
+('Transferencia','mercantil'),
+('Transferencia','provincial'),
+('Tarjeta_Debito','bod'),
+('Tarjeta_Debito','bancaribe'),
+('Tarjeta_Credito','bofa');
+
+
 insert into permiso (nombre_permiso, descripcion_permiso) values
-('todo','puede realizar cualquier operacion en todo el sistema'),
+('admintodo','puede realizar cualquier operacion en todo el sistema'),
 ('adminEmp','puede administrar a los empleados'),
-('adminCli','puede administrar a los clientes'),
-('adminYac','puede administrar a los yacimientos y proyectos'),
+('adminCli','puede administrar las ventas a clientes'),
+('adminYac','puede administrar a los yacimientos'),
 ('adminMin','puede administrar a los minerales'),
 ('consultaEmp','puede solo consultar a los empleados'),
 ('consultaCli','puede solo consultar a los clientes'),

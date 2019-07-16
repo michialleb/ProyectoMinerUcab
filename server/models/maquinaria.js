@@ -36,7 +36,93 @@ class Maquinaria {
       }
     );
   }
+  static insertMaquinariaActiva(maqui, callback) {
+    console.log("maqui act")
+    db.query(
+      "INSERT INTO maquinaria_activa (fk_maquinaria, fk_fase, fk_tipo_status) \
+      VALUES ($1,$2,$3)",
+      [maqui.id_maquinaria, maqui.id_fase, maqui.id_tipo_status],
+
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
   
+}
+
+  static updateStatusMaquinariaActiva(maqui, callback) {
+  db.query(
+    "update maquinaria_activa set fk_tipo_status=(select id_tipo_status\
+                                                  from tipo_status \
+                                                  where nombre_tipo_status=$1)\
+     where fk_fase=$2 ",
+    [maqui.id_status, maqui.id_fase],
+
+    function(err, res) {
+      if (err.error) return callback(err);
+      callback(res);
+    }
+  );
+
+}
+
+static updateStatusMaquinariaActivaManual(maqui, callback) {
+  console.log("entro en el models");
+  console.log(maqui.id_status +" "+ maqui.id_fase+ " "+ maqui.id_maquinaria);
+  db.query(
+    "update maquinaria_activa set fk_tipo_status=(select id_tipo_status\
+                                                  from tipo_status \
+                                                  where nombre_tipo_status=$1)\
+     where fk_fase=$2 and fk_maquinaria=$3 returning id_maquinaria_activa",
+    [maqui.id_status, maqui.id_fase, maqui.id_maquinaria],
+
+    function(err, res) {
+      if (err.error) return callback(err);
+      callback(res);
+    }
+  );
+
+}
+
+  static getMaquinariaFaseCantidad(id_fase, callback) {
+    db.query(
+      "select fk_maquinaria as maquinaria, cantidad  as cantidad\
+      from maquinaria_fase\
+      where fk_fase= $1",
+      [
+       id_fase
+      ],
+
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
+  static getMaquinariaActivaFase(maq, callback) {
+    db.query(
+      "select ma.id_maquinaria_activa as id, m.nombre_maquinaria as nombre, (select nombre_tipo_status\
+        from tipo_status \
+        where id_tipo_status= ma.fk_tipo_status) as status\
+        from maquinaria_activa ma, maquinaria m\
+        where ma.fk_maquinaria= m.id_maquinaria\
+        and ma.fk_maquinaria= $1\
+        and ma.fk_fase =$2",
+      [
+       maq.id_maquinaria, maq.id_fase
+      ],
+
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+  
+  
+
 }
 
 module.exports = Maquinaria;
