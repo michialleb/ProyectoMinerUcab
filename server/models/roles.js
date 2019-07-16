@@ -99,6 +99,13 @@ class Roles {
       }
     );
   }
-}
 
+  static deleteRol(idRol, callback) {
+    console.log("entro en model eliminar con " + idRol);
+    db.query(`DELETE FROM rol where id_rol=$1`, [idRol], function(err, res) {
+      if (err.error) return callback(err);
+      callback(res);
+    });
+  }
+}
 module.exports = Roles;

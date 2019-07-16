@@ -43,8 +43,6 @@ router.get("/mineralCompuesto/:id_mineral", function(req, res) {
   });
 });
 
-
-
 router.post("/modificar", function(req, res) {
   var mineral = req.body.mineral;
   Minerales.update(mineral, function(err, result) {
@@ -62,9 +60,17 @@ router.post("/", function(req, res) {
   });
 });
 
-router.delete("/:nombre",function(req,res) {
-  var nombre= req.params.nombre;
-  console.log(nombre+ ' hjjhb de diego 1');
+router.post("/mineralMineral", function(req, res) {
+  var mineral = req.body.mineral;
+  Minerales.insertMineralMineral(mineral, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
+
+router.delete("/:nombre", function(req, res) {
+  var nombre = req.params.nombre;
+  console.log(nombre + " hjjhb de diego 1");
   Minerales.delete(nombre, function(err, result) {
     if (err) return res.json(err);
     return res.json(result);

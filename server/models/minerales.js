@@ -15,7 +15,7 @@ class Minerales {
 
   static retrieveMineralCompuesto(id_mineral, callback) {
     db.query(
-     "select DISTINCT  info.nombre as nombre, info.id as id, info.cantidad as cantidad, \
+      "select DISTINCT  info.nombre as nombre, info.id as id, info.cantidad as cantidad, \
       mp.costo as costo, mp.id_mineral_presentacion as id_mp \
       from  mineral_presentacion mp, presentacion p,\
            (select m.nombre_mineral as nombre, m.id_mineral id, mm.cantidad as cantidad \
@@ -25,15 +25,13 @@ class Minerales {
             where mp.fk_mineral = info.id\
             and   mp.fk_presentacion =p.id_presentacion\
             and   p.nombre_presentacion = $2",
-      [id_mineral, 'Natural'],
+      [id_mineral, "Natural"],
       function(err, res) {
         if (err.error) return callback(err);
         callback(res);
       }
     );
   }
-
- 
 
   static retrievePresentacion(nombreMineral, callback) {
     console.log("entro al  model con nombre: " + nombreMineral);
@@ -101,7 +99,7 @@ class Minerales {
     db.query(
       "INSERT INTO mineral (nombre_mineral,tipo_mineral,valor_economico,\
         descripcion_mineral,fecha_ini_explotacion,fecha_nacionalizacion) \
-        VALUES ($1,$2,$3,$4,$5,$6)",
+        VALUES ($1,$2,$3,$4,$5,$6) returning id_mineral",
       [
         mineral.nombre,
         mineral.tipo,
@@ -117,6 +115,20 @@ class Minerales {
       }
     );
   }
+
+  static insertMineralMineral(mineral, callback) {
+    db.query(
+      "INSERT INTO mineral_mineral (fk_mineral_comp, fk_mineral,cantidad) \
+        VALUES ((SELECT id_mineral FROM mineral WHERE nombre_mineral=$1), $2, $3)",
+      [mineral.mineral, mineral.id_mineral, mineral.cantidad],
+
+      function(err, res) {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+
   static delete(nombre, callback) {
     db.query("DELETE FROM mineral where nombre_mineral=$1", [nombre], function(
       err,

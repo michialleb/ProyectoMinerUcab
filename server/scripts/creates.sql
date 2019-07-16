@@ -7,6 +7,7 @@ create table Lugar (
     references Lugar (id_lugar),
     constraint pk_id_lugar primary key (id_lugar));
 
+
 CREATE TABLE empresa_aliada (
      id_empresa_aliada SERIAL,
      nombre_empresa VARCHAR(300) NOT NULL,
@@ -107,19 +108,6 @@ CREATE TABLE Compra_Cliente (
       REFERENCES tipo_status(id_tipo_status)
       );
 
-/*CREATE TABLE Detalle_Compra_Cliente (
-        id_detalle_compra_cliente serial, 
-        cantidad real NOT NULL,
-        monto real NOT NULL,
-        FK_Compra_Cliente integer not null,
-        FK_Mineral_Presentacion integer not null,
-        CONSTRAINT pk_id_detalle_compra_cliente PRIMARY KEY(id_detalle_compra_cliente),
-        CONSTRAINT FK_detalle_compra_cliente_compra_cliente FOREIGN KEY(FK_Compra_Cliente)
-        REFERENCES Compra_Cliente(id_compra_cliente),
-        CONSTRAINT FK_mineral_presentacion FOREIGN KEY(FK_Mineral_Presentacion)
-        REFERENCES Mineral_presentacion(id_mineral_presentacion)
-     );*/
-
 create table Yacimiento (
     id_yacimiento serial,
     nombre_yacimiento varchar (50) not null UNIQUE,
@@ -167,36 +155,6 @@ CREATE TABLE compra_aliado (
      REFERENCES tipo_status(id_tipo_status)
 );
 
-/*CREATE TABLE detalle_compra_aliado (
-     id_detalle_compra_aliado SERIAL,
-     cantidad real NOT NULL,
-     precio real NOT NULL,
-     fk_compra_aliado INTEGER not null,
-     fk_mineral_presentacion INTEGER not null,
-     CONSTRAINT pk_detalle_compra_aliado PRIMARY KEY (id_detalle_compra_aliado),
-     CONSTRAINT fk_compra_aliado_detalle FOREIGN KEY (fk_compra_aliado)
-     REFERENCES compra_aliado (id_compra_aliado),
-     CONSTRAINT fk_mineral_presentacion_en_detalle FOREIGN KEY (fk_mineral_presentacion)
-     REFERENCES Mineral_presentacion(id_mineral_presentacion)
-);*/
-
-
-/*detalle compra aliado y compra cliente*/
-create table Inventario(
-    id_inventario serial,
-    fecha_inventario DATE NOT NULL,
-    cantidad real not null,
-    Fk_Compra_Aliado integer,
-    Fk_Compra_Cliente integer,
-    constraint pk_inventario  primary key (id_inventario),
-    constraint fk_compra_aliado_inventario foreign key (Fk_Compra_Aliado)
-    references Compra_Aliado (id_compra_aliado),
-    constraint fk_compra_cliente_inventario foreign key (Fk_Compra_cliente)
-    references Compra_Cliente (id_compra_cliente)
-);
-
-
-
 
 CREATE TABLE Cargo (
     id_cargo serial,
@@ -206,6 +164,7 @@ CREATE TABLE Cargo (
     );
 
 
+
 CREATE TABLE Permiso (
     id_permiso serial,
     nombre_permiso VARCHAR(70) NOT NULL,
@@ -213,12 +172,14 @@ CREATE TABLE Permiso (
     CONSTRAINT pk_id_permiso PRIMARY KEY(id_permiso)
     );
 
+
 CREATE TABLE Rol (
     id_rol serial,
-    tipo_rol VARCHAR(15) NOT NULL,
+    tipo_rol VARCHAR(70) NOT NULL UNIQUE,
     descripcion_rol VARCHAR(225), 
     CONSTRAINT pk_id_rol PRIMARY KEY(id_rol)
     );
+
 
 CREATE TABLE Permiso_Rol (
     id_permiso_rol serial,
@@ -233,6 +194,7 @@ CREATE TABLE Permiso_Rol (
 
 
 
+
 CREATE TABLE Empleado (
     id_empleado serial,
     cedula_identidad integer NOT NULL UNIQUE,
@@ -244,6 +206,9 @@ CREATE TABLE Empleado (
 	telefono_empleado bigint,
     FK_Lugar INTEGER NOT NULL, 
     fk_cargo integer not null,
+    fk_tipo_status integer default 7,
+    CONSTRAINT fk_empleado_status foreign key (fk_tipo_status)
+    REFERENCES tipo_status (id_tipo_status),
     CONSTRAINT fk_lugar_empleado FOREIGN KEY (FK_Lugar)
     REFERENCES Lugar (id_lugar),
     CONSTRAINT check_sexo_emp CHECK(sexo in('M','F')), 
@@ -253,6 +218,7 @@ CREATE TABLE Empleado (
 	
     );
 	
+
 
 
 CREATE TABLE Usuario (
@@ -274,6 +240,7 @@ CREATE TABLE Usuario (
     REFERENCES Rol (id_rol)
     );
 
+
 CREATE TABLE Horario (
     id_horario serial,
     hora_inicio time NOT NULL,
@@ -283,6 +250,7 @@ CREATE TABLE Horario (
     CONSTRAINT check_dia CHECK (dia_de_semana in ('Lunes', 'Martes','Miercoles','Jueves',
     'Viernes','Sabado','Domingo'))
     );
+
 
     CREATE TABLE etapa_explotacion (
      id_etapa SERIAL,
@@ -300,6 +268,7 @@ CREATE TABLE Horario (
      REFERENCES tipo_status(id_tipo_status)
 );
 
+
 create table Fase (
    id_fase  serial,
    numero_fase integer not null,
@@ -309,14 +278,16 @@ create table Fase (
    costo_fase   real not null,
    fecha_inicio_fase date ,
    fecha_final_fase date ,
+   fecha_inicio_estimada date,
    fk_etapa_explotacion integer,
    fk_tipo_status INTEGER NOT NULL,
    constraint pk_fase primary key (id_fase),
    constraint fk_exploracion_etapa foreign key (fk_etapa_explotacion)
    references etapa_explotacion  (id_etapa) on delete cascade ,
    CONSTRAINT fk_tipo_status_fase FOREIGN KEY(fk_tipo_status)
-     REFERENCES tipo_status(id_tipo_status)
+   REFERENCES tipo_status(id_tipo_status)
 );
+
 
 CREATE TABLE Cargo_Fase(
     id_cargo_fase serial,
@@ -341,6 +312,8 @@ CREATE TABLE Empleado_Fase_Cargo(
     CONSTRAINT fk_cargos_de_Fase FOREIGN KEY (FK_Cargo_Fase)
     REFERENCES Cargo_Fase(id_cargo_fase) on delete cascade
 );
+
+
 CREATE TABLE Horario_empleado(
     id_horario_empleado serial,
     FK_horario integer not null,
@@ -351,6 +324,7 @@ CREATE TABLE Horario_empleado(
     CONSTRAINT fk_horario_de_emp_fase FOREIGN KEY (FK_horario) 
     REFERENCES Horario(id_horario)
 );
+
 
 
 
@@ -365,8 +339,7 @@ CREATE TABLE Mineral_Empresa (
         REFERENCES empresa_aliada(id_empresa_aliada) on delete cascade
 
         );
-        
-
+      
 
 
 
@@ -382,57 +355,33 @@ CREATE TABLE Compra_cliente_proyecto(
     REFERENCES proyecto(id_proyecto) on delete cascade
 );
       
- 
+
+create table Tipo_Pago(
+    id_tipo_pago serial,
+    tipo varchar (30) not null,
+    banco varchar(50) not null,
+    constraint pk_id_tipo_pago primary key (id_tipo_pago),
+    constraint  tipo_pago check (tipo in ('Transferencia','Tarjeta_Credito','Tarjeta_Debito'))
+);
 
  CREATE TABLE pago (
      id_pago SERIAL,
      fecha_pago DATE NOT NULL,
      monto_total_pagado real NOT NULL,
      fk_compra_cliente INTEGER NOT NULL,
+     fk_tipo_pago integer not null,
      CONSTRAINT pk_id_pago PRIMARY KEY (id_pago),
      CONSTRAINT fk_compra_cliente_pago FOREIGN KEY (fk_compra_cliente)
-     REFERENCES Compra_Cliente(id_compra_cliente)
-);
-
-
-create table Tipo_Pago(
-    id_tipo_pago serial,
-    numero integer not null unique,
-    concepto varchar (50),
-    numero_confirmacion integer,
-    tipo_tarjeta_credito varchar (15),
-    fecha_vencimiento date,
-    codigo_secreto integer,
-    tipo varchar (30) not null,
-    banco varchar(50) not null,
-    constraint pk_id_tipo_pago primary key (id_tipo_pago),
-    constraint check_tipo_tarjeta_credito check (tipo_tarjeta_credito in ('Visa', 'MasterCard')),
-    constraint  tipo_pago check (tipo in ('Transferencia','Tarjeta_Credito', 'Cheque', 'Tarjeta_Debito'))
-);
-
-CREATE TABLE pago_pago (
-     id_pago_pago SERIAL,
-     monto_total_pagado INTEGER NOT NULL,
-     fk_tipo_pago INTEGER,
-     fk_pago INTEGER,
-     CONSTRAINT pk_id_pago_pago PRIMARY KEY (id_pago_pago),
+     REFERENCES Compra_Cliente(id_compra_cliente),
      CONSTRAINT fk_tipo_pago_pago FOREIGN KEY (fk_tipo_pago)
-     REFERENCES Tipo_Pago(id_tipo_pago),
-     CONSTRAINT fk_pago_pago FOREIGN KEY (fk_pago)
-     REFERENCES pago (id_pago)
+     REFERENCES Tipo_pago (id_tipo_pago)
 );
 
 
-/*CREATE TABLE tipo_pago_banco (
-     id_tipo_pago_banco SERIAL,
-     fk_tipo_pago INTEGER,
-     fk_banco INTEGER,
-     CONSTRAINT pk_id_tipo_pago_banco PRIMARY KEY (id_tipo_pago_banco,fk_tipo_pago,fk_banco),
-     CONSTRAINT fk_tipo_pago_tipo_banco FOREIGN KEY (fk_tipo_pago)
-     REFERENCES tipo_pago (id_tipo_pago),
-     CONSTRAINT fk_banco_tipo_pago FOREIGN KEY (fk_banco)
-     REFERENCES banco (id_banco)
-);*/
+
+
+
+
 
 
 create table Mineral_Mineral (
@@ -446,7 +395,6 @@ create table Mineral_Mineral (
   constraint fk_mineral_n_a_m_c foreign key (fk_mineral_comp)
   references Mineral(id_mineral)
 );
-
 
 
 
@@ -467,20 +415,7 @@ create table Mineral_Yacimiento(
 
 
 
-
  
-/*CREATE TABLE Empleado_Fase(
-    id_empleado_fase serial,
-    FK_Empleado integer,
-    FK_Fase integer,
-    FK_Fase_Etapa integer,
-    CONSTRAINT pk_id_empleadoo_fase PRIMARY KEY(id_empleado_fase,FK_Empleado, FK_Fase, FK_Fase_Etapa),
-    CONSTRAINT fk_empleado_ FOREIGN KEY(FK_Empleado) 
-    REFERENCES Empleado (id_empleado),
-    CONSTRAINT fk_fase_ FOREIGN KEY(FK_Fase, FK_Fase_Etapa) 
-    REFERENCES Fase (id_fase, fk_etapa_explotacion)
-    );*/
-
 
 CREATE TABLE maquinaria (
     id_maquinaria serial,
@@ -489,6 +424,7 @@ CREATE TABLE maquinaria (
     costo_maquinaria real not null,
     CONSTRAINT pk_id_maquinaria PRIMARY KEY (id_maquinaria)
 );
+
 
 CREATE TABLE Maquinaria_Fase (
     id_maquinaria_fase serial,
@@ -503,32 +439,31 @@ CREATE TABLE Maquinaria_Fase (
     REFERENCES maquinaria(id_maquinaria)
 );
 
-CREATE TABLE Maquinaria_Activa(
-    id_maquinaria_activa serial,
-    fk_fase integer not null,
-    fk_maquinaria integer not null,
-    fk_tipo_status integer not null,
-     CONSTRAINT fk_fase2_maq_act FOREIGN KEY (fk_fase)
-     REFERENCES fase(id_fase) on delete cascade,
-     CONSTRAINT fk_fase_maq2 FOREIGN KEY (fk_fase)
-     REFERENCES maquinaria(id_maquinaria) on delete cascade ,
-     CONSTRAINT fk_status_maq_act FOREIGN KEY (fk_tipo_status)
-     REFERENCES tipo_status(id_tipo_status)
+create table maquinaria_activa (
+  id_maquinaria_activa serial,
+  fk_maquinaria integer not null,
+  fk_fase integer not null,
+  fk_tipo_status integer not null,
+  constraint pk_maquinaria_activa primary key (id_maquinaria_activa),
+  constraint fk_maquinaria_activa foreign key (fk_maquinaria)
+  references maquinaria (id_maquinaria),
+  constraint fk_maquinaria_activa_fase foreign key (fk_fase)
+  references fase (id_fase),
+  constraint fk_maquinaria_activa_status foreign key (fk_tipo_status)
+  references tipo_status (id_tipo_status)
 );
 
 
 
-///////////////////////////////////// VISTAS //////////////////////////////////////////////////
-
 create view usuariospersonas as (
 select u.nombre_usuario as usuario, u.contraseña , concat (e.nombre_empleado,' ', e.apellido_empleado) as nombre,
-	   r.tipo_rol, e.cedula_identidad as cedula, u.id_usuario
+	   r.tipo_rol, e.cedula_identidad as cedula, u.id_usuario, r.id_rol
 from usuario u inner join empleado e on u.fk_empleado = e.id_empleado 
 	inner join rol r on u.fk_rol = r.id_rol
 where u.fk_empleado is not null 
 union all
 select u.nombre_usuario as usuario, u.contraseña , concat (c.nombre_persona,' ', c.apellido_persona) as nombre,
-	   r.tipo_rol, c.cedula_identidad as cedula, u.id_usuario
+	   r.tipo_rol, c.cedula_identidad as cedula, u.id_usuario, r.id_rol
 from usuario u inner join persona c on u.fk_cliente_persona = c.id_cliente
 	inner join rol r on u.fk_rol = r.id_rol
 	where u.fk_cliente_persona is not null 

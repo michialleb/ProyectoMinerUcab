@@ -11,7 +11,6 @@ alter sequence etapa_explotacion_id_etapa_seq restart with 1;
 alter sequence fase_id_fase_seq restart with 1;
 alter sequence horario_empleado_id_horario_empleado_seq restart with 1;
 alter sequence horario_id_horario_seq restart with 1;
-alter sequence inventario_id_inventario_seq restart with 1;
 alter sequence lugar_id_lugar_seq restart with 1;
 alter sequence maquinaria_id_maquinaria_seq restart with 1;
 alter sequence maquinaria_activa_id_maquinaria_activa_seq restart with 1;
@@ -22,7 +21,6 @@ alter sequence mineral_mineral_id_mineral_mineral_seq restart with 1;
 alter sequence mineral_presentacion_id_mineral_presentacion_seq restart with 1;
 alter sequence mineral_yacimiento_id_mineral_yacimiento_seq restart with 1;
 alter sequence pago_id_pago_seq  restart with 1;
-alter sequence pago_pago_id_pago_pago_seq restart with 1;
 alter sequence permiso_id_permiso_seq restart with 1;
 alter sequence permiso_rol_id_permiso_rol_seq restart with 1;
 alter sequence persona_id_cliente_seq restart with 1;
@@ -3188,7 +3186,7 @@ values
 (4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',197,8),
 (5,'Perforaciones exploratorias',10,30000,'03-25-2019',197,8),
 (6,'Analisis',10,30000,'04-15-2019',197,8),
-(7,'Preparacion de informe',10,30000,'05-05-2019',197,8);
+(7,'Preparacion de informe',10,30000,'05-05-2019',197,8),
 
 (1,'Restitucion topografica',20,30000,'01-05-2019',198,8),
 (2,'Fotointerpretacion',20,30000,'01-25-2019',198,8),
@@ -4178,7 +4176,7 @@ insert into permiso (nombre_permiso, descripcion_permiso) values
 ('consultaMin','puede solo consultar a los minerales');
 
 insert into permiso_rol(fk_permiso,fk_rol) values 
-(1,1),(6,2),(2,3),(6,3)(2,4),(4,4),(5,5),(3,5),(6,6),(7,6),(8,6),(9,6),(4,7),(5,7),(3,8)
+(1,1),(6,2),(2,3),(6,3),(2,4),(4,4),(5,5),(3,5),(6,6),(7,6),(8,6),(9,6),(4,7),(5,7),(3,8);
 
 INSERT INTO usuario (nombre_usuario,contraseña,fk_cliente_persona,fk_rol) VALUES ('Henegouwen',2485,1,2),('Vicdtoria',3583,2,2),('Catalunya',2062,3,2),('Wesstvlq',7911,4,2),('Losweew',1109,5,2),('Veashsm',5568,6,2),('sQC',1575,7,2),('Joaejs',2141,8,2);
 INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Mdsf',5184,1,8),('efwdc',4442,2,2),('Laoreet',6758,3,8),('Mssoeee',3281,4,5),('Vistaed',5601,5,2),('Augues',5868,6,8),('Sesmpere',1485,7,4),('Mestuer',4627,8,3),('Vehiacula',3313,9,5),('Purusd',2459,10,2);

@@ -36,7 +36,6 @@ export default class Minerales extends Component {
 
   componentDidMount() {
     this.getMineralesList();
-    
   }
   render() {
     var minerales = this.state.mineralesList;
@@ -48,8 +47,7 @@ export default class Minerales extends Component {
         "Descripción",
         "Inicio de Explotación",
         "Fecha Nacionalización",
-        "Tipo",
-
+        "Tipo"
       ]
     };
 
@@ -57,7 +55,7 @@ export default class Minerales extends Component {
       options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar"],
       content: [
         {
-          form: <FormMineral />,
+          form: <FormMineral minerales={minerales} />,
           id: 0
         },
         {
@@ -65,19 +63,20 @@ export default class Minerales extends Component {
           id: 1
         },
         {
-          form:(<EliminarMineral consult={consult}/>),
-          id:2
+          form: <EliminarMineral consult={consult} />,
+          id: 2
         },
         {
           form: (
             <ModificarMineral
               minerales={minerales}
-              mineralBuscado = {mineralBuscado}
+              mineralBuscado={mineralBuscado}
               getMinerales={this.getMineral}
             />
           ),
           id: 3
-        }]
+        }
+      ]
     };
 
     return <Menu crud={crud} />;

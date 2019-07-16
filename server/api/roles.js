@@ -29,8 +29,7 @@ router.get("/permisos/noAsignado/:id_Rol", function(req, res) {
 });
 
 router.get("/allPermisos", function(req, res) {
- 
-  Roles.retrieveAllPermisos( function(err, rol) {
+  Roles.retrieveAllPermisos(function(err, rol) {
     if (err) return res.json(err);
     return res.json(rol);
   });
@@ -45,13 +44,12 @@ router.post("/", function(req, res) {
 });
 
 router.post("/permisoRol", function(req, res) {
-  var rol= req.body.rol;
+  var rol = req.body.rol;
   Roles.insertPermisoRol(rol, function(err, result) {
     if (err) return res.json(err);
     return res.json(result);
   });
 });
-
 
 router.post("/modificar", function(req, res) {
   var rol = req.body.rol;
@@ -69,4 +67,13 @@ router.delete("/eliminarPermisos", function(req, res) {
   });
 });
 
+router.delete("/eliminarRol/:idRol", function(req, res) {
+  var idRol = req.params.idRol;
+  console.log("entro api eliminar con " + idRol);
+
+  Roles.deleteRol(idRol, function(err, result) {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
 module.exports = router;

@@ -18,12 +18,26 @@ class FormMineral extends Component {
       descripcion: "",
       inicio: "",
       nacionalizacion: "",
-      mineralList: [],
-      cantidadList: [],
+      mineral: "",
+      cantidadList: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAddMineral = this.handleAddMineral.bind(this);
+    this.handleChangeMinerales = this.handleChangeMinerales.bind(this);
+    this.handleChangeCantidad = this.handleChangeCantidad.bind(this);
+  }
+
+
+  handleChangeCantidad(e) {
+    e.preventDefault();
+    let cantidades = this.state.cantidadList;
+    let target = e.target;
+    let value = target.value;
+    let name = target.name;
+
+    cantidades[name] = value;
+    this.setState({ cantidadList: cantidades });
   }
 
   handleChange(e) {
@@ -50,8 +64,48 @@ class FormMineral extends Component {
       })
       .then(res => {
         if (res.error) swal("Datos Invalidos!", "Intente de nuevo!", "error");
-        else swal("Mineral Ingresado!", "Satisfactoriamentes!", "success");
+        else {
+          swal("Mineral Ingresado!", "Satisfactoriamentes!", "success");
+          this.handleIngresarMinerales(res[0].id_mineral);
+        }
       });
+  };
+
+  handleChangeMinerales(e) {
+    console.log("entrooo");
+    console.log(this.state.mineralList);
+    let minerales = this.state.mineralList;
+    let target = e.target;
+    let value = target.type === "checkbox" ? target.checked : target.value;
+    let name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+    if (minerales.indexOf(name) === -1) {
+      minerales.push(value);
+      console.log("pise mineral " + minerales);
+      this.setState({ mineralList: minerales });
+    }
+  }
+
+  handleIngresarMinerales = id_mineral => {
+    this.state.mineralList.map((mineral, i) => {
+      let mineral_mineral = {
+        mineral: mineral,
+        id_mineral: id_mineral,
+        cantidad: this.state.cantidadList[i],
+      };
+      this.handleAddMineralMineral(mineral_mineral);
+    });
+  };
+
+  handleAddMineralMineral = mineral => {
+    fetch("/api/minerales/mineralMineral", {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ mineral: mineral })
+    }).then(res => res.json());
   };
 
   handleSubmit(e) {
@@ -142,14 +196,46 @@ class FormMineral extends Component {
                 </select>
               </div>
 
-              <div className="container">
-                <div className="row">
-                  <div className="col-md-4" />
-                  <div className="col-md-4">
-                    <Select isMulti />
-                  </div>
-                  <div className="col-md-4" />
-                </div>
+              <div className="add_minerales">
+                <label>Minerales que lo componen: </label>
+                <select
+                  name="mineral"
+                  value={this.state.mineral}
+                  onChange={this.handleChangeMinerales}
+                >
+                  <option />
+                  {this.props.minerales.map((miner, i) => (
+                    <option value={miner.nombre_mineral} key={i}>
+                      {miner.nombre_mineral}
+                    </option>
+                  ))}
+                </select>
+
+                <table id="t01">
+                  {this.state.mineralList.map((mineral, i) => {
+                    return (
+                      <tr key={i}>
+                        <td>{mineral}
+                        <input
+                              className=""
+                              placeholder=" Cantidad"
+                              type="number"
+                              name={i}
+                              noValidate
+                              value={this.state.cantidadList[i]}
+                              onChange={this.handleChangeCantidad}
+                            />
+                            <button
+                              numero={i}
+                              name={mineral}
+                            >
+                              x
+                            </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </table>
               </div>
 
               <div className="ingresarUsuario">

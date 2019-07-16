@@ -219,6 +219,22 @@ class ConsultTableRol extends Component {
       });
   }
 
+  deleteRol(rol, e) {
+    e.preventDefault();
+
+    let idRol = rol.id_rol;
+    console.log(idRol);
+
+    fetch(`/api/roles/eliminarRol/${idRol}`, { method: "DELETE" })
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+        } else {
+          swal("Rol eliminado", "Satisfactoriamente!", "success");
+        }
+      });
+  }
+
   UpdateRol = rol => {
     this.setState({
       tipo_rol: rol.tipo_rol,
@@ -328,6 +344,18 @@ class ConsultTableRol extends Component {
               Editar
             </button>
           </div>
+        ),
+        eliminar: (
+          <div className="horario">
+            <button
+              onClick={function(e) {
+                this.deleteRol(rol, e);
+              }.bind(this)}
+            >
+              {" "}
+              Eliminar Rol
+            </button>
+          </div>
         )
       };
       Roles.push(m);
@@ -359,6 +387,12 @@ class ConsultTableRol extends Component {
         {
           label: "Editar",
           field: "editar",
+          sort: "asc",
+          width: 1000
+        },
+        {
+          label: "Eliminar rol",
+          field: "eliminar",
           sort: "asc",
           width: 1000
         }
