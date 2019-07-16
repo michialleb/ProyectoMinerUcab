@@ -2165,7 +2165,7 @@ values ('Geologo',1000),
 ('Consultor',1000);
 
 insert into fase(numero_fase,nombre_fase,duracion_fase,costo_fase,
-				fecha_inicio_fase,fk_etapa_explotacion,
+				fecha_inicio_estimada,fk_etapa_explotacion,
 				fk_tipo_status)
 values 
 (1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',1,4),
@@ -2178,7 +2178,7 @@ values
 (6,'Analisis',10,30000,'04-15-2019',2,4),
 (7,'Preparacion de informe',10,30000,'05-05-2019',2,4),
 
-(1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',3,4),
+(1,'Recopilacion y analisis de informacion',100,100000,'01-04-2019',3,4),
 (2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',3,4),
 (1,'Restitucion topografica',20,30000,'01-05-2019',4,4),
 (2,'Fotointerpretacion',20,30000,'01-25-2019',4,4),
@@ -2224,7 +2224,7 @@ values
 (2,'Fotointerpretacion',20,30000,'01-25-2019',12,4),
 (3,'Cartografia geologica',20,30000,'02-15-2019',12,4),
 (4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',12,4),
-(5,'Perforaciones exploratorias',10,30000,'03-25-2019',12,4),
+(5,'Perforaciones exploratorias',10,30000,'03-25-2019',12,4),'04-05-2018',
 (6,'Analisis',10,30000,'04-15-2019',12,4),
 (7,'Preparacion de informe',10,30000,'05-05-2019',12,4),
 
@@ -2250,13 +2250,13 @@ values
 
 (1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',17,4),
 (2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',17,4),
-(1,'Restitucion topografica',20,30000,'01-05-2019',18,4),
-(2,'Fotointerpretacion',20,30000,'01-25-2019',18,4),
-(3,'Cartografia geologica',20,30000,'02-15-2019',18,4),
-(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',18,4),
-(5,'Perforaciones exploratorias',10,30000,'03-25-2019',18,4),
-(6,'Analisis',10,30000,'04-15-2019',18,4),
-(7,'Preparacion de informe',10,30000,'05-05-2019',18,4),
+(1,'Restitucion topografica',20,30000,'01-05-2019',18,4,),
+(2,'Fotointerpretacion',20,30000,'01-25-2019',18,4,),
+(3,'Cartografia geologica',20,30000,'02-15-2019',18,4,),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',18,4,),
+(5,'Perforaciones exploratorias',10,30000,'03-25-2019',18,4,),
+(6,'Analisis',10,30000,'04-15-2019',18,4,),
+(7,'Preparacion de informe',10,30000,'05-05-2019',18,4,),
 
 (1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',19,4),
 (2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',19,4),
@@ -2337,7 +2337,7 @@ values
 (5,'Perforaciones exploratorias',10,30000,'03-25-2019',34,4),
 (6,'Analisis',10,30000,'04-15-2019',34,4),
 (7,'Preparacion de informe',10,30000,'05-05-2019',34,4),
-
+/*****************/
 (1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',35,4),
 (2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',35,4),
 (1,'Restitucion topografica',20,30000,'01-05-2019',36,4),
@@ -3049,86 +3049,94 @@ values
 (6,'Analisis',10,30000,'04-15-2019',176,4),
 (7,'Preparacion de informe',10,30000,'05-05-2019',176,4),
 /*FASES DE PROYECTOS ACTIVOSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS*/
-(1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',177,3),
-(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',177,3),
-(1,'Restitucion topografica',20,30000,'01-05-2019',178,3),
-(2,'Fotointerpretacion',20,30000,'01-25-2019',178,3),
-(3,'Cartografia geologica',20,30000,'02-15-2019',178,3),
-(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',178,3),
-(5,'Perforaciones exploratorias',10,30000,'03-25-2019',178,3),
-(6,'Analisis',10,30000,'04-15-2019',178,3),
-(7,'Preparacion de informe',10,30000,'05-05-2019',178,3),
+insert into fase(numero_fase,nombre_fase,duracion_fase,costo_fase,
+				fecha_inicio_estimada,fk_etapa_explotacion,
+				fk_tipo_status,fecha_inicio_fase,fecha_final_Fase)
+values 
+(1,'Recopilacion y analisis de informacion',10,100000,'04-05-2018',177,3,'04-05-2018','04-15-2018'),
+(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',10,100000,'05-10-18',177,3,'05-10-18','05-23-18'),
+(1,'Restitucion topografica',20,30000,'01-05-2019',178,3,'01-05-2019','02-10-2019'),
+(2,'Fotointerpretacion',10,30000,'02-13-2019',178,3,'02-13-2019','02-23-2019'),
+(3,'Cartografia geologica',2,30000,'02-24-2019',178,3,'02-24-2019','02-26-2019'),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',178,3,'03-05-2019','03-15-2019'),
+(5,'Perforaciones exploratorias',5,30000,'03-25-2019',178,3,'03-25-2019','03-30-2019'),
+(6,'Analisis',8,30000,'04-15-2019',178,3,'04-15-2019','04-23-2019'),
+(7,'Preparacion de informe',10,30000,'05-05-2019',178,3,'05-05-2019','05-15-2019'),
 
-(1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',179,3),
-(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',179,3),
-(1,'Restitucion topografica',20,30000,'01-05-2019',180,3),
-(2,'Fotointerpretacion',20,30000,'01-25-2019',180,3),
-(3,'Cartografia geologica',20,30000,'02-15-2019',180,3),
-(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',180,3),
-(5,'Perforaciones exploratorias',10,30000,'03-25-2019',180,3),
-(6,'Analisis',10,30000,'04-15-2019',180,3),
-(7,'Preparacion de informe',10,30000,'05-05-2019',180,3),
+(1,'Recopilacion y analisis de informacion',23,100000,'04-05-2018',179,3,'04-05-2018','04-28-2018'),
+(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',10,100000,'05-10-18',179,3,'05-10-2018','05-20-2018'),
+(1,'Restitucion topografica',13,30000,'01-05-2019',180,3,'01-05-2019','01-18-2019'),
+(2,'Fotointerpretacion',3,30000,'01-25-2019',180,3,'01-28-2019'),
+(3,'Cartografia geologica',4,30000,'02-15-2019',180,3,'02-15-2019','02-19-2019'),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',180,3,'03-05-2019','03-30-2019'),
+(5,'Perforaciones exploratorias',4,30000,'03-01-2019',180,3,'03-01-2019','03-28-2019'),
+(6,'Analisis',6,30000,'04-15-2019',180,3,'04-15-2019','04-21-2019'),
+(7,'Preparacion de informe',10,30000,'05-05-2019',180,3,'05-05-2019','05-15-2019'),
 
-(1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',181,3),
-(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',181,3),
-(1,'Restitucion topografica',20,30000,'01-05-2019',182,3),
-(2,'Fotointerpretacion',20,30000,'01-25-2019',182,3),
-(3,'Cartografia geologica',20,30000,'02-15-2019',182,3),
-(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',182,3),
-(5,'Perforaciones exploratorias',10,30000,'03-25-2019',182,3),
-(6,'Analisis',10,30000,'04-15-2019',182,3),
-(7,'Preparacion de informe',10,30000,'05-05-2019',182,3),
+(1,'Recopilacion y analisis de informacion',12,100000,'04-05-2018',181,3,'04-05-2018','04-17-2018'),
+(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',10,100000,'05-10-18',181,3,'05-10-18','05-20-18'),
+(1,'Restitucion topografica',13,30000,'01-05-2019',182,3,'01-05-2019','01-20-2019'),
+(2,'Fotointerpretacion'2,30000,'01-25-2019',182,3,'01-25-2019','01-27-2019'),
+(3,'Cartografia geologica',6,30000,'02-15-2019',182,3,'02-15-2019','02-21-2019'),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',182,3,'03-05-2019','03-15-2019'),
+(5,'Perforaciones exploratorias',1,30000,'03-25-2019',182,3,'03-25-2019','03-26-2019'),
+(6,'Analisis',5,30000,'04-15-2019',182,3,'04-15-2019','04-20-2019'),
+(7,'Preparacion de informe',10,30000,'05-05-2019',182,3,'05-05-2019','05-15-2019'),
 
-(1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',183,3),
-(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',183,3),
-(1,'Restitucion topografica',20,30000,'01-05-2019',184,3),
-(2,'Fotointerpretacion',20,30000,'01-25-2019',184,3),
-(3,'Cartografia geologica',20,30000,'02-15-2019',184,3),
-(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',184,3),
-(5,'Perforaciones exploratorias',10,30000,'03-25-2019',184,3),
-(6,'Analisis',10,30000,'04-15-2019',184,3),
-(7,'Preparacion de informe',10,30000,'05-05-2019',184,3),
+(1,'Recopilacion y analisis de informacion',11,100000,'04-05-2018',183,3,'04-05-2018','04-16-2018'),
+(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',6,100000,'05-10-18',183,3,'05-10-18','05-16-18'),
+(1,'Restitucion topografica',20,30000,'01-05-2019',184,3,'01-05-2019','01-25-2019'),
+(2,'Fotointerpretacion',3,30000,'01-25-2019',184,3,'01-25-2019','01-28-2019'),
+(3,'Cartografia geologica',5,30000,'02-15-2019',184,3,'02-15-2019','02-20-2019'),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',184,3,'03-05-2019','03-15-2019'),
+(5,'Perforaciones exploratorias',10,30000,'03-25-2019',184,3,'03-25-2019','04-20-2019'),
+(6,'Analisis',4,30000,'04-15-2019',184,3,'04-15-2019','04-19-2019'),
+(7,'Preparacion de informe',6,30000,'05-05-2019',184,3,'05-05-2019','05-11-2019'),
 
-(1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',185,3),
-(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',185,3),
-(1,'Restitucion topografica',20,30000,'01-05-2019',186,3),
-(2,'Fotointerpretacion',20,30000,'01-25-2019',186,3),
-(3,'Cartografia geologica',20,30000,'02-15-2019',186,3),
-(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',186,3),
-(5,'Perforaciones exploratorias',10,30000,'03-25-2019',186,3),
-(6,'Analisis',10,30000,'04-15-2019',186,3),
-(7,'Preparacion de informe',10,30000,'05-05-2019',186,3),
+(1,'Recopilacion y analisis de informacion',5,100000,'04-05-2018',185,3,'04-05-2018','04-10-2018'),
+(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',4,100000,'05-10-18',185,3,'05-10-18','05-14-18'),
+(1,'Restitucion topografica',20,30000,'06-05-2019',186,3,'06-05-2019','06-25-2019'),
+(2,'Fotointerpretacion',2,30000,'07-25-2019',186,3,'07-25-2019','07-27-2019'),
+(3,'Cartografia geologica',4,30000,'08-15-2019',186,3,'08-15-2019','08-19-2019'),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'09-05-2019',186,3,'09-05-2019','09-15-2019'),
+(5,'Perforaciones exploratorias',2,30000,'09-25-2019',186,3,'09-25-2019','09-30-2019'),
+(6,'Analisis',3,30000,'10-15-2019',186,3,'10-15-2019','10-18-2019'),
+(7,'Preparacion de informe',5,30000,'05-05-2019',186,3,'05-05-2019','05-10-2019'),
 
-(1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',187,3),
-(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',187,3),
-(1,'Restitucion topografica',20,30000,'01-05-2019',188,3),
-(2,'Fotointerpretacion',20,30000,'01-25-2019',188,3),
-(3,'Cartografia geologica',20,30000,'02-15-2019',188,3),
-(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',188,3),
-(5,'Perforaciones exploratorias',10,30000,'03-25-2019',188,3),
-(6,'Analisis',10,30000,'04-15-2019',188,3),
-(7,'Preparacion de informe',10,30000,'05-05-2019',188,3),
+(1,'Recopilacion y analisis de informacion',20,100000,'04-05-2019',187,3,'04-05-2019','04-25-2019'),
+(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',20,100000,'05-10-19',187,3,'05-10-19','05-30-19'),
+(1,'Restitucion topografica',20,30000,'01-05-2019',188,3,'01-05-2019','01-25-2019'),
+(2,'Fotointerpretacion',2,30000,'08-25-2019',188,3,'08-25-2019','08-27-2019'),
+(3,'Cartografia geologica',6,30000,'08-15-2019',188,3,'08-15-2019','08-21-2019'),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'09-05-2019',188,3,'09-05-2019','09-15-2019'),
+(5,'Perforaciones exploratorias',4,30000,'09-25-2019',188,3,'09-25-2019','09-29-2019'),
+(6,'Analisis',10,30000,'10-15-2019',188,3,'10-15-2019','10-25-2019'),
+(7,'Preparacion de informe',3,30000,'10-25-2019',188,3,'10-25-2019','10-28-2019'),
 
-(1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',189,3),
-(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',189,3),
-(1,'Restitucion topografica',20,30000,'01-05-2019',190,3),
-(2,'Fotointerpretacion',20,30000,'01-25-2019',190,3),
-(3,'Cartografia geologica',20,30000,'02-15-2019',190,3),
-(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',190,3),
-(5,'Perforaciones exploratorias',10,30000,'03-25-2019',190,3),
-(6,'Analisis',10,30000,'04-15-2019',190,3),
-(7,'Preparacion de informe',10,30000,'05-05-2019',190,3),
+(1,'Recopilacion y analisis de informacion',6,100000,'04-05-2018',189,3,'04-05-2018','04-11-2018'),
+(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',10,100000,'05-10-18',189,3,'05-10-18','05-20-18'),
+(1,'Restitucion topografica',20,30000,'01-05-2019',190,3,'01-05-2019','01-25-2019'),
+(2,'Fotointerpretacion',4,30000,'01-25-2019',190,3,'01-25-2019','01-29-2019'),
+(3,'Cartografia geologica',6,30000,'02-15-2019',190,3,'02-15-2019','02-21-2019'),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',190,3,'03-05-2019','03-15-2019'),
+(5,'Perforaciones exploratorias',2,30000,'03-25-2019',190,3,'03-25-2019','03-27-2019'),
+(6,'Analisis',4,30000,'04-15-2019',190,3,'04-15-2019','04-19-2019'),
+(7,'Preparacion de informe',10,30000,'05-05-2019',190,3,'05-05-2019','05-15-2019'),
 
-(1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',191,3),
-(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',191,3),
-(1,'Restitucion topografica',20,30000,'01-05-2019',192,3),
-(2,'Fotointerpretacion',20,30000,'01-25-2019',192,3),
-(3,'Cartografia geologica',20,30000,'02-15-2019',192,3),
-(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',192,3),
-(5,'Perforaciones exploratorias',10,30000,'03-25-2019',192,3),
-(6,'Analisis',10,30000,'04-15-2019',192,3),
-(7,'Preparacion de informe',10,30000,'05-05-2019',192,3),
-
+(1,'Recopilacion y analisis de informacion',5,100000,'04-05-2018',191,3,'04-05-2018','04-14-2018'),
+(2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',5,100000,'05-10-18',191,3,'05-10-18','05-15-18'),
+(1,'Restitucion topografica',20,30000,'01-05-2019',192,3,'01-05-2019','01-25-2019'),
+(2,'Fotointerpretacion',2,30000,'01-25-2019',192,3,'01-25-2019','01-27-2019'),
+(3,'Cartografia geologica',5,30000,'02-15-2019',192,3,'02-15-2019','02-20-2019'),
+(4,'Ejecucion de trincheras,tuneles y apiques',10,30000,'03-05-2019',192,3,'03-05-2019','03-15-2019'),
+(5,'Perforaciones exploratorias',4,30000,'03-25-2019',192,3,'03-25-2019','03-29-2019'),
+(6,'Analisis',10,30000,'04-15-2019',192,3,'04-15-2019','04-25-2019'),
+(7,'Preparacion de informe',10,30000,'05-05-2019',192,3,'05-05-2019','05-025-2019'),
+/*asignadas michi*/
+insert into fase(numero_fase,nombre_fase,duracion_fase,costo_fase,
+				fecha_inicio_estimada,fk_etapa_explotacion,
+				fk_tipo_status)
+values 
 (1,'Recopilacion y analisis de informacion',100,100000,'04-05-2018',193,7),
 (2,'Reconocimiento de campo,verificacion de informacion y preparacion de informe',100,100000,'05-10-18',193,7),
 (1,'Restitucion topografica',20,30000,'01-05-2019',194,7),
@@ -4268,7 +4276,7 @@ values
 
 
 insert into rol(tipo_rol)
-values ('Administrador'),('Empleado'),('Chofer'),('Usuario trabajador'),('Comprador');
+values ('Administrador'),('EmpleadoBajo'),('Chofer'),('Usuario trabajador'),('Comprador');
 
 insert into permiso_rol(fk_permiso,fk_rol) values 
 (1,1),(1,2),(3,3),(4,3),(2,4);
@@ -4304,3 +4312,256 @@ insert into permiso (nombre_permiso, descripcion_permiso) values
 ('adminUser','puede administrar los usuarios'),
 ('adminRol', 'puede administrar los roles'),
 ('adminInfo', 'puede consultar los reportes');
+
+
+INSERT INTO usuario (nombre_usuario,contraseña,fk_cliente_persona,fk_rol) VALUES ('Henegouwen',2485,1,1),('Victoria',3583,2,1),('Catalunya',2062,3,1),('West-Vlaanderen',7911,4,2),('Lower Austria',1109,5,3),('V‰stra Gˆtalands l‰n',5568,6,1),('QC',1575,7,3),('Jˆnkˆpings l‰n',2141,8,2),('Victorias',1866,9,7),('RJ',6003,10,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_cliente_persona,fk_rol) VALUES ('BA',5804,11,4),('Alberta',2714,12,5),('BO',2180,13,3),('San JosÈ',1782,14,1),('ON',2731,15,5),('UP',3839,16,4),('OK',3077,17,3),('C',5965,18,5),('Nord-Pas-de-Calais',7377,19,5),('British Columbia',6291,20,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_cliente_persona,fk_rol) VALUES ('LimÛn',1470,21,2),('TN',2677,22,7),('Comunitat Valenciana',2930,23,1),('SJ',4205,24,7),('A',7602,25,7),('Kansas',3970,26,5),('PIE',7124,27,3),('PUG',1045,28,3),('BA',1785,29,2),('Zeeland',1806,30,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_cliente_persona,fk_rol) VALUES ('CE',3149,31,4),('Nord-Pas-de-Calais',4907,32,3),('NA',4602,33,2),('lÛdzkie',3100,34,5),('Wie',7826,35,5),('Ulster',6165,36,5),('Pennsylvania',1779,37,4),('RM',2988,38,1),('VEN',5080,39,3),('PIE',3353,40,6);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_cliente_persona,fk_rol) VALUES ('V‰stra Gˆtalands l‰n',1915,41,3),('La Rioja',1883,42,4),('MA',1163,43,8),('Limburg',3062,44,3),('Noord Brabant',7122,45,1),('SP',5990,46,8),('Victoria',1584,47,2),('TN',2709,48,1),('Victoria',2521,49,2),('AZ',7946,50,5);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_cliente_persona,fk_rol) VALUES ('British Columbia',3415,51,7),('LU',4827,52,7),('UP',7413,53,5),('Berlin',5330,54,7),('MAR',3377,55,4),('NE',5912,56,5),('CV',5366,57,8),('Metropolitana de Santiago',7697,58,8),('Ulster',7427,59,7),('Bremen',6322,60,1);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_cliente_persona,fk_rol) VALUES ('NW',7371,61,1),('Œle-de-France',2362,62,1),('Hamburg',5065,63,8),('MV',2302,64,2),('Wie',6732,65,7),('Madhya Pradesh',4380,66,2),('QLD',3103,67,7),('VEN',6430,68,4),('WV',7107,69,6),('Luik',3625,70,1);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_cliente_persona,fk_rol) VALUES ('RS',1968,71,1),('IL',4644,72,6),('Emilia-Romagna',2986,73,8),('Berlin',6662,74,8),('QC',7294,75,3),('C',5306,76,2),('Metropolitana de Santiago',1989,77,4),('AK',6501,78,2),('M',2859,79,8),('KD',2751,80,1);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_cliente_persona,fk_rol) VALUES ('Ist',5470,81,7),('÷stergˆtlands l‰n',5741,82,6),('Alberta',7161,83,3),('Rajasthan',5779,84,2),('Illinois',6198,85,3),('PK',2284,86,8),('SJ',2682,87,6),('Piemonte',3137,88,6),('Saskatchewan',7280,89,2),('MA',3733,90,1);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_cliente_persona,fk_rol) VALUES ('I',2896,91,5),('Stockholms l‰n',4451,92,4),('Vienna',6345,93,8),('Euskadi',2454,94,3),('OR',6799,95,2),('JI',4173,96,5),('DE',1663,97,4),('Noord Holland',3755,98,4),('Henegouwen',4439,99,6),('Berlin',2609,100,1);
+
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Mi Ac Mattis Consulting',5184,1,8),('Diam Lorem Auctor Company',4442,2,2),('Laoreet Ipsum Curabitur Corporation',6758,3,8),('Morbi Tristique Senectus LLC',3281,4,5),('Vitae Nibh Donec Foundation',5601,5,2),('Augue Consulting',5868,6,8),('Semper Cursus Integer Consulting',1485,7,4),('Metus Limited',4627,8,3),('Vehicula Corp.',3313,9,5),('Purus Ac Inc.',2459,10,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Ac Sem Inc.',1475,11,1),('A Associates',6651,12,5),('Quis Industries',2945,13,8),('Suscipit Est Ltd',2493,14,7),('Lectus Quis Industries',4263,15,2),('Mollis LLP',2547,16,3),('Eros Company',2067,17,1),('Ridiculus Mus Donec Industries',6917,18,6),('Augue Eu Inc.',2090,19,4),('Nibh Phasellus Nulla Consulting',3421,20,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Nam Tempor Diam PC',3125,21,3),('Ante Dictum Associates',1729,22,4),('Sem PC',2250,23,7),('Ac Tellus Consulting',5963,24,5),('Penatibus Et LLC',3558,25,7),('Ac Orci Institute',1704,26,8),('Mauris Integer Sem Incorporated',7819,27,8),('Fermentum LLC',2495,28,8),('Nisi Nibh Lacinia Institute',3840,29,6),('Posuere Enim LLP',7879,30,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Gravida Aliquam Tincidunt Limited',4290,31,4),('Lacus Ut Nec Corporation',5023,32,3),('Imperdiet Nec Leo Consulting',4160,33,2),('Massa Rutrum Magna Inc.',5729,34,5),('Mauris Ipsum Company',5092,35,2),('Ipsum Porta Industries',1961,36,2),('Et Magnis Limited',5601,37,7),('Fringilla Mi Ltd',6216,38,1),('Velit Justo Nec Inc.',6714,39,2),('Nisl Nulla Eu Associates',2199,40,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Aliquet LLC',7569,41,5),('Aenean LLC',1278,42,4),('Nunc Mauris Morbi PC',4424,43,1),('Suspendisse Ltd',3891,44,8),('Sapien Gravida Associates',7193,45,4),('Nibh Dolor Institute',6463,46,8),('Curabitur Ut Odio Associates',6257,47,1),('Lectus Convallis Est Limited',1032,48,8),('Orci Phasellus Dapibus Foundation',3802,49,2),('Arcu Imperdiet Ullamcorper LLP',2993,50,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Maecenas Malesuada Corp.',6750,51,4),('Neque Associates',5122,52,2),('A Feugiat Limited',7748,53,2),('Suspendisse Sed Dolor Industries',5692,54,4),('Accumsan Associates',7162,55,1),('Molestie Arcu Sed Foundation',4560,56,5),('Lacus Quisque Imperdiet Institute',3967,57,2),('Elementum Sem Vitae Limited',5948,58,8),('Rhoncus Ltd',1246,59,8),('Semper Limited',2115,60,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Tincidunt Industries',7714,61,8),('Orci Phasellus Consulting',4328,62,5),('Egestas Consulting',2220,63,7),('At Libero Morbi Company',4249,64,5),('Quis Accumsan Ltd',6608,65,5),('Sed Dictum Incorporated',7024,66,2),('Est Congue Inc.',5946,67,5),('Aliquet Limited',4986,68,7),('Diam Limited',3009,69,8),('Vitae Inc.',3962,70,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Ultricies Sem Magna Associates',2411,71,6),('Enim Curabitur Corp.',4881,72,5),('Mi Eleifend Egestas Consulting',7045,73,3),('Ante Nunc Mauris LLC',2288,74,5),('Nulla Eu Company',5981,75,2),('Magna Suspendisse Tristique PC',5547,76,3),('Lorem Institute',6801,77,4),('Quis Diam Pellentesque Ltd',2767,78,1),('Sit Amet Ultricies Inc.',6479,79,6),('Nibh Aliquam Corporation',5858,80,6);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Ante Lectus Convallis Consulting',5623,81,3),('Tempor Lorem Eget PC',4049,82,6),('Velit Quisque Varius Inc.',5562,83,2),('In Tincidunt LLC',4784,84,8),('Amet Ante Foundation',4600,85,7),('Integer In Company',2295,86,5),('Eu Lacus Associates',1115,87,8),('Eros Institute',6030,88,2),('Mauris Company',2675,89,7),('Inceptos Hymenaeos Mauris Corp.',7563,90,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Eu Tempor Erat Industries',7762,91,5),('Libero Est Congue Incorporated',4954,92,4),('Facilisis LLP',2269,93,4),('Integer Vitae Nibh Industries',5868,94,4),('Velit Corp.',4395,95,4),('Semper Dui Lectus Corp.',4986,96,4),('Ac Fermentum Vel Associates',7735,97,4),('Cum Sociis Consulting',2798,98,5),('Facilisis Vitae Orci Inc.',3887,99,7),('Ullamcorper Duis Limited',1353,100,6);
+
+
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Ut Lacus Nulla Corp.',2327,101,3),('Donec Consectetuer Mauris LLP',1333,102,4),('Ac Nulla Corporation',6907,103,8),('Auctor Velit Eget Limited',1995,104,4),('Vitae Purus Institute',4152,105,2),('Eu Accumsan Inc.',6649,106,8),('Arcu Vestibulum Limited',3336,107,6),('Libero Morbi Ltd',3711,108,2),('Porttitor Scelerisque Neque Inc.',2428,109,8),('Pretium Et Rutrum LLC',1236,110,5);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Neque Tellus Imperdiet PC',7255,111,7),('A Neque Corp.',2665,112,1),('Massa Non Ltd',6783,113,8),('Tincidunt Tempus Risus Inc.',3524,114,5),('Ultrices LLP',4014,115,1),('A Nunc Associates',7410,116,5),('Dignissim Pharetra Nam Limited',2868,117,6),('Rutrum Lorem Company',3303,118,8),('Dui Company',4342,119,1),('Justo Sit Amet Corporation',2621,120,6);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Neque Pellentesque Massa PC',5336,121,2),('Dolor Donec Inc.',7727,122,1),('Vitae Mauris Institute',3396,123,6),('Donec Nibh Enim Incorporated',6468,124,2),('Orci LLP',5496,125,7),('Sed Consequat Limited',1307,126,7),('Felis Eget Institute',1435,127,7),('Nec Tempus Limited',4195,128,4),('Cursus Associates',4990,129,6),('Amet Foundation',6296,130,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Aenean LLC',3833,131,3),('Eros Non Enim Institute',6912,132,7),('Semper Tellus Foundation',7118,133,1),('Augue Scelerisque Incorporated',6560,134,8),('Mi Lacinia Mattis Foundation',4666,135,3),('Dolor Egestas Ltd',3109,136,6),('Nibh Ltd',1822,137,4),('Sit Amet LLC',3229,138,1),('Habitant Morbi Company',5012,139,3),('Odio PC',2492,140,1);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Eget LLP',6650,141,3),('Lobortis Ultrices Consulting',3811,142,3),('Felis Nulla Inc.',4697,143,7),('Egestas Ligula Nullam Incorporated',1976,144,1),('Nullam Lobortis Quam Incorporated',3293,145,5),('Neque Et LLC',7358,146,3),('Sagittis Augue Associates',2280,147,6),('Phasellus Associates',4341,148,4),('Magna Sed Eu Institute',1359,149,2),('A Neque PC',4139,150,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Mi Lacinia Mattis Associates',1245,151,1),('Mi Inc.',3679,152,1),('Pede Limited',7382,153,1),('Posuere At Foundation',1502,154,4),('Diam Proin LLC',4887,155,3),('Libero Incorporated',6341,156,4),('Nec Tellus Corporation',2788,157,5),('Sapien Institute',6589,158,7),('Cum Sociis Natoque Inc.',5963,159,7),('Nascetur Ridiculus Mus Consulting',3915,160,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Nullam Lobortis Corp.',4773,161,1),('A LLC',2945,162,7),('Nam Corp.',3342,163,8),('Accumsan LLC',7161,164,6),('Erat Vel Corporation',7699,165,5),('Sapien Foundation',5965,166,1),('Enim Non Consulting',6698,167,5),('Mattis Corp.',4465,168,5),('Non Egestas Corporation',7606,169,8),('Luctus Curabitur Ltd',5629,170,5);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Neque Associates',2429,171,5),('Eleifend Nec LLC',4093,172,2),('Cubilia Curae; PC',5048,173,1),('Duis Elementum Corp.',4495,174,4),('Dolor Sit Amet Ltd',3021,175,2),('Suspendisse Ac Metus Incorporated',1848,176,8),('Luctus Ipsum Institute',6365,177,4),('Tellus Industries',7032,178,2),('Suspendisse Sagittis Nullam Foundation',7688,179,1),('In Corporation',3632,180,1);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Dis Parturient Foundation',5856,181,7),('Orci Corp.',4565,182,6),('Tempor Associates',1530,183,4),('Malesuada Integer PC',2329,184,8),('Diam Eu Dolor Consulting',1615,185,8),('Hendrerit A Corp.',5413,186,6),('Sagittis Foundation',6750,187,1),('Proin Inc.',3860,188,3),('Ipsum Industries',7454,189,7),('Ut PC',1332,190,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Fusce Company',2759,191,3),('Mus Proin Vel PC',6917,192,3),('Donec Porttitor Tellus Industries',3610,193,8),('Ut Odio PC',3675,194,5),('Mauris Institute',6869,195,8),('Et LLP',5785,196,6),('Est Mauris Eu Institute',1219,197,4),('Egestas A Scelerisque LLP',6382,198,4),('Commodo Ipsum Suspendisse Incorporated',2988,199,1),('Nunc Ac Limited',7808,200,7);
+
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Ultricies Associates',1656,201,1),('Dui Nec Urna LLC',7271,202,7),('Gravida Corporation',3968,203,6),('Mauris LLP',1750,204,4),('Tortor At LLP',4654,205,5),('Non Bibendum Sed Institute',2228,206,8),('Dapibus Gravida Consulting',6884,207,2),('Ipsum Sodales Purus Inc.',1612,208,1),('Aliquam Rutrum Ltd',1099,209,4),('Imperdiet Nec Industries',4492,210,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Tempor Diam Dictum Company',7281,211,7),('Mauris Consulting',1666,212,5),('Ut Odio Consulting',4105,213,4),('Purus Corp.',1875,214,6),('Quis Corp.',2451,215,8),('Vel Lectus Cum Limited',4960,216,1),('Non Enim Mauris Ltd',7755,217,1),('Volutpat Nunc Sit LLC',6864,218,6),('Eu Institute',4569,219,2),('Tempus Non Lacinia PC',7569,220,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Mauris Vel Turpis Inc.',1406,221,7),('Et Associates',7917,222,3),('Lorem Industries',4890,223,1),('Pellentesque Ut LLP',6997,224,2),('Magna Sed PC',2660,225,7),('Ante Lectus Convallis Consulting',2154,226,4),('Consectetuer Adipiscing LLC',3749,227,6),('Adipiscing Elit Incorporated',1955,228,4),('Ante Iaculis Nec LLC',3043,229,7),('Tristique Corp.',6784,230,5);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Laoreet Institute',6023,231,6),('Amet Risus Corporation',4990,232,4),('Fusce Dolor LLP',4292,233,6),('Cursus Vestibulum LLC',5986,234,1),('Ac Limited',3109,235,7),('Cras Dolor Dolor Corporation',7048,236,4),('Luctus Felis Purus Corporation',2848,237,1),('Cras LLC',1486,238,8),('Ut Sagittis Inc.',5754,239,8),('Dictum Mi Ac LLC',1271,240,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Odio Institute',4047,241,5),('Curabitur Consequat Institute',2625,242,4),('Feugiat Nec Diam Ltd',2730,243,2),('Augue Ac Ipsum Company',3892,244,3),('Mattis Associates',5170,245,4),('In LLP',7868,246,3),('Vitae Velit Egestas LLP',7575,247,7),('Maecenas Mi Felis Consulting',6087,248,3),('Pellentesque Habitant Morbi Corp.',3923,249,7),('Nullam Lobortis Quam Consulting',7726,250,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Sapien Molestie LLC',4291,251,1),('Mauris Foundation',1374,252,2),('In Corporation',5473,253,6),('Iaculis Enim Sit Incorporated',5284,254,7),('Nunc Quis Arcu Corporation',5869,255,5),('Porttitor Ltd',4761,256,6),('Erat Eget Institute',6524,257,7),('Augue Ac Ipsum Institute',7242,258,1),('In Lobortis Tellus PC',3844,259,1),('Maecenas Libero Corp.',5081,260,5);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('In Dolor LLP',4126,261,3),('Malesuada LLP',1938,262,8),('Tristique Senectus Et Foundation',7835,263,6),('Nulla Eget PC',7188,264,3),('Magnis Dis Parturient Associates',4505,265,6),('Aliquam Auctor Foundation',4707,266,4),('Nec Metus Incorporated',1824,267,6),('Odio Inc.',6883,268,8),('Sit Amet Ornare Industries',5749,269,7),('Ipsum Phasellus Ltd',7027,270,1);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Suscipit Nonummy PC',6822,271,3),('A Felis Consulting',7419,272,6),('Dolor Elit PC',5683,273,8),('Amet Diam Incorporated',3665,274,5),('Etiam Imperdiet Dictum PC',7094,275,4),('Pellentesque LLP',7640,276,6),('Faucibus Lectus A Inc.',5010,277,2),('Enim PC',6063,278,2),('Augue Malesuada Corp.',4426,279,3),('A Ltd',4720,280,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Molestie Tortor Consulting',5352,281,5),('Nam Associates',6172,282,5),('Mauris Eu Institute',7640,283,6),('Dictum Ultricies Ligula LLP',2031,284,1),('Mauris Incorporated',4036,285,5),('Dignissim Pharetra Nam Company',6998,286,4),('Eu Tellus Phasellus Consulting',6646,287,5),('Sodales Company',3282,288,5),('Aenean Company',4271,289,8),('Tincidunt PC',3481,290,6);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Augue Industries',5987,291,5),('Lectus Cum Sociis Incorporated',7829,292,1),('Sem Consulting',4317,293,8),('Amet Massa Quisque Incorporated',7146,294,1),('Lacus Industries',4773,295,6),('Accumsan Neque Et Corporation',2374,296,3),('Tellus Corp.',6511,297,4),('Eu Metus PC',4497,298,4),('Vitae Aliquet Nec Inc.',1408,299,2),('Arcu Morbi PC',6233,300,5);
+
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Ut Quam PC',4013,301,6),('Sed Pharetra Foundation',6663,302,4),('Ornare Sagittis Limited',2298,303,7),('A Associates',1246,304,3),('Luctus Aliquet LLC',5708,305,8),('Dapibus LLC',6496,306,3),('Tellus Corp.',6595,307,7),('Posuere Vulputate Institute',5523,308,1),('Sit Amet Metus Limited',3955,309,6),('Aliquet Company',4824,310,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Mauris Id Sapien Institute',7672,311,6),('Ligula Ltd',3228,312,3),('Mauris Suspendisse Aliquet Corporation',2950,313,7),('In Molestie Tortor Institute',1597,314,1),('Sed Auctor Odio Consulting',6837,315,2),('Fusce Associates',5517,316,6),('Vitae LLP',5778,317,1),('Mauris Corporation',4406,318,1),('Eget Ipsum Donec Associates',3902,319,7),('Eu Accumsan Sed LLP',1636,320,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Et PC',1914,321,6),('Nulla LLP',3369,322,8),('Enim Commodo Foundation',5176,323,2),('Aliquet Sem LLP',3630,324,4),('Magna Tellus Faucibus Incorporated',1423,325,2),('Nunc Risus Varius Ltd',3959,326,6),('Morbi LLP',7611,327,8),('Erat Volutpat Nulla Institute',6681,328,8),('Purus Duis Corporation',5071,329,3),('Orci Tincidunt Adipiscing Foundation',5770,330,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Vel Pede Blandit PC',6407,331,2),('In Condimentum Donec Limited',7196,332,3),('Cursus Incorporated',1944,333,5),('Eu Turpis Institute',5093,334,5),('Lorem Vitae Odio Inc.',2982,335,7),('Mi Institute',7218,336,3),('Eget Tincidunt Dui Consulting',5318,337,2),('Mi Felis Adipiscing Corp.',1127,338,3),('Magnis Dis Ltd',7883,339,8),('Vel Venenatis Industries',2497,340,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('At Iaculis Associates',5568,341,2),('Tempus Eu Limited',1859,342,3),('Mauris Sagittis Placerat Incorporated',5972,343,2),('Proin Incorporated',6271,344,7),('Leo In Industries',1419,345,6),('Eu Augue Porttitor PC',2617,346,6),('Mauris Ipsum Company',3936,347,1),('Quis Lectus Limited',6962,348,2),('Dui Cum Ltd',3095,349,2),('Dolor Egestas Limited',7862,350,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Vel Faucibus Id LLP',6590,351,3),('Nam Institute',7099,352,3),('Lorem Eu Metus Associates',7461,353,3),('Egestas PC',1798,354,4),('Dui In Sodales Associates',6103,355,5),('Ac Libero Nec Inc.',5844,356,8),('Ac Institute',1690,357,6),('Tellus Id Nunc LLC',5305,358,6),('Orci Ut Semper Corporation',2818,359,4),('Velit Consulting',5370,360,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Turpis Egestas PC',1068,361,2),('A Felis Ullamcorper Institute',1532,362,6),('Fringilla Euismod Corporation',5425,363,1),('At Institute',2139,364,3),('Mauris Ut Quam LLC',7359,365,4),('Torquent Incorporated',1417,366,3),('Nam Ligula Elit Inc.',6796,367,3),('Ut Tincidunt Ltd',3691,368,4),('Metus Incorporated',1040,369,8),('Quam LLC',3426,370,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Molestie Pharetra Nibh Corp.',6106,371,7),('Blandit Ltd',5215,372,6),('Ipsum Leo Inc.',1005,373,1),('Nec Ante Company',5269,374,1),('Convallis In Associates',3642,375,6),('Sagittis Nullam Company',3106,376,8),('Mauris Consulting',1779,377,7),('Eleifend Vitae Erat Incorporated',7733,378,7),('Duis Risus Industries',5772,379,1),('Commodo Tincidunt Nibh Ltd',2337,380,5);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Suspendisse Aliquet Molestie Institute',7989,381,7),('Ipsum Ltd',7039,382,2),('Augue Corp.',3101,383,8),('Neque Nullam Nisl Company',4947,384,1),('Luctus Limited',6823,385,2),('Consectetuer Ipsum Associates',4036,386,6),('Est Institute',2499,387,3),('Eget Ipsum Suspendisse Corp.',4741,388,8),('Elit Erat Vitae Limited',2129,389,7),('Neque Sed Associates',6658,390,6);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Aenean PC',1629,391,4),('Ultrices Company',3948,392,4),('Metus Consulting',6495,393,2),('Mus Limited',4575,394,7),('Auctor Velit Aliquam Company',4665,395,1),('Tortor Nunc LLP',6648,396,3),('Leo In Lobortis LLP',6905,397,2),('Aliquet Foundation',4223,398,3),('In Foundation',6800,399,4),('Egestas Hendrerit Neque Incorporated',1934,400,5);
+
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('BC',3560,401,4),('Vienna',5188,402,2),('Emilia-Romagna',3765,403,5),('Alabama',2908,404,6),('Idaho',5193,405,1),('Madrid',2786,406,5),('O',4496,407,4),('Luik',2462,408,4),('VII',4787,409,2),('Brussels Hoofdstedelijk Gewest',5354,410,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('O',1853,411,7),('NS',1957,412,3),('AQ',3959,413,5),('ON',2351,414,6),('BW',2797,415,8),('SJ',4211,416,8),('Connecticut',7485,417,6),('NT',5486,418,6),('Hawaii',2741,419,3),('KP',1394,420,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Basse-Normandie',4245,421,2),('South Island',7359,422,3),('CL',2446,423,3),('BK',2622,424,7),('W',2864,425,5),('Victoria',7449,426,2),('Wielkopolskie',1065,427,4),('BA',1613,428,4),('AZ',7930,429,8),('BE',2234,430,5);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('SJ',6587,431,8),('Zeeland',1289,432,2),('AB',4837,433,3),('Noord Brabant',6039,434,3),('NI',7199,435,4),('Ist',7646,436,5),('PIE',2559,437,5),('Connacht',5039,438,3),('Rio Grande do Sul',5873,439,5),('NSW',3225,440,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('WB',1519,441,7),('Wie',3393,442,3),('Alajuela',7436,443,7),('Vlaams-Brabant',7664,444,2),('WA',4855,445,5),('Hamburg',2570,446,4),('VB',3343,447,6),('Borno',1413,448,1),('CN',7909,449,6),('U',2325,450,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Ankara',5303,451,1),('F',3388,452,7),('Kaduna',1016,453,8),('Van',1308,454,8),('West Bengal',7645,455,6),('HH',5562,456,8),('CV',2050,457,2),('Comunitat Valenciana',2747,458,6),('NI',2617,459,8),('VIC',3486,460,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Madrid',4389,461,2),('PO',7887,462,5),('CL',7616,463,2),('Pomorskie',2389,464,8),('KN',4374,465,1),('PIE',5990,466,8),('Gelderland',7916,467,2),('lÛdzkie',4411,468,8),('÷stergˆtlands l‰n',4793,469,6),('South Australia',4026,470,1);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Vienna',7239,471,6),('Rivers',7363,472,8),('Cartago',3807,473,6),('Ulster',7219,474,3),('QLD',3601,475,6),('Malopolskie',2729,476,7),('ON',2706,477,6),('AK',3184,478,7),('P',2658,479,2),('Friuli-Venezia Giulia',5352,480,1);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('West-Vlaanderen',7636,481,8),('Northern Territory',1396,482,3),('MA',6510,483,8),('Ist',2986,484,6),('OH',1687,485,8),('Yukon',5908,486,7),('NF',3602,487,5),('CT',7302,488,4),('S„o Paulo',5381,489,1),('L',4012,490,5);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('MN',3424,491,7),('H',7584,492,2),('KP',5799,493,2),('RM',1847,494,3),('IX',4072,495,3),('Noord Brabant',6455,496,8),('AG',4190,497,7),('NA',6075,498,2),('Quebec',4014,499,4),('÷stergˆtlands l‰n',6023,500,1);
+
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Vienna',5530,501,8),('CV',3664,502,3),('MG',6093,503,1),('Paran·',2945,504,3),('PR',1001,505,1),('WB',7102,506,6),('S„o Paulo',7801,507,1),('New South Wales',2355,508,3),('Maharastra',4824,509,1),('IN',7670,510,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('RJ',2586,511,6),('IL',6943,512,3),('HH',4988,513,4),('SIC',3206,514,3),('Rio de Janeiro',6948,515,8),('Bauchi',1698,516,1),('AB',6388,517,1),('BA',2938,518,7),('British Columbia',1165,519,1),('Vlaams-Brabant',2568,520,5);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Berlin',2434,521,2),('Hamburg',4353,522,6),('AB',4963,523,4),('UMB',2587,524,4),('OG',3012,525,4),('Izm',1797,526,1),('Alaska',3265,527,3),('C',3415,528,6),('X',4185,529,2),('Leinster',3949,530,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Schleswig-Holstein',6174,531,5),('Lombardia',4277,532,7),('NA',2490,533,2),('Rio de Janeiro',7193,534,8),('VEN',1042,535,1),('South Island',1871,536,8),('L',1844,537,7),('Podkarpackie',7449,538,5),('NT',7195,539,8),('Tennessee',3966,540,1);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('OS',7558,541,7),('U',2868,542,5),('BA',7875,543,2),('Dorset',1925,544,4),('Maharastra',1404,545,2),('AS',1479,546,4),('Hamburg',6833,547,6),('Maryland',5249,548,3),('Ohio',1769,549,1),('Comunitat Valenciana',4371,550,6);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('NE',2261,551,6),('KS',7881,552,2),('GJ',5788,553,2),('CE',7094,554,3),('Wie',3077,555,7),('Vienna',2255,556,7),('Quebec',6998,557,4),('NSW',6677,558,7),('Berlin',1840,559,7),('MI',7470,560,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('PUG',4062,561,1),('Vorarlberg',5691,562,8),('V‰stra Gˆtalands l‰n',7649,563,7),('Wie',7740,564,1),('New South Wales',1952,565,1),('BE',5648,566,6),('HH',7637,567,6),('Alajuela',5603,568,3),('NSW',3124,569,3),('Vienna',7058,570,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('U',2706,571,1),('Zuid Holland',4322,572,4),('Utah',4914,573,2),('NB',6947,574,8),('Guanacaste',1484,575,1),('Galicia',2340,576,7),('Madrid',4026,577,5),('Bur',6058,578,4),('Connacht',4683,579,6),('Zl',7215,580,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('North Island',2738,581,7),('MB',1167,582,5),('Ontario',6712,583,2),('Quebec',2513,584,5),('TAS',3632,585,4),('HE',1666,586,3),('Michigan',4959,587,6),('Guanacaste',1363,588,5),('Istanbul',7695,589,8),('Extremadura',6248,590,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Vienna',1210,591,4),('QLD',1868,592,3),('Zuid Holland',5108,593,5),('QC',7371,594,3),('Santa Catarina',4121,595,4),('Malopolskie',3978,596,5),('TN',6164,597,1),('N.',5587,598,8),('LX',5833,599,2),('SA',2690,600,5);
+
+
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Istanbul',2786,601,2),('Iowa',3858,602,1),('LX',1427,603,5),('Cartago',2465,604,3),('Henegouwen',6716,605,1),('Mississippi',3786,606,2),('KN',3136,607,7),('OR',7623,608,4),('Cear·',5268,609,5),('S„o Paulo',4921,610,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('WB',4099,611,6),('QC',3639,612,3),('U',1227,613,3),('Zeeland',5762,614,3),('WV',1322,615,4),('W',7769,616,7),('Stockholms l‰n',2887,617,1),('Vienna',5024,618,4),('VII',6412,619,4),('Montgomeryshire',5011,620,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('CA',5460,621,5),('Canarias',7139,622,6),('Luxemburg',5628,623,1),('RM',4934,624,2),('Guanacaste',4241,625,5),('Zl',3537,626,4),('OV',5647,627,6),('TN',5887,628,4),('AN',1108,629,8),('Imo',1744,630,1);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('G',5646,631,1),('YT',1700,632,3),('Leinster',1123,633,5),('Slaskie',6001,634,2),('CA',4021,635,8),('Paran·',5195,636,7),('Indiana',5037,637,6),('CA',4547,638,2),('BU',1658,639,2),('North Island',3823,640,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('BC',7645,641,4),('Limburg',2174,642,7),('South Australia',5410,643,1),('OH',1292,644,5),('N.',4049,645,5),('Champagne-Ardenne',2351,646,5),('Van',5962,647,2),('Zeeland',6037,648,3),('Provence-Alpes-CÙte d'Azur',6397,649,1),('CL',1711,650,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('NewSout',2001,651,8),('Gaziantep',6810,652,6),('Kansas',3189,653,3),('Anambra',6961,654,6),('HI',7904,655,2),('Ankara',2668,656,5),('MA',5337,657,8),('NSW',3540,658,4),('Galicia',4059,659,8),('DU',1665,660,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Leinster',2573,661,7),('Montana',7023,662,1),('Saxony-Anhalt',7109,663,2),('AB',1406,664,5),('NI',1797,665,6),('North Island',2863,666,2),('Western Australia',6199,667,5),('IL',3065,668,7),('FL',7740,669,2),('Queensland',3046,670,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('CVa1111',5181,671,6),('MA',6712,672,1),('Jˆnkˆpings l‰n',7889,673,5),('Campania',1168,674,2),('BE',1557,675,8),('Œle-de-France',4749,676,2),('Ontario',7335,677,3),('Kaduna',7235,678,2),('San JosÈ',3418,679,7),('Lagos',6406,680,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Maule',6338,681,6),('WaBrabant',2763,682,2),('ONas',2782,683,3),('Saskatchewan',2306,684,1),('Toscana',5309,685,5),('MT',1655,686,8),('RM',6035,687,3),('Antofagasta',2470,688,5),('NO',5160,689,7),('SP',7532,690,1);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('C',1779,691,8),('Ontario',2200,692,8),('÷stergˆtlands l‰n',2411,693,7),('Emilia-Romagna',2864,694,4),('Stockholms l‰n',6065,695,3),('Namen',7848,696,8),('AndalucÌa',6045,697,2),('X',3313,698,3),('Lubuskie',6305,699,8),('Ulster',1378,700,6);
+
+
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('RJ',4139,701,6),('BW',1134,702,4),('Ontario',6607,703,8),('SP',1876,704,7),('Vienna',4989,705,8),('Quebec',4448,706,1),('U',2500,707,7),('KD',4103,708,7),('Gelderland',4816,709,8),('Metropolitana de Santiago',4845,710,6);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Metropolitana de Santiago',4997,711,7),('Ontario',6500,712,6),('MB',4694,713,8),('MG',1132,714,6),('Vienna',6544,715,4),('Western Australia',1208,716,7),('Alajuela',7890,717,4),('L',1328,718,6),('WA',6401,719,8),('AP',2552,720,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('NI',4011,721,2),('Saxony',3934,722,4),('Ontario',4182,723,3),('Overijssel',7676,724,4),('ON',3122,725,1),('N.',4442,726,5),('E',5083,727,6),('Nottinghamshire',4849,728,1),('ON',2108,729,3),('Comunitat Valenciana',5935,730,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('BE',6347,731,1),('Vlaams-Brabant',5460,732,3),('SK',3006,733,6),('RS',6868,734,3),('Limburg',6353,735,2),('Vienna',6042,736,8),('New South Wales',4208,737,7),('Vienna',6157,738,5),('RJ',3343,739,8),('HI',5984,740,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('SI',5221,741,6),('Œle-de-France',5764,742,8),('BA',2281,743,1),('SL',3809,744,3),('V‰stra Gˆtalands l‰n',7785,745,1),('KN',5063,746,4),('M',5093,747,7),('Wie',7690,748,7),('NI',1271,749,4),('Victoria',2082,750,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Vienna',2771,751,7),('Wie',2151,752,7),('Provence-Alpes-CÙte d'Azur',6835,753,7),('SJ',1501,754,2),('Wie',4433,755,2),('MA',1306,756,5),('KN',1456,757,5),('HB',4902,758,1),('Catalunya',3458,759,4),('C',4230,760,5);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('MA',6558,761,4),('PUG',4107,762,6),('RM',4708,763,3),('HR',3513,764,3),('O',7801,765,6),('UP',5716,766,5),('Rajasthan',2474,767,5),('Karnataka',2086,768,4),('Montgomeryshire',4195,769,2),('NI',3269,770,5);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Hawaii',1256,771,3),('NI',5210,772,3),('VDA',4575,773,1),('AQ',3250,774,5),('KA',7940,775,8),('Western Australia',7937,776,1),('MG',4861,777,1),('AG',7005,778,1),('SL',5394,779,2),('North Island',5227,780,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Samsun',4485,781,6),('Ontario',1867,782,7),('G',6467,783,5),('Vienna',1692,784,8),('Vienna',7010,785,2),('LA',1001,786,5),('Van',6036,787,3),('IL',1776,788,3),('MB',7378,789,3),('Dr',1759,790,1);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('HH',1143,791,6),('TX',7629,792,1),('Puglia',5597,793,6),('Veneto',4803,794,6),('Kon',7136,795,8),('Quebec',4473,796,6),('AB',4563,797,3),('Vienna',5702,798,6),('Wie',2434,799,5),('CV',5338,800,5);
+
+
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('ON',3049,801,4),('Vienna',3088,802,4),('FC',3764,803,1),('WB',2465,804,3),('Cear·',2649,805,7),('AN',1134,806,2),('PA',6901,807,8),('CAM',6896,808,5),('PA',5389,809,2),('L',4032,810,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('VA',4514,811,3),('Newfoundland and Labrador',6530,812,5),('Zl',2645,813,4),('Connacht',7667,814,4),('Berlin',6323,815,1),('ValparaÌso',6012,816,8),('HH',5824,817,7),('LimÛn',1280,818,6),('Kerala',5557,819,6),('Quebec',3856,820,1);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Stockholms l‰n',1259,821,7),('New South Wales',2934,822,4),('G',5301,823,2),('AN',4116,824,6),('WB',6698,825,2),('Bremen',3753,826,6),('Connacht',7115,827,2),('Queensland',2364,828,3),('Texas',2967,829,5),('JH',2130,830,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('L',2572,831,7),('British Columbia',3915,832,1),('BiobÌo',1069,833,4),('VIC',4797,834,6),('Kansas',4486,835,4),('LAZ',5345,836,2),('TX',3935,837,5),('M',3552,838,8),('Stm',3133,839,1),('New South Wales',3881,840,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('QC',6569,841,1),('Castilla y LeÛn',5687,842,4),('AB',1965,843,6),('SP',1912,844,1),('WB',2791,845,2),('Saskatchewan',3634,846,7),('DE',2790,847,6),('OR',4887,848,1),('PM',7484,849,3),('LOM',2130,850,1);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Hamburg',6216,851,4),('Berlin',4130,852,7),('Berlin',7893,853,1),('Wyoming',2577,854,3),('Munster',2524,855,4),('WA',3701,856,5),('Banffshire',3612,857,6),('Toscana',7877,858,1),('QC',4468,859,4),('Berlin',1869,860,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('North Island',1694,861,1),('Aquitaine',2122,862,8),('SA',5102,863,4),('Wielkopolskie',5031,864,3),('Rajasthan',6939,865,4),('Ulster',3298,866,5),('DF',2241,867,1),('L',5516,868,1),('Luxemburg',3387,869,4),('OV',3424,870,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Cear·',3736,871,4),('Andhra Pradesh',2328,872,3),('Dolnoslaskie',4361,873,8),('British Columbia',4586,874,8),('ON',5581,875,6),('IM',7221,876,3),('Akwa Ibom',2982,877,2),('VB',7687,878,5),('Galicia',6028,879,8),('Pomorskie',2838,880,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('CN',2465,881,8),('Champagne-Ardenne',4222,882,2),('South Island',7375,883,8),('PM',7349,884,8),('Bur',5765,885,1),('N.',1264,886,5),('S„o Paulo',1005,887,3),('Cear·',1097,888,1),('WY',6146,889,5),('OY',6674,890,1);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('NSW',7952,891,6),('U',7360,892,7),('Saarland',4122,893,4),('F',6285,894,6),('Dr',1603,895,8),('SJ',5125,896,4),('SAR',2949,897,4),('MT',3547,898,7),('ON',5762,899,8),('ST',3768,900,8);
+
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('SJ',4806,901,1),('L',5544,902,7),('AQ',2522,903,7),('Par·',4045,904,8),('PA',4580,905,6),('NI',7091,906,6),('New South Wales',2566,907,4),('QC',4717,908,7),('N.',7816,909,1),('VIC',7226,910,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('LOM',1913,911,2),('Vienna',6725,912,4),('V‰stra Gˆtalands l‰n',4741,913,1),('MH',5417,914,1),('PA',1212,915,8),('V‰stra Gˆtalands l‰n',7681,916,5),('ACT',7163,917,3),('Liguria',3454,918,7),('BE',3712,919,8),('New South Wales',5929,920,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('BE',3133,921,7),('NI',4498,922,3),('C',7360,923,6),('Alabama',6339,924,8),('Quebec',6127,925,4),('Fr',3485,926,2),('Los Lagos',3685,927,2),('NI',2401,928,1),('NE',1161,929,4),('V',3479,930,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Ankara',4744,931,7),('Koc',5750,932,3),('LI',1694,933,5),('RJ',4202,934,8),('GL',7607,935,4),('Jigawa',3066,936,7),('BA',3301,937,5),('VA',4549,938,3),('Uttar Pradesh',7856,939,1),('WP',6721,940,1);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('ValparaÌso',1300,941,6),('Gujarat',3504,942,8),('Alajuela',6242,943,7),('LAZ',3387,944,8),('H',7839,945,6),('ON',1302,946,3),('Œle-de-France',6446,947,8),('Nova Scotia',2048,948,4),('Texas',4579,949,8),('OK',1872,950,1);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Overijssel',1109,951,3),('San JosÈ',3163,952,3),('Lincolnshire',1137,953,1),('Vienna',7972,954,1),('Dalarnas l‰n',1414,955,3),('ZP',7587,956,7),('Ontario',6595,957,5),('Ontario',2884,958,8),('Vienna',2917,959,5),('Texas',7075,960,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('West Bengal',7929,961,4),('Vienna',2318,962,2),('VII',7629,963,7),('GJ',6066,964,2),('SI',3483,965,2),('AB',7918,966,8),('Devon',2356,967,8),('Alberta',5671,968,6),('Ov',7958,969,4),('CV',3162,970,6);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('NI',4410,971,1),('GL',1987,972,3),('South Island',3169,973,4),('MH',2161,974,4),('Paran·',4618,975,4),('Gelderland',5020,976,4),('West Bengal',3022,977,6),('NO',4923,978,3),('TN',3249,979,6),('WA',6821,980,1);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Bahia',2576,981,3),('Westmorland',2318,982,2),('S„o Paulo',3938,983,5),('Borno',2752,984,1),('Vorarlberg',5586,985,7),('Quebec',5879,986,5),('Provence-Alpes-CÙte d'Azur',5742,987,8),('LA',6930,988,4),('MA',2818,989,8),('Jigawa',6345,990,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Zzppi',1837,991,6),('North Rhine-Westphalia',6856,992,5),('AndalucÌa',7105,993,1),('AZ',1107,994,4),('Konya',1414,995,5),('QLD',5547,996,6),('RM',6145,997,7),('Kano',7741,998,7),('MA',5127,999,7),('Manisa',5377,1000,2);
+
+
+
+
+
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('CA',4391,1001,7),('L',5757,1002,6),('BC',4455,1003,8),('North Rhine-Westphalia',5662,1004,4),('BE',5374,1005,5),('CO',4596,1006,8),('VIC',3953,1007,5),('WA',3597,1008,7),('Gävleborgs län',3893,1009,3),('West-Vlaanderen',5597,1010,6);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('NV',5838,1011,3),('Berlin',5165,1012,6),('Abruzzo',5391,1013,3),('ML',5525,1014,6),('Madhya Pradesh',5829,1015,4),('Jigawa',4321,1016,3),('Canarias',4229,1017,5),('AN',3751,1018,7),('JI',5695,1019,7),('AB',4239,1020,6);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('New South Wales',4256,1021,6),('ON',3741,1022,4),('Alajuela',5047,1023,3),('Hamburg',3356,1024,5),('Montana',4209,1025,3),('KN',4254,1026,4),('N.',5136,1027,8),('Manitoba',3288,1028,8),('MH',5192,1029,7),('OK',4008,1030,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Mazowieckie',5077,1031,6),('NB',5836,1032,3),('Hamburg',4426,1033,2),('Istanbul',5240,1034,4),('WA',5205,1035,6),('Sokoto',4050,1036,7),('Île-de-France',4223,1037,6),('VB',4757,1038,2),('Euskadi',4963,1039,6),('Baden',4021,1040,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Oost-Vlaanderen',4388,1041,7),('Ontario',5959,1042,5),('Saskatchewan',5763,1043,2),('ON',3018,1044,6),('Buckinghamshire',3603,1045,8),('BA',3163,1046,8),('Tamil Nadu',4000,1047,2),('ABR',5674,1048,8),('Kahramanmaraş',4688,1049,3),('Queensland',3089,1050,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Indiana',4513,1051,5),('RI',3322,1052,5),('VIC',5529,1053,8),('RM',4893,1054,5),('Guanacaste',5202,1055,2),('RS',5029,1056,2),('NI',5101,1057,6),('ON',5987,1058,3),('Sardegna',5856,1059,3),('DE',5023,1060,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Lowerony',3853,1061,4),('Vienna',5069,1062,6),('Gujarat',3185,1063,4),('O',3590,1064,8),('LAZ',4523,1065,8),('HB',5986,1066,4),('Maine',4867,1067,3),('QC',5475,1068,2),('NI',5806,1069,7),('BE',5496,1070,6);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Emilia-Romagna',5178,1071,2),('British Columbia',5862,1072,4),('Gl',3947,1073,6),('BU',4056,1074,5),('Vienna',5223,1075,6),('WP',3590,1076,4),('Kansas',3563,1077,5),('Istanbul',5486,1078,6),('Ogun',4096,1079,3),('II',4333,1080,6);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Vienna',4910,1081,8),('North Island',5700,1082,7),('UT',4773,1083,3),('Pays de la Loire',5515,1084,2),('Provence-Alpes-Côte d'Azur',5104,1085,5),('ON',3338,1086,7),('L',3658,1087,6),('AR',4878,1088,8),('Essex',4365,1089,5),('Cartago',5570,1090,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Madhya Pradesh',4976,1091,2),('Istanbul',4201,1092,2),('CU',4614,1093,2),('Gelderland',5292,1094,5),('Kocaeli',4405,1095,2),('Oxfordshire',4393,1096,3),('Warmińsko-mazurskie',4285,1097,7),('Uttar Pradesh',4812,1098,6),('Zl',5651,1099,5),('Gaz',3042,1100,4);
+
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Victoria',3818,1101,2),('Ontario',4118,1102,6),('PV',3638,1103,3),('Zeeland',4485,1104,8),('PA',4357,1105,2),('LD',4710,1106,7),('Västra Götalands län',3126,1107,5),('A',3606,1108,7),('QLD',4977,1109,6),('SJ',4940,1110,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Mississippi',4966,1111,2),('RU',3838,1112,2),('AB',4538,1113,8),('Wie',5935,1114,2),('SP',4247,1115,4),('ON',4779,1116,6),('Metropolitana de Santiago',4021,1117,4),('Virginia',5577,1118,7),('Newfoundland and Labrador',5142,1119,6),('İzmir',3856,1120,5);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Lagos',3016,1121,4),('Berwickshire',3851,1122,8),('Ank',3093,1123,5),('Wie',5164,1124,4),('Friuli-Venezia Giulia',3173,1125,5),('Ontario',5971,1126,6),('KN',5249,1127,8),('Vermont',5229,1128,5),('Munster',3643,1129,7),('Ant',4897,1130,6);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('BC',4715,1131,7),('Osun',4689,1132,2),('WO',5952,1133,6),('HE',5662,1134,6),('Wielkopolskie',5055,1135,4),('PR',3539,1136,8),('Berlin',3577,1137,3),('PK',5832,1138,8),('Metropolitana de Santiago',3104,1139,7),('UT',4666,1140,6);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('SP',4997,1141,3),('Nottinghamshire',5906,1142,6),('LA',3771,1143,7),('NI',4941,1144,3),('Ist',5895,1145,3),('Overijssel',4398,1146,7),('VI',3316,1147,5),('RM',3770,1148,2),('Minas Gerais',5913,1149,5),('QC',3733,1150,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Murcia',4452,1151,2),('WV',5644,1152,8),('AK',5466,1153,8),('AP',3907,1154,6),('Galicia',5230,1155,7),('AB',5316,1156,2),('Catalunya',4702,1157,7),('Ulster',4152,1158,7),('U',4772,1159,7),('BC',4468,1160,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Diy',4105,1161,8),('Antalya',3916,1162,8),('Aydın',5520,1163,5),('Ayd',3899,1164,7),('L',4669,1165,3),('Centre',5695,1166,6),('Metropolitana de Santiago',4853,1167,8),('NU',3318,1168,4),('Wie',5069,1169,8),('Nord-Pas-de-Calais',3653,1170,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Connacht',5365,1171,6),('Colorado',5164,1172,8),('Quebec',5444,1173,3),('South Australia',3806,1174,6),('C',4946,1175,4),('Biobío',5360,1176,3),('ON',3303,1177,7),('Lagos',3367,1178,6),('BE',5282,1179,2),('NE',3928,1180,5);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Missouri',5765,1181,8),('San José',5261,1182,2),('South Island',5872,1183,4),('Wie',3119,1184,4),('Wie',3570,1185,3),('BC',3007,1186,3),('Wie',4576,1187,7),('Vienna',4750,1188,3),('Luik',3668,1189,5),('CA',5316,1190,6);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Ankara',5833,1191,7),('Ontario',5933,1192,8),('SP',4199,1193,4),('Connecticut',5576,1194,3),('ON',3157,1195,7),('RM',5415,1196,7),('Dalarnas län',5606,1197,7),('CV',3200,1198,2),('İzmir',4694,1199,4),('Leinster',4827,1200,4);
+
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('N.',5576,1201,6),('PR',3902,1202,5),('Quebec',5178,1203,7),('Noord Holland',4410,1204,8),('Ov',4139,1205,7),('Perthshire',5383,1206,7),('PD',3280,1207,7),('Navarra',5363,1208,8),('Lazio',3569,1209,8),('GL',4055,1210,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('HU',4881,1211,3),('AN',4867,1212,2),('Mississippi',3567,1213,6),('Pará',3207,1214,7),('Sokoto',4910,1215,4),('Lombardia',4440,1216,4),('MP',3054,1217,2),('Cartago',3697,1218,2),('BY',4148,1219,2),('KD',4088,1220,5);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('North Rhine-Westphalia',5371,1221,2),('Z.',5366,1222,7),('SL',4490,1223,6),('Colorado',4638,1224,4),('Vienna',4014,1225,6),('BE',5804,1226,4),('San José',5585,1227,5),('Santa Catarina',5242,1228,8),('NS',3809,1229,4),('Gl',5476,1230,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Mersin',3724,1231,6),('Vienna',5018,1232,4),('N.',5436,1233,3),('Leinster',4835,1234,4),('Iowa',4299,1235,3),('Jönköpings län',4783,1236,6),('IL',5616,1237,4),('Colorado',5812,1238,8),('DS',5831,1239,6),('MA',5109,1240,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Västra Götalands län',3037,1241,4),('NI',4630,1242,3),('CO',4322,1243,2),('NI',4381,1244,5),('HH',5638,1245,5),('Sląskie',4072,1246,5),('Haryana',5758,1247,4),('SH',5616,1248,4),('Noord Holland',3945,1249,2),('North Island',4163,1250,5);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('BE',4267,1251,5),('Vienna',4286,1252,5),('C',5588,1253,8),('Emilia-Romagna',5842,1254,8),('Wie',5193,1255,6),('ON',5229,1256,2),('Connacht',4942,1257,4),('Madhya Pradesh',5900,1258,4),('L.',5984,1259,7),('BU',5921,1260,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Flintshire',5249,1261,3),('Pays de la Loire',4320,1262,8),('Vienna',4389,1263,2),('MG',5570,1264,4),('GJ',4433,1265,2),('Calabria',5866,1266,3),('PIE',5712,1267,8),('Biobío',4890,1268,4),('Metropolitana de Santiago',3924,1269,5),('SJ',4274,1270,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Hatay',4267,1271,2),('Namen',4002,1272,5),('Tennessee',5115,1273,4),('LOM',4391,1274,6),('Heredia',5947,1275,7),('Zl',4123,1276,4),('LX',5075,1277,2),('Sardegna',5682,1278,8),('Vienna',5123,1279,6),('BW',5817,1280,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Victoria',4934,1281,6),('Małopolskie',3039,1282,4),('HH',3251,1283,7),('WB',3279,1284,5),('O',3343,1285,5),('Ayrshire',5377,1286,7),('Quebec',3159,1287,6),('Canarias',5344,1288,8),('Galicia',5734,1289,6),('Idaho',4086,1290,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('ON',3533,1291,6),('MU',4547,1292,3),('MA',5319,1293,3),('IX',4650,1294,6),('WB',5242,1295,5),('VIC',3891,1296,3),('Connacht',4530,1297,6),('N.',4565,1298,8),('Kon',3791,1299,6),('Ankara',5222,1300,4);
+
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('SJ',3604,1301,8),('Saskatchewan',3712,1302,5),('MI',3807,1303,8),('SL',3672,1304,8),('West-Vlaanderen',3381,1305,2),('AN',3268,1306,7),('Vienna',3246,1307,8),('L',5547,1308,3),('G',4126,1309,6),('ON',5155,1310,5);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('South Island',4224,1311,7),('Vienna',3662,1312,2),('NI',5165,1313,8),('San José',5360,1314,8),('BA',4345,1315,3),('WY',3148,1316,7),('San José',5328,1317,5),('Z.',4129,1318,2),('Emilia-Romagna',4740,1319,4),('UP',3814,1320,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Paraná',4613,1321,8),('Brussels Hoofdstedelijk Gewest',4648,1322,4),('Victoria',4439,1323,3),('PR',3914,1324,6),('Rio de Janeiro',4230,1325,3),('Vbg',4851,1326,6),('KS',5399,1327,2),('Munster',4916,1328,2),('PE',3114,1329,8),('Catalunya',3878,1330,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('AK',3301,1331,2),('XIV',4565,1332,8),('Ontario',5685,1333,2),('MG',3004,1334,8),('Vienna',4204,1335,8),('BE',4759,1336,4),('San José',3896,1337,4),('HB',4609,1338,6),('ON',5556,1339,4),('VIC',4731,1340,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Midi-Pyrénées',4090,1341,3),('Vienna',4531,1342,6),('British Columbia',3248,1343,6),('Provence-Alpes-Côte d'Azur',5744,1344,8),('Leinster',5901,1345,2),('MS',4450,1346,8),('W',4830,1347,6),('Quebec',4289,1348,6),('BE',5766,1349,4),('SK',4408,1350,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Somerset',4217,1351,8),('Cumberland',5885,1352,4),('Zeeland',3110,1353,6),('Sląskie',5270,1354,2),('Västra Götalands län',4644,1355,4),('Australian Capital Territory',5861,1356,7),('Rutland',5142,1357,8),('Warmińsko-mazurskie',3092,1358,5),('San José',4546,1359,4),('CO',3606,1360,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('W',3462,1361,6),('New South Wales',4222,1362,2),('Madrid',3242,1363,7),('CN',4931,1364,5),('Stockholms län',3776,1365,5),('Hamburg',3310,1366,8),('H',3330,1367,5),('Madrid',4028,1368,6),('Ontario',5037,1369,7),('L',3156,1370,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('U',5367,1371,8),('W',4343,1372,6),('Biobío',5281,1373,2),('GJ',5891,1374,5),('IM',4073,1375,6),('NI',4718,1376,2),('CA',5947,1377,3),('Wie',5875,1378,7),('Ov',4487,1379,3),('FL',5102,1380,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Alajuela',4848,1381,6),('Alajuela',4717,1382,8),('Västra Götalands län',3187,1383,2),('Biobío',5086,1384,8),('BC',5328,1385,4),('Yorkshire',4920,1386,8),('Île-de-France',4999,1387,5),('Quebec',3171,1388,7),('F',5939,1389,6),('Maharastra',3415,1390,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('ID',5071,1391,4),('Lazio',4522,1392,8),('Zl',4708,1393,2),('PA',5666,1394,6),('Metropolitana de Santiago',5706,1395,5),('Cartago',3570,1396,3),('VII',5189,1397,5),('OH',3641,1398,2),('Biobío',5626,1399,6),('Lombardia',5284,1400,5);
+
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('AN',4514,1401,6),('Alberta',5007,1402,6),('Gelderland',4126,1403,2),('RP',3840,1404,5),('Hesse',3359,1405,7),('Niger',3106,1406,6),('Pays de la Loire',4627,1407,4),('Provence-Alpes-Côte d'Azur',3126,1408,6),('LOM',5475,1409,5),('LIG',4141,1410,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Wie',5064,1411,5),('ON',5283,1412,7),('MB',5368,1413,5),('Andalucía',3399,1414,6),('Connacht',3665,1415,3),('Hawaii',5146,1416,8),('Fl',4612,1417,6),('L.',4675,1418,6),('Emilia-Romagna',4913,1419,7),('Fr',4718,1420,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Zl',5245,1421,4),('ERM',3942,1422,2),('AR',5408,1423,4),('ERM',5632,1424,8),('Henegouwen',3387,1425,2),('Alberta',4190,1426,7),('Noord Brabant',5800,1427,7),('PR',4156,1428,6),('Oost-Vlaanderen',4399,1429,4),('AZ',4582,1430,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Waals-Brabant',4471,1431,5),('Lombardia',3988,1432,4),('Nevada',4954,1433,2),('AB',5788,1434,7),('WB',4649,1435,5),('IL',3093,1436,8),('Wie',3657,1437,7),('ON',3763,1438,8),('C',3942,1439,3),('Zl',4909,1440,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Uttar Pradesh',5108,1441,5),('Oregon',5513,1442,2),('O'Higgins',4630,1443,3),('Overijssel',5796,1444,5),('PR',3401,1445,2),('WB',5067,1446,8),('O',5381,1447,3),('Kaduna',5014,1448,8),('North Rhine-Westphalia',3831,1449,7),('RM',5315,1450,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('L',5712,1451,7),('Berlin',4789,1452,4),('KD',5204,1453,3),('CA',5844,1454,4),('E',3462,1455,4),('Koc',5165,1456,3),('Bihar',5405,1457,8),('OG',3443,1458,5),('MA',4895,1459,4),('AB',5858,1460,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Comunitat Valenciana',4985,1461,3),('NI',5906,1462,5),('Ankara',3145,1463,5),('Waals-Brabant',5644,1464,6),('NI',4007,1465,5),('Dr',3014,1466,2),('Andalucía',5903,1467,7),('KN',4156,1468,4),('Principado de Asturias',4176,1469,3),('BE',5658,1470,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Luxemburg',4717,1471,7),('X',3200,1472,3),('E',3168,1473,5),('Utah',3048,1474,7),('QC',3948,1475,2),('Quebec',3439,1476,6),('Glamorgan',5969,1477,6),('JH',4846,1478,2),('North Island',3899,1479,2),('Canarias',5608,1480,5);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('TN',4573,1481,7),('Drenthe',3171,1482,2),('Goiás',5470,1483,7),('ON',4207,1484,4),('AS',5208,1485,5),('Lagos',4814,1486,3),('Mazowieckie',4943,1487,4),('BR',5472,1488,3),('PV',5547,1489,8),('Ulster',5940,1490,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('RA',5068,1491,2),('N.',4188,1492,3),('BA',3962,1493,4),('OR',4445,1494,2),('Metropolitana de Santiago',4878,1495,2),('Alberta',3813,1496,4),('Ank',3582,1497,8),('Quebec',3356,1498,8),('Saxony-Anhalt',5861,1499,7),('SI',5787,1500,4);
+
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Nec Ligula Consulting',4494,1501,6),('Ac Metus Vitae Associates',4226,1502,2),('Feugiat Nec Ltd',4092,1503,3),('Augue Porttitor Corp.',3809,1504,6),('Facilisis Lorem Tristique Incorporated',3907,1505,5),('Tempus Mauris Associates',3945,1506,5),('Arcu Ac Orci Corporation',5554,1507,8),('Mauris Eu LLC',4905,1508,3),('Phasellus At Corp.',3409,1509,3),('Donec Tincidunt Industries',5885,1510,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Nunc Lectus Inc.',3261,1511,5),('Mauris Foundation',4957,1512,3),('Vitae LLC',3748,1513,5),('Nam Ltd',3731,1514,2),('Luctus Et Foundation',4285,1515,5),('Nec Enim Consulting',5180,1516,7),('Metus Corporation',3549,1517,2),('Amet Diam Ltd',4771,1518,8),('Penatibus Ltd',5654,1519,5),('Non Sollicitudin Institute',5317,1520,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Morbi Non LLP',3943,1521,5),('Quis Corp.',4301,1522,6),('Et Tristique Pellentesque Ltd',4985,1523,8),('Placerat Orci Lacus Associates',5318,1524,7),('Aliquet Libero Foundation',4628,1525,3),('Sem PC',5473,1526,7),('Mauris Blandit Inc.',3785,1527,7),('Nec Corporation',3302,1528,5),('Nulla Corp.',4708,1529,2),('Vitae Foundation',5284,1530,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Ornare Elit Incorporated',4606,1531,6),('Sagittis Inc.',4789,1532,4),('Lacinia Associates',5822,1533,5),('Mauris Ut Inc.',4871,1534,4),('Ipsum Institute',4037,1535,6),('Magna A Tortor Ltd',5637,1536,7),('Neque Nullam LLC',3847,1537,4),('Quisque Ac Inc.',5587,1538,8),('A Odio Semper Company',5168,1539,6),('Nunc Interdum Feugiat LLP',5249,1540,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Malesuada Fames Corp.',5476,1541,6),('Lacinia Vitae Incorporated',3495,1542,4),('Quisque Ltd',3452,1543,2),('Diam Luctus Inc.',5273,1544,4),('Mauris Vel Turpis PC',4041,1545,5),('Eu LLC',5084,1546,2),('Natoque Penatibus Et Corp.',4683,1547,4),('Vitae Purus LLC',5471,1548,2),('Praesent Interdum Associates',4712,1549,6),('Non Institute',4585,1550,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('At Libero Morbi LLC',5697,1551,2),('Ante Corp.',3207,1552,7),('Ipsum Non LLC',5251,1553,7),('Mauris Incorporated',3021,1554,7),('Mauris Corporation',5315,1555,3),('Amet Limited',3843,1556,6),('Lobortis Institute',3315,1557,2),('Blandit Foundation',5150,1558,7),('Leo Cras Vehicula LLC',5318,1559,3),('Ac Risus Inc.',3198,1560,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Aliquam Auctor Velit Incorporated',4881,1561,4),('Sed Consulting',4398,1562,5),('Tristique Pharetra Quisque Incorporated',5499,1563,6),('In Ltd',4020,1564,7),('Magna Cras Convallis Corporation',4061,1565,6),('Nisl Sem Consequat Institute',3273,1566,4),('Pharetra Incorporated',3744,1567,4),('Lorem Company',3756,1568,3),('Pharetra Limited',5096,1569,8),('Sed Sem Foundation',3183,1570,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Diam Lorem Associates',5069,1571,6),('Auctor Mauris Vel LLP',4253,1572,5),('In LLP',5475,1573,3),('A Nunc LLC',4975,1574,8),('Mauris Vel Turpis LLP',4093,1575,8),('Lacus Varius Consulting',3941,1576,6),('Tellus Aenean Corporation',4286,1577,7),('Aliquet Incorporated',4507,1578,2),('Quisque Fringilla Euismod Company',5490,1579,7),('Erat Nonummy Associates',5328,1580,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Vitae Diam Industries',3614,1581,3),('In Ornare Limited',3281,1582,5),('Eu Eros Corporation',5563,1583,6),('Lacinia Orci Limited',4624,1584,3),('Vestibulum Associates',5080,1585,3),('Erat Eget Tincidunt PC',3165,1586,5),('Quis Tristique Ac Industries',5241,1587,7),('Enim Nec Tempus Industries',5916,1588,6),('At Industries',4212,1589,8),('Malesuada Integer Id Corporation',4330,1590,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Penatibus Et Corporation',3795,1591,7),('Amet Consulting',4502,1592,7),('Ipsum LLP',5531,1593,7),('Egestas Aliquam Corp.',5537,1594,6),('Nec Inc.',3043,1595,5),('Donec PC',4459,1596,8),('Tempus LLP',4173,1597,8),('Congue Consulting',3613,1598,7),('Metus Aenean Sed Ltd',3607,1599,2),('Malesuada Malesuada LLP',3897,1600,8);
+
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Semper Dui Lectus LLC',4841,1601,2),('Lobortis Quam A LLP',3118,1602,5),('Risus Incorporated',4867,1603,8),('Vel Ltd',4990,1604,8),('Lobortis Risus In Incorporated',3884,1605,5),('Augue Inc.',5066,1606,7),('Eu LLP',4954,1607,4),('Sit Incorporated',3739,1608,8),('Ipsum Phasellus Vitae Company',5103,1609,6),('Nisl Sem Associates',3883,1610,6);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Dictum Corp.',5918,1611,6),('Urna Et Arcu Inc.',4700,1612,2),('Tortor Inc.',4189,1613,2),('A Feugiat Tellus Corporation',4694,1614,6),('Ac Feugiat LLP',4000,1615,6),('A Felis Institute',3820,1616,7),('Neque LLC',3965,1617,6),('Tellus Faucibus Leo Consulting',4201,1618,2),('Mauris Consulting',5578,1619,2),('In Condimentum Donec LLC',5656,1620,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Cras Eu Corp.',4067,1621,6),('A Consulting',4785,1622,5),('Pellentesque Institute',5245,1623,4),('Interdum Enim Non LLP',3413,1624,3),('Etiam Imperdiet Industries',4420,1625,6),('Enim Corporation',4525,1626,3),('Justo Nec Ante Corporation',3571,1627,7),('Ut Nulla Incorporated',5290,1628,2),('Lorem Luctus Ut Corporation',4700,1629,5),('Tellus Aenean Egestas Institute',5528,1630,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Lorem Ipsum Dolor LLP',4272,1631,2),('Sed LLC',5368,1632,8),('Ut Sem Nulla Incorporated',3095,1633,6),('Est Mollis Corporation',3004,1634,5),('Ipsum Ac Associates',3118,1635,2),('Ultrices Foundation',5107,1636,6),('Justo Praesent Corp.',5543,1637,4),('Quis Accumsan Corp.',5769,1638,3),('Blandit Incorporated',3203,1639,5),('Sem Egestas Blandit Company',3156,1640,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Arcu Vestibulum Foundation',4757,1641,2),('Auctor Vitae Aliquet Institute',4782,1642,4),('Auctor Ullamcorper Limited',3769,1643,4),('Egestas Consulting',5385,1644,4),('Vel Venenatis Vel Company',3093,1645,7),('Rutrum Associates',5719,1646,5),('Auctor LLP',4612,1647,7),('Convallis Erat Foundation',3007,1648,5),('Lacus Quisque Corp.',3858,1649,5),('Donec Egestas Duis Limited',3924,1650,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Torquent Per Conubia Institute',5591,1651,6),('Justo LLC',4898,1652,6),('Dolor Elit Pellentesque LLP',3470,1653,3),('Luctus Ltd',4741,1654,4),('Pede Suspendisse Dui Inc.',4255,1655,7),('Nunc Corp.',5242,1656,4),('Ut Aliquam Iaculis LLP',3765,1657,8),('Augue Ut Ltd',5647,1658,4),('Aliquam Industries',3170,1659,6),('Cras Consulting',3440,1660,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Diam Vel Inc.',3347,1661,7),('Lacus Varius Et Foundation',5484,1662,8),('Ante PC',3145,1663,5),('Molestie Industries',4556,1664,2),('Vulputate PC',4826,1665,5),('At Limited',5191,1666,5),('Magna Duis Dignissim LLC',3427,1667,8),('Ultrices Duis Volutpat LLP',4090,1668,3),('Molestie Consulting',3100,1669,3),('Lorem Lorem Luctus Consulting',5131,1670,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Rhoncus Nullam Velit Corporation',3274,1671,7),('Sed Diam Lorem Foundation',5144,1672,8),('At LLP',3125,1673,8),('Elementum Purus Accumsan Ltd',4583,1674,8),('Duis Ac Associates',3673,1675,2),('Tempor Erat Associates',4607,1676,4),('Nunc PC',4528,1677,3),('Praesent Eu Dui PC',3806,1678,7),('Lectus Ltd',5314,1679,8),('Sed Leo Industries',3055,1680,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Lorem Limited',3619,1681,8),('Eu Foundation',4705,1682,8),('Eu Placerat LLP',3075,1683,4),('Magna Inc.',3655,1684,8),('Nunc Id Enim Institute',5667,1685,2),('Ut Nec Corporation',5573,1686,6),('Aliquam Nisl Nulla Company',3900,1687,5),('Nec Ante Corp.',5626,1688,8),('Adipiscing Non Ltd',4611,1689,8),('Nisi A Odio LLC',5406,1690,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Sit Corporation',3923,1691,3),('Quis Tristique Ac Ltd',3913,1692,7),('Tincidunt Nunc Ac Incorporated',3704,1693,3),('Suspendisse Aliquet Foundation',3926,1694,7),('Est Associates',5638,1695,8),('Ipsum Dolor Corporation',3099,1696,3),('Velit Eget Company',4816,1697,3),('Nunc Sed Limited',5886,1698,6),('Vulputate Risus Incorporated',3871,1699,5),('Class Incorporated',4044,1700,8);
+
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Et Netus Et LLP',3257,1701,7),('Id Ante Nunc Ltd',5827,1702,7),('Ante Maecenas Mi Institute',3046,1703,7),('Vulputate Associates',3124,1704,5),('Purus Mauris Corporation',4575,1705,5),('Natoque Penatibus Et Corp.',3543,1706,3),('Auctor LLP',4174,1707,5),('Mauris PC',5989,1708,4),('Dolor Corp.',3624,1709,2),('Tempus Risus LLC',3058,1710,6);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Nec Mollis Associates',5394,1711,5),('Quam Elementum At Corp.',4953,1712,3),('Lectus Limited',3192,1713,4),('Orci Consectetuer Consulting',5159,1714,5),('Risus A Ultricies Institute',4947,1715,4),('Magna Ut Corporation',5496,1716,5),('Porttitor Consulting',5392,1717,8),('Cubilia Curae; Institute',4517,1718,4),('Scelerisque Incorporated',5196,1719,5),('Odio Sagittis Semper LLP',5617,1720,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Elit Fermentum Risus PC',4397,1721,5),('Vitae Sodales Corporation',5289,1722,5),('Vivamus Non Lorem Foundation',3562,1723,2),('Interdum LLC',4014,1724,5),('Tellus Eu Foundation',3076,1725,7),('Nunc Mauris Sapien PC',5727,1726,4),('Dui Incorporated',5107,1727,6),('Senectus LLC',4489,1728,8),('Class Aptent Corp.',3275,1729,7),('Enim Gravida Sit Institute',4772,1730,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Laoreet LLC',5864,1731,7),('Erat Sed Consulting',5492,1732,3),('Libero Lacus Varius PC',4232,1733,3),('Metus Incorporated',4538,1734,4),('Egestas A Dui Consulting',5787,1735,3),('Erat Vivamus Institute',3879,1736,7),('Pellentesque A Corporation',3165,1737,2),('Magna A Incorporated',3553,1738,2),('Tristique Pharetra Quisque Limited',4348,1739,4),('Sociis Natoque Penatibus Company',5543,1740,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Et Lacinia Inc.',3740,1741,3),('Vestibulum Ltd',3468,1742,8),('Erat Nonummy Ultricies Corporation',5892,1743,5),('In Nec Consulting',5992,1744,7),('Dui Company',3240,1745,4),('Magna Suspendisse Tristique LLP',4678,1746,5),('Vulputate Eu Odio Inc.',5954,1747,2),('Etiam Limited',5655,1748,7),('Orci Tincidunt Ltd',4152,1749,4),('Tempus Eu Ligula Foundation',3927,1750,6);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Sed Pede Associates',3114,1751,7),('Ultrices PC',5101,1752,8),('Tristique Ac Eleifend LLC',3069,1753,5),('Iaculis Enim Foundation',5583,1754,6),('Orci Industries',4883,1755,3),('Diam Luctus Company',3824,1756,6),('Libero LLP',5047,1757,6),('Ornare In Industries',4199,1758,3),('Vel Arcu Consulting',4488,1759,8),('Diam Associates',3325,1760,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Dolor Inc.',3040,1761,8),('Orci Ut Sagittis Institute',3957,1762,5),('Orci Luctus Incorporated',3436,1763,7),('Feugiat Tellus Inc.',5339,1764,5),('Tempus Eu Ligula Foundation',4388,1765,7),('Dolor Quisque Tincidunt LLP',3653,1766,4),('Facilisis Foundation',3969,1767,6),('Magna Cras Associates',3546,1768,4),('Maecenas Mi Felis Consulting',3658,1769,6),('Dolor Industries',4254,1770,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Elit Pharetra Ut Foundation',4601,1771,5),('Mauris Magna Duis Institute',3221,1772,2),('Dolor Nonummy Ac Consulting',4723,1773,4),('Aliquet Consulting',4742,1774,5),('Scelerisque Limited',3871,1775,8),('Pede Inc.',5950,1776,6),('Nec Tempus Mauris Consulting',3773,1777,4),('Varius Nam Porttitor Corp.',5139,1778,8),('Convallis Dolor Quisque Industries',5539,1779,7),('Nec Foundation',3157,1780,6);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Et Tristique Pellentesque Industries',5033,1781,8),('Auctor Ullamcorper Ltd',4610,1782,5),('Nulla Facilisi Sed Industries',3993,1783,5),('Senectus LLC',5834,1784,6),('Donec Foundation',5960,1785,3),('Phasellus At Augue Inc.',4691,1786,8),('Proin Limited',4479,1787,4),('Semper Pretium Neque Institute',4617,1788,5),('Tincidunt Ltd',4103,1789,5),('Varius Orci Company',4371,1790,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Aliquam Foundation',3964,1791,2),('Natoque Penatibus Et Limited',3555,1792,2),('Mi Eleifend Egestas PC',4783,1793,7),('Magnis Dis LLP',5095,1794,6),('Lectus Corporation',4981,1795,6),('Fermentum LLP',3816,1796,7),('Fringilla Consulting',4311,1797,3),('Justo Faucibus Lectus LLP',3035,1798,7),('Leo Cras Vehicula Industries',5155,1799,8),('Sapien Cursus In Incorporated',5751,1800,7);
+
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Vancouver',4158,1801,8),('Pettineo',5700,1802,8),('Lübeck',4954,1803,6),('Kozan',3872,1804,4),('Chimay',4362,1805,5),('Villa Alegre',5455,1806,3),('Casablanca',5425,1807,7),('Orangeville',3986,1808,3),('Lustin',3680,1809,4),('Isnes',4497,1810,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Monticelli d'Ongina',4501,1811,7),('Roux',3627,1812,8),('Nil-Saint-Vincent-Saint-Martin',5236,1813,3),('Lisieux',4797,1814,3),('Schweinfurt',3328,1815,6),('Peine',5443,1816,6),('Hyderabad',4207,1817,2),('Bozeman',3016,1818,2),('Oamaru',5675,1819,8),('Höchst',3134,1820,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Seilles',4554,1821,5),('Machynlleth',4026,1822,8),('Evansville',3348,1823,7),('Onze-Lieve-Vrouw-Lombeek',3853,1824,6),('San Giuliano di Puglia',4018,1825,6),('Aschersleben',4523,1826,2),('Jamoigne',3476,1827,7),('Beringen',4629,1828,4),('Runcorn',4926,1829,5),('Herne',3164,1830,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Adrano',5561,1831,3),('Bergisch Gladbach',5962,1832,4),('New Quay',5913,1833,2),('Pirmasens',3014,1834,7),('Penna San Giovanni',4118,1835,2),('Coalhurst',4448,1836,8),('Eckville',5836,1837,7),('Price',5432,1838,4),('Sagamu',3591,1839,6),('Ponoka',5415,1840,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Pratovecchio',4347,1841,8),('Torgiano',4426,1842,7),('Lang',4352,1843,3),('Acosse',4238,1844,7),('Galway',4783,1845,7),('Te Puke',5067,1846,8),('Uitbergen',4588,1847,3),('Girifalco',5521,1848,7),('Grandrieu',4897,1849,8),('Argyle',4969,1850,5);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Amroha',4574,1851,6),('Kendal',5136,1852,2),('Pordenone',3023,1853,4),('East Linton',4816,1854,4),('Marbais',5041,1855,2),('Swindon',5248,1856,4),('Paredones',4230,1857,8),('Joondalup',3002,1858,6),('Chatteris',5569,1859,8),('Oamaru',3544,1860,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Salt Spring Island',4443,1861,6),('Buzet',5730,1862,8),('Affligem',3781,1863,5),('Salamanca',4805,1864,6),('Oostakker',5881,1865,7),('Linköping',3115,1866,4),('Sant'Angelo in Pontano',3138,1867,4),('Wigtown',5198,1868,8),('Te Puke',4954,1869,6),('Guarapuava',3898,1870,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Drumheller',3855,1871,2),('Langley',5467,1872,2),('Kamarhati',3395,1873,2),('Uluberia',4265,1874,6),('Herselt',5241,1875,5),('Tumbler Ridge',4252,1876,2),('Ruthin',3094,1877,2),('Crecchio',3464,1878,6),('Biała Podlaska',4924,1879,5),('Vico del Gargano',3969,1880,5);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Banff',4142,1881,7),('Mold',5513,1882,3),('Galmaarden',5971,1883,8),('Pelotas',4668,1884,2),('Campotosto',5602,1885,4),('Swadlincote',4012,1886,8),('Bad Oldesloe',4072,1887,3),('Sant'Ilario dello Ionio',5695,1888,6),('Garaguso',3718,1889,2),('Huara',5234,1890,8);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Tucson',4057,1891,5),('Sperlinga',4095,1892,6),('Würzburg',3586,1893,2),('Parauapebas',5121,1894,4),('Cisterna di Latina',3226,1895,5),('Birori',3106,1896,4),('Otranto',4675,1897,4),('Colchane',4465,1898,5),('San Jose',5477,1899,7),('Steendorp',3144,1900,4);
+
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Chambave',5532,1901,7),('Menai Bridge',5070,1902,8),('Lichfield',5272,1903,4),('Jodoigne-Souveraine',3902,1904,6),('Sant'Eusanio Forconese',4915,1905,3),('Brescia',5762,1906,3),('Limache',4070,1907,8),('Sagar',4632,1908,2),('Bracknell',3763,1909,2),('Nashik',4654,1910,3);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Billingzs',3703,1911,7),('Champalain',5303,1912,5),('Coldastream',4423,1913,3),('Minuccianoz',3882,1914,7),('Waitaraz',4222,1915,5),('Burdinnes',4193,1916,3),('Bertiolos',4765,1917,7),('Sundries',5609,1918,7),('Lethbridges',5005,1919,6),('BadHes',4483,1920,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Bruderheim',4884,1921,5),('Firozabad',4012,1922,8),('Termoli',3381,1923,4),('Saint John',4020,1924,5),('Knittelfeld',4398,1925,2),('Landshut',4492,1926,6),('Heist-op-den-Berg',4427,1927,5),('Oyen',3274,1928,7),('Regina',3401,1929,5),('Hertford',4082,1930,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Makurdi',4216,1931,5),('Valtournenche',3232,1932,7),('Villach',5839,1933,3),('GŽrouville',4629,1934,3),('Portico e San Benedetto',3566,1935,3),('Santa Inês',4615,1936,7),('Colleretto Castelnuovo',5906,1937,7),('San Pablo',4680,1938,4),('São João de Meriti',5103,1939,7),('Abaetetuba',4448,1940,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('San Ramón',4551,1941,6),('Antibes',5610,1942,4),('Deventer',5917,1943,8),('Antibes',5051,1944,2),('Neuruppin',4806,1945,7),('Toulon',3890,1946,5),('Geelong',5363,1947,2),('Toruń',5363,1948,8),('Dibrugarh',4148,1949,5),('Koblenz',3799,1950,6);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Schwäbisch Gmünd',4276,1951,2),('Bella',5110,1952,5),('Chiny',5698,1953,5),('Tongrinne',5861,1954,7),('Waitara',5648,1955,5),('Vellore',4859,1956,7),('Bludenz',5037,1957,4),('Sète',5673,1958,7),('Köln',4069,1959,5),('Konin',5417,1960,7);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('San Diego',4759,1961,4),('Elen',5526,1962,6),('Shawinigan',3329,1963,6),('Las Palmas',4793,1964,8),('Inveraray',3248,1965,3),('Carpignano Salentino',3899,1966,3),('Donosti',3644,1967,6),('Valcourt',5771,1968,7),('San Antonio',5140,1969,6),('Eindhout',3497,1970,2);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Götzis',4253,1971,4),('Quilpué',4371,1972,6),('Wjordan',4490,1973,2),('ELinton',5342,1974,3),('Nice',5213,1975,8),('Wolfsburg',4584,1976,3),('Grembergen',4283,1977,3),('RoccaSS',3134,1978,5),('SantElena',3946,1979,2),('Macon',4655,1980,5);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('Rancagua',3860,1981,2),('Holman',5208,1982,7),('Hoorn',5982,1983,6),('Trivigno',3734,1984,7),('Anzegem',5477,1985,4),('Marentino',4806,1986,3),('Chandrapur',4884,1987,6),('Algarrobo',3897,1988,4),('Felixstowe',3193,1989,2),('Castelmezzano',3283,1990,4);
+INSERT INTO usuario (nombre_usuario,contraseña,fk_empleado,fk_rol) VALUES ('PetitHallet',5686,1991,6),('Sclayn',3179,1992,2),('João Pessoa',4603,1993,3),('Hof',4667,1994,6),('Russell',5913,1995,7),('Brandon',5027,1996,4),('Sooke',4157,1997,8),('Barasat',5971,1998,5),('Burhanpur',3712,1999,4),('Montjovet',5624,2000,3);
+
+INSERT INTO usuario (nombre_usuario,contrasena,fk_empleado,fk_rol) VALUES ('Bathgate',3934,2001,8),('Herfelingen',4377,2002,3),('León',4149,2003,7),('Sagar',3213,2004,4),('Noville',4132,2005,5),('Wijshagen',5476,2006,2),('TrognŽe',3665,2007,8),('Coquitlam',3276,2008,7),('Sooke',3313,2009,2),('Krefeld',3892,2010,5);
+INSERT INTO usuario (nombre_usuario,contrasena,fk_empleado,fk_rol) VALUES ('Port Augusta',3087,2011,8),('Hamilton',5217,2012,8),('Cascavel',4212,2013,4),('Aurora',5748,2014,2),('Bevilacqua',5059,2015,2),('Deline',5523,2016,2),('San Rafael',4496,2017,6),('Quispamsis',4477,2018,8),('Newbury',4188,2019,2),('Avigliano Umbro',3727,2020,5);
+INSERT INTO usuario (nombre_usuario,contrasena,fk_empleado,fk_rol) VALUES ('Bhind',3081,2021,4),('Rycroft',3666,2022,7),('San Rafael Abajo',4174,2023,7),('Bicinicco',5646,2024,2),('Kessel',4622,2025,2),('Torella del Sannio',4606,2026,8),('Villar Pellice',5684,2027,3),('Chishtian Mandi',3829,2028,2),('Basirhat',5136,2029,2),('Toledo',3877,2030,6);
+INSERT INTO usuario (nombre_usuario,contrasena,fk_empleado,fk_rol) VALUES ('Yellowknife',5497,2031,6),('Nemoli',4693,2032,6),('Hoeilaart',4896,2033,7),('Villenave-d'Ornon',4795,2034,3),('Honolulu',3734,2035,8),('Redlands',5883,2036,7),('Pogliano Milanese',5506,2037,6),('Vizianagaram',5142,2038,2),('Lennik',4711,2039,2),('Poucet',5968,2040,5);
+INSERT INTO usuario (nombre_usuario,contrasena,fk_empleado,fk_rol) VALUES ('Heusweiler',4185,2041,4),('Beauport',5033,2042,3),('Pichidegua',5619,2043,2),('Lidköping',5645,2044,2),('Halifax',5097,2045,3),('Wambeek',5131,2046,4),('Valleyview',4797,2047,5),('Wasseiges',5288,2048,2),('Poggiodomo',3255,2049,2),('Friedrichsdorf',4886,2050,5);
+INSERT INTO usuario (nombre_usuario,contrasena,fk_empleado,fk_rol) VALUES ('Grimaldi',5373,2051,8),('DesMoines',3622,2052,2),('Fraser-Fort George',5059,2053,5),('Luzzara',4133,2054,4),('Champlain',5862,2055,3),('Antuco',5021,2056,3),('Erli',4125,2057,3),('Belcarra',5021,2058,6),('Ramara',3582,2059,2),('Kuurne',3089,2060,4);
+INSERT INTO usuario (nombre_usuario,contrasena,fk_empleado,fk_rol) VALUES ('Hugli-Chinsurah',5464,2061,2),('Rutland',3230,2062,7),('San Martino in Badia/St. Martin in Thurn',4632,2063,2),('Morvi',5351,2064,2),('Sommariva Perno',4560,2065,6),('Bouwel',3615,2066,7),('Juneau',4502,2067,3),('Juazeiro do Norte',5540,2068,3),('Recife',4305,2069,2),('Reno',3007,2070,6);
+INSERT INTO usuario (nombre_usuario,contrasena,fk_empleado,fk_rol) VALUES ('Punitaqui',3293,2071,4),('Borlänge',3136,2072,2),('Aiseau-Presles',5395,2073,5),('Valbrevenna',3786,2074,4),('Amersfoort',5057,2075,6),('North Saanich',4712,2076,8),('Villers-sur-Semois',4215,2077,7),('Brentwood',4741,2078,3),('Trois-Rivières',3332,2079,8),('Pangnirtung',5815,2080,8);
+INSERT INTO usuario (nombre_usuario,contrasena,fk_empleado,fk_rol) VALUES ('Cargovil',4410,2081,7),('Kirriemuir',4273,2082,8),('Lauterach',4002,2083,4),('Zamość',4654,2084,2),('Beaconsfield',3966,2085,8),('Makurdi',3531,2086,7),('Hay River',4172,2087,4),('Monte Patria',3994,2088,8),('Wolverhampton',3951,2089,6),('Camporotondo di Fiastrone',5335,2090,4);
+INSERT INTO usuario (nombre_usuario,contrasena,fk_empleado,fk_rol) VALUES ('Perwez',4848,2091,7),('Finspång',4106,2092,7),('Stuttgart',3590,2093,7),('Penzance',5062,2094,4),('Cardiff',5382,2095,8),('Neu-Ulm',4070,2096,2),('Pointe-Claire',3224,2097,3),('Villers-la-Ville',4261,2098,4),('Bloxham',3319,2099,8),('Ronciglione',3304,2100,7);
+
+

@@ -57,9 +57,21 @@ export default class InfoRelevante extends Component {
     var dateStringi="", dateStringf="";
     e.preventDefault();
     switch (numeroReporte) {
-      case 1 : 
-        console.log("hola");
+        case 1 : 
         window.open("http://localhost:8080/jasperserver/rest_v2/reports/reports/Reportes/ReporteEm.pdf");
+        break; 
+        case 2 : 
+   
+        datei = new Date(this.state.fi);
+        dateStringi = new Date(datei.getTime() - (datei.getTimezoneOffset() * 60000 ))
+                           .toISOString()
+                           .split("T")[0];
+       
+       datef = new Date(this.state.ff);
+       dateStringf= new Date(datef.getTime() - (datef.getTimezoneOffset() * 60000 ))
+                          .toISOString()
+                           .split("T")[0];
+                           window.open(`http://localhost:8080/jasperserver/rest_v2/reports/reports/Reportes/Reporte2.pdf?FECHA_INICIO=${dateStringi}&FECHA_FINAL=${dateStringf}`);
         break; 
       case 5:
           datei = new Date(this.state.fi);
@@ -86,6 +98,32 @@ export default class InfoRelevante extends Component {
   
          window.open(`http://localhost:8080/jasperserver/rest_v2/reports/reports/Reportes/Reporte7.pdf?FECHA_INICIO=${dateStringi}&FECHA_FINAL=${dateStringf}&ID_EMPLEADO=${this.state.cedulaBuscada}`);
           break;
+          case 8:
+            datei = new Date(this.state.fi);
+            dateStringi = new Date(datei.getTime() - (datei.getTimezoneOffset() * 60000 ))
+                               .toISOString()
+                               .split("T")[0];
+           
+           datef = new Date(this.state.ff);
+           dateStringf= new Date(datef.getTime() - (datef.getTimezoneOffset() * 60000 ))
+                              .toISOString()
+                               .split("T")[0];
+   
+          window.open(`http://localhost:8080/jasperserver/rest_v2/reports/reports/Reportes/Reporte8.pdf?FECHA_INICIO=${dateStringi}&FECHA_FINAL=${dateStringf}`);
+           break;
+           case 9:
+            datei = new Date(this.state.fi);
+            dateStringi = new Date(datei.getTime() - (datei.getTimezoneOffset() * 60000 ))
+                               .toISOString()
+                               .split("T")[0];
+           
+           datef = new Date(this.state.ff);
+           dateStringf= new Date(datef.getTime() - (datef.getTimezoneOffset() * 60000 ))
+                              .toISOString()
+                               .split("T")[0];
+   
+          window.open(`http://localhost:8080/jasperserver/rest_v2/reports/reports/Reportes/Reporte9.pdf?FECHA_INICIO=${dateStringi}&FECHA_FINAL=${dateStringf}`);
+           break;
           case 10:
               datei = new Date(this.state.fi);
               dateStringi = new Date(datei.getTime() - (datei.getTimezoneOffset() * 60000 ))
@@ -165,7 +203,7 @@ export default class InfoRelevante extends Component {
                     />
                   </div>
                   <div className="ingresarUsuario">
-                    <button>Generar reporte</button>
+                    <button onClick={(function (e) {this.generarReporte(e,2)}).bind(this)}>Generar reporte</button>
                   </div>
                 </form>
               </div>
@@ -415,21 +453,38 @@ export default class InfoRelevante extends Component {
             <div className="wrapper">
               <div className="form-wrapper">
                 <h3>
-                  PRESENTACION DEL MINERAL MENOS SOLICITADO POR LOS CLIENTES POR
-                  AÑO
+                  PRESENTACION DEL MINERAL MENOS SOLICITADO 
                 </h3>
-                <div className="firstName">
-                  <label htmlFor="firstName">Año a buscar</label>
-                  <input
-                    className=""
-                    type="text"
-                    name="año"
-                    onChange={this.handleChange}
-                  />
-                </div>
-                <div className="ingresarUsuario">
-                  <button>Generar reporte</button>
-                </div>
+                <form className="form" noValidate>
+                  <div className="nacimiento">
+                    <label htmlFor="nacimiento">Fecha inicial</label>
+                    <input
+                      className=""
+                      placeholder="xx/yy/zz"
+                      type="date"
+                      name="fi"
+                      noValidate
+                      value={this.state.fi}
+                      onChange={this.handleChange}
+                    />
+                  </div>
+
+                  <div className="nacimiento">
+                    <label htmlFor="nacimiento">Fecha final</label>
+                    <input
+                      className=""
+                      placeholder="xx/yy/zz"
+                      type="date"
+                      name="ff"
+                      noValidate
+                      value={this.state.ff}
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <div className="ingresarUsuario">
+                    <button onClick={(function (e) {this.generarReporte(e,8)}).bind(this)}>Generar reporte</button>
+                  </div>
+                </form>
               </div>
             </div>
           ),
@@ -467,7 +522,7 @@ export default class InfoRelevante extends Component {
                     />
                   </div>
                   <div className="ingresarUsuario">
-                    <button>Generar reporte</button>
+                    <button onClick={(function (e) {this.generarReporte(e,9)}).bind(this)}>Generar reporte</button>
                   </div>
                 </form>
               </div>

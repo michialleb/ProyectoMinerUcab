@@ -64,3 +64,20 @@ and efc.fk_cargo_fase= cf.id_cargo_fase
 and cf.fk_fase = f.id_fase
 and f.fk_etapa_explotacion =et.id_etapa
 and f.fecha_inicio_fase between '1993-01-01' and '2028-01-01';
+
+/* query de proyectos incompleto*/
+select distinct y.fecha, x.costo, pro.nombre_proyecto
+from (  select sum (f.costo_fase) as costo, p.nombre_proyecto as proyecto,
+	    p.id_proyecto as id_p 
+		from fase f, etapa_explotacion e, proyecto p
+		where f.fk_etapa_explotacion = e.id_etapa
+		and e.fk_proyecto = p.id_proyecto
+		group by p.nombre_proyecto, p.id_proyecto) as x, (select fa.fecha_inicio_estimada as fecha, pr.nombre_proyecto as proyecto
+														  from fase fa, etapa_explotacion et, proyecto pr
+														   where fa.numero_fase=1 
+						  							       and et.numero_etapa =1 
+					                                	   and fa.fk_etapa_explotacion = et.id_etapa
+														   and et.fk_proyecto= pr.id_proyecto
+														  ) as y, proyecto pro
+where pro.nombre_proyecto = x.proyecto
+and  pro.nombre_proyecto = y.proyecto

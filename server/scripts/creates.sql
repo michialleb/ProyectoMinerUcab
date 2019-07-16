@@ -227,7 +227,7 @@ CREATE TABLE Empleado (
 	telefono_empleado bigint,
     FK_Lugar INTEGER NOT NULL, 
     fk_cargo integer not null,
-    fk_tipo_status integer,
+    fk_tipo_status integer default 7,
     CONSTRAINT fk_empleado_status foreign key (fk_tipo_status)
     REFERENCES tipo_status (id_tipo_status),
     CONSTRAINT fk_lugar_empleado FOREIGN KEY (FK_Lugar)
@@ -299,7 +299,7 @@ create table Fase (
    costo_fase   real not null,
    fecha_inicio_fase date ,
    fecha_final_fase date ,
-   fecha_estimada_fase date,
+   fecha_inicio_estimada date,
    fk_etapa_explotacion integer,
    fk_tipo_status INTEGER NOT NULL,
    constraint pk_fase primary key (id_fase),

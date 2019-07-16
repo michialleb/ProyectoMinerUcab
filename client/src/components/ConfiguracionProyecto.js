@@ -138,12 +138,11 @@ class ConfiguracionProyecto extends Component {
   handleIngresarCargos(e, nombreFase, duracionFase, costoFase, fecha_estimada_fase) {
     e.preventDefault();
     var costo = parseInt(costoFase) + parseInt(this.state.costoFase);
-    console.log("costo " + costo);
     let duracion = parseInt(duracionFase) + parseInt(this.state.duracionFase);
     let numero = this.state.numeroFase + 1; // cuenta las fases que se van agregando
     this.addFase(nombreFase, duracionFase, costoFase, fecha_estimada_fase);
 
-    console.log("costo nuevo =" + this.state.costoFase);
+ //   console.log("costo nuevo =" + this.state.costoFase);
     this.setState({
       numeroFase: numero,
       costoFase: costo,

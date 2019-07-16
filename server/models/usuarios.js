@@ -39,6 +39,7 @@ class Usuarios {
   }
 
   static insert(user, callback) {
+    if (user.nombre_usuario == "") user.nombre_usuario=null;
     var tipo = user.nombre_persona.split([":"], [1]);
     if (tipo == "Cliente") {
       db.query(
@@ -66,6 +67,7 @@ class Usuarios {
   }
 
   static update(user, callback) {
+    
     db.query(
       "UPDATE usuario set nombre_usuario = $1 , contraseña=$2 , \
         fk_rol = (select id_rol from rol where tipo_rol = $3) \

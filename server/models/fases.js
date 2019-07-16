@@ -134,7 +134,7 @@ class Fases {
   static insert(fase, callback) {
     db.query(
       "insert into Fase (numero_fase, nombre_fase,duracion_fase,costo_fase,\
-        fk_etapa_explotacion,fk_tipo_status, fecha_estimada_fase) \
+        fk_etapa_explotacion,fk_tipo_status, fecha_inicio_estimada) \
         values ($1, $2, $3,$4, (select id_etapa \
                                 from etapa_explotacion\
                                 where fk_proyecto= (select id_proyecto\
