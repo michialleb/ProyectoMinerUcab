@@ -68,6 +68,7 @@ class Maquinaria {
 }
 
 static updateStatusMaquinariaActivaManual(maqui, callback) {
+  console.log("entro en el models");
   console.log(maqui.id_status +" "+ maqui.id_fase+ " "+ maqui.id_maquinaria);
   db.query(
     "update maquinaria_activa set fk_tipo_status=(select id_tipo_status\
@@ -102,7 +103,7 @@ static updateStatusMaquinariaActivaManual(maqui, callback) {
 
   static getMaquinariaActivaFase(maq, callback) {
     db.query(
-      "select m.nombre_maquinaria as nombre, (select nombre_tipo_status\
+      "select ma.id_maquinaria_activa as id, m.nombre_maquinaria as nombre, (select nombre_tipo_status\
         from tipo_status \
         where id_tipo_status= ma.fk_tipo_status) as status\
         from maquinaria_activa ma, maquinaria m\

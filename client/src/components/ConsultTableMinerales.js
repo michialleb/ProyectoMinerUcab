@@ -22,11 +22,11 @@ class ConsultTableMinerales extends Component {
       .then(res => {
           swal(
             <div>
-              <ListGroup>
+              <li>
               {this.state.compuestosList.map(mineral => {
-                return (<ListGroup.Item>{mineral.nombre}</ListGroup.Item>);
+                return (<ul>{mineral.nombre}</ul>);
               })}
-            </ListGroup>
+            </li>
             </div>
           );  // this.setState({ selected : !this.state.selected});
       });

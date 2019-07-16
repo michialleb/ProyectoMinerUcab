@@ -60,8 +60,8 @@ router.post("/update/maquinaria/activa", function(req, res) {
   });
 });
 
-router.post("/update/status/maquinaria/activa/manual", function(req, res) {
-  console.log("cambiando status maqui")
+router.post("/update/maquinaria/maquinaria/activa/manual", function(req, res) {
+  console.log("cambiando status maqui holisss")
   var maqui = req.body.maqui
 
   Maquinaria.updateStatusMaquinariaActivaManual(maqui, function(err, result) {

@@ -120,20 +120,19 @@ class ConsultTableProyectos extends Component {
     
   }
   modificarStatusMaquinariaActivaManual(id_fase, id_maquinaria){
-    // no funciona no se por que
-    console.log(id_fase +" " + id_maquinaria);
+  
+    console.log("verificando el metodo que no se"+this.state.status);
     let maqui={
       id_fase: id_fase,
       id_status: this.state.status,
       id_maquinaria: id_maquinaria
     }
-    fetch(`/api/maquinaria/update/status/maquinaria/activa/manual`, {
+    fetch(`/api/maquinaria/update/maquinaria/maquinaria/activa/manual`, {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ maqui: maqui})
     }).then(res => res.json())
       .then (res=>{
-        console.log("este es el res"+ res)
         if (res.error)
         swal2("Error !", "Intente de nuevo!", "error");
         else
@@ -241,7 +240,7 @@ class ConsultTableProyectos extends Component {
                 <td>
                   <div className="horario">
                   <button   onClick={function(e) {
-                       this.cambiarStatusMaquinaria();
+                       this.cambiarStatusMaquinaria(id_fase,id_maquinaria);
                        }.bind(this)}> Cambiar Status </button> 
                   </div>
                </td>
@@ -355,8 +354,6 @@ class ConsultTableProyectos extends Component {
       // this.setState({ selected : !this.state.selected});
     });
   }
- 
-
   
   iniciarFase(id_etapa){
     let fase={
@@ -441,7 +438,49 @@ class ConsultTableProyectos extends Component {
 
  }
  }
-  
+ //////////// aquiiiiiiiiiiiiiiiiiiii
+ modificarStatusProyecto(id_proyecto){
+   let id=0;
+   this.props.status.map((st)=>{
+     if(st.nombre_tipo_status==this.state.status){
+       id=st.id_tipo_status;
+     }
+   });
+
+   let proyecto={ id_proyecto: id_proyecto, id_status: id}
+   fetch(`/api/proyecto/cambiarStatus`, {
+     method: "post",
+     headers: { "Content-type": "application/json" },
+     body: JSON.stringify({ proyecto: proyecto})
+   }).then(res => res.json())
+     .then (res=>{
+        if (res.error){
+        swal("Ocurrió un error al actualizar el status", "", "error");
+        }else{
+        swal("Status actualizado", "Exitosamente", "success");
+        }
+     })
+
+ }
+
+  handleCambiarStatusProyecto= (id_proyecto,status) =>{
+    swal(
+      <div>
+      <span> <h5>{status}</h5></span>
+      <select
+      onChange={this.handleChangeStatus} >
+      <option />
+      {this.props.status.map((s, i) => (
+        <option value={s.nombre_tipo_status} key={i}>
+          {s.nombre_tipo_status}
+        </option>
+      ))}
+    </select>
+    </div>
+     ).then (res=>{
+      this.modificarStatusProyecto(id_proyecto);
+     })
+  }
   addBotton = proyectos => {
     var proyecto = [];
     this.props.proyectos.map(proyec => {
@@ -465,6 +504,15 @@ class ConsultTableProyectos extends Component {
                        onClick={function(e) {
                        this.handleIniciar(proyec.id, proyec.status);
                        }.bind(this)}  >  Iniciar
+             </button>
+             </div>
+        ),
+        cambiar_Status: (
+          <div className="horario">
+               <button
+                       onClick={function(e) {
+                       this.handleCambiarStatusProyecto(proyec.id, proyec.status);
+                       }.bind(this)}  >  Cambiar Status
              </button>
              </div>
         )
