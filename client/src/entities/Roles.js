@@ -13,11 +13,10 @@ export default class Roles extends Component {
     this.state = {
       rolesList: [],
       permisosList: [],
-      permisosNoAsignados:[]
+      permisosNoAsignados: []
     };
   }
 
-  
   getPermisosList = () => {
     fetch("/api/roles/allPermisos")
       .then(res => res.json())
@@ -26,7 +25,6 @@ export default class Roles extends Component {
         this.setState({ permisosList });
       });
   };
-  
 
   getRolesList = () => {
     fetch("/api/roles")
@@ -50,14 +48,14 @@ export default class Roles extends Component {
     };
 
     var crud = {
-      options: ["Ingresar ", "Consultar ", "Eliminar ", "Modificar"],
+      options: ["Ingresar ", "Consultar "],
       content: [
         {
-          form: <FormRol permisos= {permisos} />,
+          form: <FormRol permisos={permisos} />,
           id: 0
         },
         {
-          form: <ConsultTableRol roles={roles}/>,
+          form: <ConsultTableRol roles={roles} />,
           id: 1
         },
         {

@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
 import swal from "sweetalert";
-import ReactPDF from "react-pdf";
-var fs = require("fs");
-var request = require("request");
-
 
 
 class Form extends Component {

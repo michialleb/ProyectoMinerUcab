@@ -4165,7 +4165,7 @@ values('administrador','administra todo'),
 ('vendedor',null);
 
 insert into permiso (nombre_permiso, descripcion_permiso) values
-('todo','puede realizar cualquier operacion en todo el sistema'),
+('adminTodo','puede realizar cualquier operacion en todo el sistema'),
 ('adminEmp','puede administrar a los empleados'),
 ('adminCli','puede administrar a los clientes'),
 ('adminYac','puede administrar a los yacimientos y proyectos'),

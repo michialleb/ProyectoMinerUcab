@@ -189,7 +189,7 @@ CREATE TABLE Permiso_Rol (
     CONSTRAINT fk_perm_rol_permiso FOREIGN KEY(FK_Permiso) 
     REFERENCES Permiso(id_Permiso),
     CONSTRAINT fk_perm_rol_rol FOREIGN KEY(FK_Rol) 
-    REFERENCES Rol(id_rol)
+    REFERENCES Rol(id_rol) on delete cascade
     );
 
 
@@ -237,7 +237,7 @@ CREATE TABLE Usuario (
     CONSTRAINT fk_usuario_cliente_persona FOREIGN KEY (FK_Cliente_Persona)
     REFERENCES Persona (id_cliente),
     CONSTRAINT fk_rol_usuario FOREIGN KEY (FK_Rol) 
-    REFERENCES Rol (id_rol)
+    REFERENCES Rol (id_rol) on delete cascade
     );
 
 
@@ -356,6 +356,13 @@ CREATE TABLE Compra_cliente_proyecto(
 );
       
 
+create table Tipo_Pago(
+    id_tipo_pago serial,
+    tipo varchar (30) not null,
+    banco varchar(50) not null,
+    constraint pk_id_tipo_pago primary key (id_tipo_pago),
+    constraint  tipo_pago check (tipo in ('Transferencia','Tarjeta_Credito','Tarjeta_Debito'))
+);
 
  CREATE TABLE pago (
      id_pago SERIAL,
